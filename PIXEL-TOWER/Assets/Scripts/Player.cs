@@ -51,6 +51,21 @@ public class Player : MonoBehaviour {
         print(angle);
         anim.SetFloat("DirectionAngle", angle);
 
+<<<<<<< Updated upstream
+=======
+        if (angle <= 30)
+        {
+            if (anim.GetInteger("Movement")!=0)
+            {
+                anim.SetInteger("Movement", 0);
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            
+        }
+        else if (angle > 30 && angle <= 115)
+        {
+            anim.SetInteger("Movement", 1);
+>>>>>>> Stashed changes
 
         if (angle > 30 && angle <= 160)
         {
