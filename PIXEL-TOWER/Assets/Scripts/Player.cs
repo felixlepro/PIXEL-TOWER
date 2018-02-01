@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
         movement.Set(h, v, 0f);
         movement = movement.normalized * speed * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + movement);
-        if (h + v == 0)
+        if (h  == 0 && v == 0)
         {
             anim.SetBool("IsMoving", false);
         }
