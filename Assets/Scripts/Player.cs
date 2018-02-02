@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public float speed;
+    public float rotationBuffer;
     private Rigidbody2D playerRigidbody;
     private Animator anim;
     Vector3 movement;
@@ -43,6 +44,8 @@ public class Player : MonoBehaviour {
 
     void faceMouse()
     {
+        Vector3 faceRight = new Vector3(1,1,1);
+        Vector3 faceLeft = new Vector3(-1, 1, 1);
 
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -50,17 +53,19 @@ public class Player : MonoBehaviour {
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
 
         anim.SetFloat("DirectionAngle", angle);
-        //print(angle);
-       // System.Console.WriteLine(angle);
-       // print(direction.x);
-      //  if (angle > 30 && angle <= 160)
+
+      
+
+        if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            if( direction.x >= 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            else transform.localScale = new Vector3(-1, 1, 1);
-        }     
+            transform.localScale = faceLeft;
+        }
+        else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        {
+            transform.localScale = faceRight;
+        }
+
+
 
     }
 

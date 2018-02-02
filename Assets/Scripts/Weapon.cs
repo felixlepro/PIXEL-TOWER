@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
-    private Animator anim;
     public GameObject player;
+    private Animator anim;
 
     void Start()
     {
-
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
-            //Attack();
+            playerAttack();
         }
         faceMouse();
     }
@@ -31,7 +31,11 @@ public class Weapon : MonoBehaviour
         Vector2 direction = new Vector2(mousePosition.x - player.transform.position.x, mousePosition.y - player.transform.position.y);
 
         transform.up = direction;
+    }
 
+    void playerAttack()
+    {
+        anim.SetTrigger("PlayerAttack");
     }
 
 }
