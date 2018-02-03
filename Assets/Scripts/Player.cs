@@ -58,11 +58,11 @@ public class Player : MonoBehaviour {
 
         if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            transform.localScale = faceLeft;
+        //    transform.localScale = faceLeft;
         }
         else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            transform.localScale = faceRight;
+         //   transform.localScale = faceRight;
         }
 
 
