@@ -7,31 +7,25 @@ public class WeaponManager: MonoBehaviour
     public GameObject player;
     public Weapon weapon;
     private SpriteRenderer spriteR;
+    private Animator anim;
 
-    public Rigidbody2D weaponRB;
 
     void Start()
     {
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         spriteR.sprite = weapon.idleSprite;
         //spriteR.color = weapon.wColor;
-        weaponRB = GetComponent<Rigidbody2D>();
-           
+        anim = GetComponentInChildren<Animator>();
+        anim.runtimeAnimatorController = weapon.animator;
+        weapon.setUpAS();
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            
-            weapon.attack(weaponRB);
-        }    
+            anim.SetTrigger("PlayerAttack");
+        }
     }
-
- 
-
-  
-
-   
 
 }

@@ -11,13 +11,15 @@ public class Weapon : ScriptableObject
     public Color wColor;
     public int attackDamage;
     public float attackSpeed; //  attaque/seconde
-    public float angleAttack;
+    public RuntimeAnimatorController animator;
 
 
     public void  attack(Rigidbody2D  rb)
     {
-       // rb.angularVelocity = 10000 * Time.deltaTime; caca
 
+    }
+
+    public void setUpAS() {
 
     }
 

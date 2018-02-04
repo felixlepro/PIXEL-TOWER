@@ -9,16 +9,16 @@ public class Player : MonoBehaviour {
     private Animator anim;
     Vector3 movement;
 
-    Transform playerGraphics;
+    //Transform playerGraphics;
     Transform weaponTransform;
 
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        playerGraphics = transform.Find("Graphics");
-        weaponTransform = transform.Find("WeaponRotation");
         anim = GetComponentInChildren < Animator > ();
-        
+
+        //playerGraphics = transform.Find("Graphics");
+        weaponTransform = transform.Find("WeaponRotation");
 
     }
 
@@ -63,17 +63,26 @@ public class Player : MonoBehaviour {
         weaponTransform.up = direction;
 
 
-        if (direction.x < 0 && playerGraphics.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            playerGraphics.localScale = faceLeft;
-            weaponTransform.position = new Vector3(weaponTransform.transform.position.x-2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+            transform.localScale = faceLeft;
+            //playerGraphics.localScale = faceLeft;
+            //weaponTransform.localScale = faceLeft;
+            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
         }
-        else if (direction.x > 0 & playerGraphics.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            playerGraphics.localScale = faceRight;
-            weaponTransform.position = new Vector3(weaponTransform.transform.position.x+2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+            transform.localScale = faceRight;
+            //playerGraphics.localScale = faceRight;
+            //weaponTransform.localScale = faceRight;
+            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
         }
 
     }
 
 }
+
+           
+            

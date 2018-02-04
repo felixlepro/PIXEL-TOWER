@@ -18,3 +18,4 @@ MonoBehaviour:
   attackDamage: 10
   attackSpeed: 10
   angleAttack: 30
+  animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
