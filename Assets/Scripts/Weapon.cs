@@ -2,40 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+[CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon/Sword")]
+public class Weapon : ScriptableObject
 {
-    public GameObject player;
-    private Animator anim;
+    public string weaponName;
+    public Sprite idleSprite;
+    public Sprite attackSprite;
+    public Color wColor;
+    public int attackDamage;
+    public float attackSpeed; //  attaque/seconde
+    public float angleAttack;
 
-    void Start()
+
+    public void  attack(Rigidbody2D  rb)
     {
-        anim = GetComponentInChildren<Animator>();
-    }
+       // rb.angularVelocity = 10000 * Time.deltaTime; caca
 
-    void Update()
-    {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            playerAttack();
-        }
-        faceMouse();
-    }
-
-    void faceMouse()
-    {
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        Vector2 direction = new Vector2(mousePosition.x - player.transform.position.x, mousePosition.y - player.transform.position.y);
-
-        transform.up = direction;
-    }
-
-    void playerAttack()
-    {
-        anim.SetTrigger("PlayerAttack");
     }
 
 }

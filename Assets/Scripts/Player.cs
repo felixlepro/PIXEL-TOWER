@@ -9,10 +9,17 @@ public class Player : MonoBehaviour {
     private Animator anim;
     Vector3 movement;
 
+    Transform playerGraphics;
+    Transform weaponTransform;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        playerGraphics = transform.Find("Graphics");
+        weaponTransform = transform.Find("WeaponRotation");
+        anim = GetComponentInChildren < Animator > ();
+        
+
     }
 
     void Update()
@@ -53,19 +60,19 @@ public class Player : MonoBehaviour {
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
 
         anim.SetFloat("DirectionAngle", angle);
+        weaponTransform.up = direction;
 
-      
 
-        if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        if (direction.x < 0 && playerGraphics.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            transform.localScale = faceLeft;
+            playerGraphics.localScale = faceLeft;
+            weaponTransform.position = new Vector3(weaponTransform.transform.position.x-2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
         }
-        else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        else if (direction.x > 0 & playerGraphics.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
-            transform.localScale = faceRight;
+            playerGraphics.localScale = faceRight;
+            weaponTransform.position = new Vector3(weaponTransform.transform.position.x+2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
         }
-
-
 
     }
 
