@@ -13,8 +13,10 @@ public class WeaponManager: MonoBehaviour
     void Start()
     {
         spriteR = gameObject.GetComponent<SpriteRenderer>();
-        spriteR.sprite = weapon.idleSprite;
-        //spriteR.color = weapon.wColor;
+        //spriteR.sprite = Resources.LoadAll<Sprite>("davestrike2_01")[0];
+        //this.gameObject.GetComponent<SpriteRenderer>().sprite = test;
+       // spriteR.sprite = weapon.idleSprite;
+        spriteR.color = weapon.wColor;
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = weapon.animator;
         weapon.setUpAS();
@@ -22,6 +24,7 @@ public class WeaponManager: MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("PlayerAttack");

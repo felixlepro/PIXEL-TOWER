@@ -9,31 +9,31 @@ public class Player : MonoBehaviour {
     private Animator anim;
     Vector3 movement;
 
-    //Transform playerGraphics;
     Transform weaponTransform;
+    SpriteRenderer graphicsSpriteR;
 
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren < Animator > ();
 
-        //playerGraphics = transform.Find("Graphics");
         weaponTransform = transform.Find("WeaponRotation");
-
+        graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
     }
 
     void Update()
-    {
-       
-        faceMouse();
-    }
-
-    void FixedUpdate()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
         Move(horizontal, vertical);
+
+        faceMouse();
+    }
+
+    void FixedUpdate()
+    {
+        
     }
     private void Move(float h, float v)
     {
@@ -51,7 +51,8 @@ public class Player : MonoBehaviour {
 
     void faceMouse()
     {
-        Vector3 faceRight = new Vector3(1,1,1);
+
+        Vector3 faceRight = new Vector3(1, 1, 1);
         Vector3 faceLeft = new Vector3(-1, 1, 1);
 
         Vector3 mousePosition = Input.mousePosition;
@@ -59,26 +60,31 @@ public class Player : MonoBehaviour {
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
 
-        anim.SetFloat("DirectionAngle", angle);
-        weaponTransform.up = direction;
-
-
         if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
             transform.localScale = faceLeft;
-            //playerGraphics.localScale = faceLeft;
-            //weaponTransform.localScale = faceLeft;
+            weaponTransform.localScale = new Vector3(-1, -1, 0);
+            
             //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
         else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
             transform.localScale = faceRight;
-            //playerGraphics.localScale = faceRight;
-            //weaponTransform.localScale = faceRight;
+            weaponTransform.localScale = new Vector3(1, 1, 0);
+           
             //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
+
+        if (angle > 115) graphicsSpriteR.sortingOrder = 1;
+        else graphicsSpriteR.sortingOrder = -1;
+
+        anim.SetFloat("DirectionAngle", angle);
+        weaponTransform.right = direction;
+
+
+        
 
     }
 
