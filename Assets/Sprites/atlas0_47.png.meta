@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 8b58737dd6c5f8c43b3771a22b71fd92
-timeCreated: 1517714585
+labels:
+- Ground
+timeCreated: 1517792297
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: atlas0_47_0
+    21300002: atlas0_47_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -89,7 +92,21 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas0_47_1
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1592
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
