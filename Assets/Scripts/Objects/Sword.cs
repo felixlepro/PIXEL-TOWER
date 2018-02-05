@@ -11,6 +11,7 @@ public class Sword : Weapon
 
     public override void setUpAS()
     {
+
     }
 
 }
