@@ -152,77 +152,26 @@ public class Board : MonoBehaviour {
     }
 
 
-    void InstantiateTiles()
-    {
-        // Go through all the tiles in the jagged array...
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            for (int j = 0; j < tiles[i].Length; j++)
-            {
-                // ... and instantiate a floor tile for it.
-                InstantiateFromArray(floorTiles, i, j);
+    //void InstantiateTiles()
+    //{
+    //    // Go through all the tiles in the jagged array...
+    //    for (int i = 0; i < tiles.Length; i++)
+    //    {
+    //        for (int j = 0; j < tiles[i].Length; j++)
+    //        {
+    //            // ... and instantiate a floor tile for it.
+    //            InstantiateFromArray(floorTiles, i, j);
 
-                // If the tile type is Wall...
-                if (tiles[i][j] == TileType.Wall)
-                {
-                    // ... instantiate a wall over the top.
-                    InstantiateFromArray(wallTiles, i, j);
-                }
-            }
-        }
-    }
-
-
-    void InstantiateOuterWalls()
-    {
-        // The outer walls are one unit left, right, up and down from the board.
-        float leftEdgeX = -1f;
-        float rightEdgeX = largeur + 0f;
-        float bottomEdgeY = -1f;
-        float topEdgeY = hauteur + 0f;
-
-        // Instantiate both vertical walls (one on each side).
-        InstantiateVerticalOuterWall(leftEdgeX, bottomEdgeY, topEdgeY);
-        InstantiateVerticalOuterWall(rightEdgeX, bottomEdgeY, topEdgeY);
-
-        // Instantiate both horizontal walls, these are one in left and right from the outer walls.
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeY);
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeY);
-    }
-
-
-    void InstantiateVerticalOuterWall(float xCoord, float startingY, float endingY)
-    {
-        // Start the loop at the starting value for Y.
-        float currentY = startingY;
-
-        // While the value for Y is less than the end value...
-        while (currentY <= endingY)
-        {
-            // ... instantiate an outer wall tile at the x coordinate and the current y coordinate.
-            InstantiateFromArray(outerWallTiles, xCoord, currentY);
-
-            currentY++;
-        }
-    }
-
-
-    void InstantiateHorizontalOuterWall(float startingX, float endingX, float yCoord)
-    {
-        // Start the loop at the starting value for X.
-        float currentX = startingX;
-
-        // While the value for X is less than the end value...
-        while (currentX <= endingX)
-        {
-            // ... instantiate an outer wall tile at the y coordinate and the current x coordinate.
-            InstantiateFromArray(outerWallTiles, currentX, yCoord);
-
-            currentX++;
-        }
-    }
-
-
+    //            // If the tile type is Wall...
+    //            if (tiles[i][j] == TileType.Wall)
+    //            {
+    //                // ... instantiate a wall over the top.
+    //                InstantiateFromArray(wallTiles, i, j);
+    //            }
+    //        }
+    //    }
+    //}
+    
     void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
     {
         // Create a random index for the array.
