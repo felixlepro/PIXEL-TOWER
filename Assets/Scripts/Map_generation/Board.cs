@@ -13,7 +13,7 @@ public class Board : MonoBehaviour {
     public IntRange hautRoom = new IntRange(3, 10);
     public IntRange largRoom = new IntRange(3, 10);
     public IntRange longCorridor = new IntRange(6, 10);
-    public GameObject[] floortiles;
+    public GameObject[] floorTiles;
     public GameObject mur_Nord;
     public GameObject mur_Sud;
     public GameObject mur_Est;
@@ -32,7 +32,10 @@ public class Board : MonoBehaviour {
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
+        SetTilesValuesForRooms();
+        SetTilesValuesForCorridors();
 
+        InstantiateTiles();
 
 
 
@@ -152,26 +155,27 @@ public class Board : MonoBehaviour {
     }
 
 
-    //void InstantiateTiles()
-    //{
-    //    // Go through all the tiles in the jagged array...
-    //    for (int i = 0; i < tiles.Length; i++)
-    //    {
-    //        for (int j = 0; j < tiles[i].Length; j++)
-    //        {
-    //            // ... and instantiate a floor tile for it.
-    //            InstantiateFromArray(floorTiles, i, j);
+    void InstantiateTiles()
+    {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < tiles[i].Length; j++)
+            {
+                if (tiles[i][j] == TileType.Floor)
+                {
+                    InstantiateFromArray(floorTiles, i, j);
+                }
 
-    //            // If the tile type is Wall...
-    //            if (tiles[i][j] == TileType.Wall)
-    //            {
-    //                // ... instantiate a wall over the top.
-    //                InstantiateFromArray(wallTiles, i, j);
-    //            }
-    //        }
-    //    }
-    //}
-    
+                // If the tile type is Wall...
+                //if (tiles[i][j] == TileType.Wall)
+                //{
+                //    // ... instantiate a wall over the top.
+                //    InstantiateFromArray(wallTiles, i, j);
+                //}
+            }
+        }
+    }
+
     void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
     {
         // Create a random index for the array.

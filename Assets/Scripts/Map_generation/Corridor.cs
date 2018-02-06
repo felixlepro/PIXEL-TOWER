@@ -4,7 +4,7 @@ public enum Direction
     {
         Nord,Est,Sud,Ouest,
     }
-public class Corridor : MonoBehaviour
+public class Corridor
 {
     public int startX;
     public int startY;
@@ -29,18 +29,17 @@ public class Corridor : MonoBehaviour
         get
         {
             if (direction == Direction.Est  || direction == Direction.Ouest )
-                return startX;
+                return startY;
             if (direction == Direction.Nord )
-                return startX + longCorridor - 1;
+                return startY + longCorridor - 1;
             else
-                return startX - longCorridor + 1;
+                return startY - longCorridor + 1;
 
         }
     }
     public void SetupCorridor(Room room, IntRange longueur,IntRange largRoom, IntRange hautRoom, int columns, int rows,bool corridor1)
     {
         direction = (Direction)Random.Range(0, 4);
-
         Direction directionCont = (Direction)(((int)room.enteringCorridor + 2) % 4);
         if (!corridor1 && direction == directionCont )
              direction= (Direction)(((int)direction + 1) % 4);

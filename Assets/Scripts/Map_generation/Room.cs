@@ -27,25 +27,25 @@ public class Room
            case Direction.Nord:
                 hautRoom = Mathf.Clamp(hautRoom, 1, rows - corridor.EndPosY);
                 posY = corridor.EndPosY;
-                posX = Random.Range(corridor.EndPosX - largRoom + 1, corridor.EndPosX);
+                posX = Random.Range (corridor.EndPosX - largRoom + 1, corridor.EndPosX);
 
-                posX = Mathf.Clamp(posX, 0, columns - largRoom);
+                posX = Mathf.Clamp (posX, 0, columns - largRoom);
                 break;
-            case Direction.Est:
+           case Direction.Est:
                 largRoom = Mathf.Clamp(largRoom, 1, columns - corridor.EndPosX);
                 posX = corridor.EndPosX;
 
-                posY = Random.Range(corridor.EndPosY - hautRoom + 1, corridor.EndPosY);
+                posY = Random.Range((corridor.EndPosY - (hautRoom)) + 1, corridor.EndPosY);
                 posY = Mathf.Clamp(posY, 0, rows - hautRoom);
                 break;
-            case Direction.Sud:
+           case Direction.Sud:
                 hautRoom = Mathf.Clamp(hautRoom, 1, corridor.EndPosY);
                 posY = corridor.EndPosY - hautRoom + 1;
 
                 posX = Random.Range(corridor.EndPosX - largRoom + 1, corridor.EndPosX);
                 posX = Mathf.Clamp(posX, 0, columns - largRoom);
                 break;
-            case Direction.Ouest:
+           case Direction.Ouest:
                 largRoom = Mathf.Clamp(largRoom, 1, corridor.EndPosX);
                 posX = corridor.EndPosX - largRoom + 1;
 
