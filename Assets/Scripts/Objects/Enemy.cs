@@ -11,6 +11,10 @@ abstract public class Enemy : ScriptableObject
     //public Sprite AttackSprite;
     public int attackDamage;
     public float attackSpeed; //  attaque/seconde
+    public float lookAtDistance;
+    public float chaseRange;
+    public float attackRange;
+    public  float moveSpeed;
     public RuntimeAnimatorController animator;
 
     abstract public void Attack();
