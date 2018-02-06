@@ -13,7 +13,7 @@ public class Board : MonoBehaviour {
     public IntRange hautRoom = new IntRange(3, 10);
     public IntRange largRoom = new IntRange(3, 10);
     public IntRange longCorridor = new IntRange(6, 10);
-    public GameObject[] floorTiles;
+    public GameObject floorTiles;
     public GameObject mur_Nord;
     public GameObject mur_Sud;
     public GameObject mur_Est;
@@ -27,6 +27,7 @@ public class Board : MonoBehaviour {
 
     private void Start()
     {
+        
         boardHolder = new GameObject("Board Holder");
 
         SetUpTilesArray();
@@ -48,6 +49,8 @@ public class Board : MonoBehaviour {
         {
             tiles[i] = new TileType[hauteur];
         }
+        hauteur--;
+        largeur--;
     }
     void CreateRoomsAndCorridors()
     {
@@ -163,29 +166,44 @@ public class Board : MonoBehaviour {
             {
                 if (tiles[i][j] == TileType.Floor)
                 {
-                    InstantiateFromArray(floorTiles, i, j);
+                    Instantiate(floorTiles, i, j);
                 }
-
-                // If the tile type is Wall...
-                //if (tiles[i][j] == TileType.Wall)
-                //{
-                //    // ... instantiate a wall over the top.
-                //    InstantiateFromArray(wallTiles, i, j);
-                //}
+                
+                if (tiles[i][j] == TileType.Wall && j > 0 && i<largeur-1 )
+                {
+                    if (tiles[i][j-1]==TileType.Floor )
+                    {
+                        Instantiate(mur_Nord, i, j);
+                    }
+                    if(tiles[i+1][j] == TileType.Floor)
+                    {
+                        Instantiate(mur_Ouest, i+.35f, j+.72f);
+                    }
+                }
             }
         }
     }
 
-    void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
-    {
-        // Create a random index for the array.
-        int randomIndex = Random.Range(0, prefabs.Length);
+    //void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
+    //{
+    //    // Create a random index for the array.
+    //    int randomIndex = Random.Range(0, prefabs.Length);
 
-        // The position to be instantiated at is based on the coordinates.
-        Vector3 position = new Vector3(xCoord, yCoord, 0f);
+    //    // The position to be instantiated at is based on the coordinates.
+    //    Vector3 position = new Vector3(2f*xCoord,2f* yCoord, 0f);
+
+    //    // Create an instance of the prefab from the random index of the array.
+    //    GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+
+    //    // Set the tile's parent to the board holder.
+    //    tileInstance.transform.parent = boardHolder.transform;
+    //}
+    void Instantiate(GameObject prefab,float x,float y)
+    {
+        Vector3 position = new Vector3(2f * x, 2f * y, 0f);
 
         // Create an instance of the prefab from the random index of the array.
-        GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+        GameObject tileInstance = Instantiate(prefab, position, Quaternion.identity) as GameObject;
 
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;

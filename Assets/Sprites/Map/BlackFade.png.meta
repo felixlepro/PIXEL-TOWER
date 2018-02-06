@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f32a21d5cb45da246a2480a0ceb716e7
-timeCreated: 1517876176
+timeCreated: 1517928850
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 48
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -85,36 +85,36 @@ TextureImporter:
       name: BlackFade_0
       rect:
         serializedVersion: 2
-        x: 245
-        y: 399
-        width: 48
-        height: 48
+        x: 240
+        y: 357
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 24}
-        - {x: -24, y: -24}
-        - {x: 24, y: -24}
-        - {x: 24, y: 24}
+      - - {x: -48, y: 48}
+        - {x: -48, y: -48}
+        - {x: 48, y: -48}
+        - {x: 48, y: 48}
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: BlackFade_1
       rect:
         serializedVersion: 2
-        x: 245
+        x: 240
         y: 308
-        width: 48
-        height: 48
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -23.231277, y: 24}
-        - {x: -24, y: -24}
-        - {x: 24, y: 24}
-        - {x: 24, y: 23.820862}
+      - - {x: -48, y: 48}
+        - {x: -48, y: -48}
+        - {x: 48, y: 48}
+        - {x: 48, y: 48}
       physicsShape: []
       tessellationDetail: 0
     outline: []
