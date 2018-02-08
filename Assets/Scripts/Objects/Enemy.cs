@@ -16,6 +16,7 @@ abstract public class Enemy : ScriptableObject
     public float attackRange;
     public  float moveSpeed;
     public RuntimeAnimatorController animator;
+    public float lookSphereCastRadius;
 
     abstract public void Attack();
 }
