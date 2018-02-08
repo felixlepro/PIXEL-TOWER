@@ -168,17 +168,45 @@ public class Board : MonoBehaviour {
                 {
                     Instantiate(floorTiles, i, j);
                 }
-                
-                if (tiles[i][j] == TileType.Wall && j > 0 && i<largeur-1 )
+                if (tiles[i][j] == TileType.Wall )
+                {
+                    Instantiate(voidTile , i, j+.72f);
+                }
+
+                if (tiles[i][j] == TileType.Wall && j > 0 )
                 {
                     if (tiles[i][j-1]==TileType.Floor )
                     {
                         Instantiate(mur_Nord, i, j);
                     }
-                    if(tiles[i+1][j] == TileType.Floor)
+                    
+
+                }
+                if (tiles[i][j] == TileType.Wall && i < largeur - 1)
+                {
+                    
+                    if (tiles[i + 1][j] == TileType.Floor)
                     {
-                        Instantiate(mur_Ouest, i+.35f, j+.72f);
+                        Instantiate(mur_Ouest, i + .35f, j + .72f);
                     }
+
+                }
+                if (tiles[i][j] == TileType.Wall && j <hauteur-1)
+                {
+                    if (tiles[i][j + 1] == TileType.Floor)
+                    {
+                        Instantiate(mur_Sud, i, j+1.1f);
+                    }
+                    
+
+                }
+                if (tiles[i][j] == TileType.Wall &&  i > 0)
+                {
+                    if (tiles[i - 1][j] == TileType.Floor)
+                    {
+                        Instantiate(mur_Est, i - .35f, j + .72f);
+                    }
+
                 }
             }
         }

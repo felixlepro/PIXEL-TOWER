@@ -51,8 +51,8 @@ public class Player : MonoBehaviour {
 
     void faceMouse()
     {
-        Vector3 faceRight = new Vector3(1,1,1);
-        Vector3 faceLeft = new Vector3(-1, 1, 1);
+        Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
+        Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
