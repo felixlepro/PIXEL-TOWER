@@ -15,7 +15,7 @@ public class Patrol : StateMachineBehaviour {
     {
         wayPoints = GameObject.FindGameObjectsWithTag("waypoints");
         Debug.Log(wayPoints[0].transform.position.x);
-        
+   
     }
 
 

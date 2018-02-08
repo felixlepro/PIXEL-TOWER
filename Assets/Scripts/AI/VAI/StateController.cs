@@ -28,6 +28,7 @@ public class StateController : MonoBehaviour
 
     public void SetupAI(bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager)
     {
+
         wayPointList = wayPointsFromTankManager;
         aiActive = aiActivationFromTankManager;
         if (aiActive)
