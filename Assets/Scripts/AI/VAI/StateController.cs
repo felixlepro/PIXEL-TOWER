@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Pathfinding;
 
 public class StateController : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class StateController : MonoBehaviour
     public Transform eyes;
     public State remainState;
 
+    SpriteRenderer spriteR;
 
-    [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public AIPath AIPath;
+    //[HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public Transform chaseTarget;
@@ -23,21 +26,30 @@ public class StateController : MonoBehaviour
 
     void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        spriteR = GetComponentInChildren<SpriteRenderer>();
+        AIPath = GetComponent<AIPath>();
+        //navMeshAgent = GetComponent<NavMeshAgent>();
+        //wayPointList = new List<Transform>();
+        // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
+        aiActive = true;                                                                                        //temporaire
+        foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
+        {
+            wayPointList.Add(wp.transform);
+        }
     }
 
-    public void SetupAI(bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager)
+    public void SetupAI(bool aiActivationFromGameManager, List<Transform> wayPointsFromGameManager)
     {
 
-        wayPointList = wayPointsFromTankManager;
-        aiActive = aiActivationFromTankManager;
+        wayPointList = wayPointsFromGameManager;
+        aiActive = aiActivationFromGameManager;
         if (aiActive)
         {
-            navMeshAgent.enabled = true;
+            AIPath.enabled = true;
         }
         else
         {
-            navMeshAgent.enabled = false;
+            AIPath.enabled = false;
         }
     }
 
@@ -52,8 +64,9 @@ public class StateController : MonoBehaviour
     {
         if (currentState != null && eyes != null)
         {
-            Gizmos.color = currentState.sceneGizmoColor;
-            Gizmos.DrawWireSphere(eyes.position, enemy.lookSphereCastRadius);
+            spriteR.color  = currentState.sceneGizmoColor;
+            //Gizmos.color = currentState.sceneGizmoColor;
+            //Gizmos.DrawWireSphere(eyes.position, enemy.lookSphereCastRadius);
         }
     }
 

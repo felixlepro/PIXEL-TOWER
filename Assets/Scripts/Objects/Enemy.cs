@@ -6,7 +6,7 @@ using UnityEngine;
 abstract public class Enemy : ScriptableObject
 {
     public string EnemyName;
-    public Color wColor;
+    public Color wColor = Color.white;
     // public Sprite idleSprite;
     //public Sprite AttackSprite;
     public int attackDamage;

@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf593c42263116041bff0cc8347c5633, type: 3}
   m_Name: Patrol Chaser
   m_EditorClassIdentifier: 
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: 23e11b54cf558a64cbaac5eb1e5a39ce, type: 2}
   transitions:
-  - decision: {fileID: 0}
-    trueState: {fileID: 11400000}
-    falseState: {fileID: 0}
-  sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - decision: {fileID: 11400000, guid: b4cd511e9ec716949b1b1602f54bdba0, type: 2}
+    trueState: {fileID: 11400000, guid: ec6625e2b4976d343b09ea97274ebeda, type: 2}
+    falseState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
+  sceneGizmoColor: {r: 0, g: 1, b: 0.048275948, a: 1}

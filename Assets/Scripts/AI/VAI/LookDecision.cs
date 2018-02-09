@@ -8,8 +8,7 @@ public class LookDecision : Decision
 
     public override bool Decide(StateController controller)
     {
-        bool targetVisible = Look(controller);
-        return targetVisible;
+        return Look(controller);
     }
 
     private bool Look(StateController controller)

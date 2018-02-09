@@ -13,7 +13,7 @@ public class ScanDecision : Decision
 
     private bool Scan(StateController controller)
     {
-        controller.navMeshAgent.Stop();
+        //controller.navMeshAgent.Stop();
         // controller.transform.Rotate(0, controller.enemy.searchingTurnSpeed * Time.deltaTime, 0);
         return true;//controller.CheckIfCountDownElapsed(controller.enemyStats.searchDuration);
     }

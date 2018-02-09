@@ -8,19 +8,19 @@ public class EnemyManager : MonoBehaviour
     private SpriteRenderer spriteR;
     private Animator anim;
 
-    float Distance;
-    public Transform Target;
-    float lookAtDistance;
-    float chaseRange;
-    float attackRange;
-    float moveSpeed;
-    float Damping = 6f;
-    float attackRepeatTime;
-    int TheDammage;
+   // float Distance;
+   // public Transform Target;
+    //float lookAtDistance;
+    //float chaseRange;
+    //float attackRange;
+    //float moveSpeed;
+    //float Damping = 6f;
+    //float attackRepeatTime;
+    //int TheDammage;
 
     private float attackTime;
 
-    CharacterController controller;
+    //CharacterController controller;
     private Vector3 moveDirection;
     void Start()
     {
@@ -29,86 +29,91 @@ public class EnemyManager : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = enemy.animator; ;
 
-        lookAtDistance = enemy.lookAtDistance;
-        chaseRange = enemy.chaseRange;
-        attackRange = enemy.attackRange;
-        moveSpeed = enemy.moveSpeed;
 
-        attackRepeatTime = enemy.attackSpeed;
-        TheDammage = enemy.attackDamage;
-        controller = GetComponent<CharacterController>();
+        //lookAtDistance = enemy.lookAtDistance;
+        //chaseRange = enemy.chaseRange;
+        //attackRange = enemy.attackRange;
+        //moveSpeed = enemy.moveSpeed;
+
+        //attackRepeatTime = enemy.attackSpeed;
+        //TheDammage = enemy.attackDamage;
+        //controller = GetComponent<CharacterController>();
 
 
-        attackTime = Time.time;
+        //attackTime = Time.time;
     }
 
     void Update()
     {
         
-            Distance = Vector3.Distance(Target.position, transform.position);
+            //Distance = Vector3.Distance(Target.position, transform.position);
 
-            if (Distance < lookAtDistance)
-            {
-                //lookAt();
-            }
+            //if (Distance < lookAtDistance)
+            //{
+            //    //lookAt();
+            //}
 
-            if (Distance > lookAtDistance)
-            {
-                //spriteR.material.color = Color.green;
-            }
+            //if (Distance > lookAtDistance)
+            //{
+            //    //spriteR.material.color = Color.green;
+            //}
 
-            if (Distance < attackRange)
-            {
-                //attack();
-            }
-            else if (Distance < chaseRange)
-            {
-                //chase();
-            }
+            //if (Distance < attackRange)
+            //{
+            //    //attack();
+            //}
+            //else if (Distance < chaseRange)
+            //{
+            //    //chase();
+            //}
         
     }
 
-    void lookAt()
-    {
-        //spriteR.material.color = Color.yellow;
-        getAngle();
-        isMoving(false);
-    }
+    //void lookAt()
+    //{
+    //    //spriteR.material.color = Color.yellow;
+    //    getAngle();
+    //    isMoving(false);
+    //}
 
-    void chase()
-    {
-        //spriteR.material.color = Color.red;
+    //void chase()
+    //{
+    //    //spriteR.material.color = Color.red;
 
-        moveDirection = transform.forward;
-        moveDirection *= moveSpeed;
+    //    moveDirection = transform.forward;
+    //    moveDirection *= moveSpeed;
 
-        transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * moveSpeed / Distance);
-        isMoving(true);
-    }
+    //    transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * moveSpeed / Distance);
+    //    isMoving(true);
+    //}
 
-    void attack()
-    {
-        if (Time.time > attackTime)
-        {
-            //Target.SendMessage("ApplyDammage", TheDammage);
-            //Debug.Log("The Enemy Has Attacked");
-            attackTime = Time.time + attackRepeatTime;
-        }
-    }
+    //void attack()
+    //{
+    //    if (Time.time > attackTime)
+    //    {
+    //        //Target.SendMessage("ApplyDammage", TheDammage);
+    //        //Debug.Log("The Enemy Has Attacked");
+    //        attackTime = Time.time + attackRepeatTime;
+    //    }
+    //}
 
-    void ApplyDammage()
+    //void ApplyDammage()
+    //{
+    //    chaseRange += 30;
+    //    moveSpeed += 2;
+    //    lookAtDistance += 40;
+    //}
+
+
+
+
+    void getAngle()                                     //à garder
     {
-        chaseRange += 30;
-        moveSpeed += 2;
-        lookAtDistance += 40;
-    }
-    void getAngle()
-    {
-        Vector2 direction = Target.position - transform.position;
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
-        if (direction.x < 0) angle = 360-angle;
-        anim.SetFloat("Angle", angle);
-        Debug.Log(angle);
+        //Vector2 direction = Target.position - transform.position;
+        //float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        //if (direction.x < 0) angle = 360-angle;
+        //anim.SetFloat("Angle", angle);
+        //Debug.Log(angle);
     }
     void isMoving(bool moving)
     {
