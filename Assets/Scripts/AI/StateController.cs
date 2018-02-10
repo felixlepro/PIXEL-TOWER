@@ -11,14 +11,14 @@ public class StateController : MonoBehaviour
     public Enemy enemy;
     public Transform eyes;
     public State remainState;
+    public Transform chaseTarget;
+    private Animator anim;
 
-    SpriteRenderer spriteR;
+    [HideInInspector] SpriteRenderer spriteR;
 
     [HideInInspector] public AIPath AIPath;
-    //[HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
-    [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public float stateTimeElapsed;
 
     private bool aiActive;
@@ -26,9 +26,17 @@ public class StateController : MonoBehaviour
 
     void Awake()
     {
+       
         spriteR = GetComponentInChildren<SpriteRenderer>();
+        spriteR.color = enemy.wColor;
+
+        anim = GetComponentInChildren<Animator>();
+        anim.runtimeAnimatorController = enemy.animator;
+
         AIPath = GetComponent<AIPath>();
-        //navMeshAgent = GetComponent<NavMeshAgent>();
+        AIPath.maxSpeed = enemy.moveSpeed;
+        AIPath.endReachedDistance = enemy.attackRange;
+
         //wayPointList = new List<Transform>();
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
         aiActive = true;                                                                                        //temporaire
@@ -64,9 +72,8 @@ public class StateController : MonoBehaviour
     {
         if (currentState != null && eyes != null)
         {
-            spriteR.color  = currentState.sceneGizmoColor;
-            //Gizmos.color = currentState.sceneGizmoColor;
-            //Gizmos.DrawWireSphere(eyes.position, enemy.lookSphereCastRadius);
+         // spriteR.color  = currentState.sceneGizmoColor;          normalement dans le code mais ca piche des erreurs de marde meme si ya pas derreur pi que ca marche
+            
         }
     }
 
@@ -88,5 +95,18 @@ public class StateController : MonoBehaviour
     private void OnExitState()
     {
         stateTimeElapsed = 0;
+    }
+
+    void getAngle()                                     //à garder
+    {
+        //Vector2 direction = Target.position - transform.position;
+        //float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        //if (direction.x < 0) angle = 360-angle;
+        //anim.SetFloat("Angle", angle);
+        //Debug.Log(angle);
+    }
+    void isMoving(bool moving)
+    {
+        anim.SetBool("isMoving", moving);
     }
 }

@@ -8,6 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d15e978aff015d14cad5f94e2028197c, type: 3}
-  m_Name: LookDecision
+  m_Script: {fileID: 11500000, guid: afb23993c36489e44a6d8ec76a7c7e68, type: 3}
+  m_Name: ActiveState Decision
   m_EditorClassIdentifier: 
