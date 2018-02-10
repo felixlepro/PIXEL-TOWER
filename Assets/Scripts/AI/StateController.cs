@@ -9,7 +9,6 @@ public class StateController : MonoBehaviour
 
     public State currentState;
     public Enemy enemy;
-    public Transform eyes;
     public State remainState;
     public Transform chaseTarget;
     private Animator anim;
@@ -70,7 +69,7 @@ public class StateController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (currentState != null && eyes != null)
+        if (currentState != null)
         {
          // spriteR.color  = currentState.sceneGizmoColor;          normalement dans le code mais ca piche des erreurs de marde meme si ya pas derreur pi que ca marche
             
