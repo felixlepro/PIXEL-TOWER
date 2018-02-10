@@ -6,16 +6,15 @@ using UnityEngine;
 abstract public class Enemy : ScriptableObject
 {
     public string EnemyName;
-    public Color wColor;
-    // public Sprite idleSprite;
-    //public Sprite AttackSprite;
+    public Color wColor = Color.white;
     public int attackDamage;
     public float attackSpeed; //  attaque/seconde
-    public float lookAtDistance;
-    public float chaseRange;
     public float attackRange;
     public  float moveSpeed;
     public RuntimeAnimatorController animator;
+
+    public float chaseRange;
+    public float chaseRangeBuffer;
 
     abstract public void Attack();
 }

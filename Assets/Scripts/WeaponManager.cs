@@ -8,14 +8,12 @@ public class WeaponManager: MonoBehaviour
     public Weapon weapon;
     private SpriteRenderer spriteR;
     private Animator anim;
+    private float timeElapsed;
 
 
     void Start()
     {
         spriteR = gameObject.GetComponent<SpriteRenderer>();
-        //spriteR.sprite = Resources.LoadAll<Sprite>("davestrike2_01")[0];
-        //this.gameObject.GetComponent<SpriteRenderer>().sprite = test;
-       // spriteR.sprite = weapon.idleSprite;
         spriteR.color = weapon.wColor;
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = weapon.animator;
@@ -27,8 +25,23 @@ public class WeaponManager: MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            attack();
+        }
+    }
+
+    void attack()
+    {
+        if (CheckIfCountDownElapsed(weapon.attackSpeed))
+        {
             anim.SetTrigger("PlayerAttack");
         }
+
+    }
+
+     bool CheckIfCountDownElapsed(float duration)
+    {
+        timeElapsed += Time.deltaTime;
+        return (timeElapsed >= duration);
     }
 
 }
