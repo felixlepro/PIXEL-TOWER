@@ -8,8 +8,11 @@ abstract public class Weapon : ScriptableObject
     public string weaponName;
     public Color wColor;
     public int attackDamage;
+    public int cost;
+    public float range;
     public float attackSpeed; //  attaque/seconde
     public RuntimeAnimatorController animator;
+    public string description;
 
     abstract public void Attack();
     abstract public void setUpAS();
