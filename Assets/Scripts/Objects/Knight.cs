@@ -6,8 +6,11 @@ using UnityEngine;
 public class Knight : Enemy
 {
 
-    public override void Attack()
+    public override void Attack(StateController controller)
     {
+        controller.anim.SetTrigger("Attack");
+        controller.getAngleTarget();
+
     }
 }
 

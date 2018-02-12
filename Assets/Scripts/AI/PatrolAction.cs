@@ -14,17 +14,17 @@ public class PatrolAction : Action
 
     private void Patrol(StateController controller)
     {
-        
+        controller.getAnglePath();
         // controller.target.position = controller.wayPointList[controller.nextWayPoint].position;
-        controller.AIPath.destination  = controller.wayPointList[controller.nextWayPoint].position;
+        controller.AIPathing.destination  = controller.wayPointList[controller.nextWayPoint].position;
 
-        if ((controller.AIPath.reachedEndOfPath || !controller.AIPath.hasPath) && !controller.AIPath.pathPending)
+        if ((controller.AIPathing.reachedEndOfPath || !controller.AIPathing.hasPath) && !controller.AIPathing.pathPending)
         {
             if (Idle(controller)) {
                 controller.anim.SetBool("isMoving", true);
                 controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
-                controller.AIPath.destination = controller.wayPointList[controller.nextWayPoint].position;
-                controller.AIPath.SearchPath();
+                controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
+                controller.AIPathing.SearchPath();
                 // Debug.Log(controller.AIPath.destination);
                 Debug.Log("pipi");
             }

@@ -17,5 +17,5 @@ abstract public class Enemy : ScriptableObject
     public float chaseRange;
     public float chaseRangeBuffer;
 
-    abstract public void Attack();
+    abstract public void Attack(StateController controller);
 }

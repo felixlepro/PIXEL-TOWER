@@ -15,7 +15,8 @@ public class StateController : MonoBehaviour
 
     [HideInInspector] SpriteRenderer spriteR;
 
-    [HideInInspector] public AIPath AIPath;
+    [HideInInspector] public AIPath AIPathing;
+    [HideInInspector] public SimpleSmoothModifier sSmoothModifier;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public float stateTimeElapsed;
@@ -33,9 +34,11 @@ public class StateController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = enemy.animator;
 
-        AIPath = GetComponent<AIPath>();
-        AIPath.maxSpeed = enemy.moveSpeed;
-        AIPath.endReachedDistance = enemy.attackRange;
+        AIPathing = GetComponent<AIPath>();
+        AIPathing.maxSpeed = enemy.moveSpeed;
+        AIPathing.endReachedDistance = enemy.attackRange;
+        AIPathing.rotationIn2D = true;
+        sSmoothModifier = GetComponent<SimpleSmoothModifier>();
  
         //wayPointList = new List<Transform>();
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
@@ -53,11 +56,11 @@ public class StateController : MonoBehaviour
         aiActive = aiActivationFromGameManager;
         if (aiActive)
         {
-            AIPath.enabled = true;
+            AIPathing.enabled = true;
         }
         else
         {
-            AIPath.enabled = false;
+            AIPathing.enabled = false;
         }
     }
 
@@ -66,6 +69,7 @@ public class StateController : MonoBehaviour
         if (!aiActive)
             return;
         currentState.UpdateState(this);
+
     }
 
     void OnDrawGizmos()
@@ -97,12 +101,23 @@ public class StateController : MonoBehaviour
         stateTimeElapsed = 0;
     }
 
-    void getAngle()                                     //à garder
+    public void getAnglePath()                                     //à garder
     {
-        //Vector2 direction = Target.position - transform.position;
+        float angle = transform.rotation.z;
+        anim.SetFloat("Angle", angle);
+        //float angle = AIPathing.SimulateRotationTowards
+
+        //Vector2 direction = chaseTarget.position - transform.position;
         //float angle = Vector2.Angle(direction, new Vector2(0, -1));
-        //if (direction.x < 0) angle = 360-angle;
+        //if (direction.x < 0) angle = 360 - angle;
         //anim.SetFloat("Angle", angle);
         //Debug.Log(angle);
     }
-}
+    public void getAngleTarget()
+    {
+        Vector2 direction = chaseTarget.position - transform.position;
+        float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        if (direction.x < 0) angle = 360 - angle;
+        anim.SetFloat("Angle", angle);
+    }
+    }
