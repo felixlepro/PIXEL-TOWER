@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Board : MonoBehaviour {
     public enum TileType
@@ -37,8 +38,8 @@ public class Board : MonoBehaviour {
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-
-
+        AstarPath.active.Scan();
+        //GetComponent<AstarPath>().Scan();
 
 
     }   
