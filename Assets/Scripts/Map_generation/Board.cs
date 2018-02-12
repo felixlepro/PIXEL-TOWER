@@ -26,7 +26,7 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
-    private void Start()
+    public void SetupBoard()
     {
         
         boardHolder = new GameObject("Board Holder");
@@ -38,11 +38,8 @@ public class Board : MonoBehaviour {
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        AstarPath.active.Scan();
-        //GetComponent<AstarPath>().Scan();
+    }
 
-
-    }   
     private void SetUpTilesArray()
     {
         tiles = new TileType[largeur][];
