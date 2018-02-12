@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
     public float speed;
     public float rotationBuffer;
+    public float restartDelay = 1f;
+
     private Rigidbody2D playerRigidbody;
+    private BoxCollider2D boxCollider;
     private Animator anim;
     Vector3 movement;
 
@@ -21,7 +26,21 @@ public class Player : MonoBehaviour {
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
     }
 
-    void Update()
+    private void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Exit")
+        {
+            Invoke("Restart", restartDelay);
+            enabled = false;
+        }
+    }
+
+        void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
