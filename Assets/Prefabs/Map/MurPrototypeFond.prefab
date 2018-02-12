@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61706945843972150}
   m_Layer: 0
   m_Name: MurPrototypeFond
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
