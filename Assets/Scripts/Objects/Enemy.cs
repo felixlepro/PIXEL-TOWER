@@ -12,6 +12,7 @@ abstract public class Enemy : ScriptableObject
     public float attackRange;
     public  float moveSpeed;
     public RuntimeAnimatorController animator;
+    public float idleTime;
 
     public float chaseRange;
     public float chaseRangeBuffer;

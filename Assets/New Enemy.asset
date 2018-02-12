@@ -18,5 +18,6 @@ MonoBehaviour:
   attackRange: 5
   moveSpeed: 10
   animator: {fileID: 9100000, guid: 8b4d237af30af8b47ba4abc4335b580c, type: 2}
+  idleTime: 0.5
   chaseRange: 20
   chaseRangeBuffer: 5

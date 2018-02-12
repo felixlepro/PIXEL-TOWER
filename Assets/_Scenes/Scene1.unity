@@ -305,7 +305,7 @@ Animator:
   m_GameObject: {fileID: 146404067}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8b4d237af30af8b47ba4abc4335b580c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1424,6 +1424,7 @@ MonoBehaviour:
   wayPointList: []
   nextWayPoint: 0
   stateTimeElapsed: 0
+  anim: {fileID: 0}
 --- !u!114 &1833877505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,7 +1472,7 @@ MonoBehaviour:
   rotationIn2D: 0
   targetCompatibility: {fileID: 0}
   rotationSpeed: 0
-  slowdownDistance: 1
+  slowdownDistance: 0
   pickNextWaypointDist: 1
   endReachedDistance: 0.5
   alwaysDrawGizmos: 1
@@ -1700,8 +1701,8 @@ MonoBehaviour:
   hauteur: 100
   largeur: 100
   numRooms:
-    min: 100
-    max: 100
+    min: 30
+    max: 50
   hautRoom:
     min: 3
     max: 10
@@ -1709,7 +1710,7 @@ MonoBehaviour:
     min: 3
     max: 10
   longCorridor:
-    min: 6
+    min: 2
     max: 10
   floorTiles: {fileID: 1422594907731900, guid: 9b50c418c1d448c408f4ed6f3807073d, type: 2}
   mur_Nord: {fileID: 1294078729329326, guid: 39be942870f64c74195b1a9f76648dcb, type: 2}

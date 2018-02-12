@@ -11,7 +11,7 @@ public class StateController : MonoBehaviour
     public Enemy enemy;
     public State remainState;
     public Transform chaseTarget;
-    private Animator anim;
+    
 
     [HideInInspector] SpriteRenderer spriteR;
 
@@ -19,6 +19,7 @@ public class StateController : MonoBehaviour
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public Animator anim;
 
     private bool aiActive;
 
@@ -35,7 +36,7 @@ public class StateController : MonoBehaviour
         AIPath = GetComponent<AIPath>();
         AIPath.maxSpeed = enemy.moveSpeed;
         AIPath.endReachedDistance = enemy.attackRange;
-
+ 
         //wayPointList = new List<Transform>();
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
         aiActive = true;                                                                                        //temporaire
@@ -103,9 +104,5 @@ public class StateController : MonoBehaviour
         //if (direction.x < 0) angle = 360-angle;
         //anim.SetFloat("Angle", angle);
         //Debug.Log(angle);
-    }
-    void isMoving(bool moving)
-    {
-        anim.SetBool("isMoving", moving);
     }
 }
