@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 
     private void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);//C'EST LA QU'ON CHANGE LA SCENE CALISS
     }
 
     private void OnTriggerEnter2D(Collider2D other)
