@@ -11,12 +11,11 @@ public class StateController : MonoBehaviour
     public Enemy enemy;
     public State remainState;
     public Transform chaseTarget;
-    
+
 
     [HideInInspector] SpriteRenderer spriteR;
 
     [HideInInspector] public AIPath AIPathing;
-    [HideInInspector] public SimpleSmoothModifier sSmoothModifier;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public float stateTimeElapsed;
@@ -27,7 +26,7 @@ public class StateController : MonoBehaviour
 
     void Awake()
     {
-       
+
         spriteR = GetComponentInChildren<SpriteRenderer>();
         spriteR.color = enemy.wColor;
 
@@ -38,8 +37,7 @@ public class StateController : MonoBehaviour
         AIPathing.maxSpeed = enemy.moveSpeed;
         AIPathing.endReachedDistance = enemy.attackRange;
         AIPathing.rotationIn2D = true;
-        sSmoothModifier = GetComponent<SimpleSmoothModifier>();
- 
+
         //wayPointList = new List<Transform>();
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
         aiActive = true;                                                                                        //temporaire
@@ -72,15 +70,6 @@ public class StateController : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
-    {
-        if (currentState != null)
-        {
-         // spriteR.color  = currentState.sceneGizmoColor;          normalement dans le code mais ca piche des erreurs de marde meme si ya pas derreur pi que ca marche
-            
-        }
-    }
-
     public void TransitionToState(State nextState)
     {
         if (nextState != remainState)
@@ -103,14 +92,15 @@ public class StateController : MonoBehaviour
 
     public void getAnglePath()                                     //à garder
     {
-        float angle = transform.rotation.z;
-        anim.SetFloat("Angle", angle);
-        //float angle = AIPathing.SimulateRotationTowards
+        float angle = 0;
+        if (!AIPathing.reachedEndOfPath)
+        {
+            Vector2 direction = AIPathing.velocity;
+            angle = Vector2.Angle(direction, new Vector2(0, -1));
+            if (direction.x < 0) angle = 360 - angle;
+            anim.SetFloat("Angle", angle);           
+        } 
 
-        //Vector2 direction = chaseTarget.position - transform.position;
-        //float angle = Vector2.Angle(direction, new Vector2(0, -1));
-        //if (direction.x < 0) angle = 360 - angle;
-        //anim.SetFloat("Angle", angle);
         //Debug.Log(angle);
     }
     public void getAngleTarget()
@@ -119,5 +109,6 @@ public class StateController : MonoBehaviour
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
         if (direction.x < 0) angle = 360 - angle;
         anim.SetFloat("Angle", angle);
+        //Debug.Log(angle);
     }
-    }
+}

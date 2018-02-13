@@ -8,13 +8,13 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        
+        controller.getAnglePath();
         Patrol(controller);
     }
 
     private void Patrol(StateController controller)
     {
-        controller.getAnglePath();
+        
         // controller.target.position = controller.wayPointList[controller.nextWayPoint].position;
         controller.AIPathing.destination  = controller.wayPointList[controller.nextWayPoint].position;
 
@@ -26,11 +26,12 @@ public class PatrolAction : Action
                 controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
                 controller.AIPathing.SearchPath();
                 // Debug.Log(controller.AIPath.destination);
-                Debug.Log("pipi");
+                Debug.Log("moving = true");
             }
             else
             {
                 controller.anim.SetBool("isMoving", false);
+                Debug.Log("moving = false");
             }
         }
     }

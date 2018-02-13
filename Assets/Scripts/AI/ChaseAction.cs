@@ -12,7 +12,8 @@ public class ChaseAction : Action
 
     private void Chase(StateController controller)
     {
+        controller.anim.SetBool("isMoving", true);
+        controller.getAngleTarget();
         controller.AIPathing.destination = controller.chaseTarget.position;
-       // controller.navMeshAgent.Resume();
     }
 }
