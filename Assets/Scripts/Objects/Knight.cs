@@ -9,7 +9,6 @@ public class Knight : Enemy
     public override void Attack(StateController controller)
     {
         controller.anim.SetBool("isMoving", false);
-        controller.anim.SetTrigger("Attack");
         controller.getAngleTarget();
 
     }
