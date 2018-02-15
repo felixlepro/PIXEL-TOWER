@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
-        
         boardScript = GetComponent<Board>();
+
         InitGame();
     }
 
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour {
     {
         levelImage.SetActive(false);
         doingSetup = false;
-        Debug.Log("GrosCaca");
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -61,8 +60,7 @@ public class GameManager : MonoBehaviour {
         levelText.text = "Level " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
-        boardScript.SetupBoard();
-        
+        boardScript.SetupBoard(); 
     }
 
     // Update is called once per frame
