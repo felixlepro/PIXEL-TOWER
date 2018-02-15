@@ -38,7 +38,16 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
+
+        else if ((other.tag == "Sylvain") & (Input.GetKeyDown("Enter")))
+        {
+           
+        }
+
     }
+
+
+
 
         void Update()
     {
