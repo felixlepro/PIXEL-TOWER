@@ -14,26 +14,42 @@ public class Player : MonoBehaviour {
     
 
 
+    public Weapon weapon;
+    
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
+    private int hp;
     Vector3 movement;
 
     Transform weaponTransform;
     GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
+ 
+
     void Start()
     {
+        weapon = new Sword(10);
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren < Animator > ();
-
+        hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
       
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
 
         
+    }
+
+    public void EnvoyerDegat(Enemy cible)
+    {
+        cible.recevoirDegats(weapon.GetDamage());
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.playerHp = hp;
     }
 
     private void Restart()
@@ -47,6 +63,16 @@ public class Player : MonoBehaviour {
         {
             Invoke("Restart", restartDelay);
             enabled = false;
+        }
+        if (other.tag == "Enemy")
+        {
+            
+            StateController enemyScript = other.gameObject.GetComponent<StateController>();
+            EnvoyerDegat(enemyScript.enemy);
+            if(enemyScript.enemy.hp <= 0)
+            {
+                enemyScript.gameObject.SetActive(false);
+            }
         }
     }
 

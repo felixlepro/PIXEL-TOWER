@@ -14,4 +14,8 @@ abstract public class Weapon : ScriptableObject
     abstract public void Attack();
     abstract public void setUpAS();
 
+    public int GetDamage()
+    {
+        return attackDamage;
+    }
 }

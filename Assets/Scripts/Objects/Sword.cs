@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon/Sword")]
 public class Sword : Weapon
 {
+    public Sword(int damage)
+    {
+        attackDamage = damage;
+    }
+
     public override void Attack()
     {
     }
@@ -13,5 +18,5 @@ public class Sword : Weapon
     {
 
     }
-
+    
 }

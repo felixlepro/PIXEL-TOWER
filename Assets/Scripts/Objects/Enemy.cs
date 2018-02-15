@@ -13,9 +13,15 @@ abstract public class Enemy : ScriptableObject
     public  float moveSpeed;
     public RuntimeAnimatorController animator;
     public float idleTime;
+    public int hp;
 
     public float chaseRange;
     public float chaseRangeBuffer;
 
     abstract public void Attack(StateController controller);
+
+    public void recevoirDegats(int damage)
+    {
+        hp -= damage;
+    }
 }

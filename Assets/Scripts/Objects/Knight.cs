@@ -6,11 +6,20 @@ using UnityEngine;
 public class Knight : Enemy
 {
 
+    public Knight()
+    {
+        hp = 100;
+    }
+
     public override void Attack(StateController controller)
     {
         controller.anim.SetBool("isMoving", false);
         controller.getAngleTarget();
 
     }
+    
+
+    
+
 }
 

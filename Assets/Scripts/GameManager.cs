@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public float levelStartDelay = 2f;
     public static GameManager instance = null;
-    public GameObject player;
+    public int playerHp = 100;
 
     private Board boardScript;
     private int level = 1;
