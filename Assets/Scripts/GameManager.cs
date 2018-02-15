@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour {
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
         boardScript.SetupBoard();
-        CameraFollow cameraFollower = GetComponent<CameraFollow>();
-        cameraFollower.target = (Transform)player.transform;
     }
 
     // Update is called once per frame

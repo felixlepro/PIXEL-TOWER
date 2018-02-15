@@ -168,10 +168,7 @@ public class Board : MonoBehaviour {
                 {
                     InstantiateObject(floorTiles, i, j);
                 }
-                if (tiles[i][j] == TileType.Wall )
-                {
-                    InstantiateObject(voidTile , i, j+.72f);
-                }
+                
 
                 if (tiles[i][j] == TileType.Wall && j > 0 )
                 {
@@ -196,6 +193,7 @@ public class Board : MonoBehaviour {
                     if (tiles[i][j + 1] == TileType.Floor)
                     {
                         InstantiateObject(mur_Sud, i, j+1.1f);
+                        InstantiateObject(voidTile, i, j+.72f);
                     }
                     
 

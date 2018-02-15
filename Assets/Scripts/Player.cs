@@ -78,16 +78,16 @@ public class Player : MonoBehaviour {
 
         void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Move(horizontal, vertical);
 
         faceMouse();
-    }
-
-    void FixedUpdate()
-    {
-        
     }
     private void Move(float h, float v)
     {
