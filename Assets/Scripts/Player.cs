@@ -8,6 +8,11 @@ public class Player : MonoBehaviour {
     public float speed;
     public float rotationBuffer;
     public float restartDelay = 1f;
+    public float weaponDistance = 1.25f;
+    [Range(0f, 1f)]
+    public float ratioWeaponPivot;
+    
+
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -15,6 +20,7 @@ public class Player : MonoBehaviour {
     Vector3 movement;
 
     Transform weaponTransform;
+    GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
     void Start()
@@ -23,7 +29,11 @@ public class Player : MonoBehaviour {
         anim = GetComponentInChildren < Animator > ();
 
         weaponTransform = transform.Find("WeaponRotation");
+        weaponChild = GameObject.Find("Weapon");
+      
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
+
+        setWeaponPivot();
     }
 
     private void Restart()
@@ -100,11 +110,13 @@ public class Player : MonoBehaviour {
 
         anim.SetFloat("DirectionAngle", angle);
         weaponTransform.right = direction;
-
-
-        
-
     }
+    void setWeaponPivot()
+    {
+        weaponTransform.position = new Vector3(ratioWeaponPivot * weaponDistance, weaponTransform.position.y, weaponTransform.position.z);
+        weaponChild.transform.position = new Vector3(weaponDistance - (ratioWeaponPivot * weaponDistance) + weaponTransform.position.x, weaponChild.transform.position.y, weaponChild.transform.position.z);;
+    }
+
 
 }
 
