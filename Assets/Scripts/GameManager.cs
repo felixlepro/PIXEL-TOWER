@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public float levelStartDelay = 2f;
     public static GameManager instance = null;
+    public GameObject player;
 
     private Board boardScript;
     private int level = 1;
@@ -60,7 +61,9 @@ public class GameManager : MonoBehaviour {
         levelText.text = "Level " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
-        boardScript.SetupBoard(); 
+        boardScript.SetupBoard();
+        CameraFollow cameraFollower = GetComponent<CameraFollow>();
+        cameraFollower.target = (Transform)player.transform;
     }
 
     // Update is called once per frame
