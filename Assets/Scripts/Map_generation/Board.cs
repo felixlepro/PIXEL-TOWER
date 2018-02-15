@@ -38,7 +38,6 @@ public class Board : MonoBehaviour {
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        InstantiateObject(GetComponent<GameManager>().player, 50f, 50f);
         AstarPath.active.Scan();
 
     }

@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
       
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
 
-        setWeaponPivot();
+        
     }
 
     private void Restart()
@@ -54,7 +54,6 @@ public class Player : MonoBehaviour {
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
         Move(horizontal, vertical);
 
         faceMouse();
@@ -114,7 +113,7 @@ public class Player : MonoBehaviour {
     void setWeaponPivot()
     {
         weaponTransform.position = new Vector3(ratioWeaponPivot * weaponDistance, weaponTransform.position.y, weaponTransform.position.z);
-        weaponChild.transform.position = new Vector3(weaponDistance - (ratioWeaponPivot * weaponDistance) + weaponTransform.position.x, weaponChild.transform.position.y, weaponChild.transform.position.z);;
+        weaponChild.transform.position = new Vector3(weaponDistance - (ratioWeaponPivot * weaponDistance) + weaponTransform.position.x, weaponChild.transform.position.y, weaponChild.transform.position.z);
     }
 
 

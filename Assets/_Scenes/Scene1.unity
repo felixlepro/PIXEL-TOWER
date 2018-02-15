@@ -100,11 +100,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4583557584215354, guid: b5b9da9b6cec7014b925db3150dbfb13, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.77
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4583557584215354, guid: b5b9da9b6cec7014b925db3150dbfb13, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -6.4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4583557584215354, guid: b5b9da9b6cec7014b925db3150dbfb13, type: 2}
       propertyPath: m_LocalPosition.z
@@ -173,6 +173,11 @@ Prefab:
       propertyPath: ratioWeaponPivot
       value: 0.44
       objectReference: {fileID: 0}
+    - target: {fileID: 114159269595583006, guid: b5b9da9b6cec7014b925db3150dbfb13,
+        type: 2}
+      propertyPath: ratioWeaponPivot
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b9da9b6cec7014b925db3150dbfb13, type: 2}
   m_IsPrefabParent: 0
@@ -238,7 +243,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 50235210}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -247,7 +252,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
