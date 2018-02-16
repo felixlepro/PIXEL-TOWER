@@ -26,11 +26,16 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
-    public void SetupBoard()
+    public void SetupBoard(int lvl)
     {
         
-        boardHolder = new GameObject("Board Holder");
 
+
+        boardHolder = new GameObject("Board Holder");
+        if (lvl !=1)
+        {
+            Destroy(boardHolder);
+        }
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
@@ -234,4 +239,5 @@ public class Board : MonoBehaviour {
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
     }
+   
 }
