@@ -13,9 +13,8 @@ public class AttackAction : Action
     private void Attack(StateController controller)
     {
 
-        if(Vector3.Distance(controller.chaseTarget.position, controller.transform.position) <= controller.enemy.attackRange 
-            //&& controller.CheckIfCountDownElapsed(controller.enemy.attackSpeed)
-           )
+        if ((Vector3.Distance(controller.chaseTarget.position, controller.transform.position) <= controller.enemy.attackRange )
+            && controller.CheckAttackReady())
         {
             controller.anim.SetBool("isAttacking", true);
             controller.enemy.Attack(controller);

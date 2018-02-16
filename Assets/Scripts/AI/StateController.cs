@@ -19,6 +19,7 @@ public class StateController : MonoBehaviour
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public float AScountdown = 0;
     [HideInInspector] public Animator anim;
 
     private bool aiActive;
@@ -84,10 +85,36 @@ public class StateController : MonoBehaviour
         stateTimeElapsed += Time.deltaTime;
         return (stateTimeElapsed >= duration);
     }
+    public bool CheckAttackReady()
+    {
+       Debug.Log(AScountdown );
+        AScountdown -= Time.deltaTime;
+        if (AScountdown <= 0)
+        {
+            Debug.Log("true");
+            AScountdown = enemy.attackSpeed;
+            return true;
+        }
+        else return false;
+    }
+
+public void UpdateAS()
+    {
+        AScountdown -= Time.deltaTime;
+    }
 
     private void OnExitState()
     {
         stateTimeElapsed = 0;
+    }
+
+    public bool checkAnimfinished()
+    {
+        if (enemy.attackSpeed - AScountdown > anim.GetCurrentAnimatorStateInfo(0).length)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void getAnglePath()                                     //à garder
