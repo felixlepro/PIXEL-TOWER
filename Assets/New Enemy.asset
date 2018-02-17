@@ -14,11 +14,15 @@ MonoBehaviour:
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 10
-  attackSpeed: 1
-  attackRange: 3
+  attackSpeed: 3
+  attackRange: 4
   moveSpeed: 10
-  animator: {fileID: 9100000, guid: 8b4d237af30af8b47ba4abc4335b580c, type: 2}
+  animator: {fileID: 9100000, guid: e9ee8002a404c4942ad78f36aa4a557c, type: 2}
   idleTime: 0.5
   hp: 100
-  chaseRange: 20
+  chaseRange: 30
   chaseRangeBuffer: 5
+  controller: {fileID: 0}
+  isWalking: 0
+  isAttacking: 0
+  Angle: 145.45468

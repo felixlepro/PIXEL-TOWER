@@ -12,7 +12,12 @@ public class ChaseAction : Action
 
     private void Chase(StateController controller)
     {
-        controller.anim.SetBool("isMoving", true);
+        controller.enemy.isAttacking = false;
+        if(controller.AIPathing.reachedEndOfPath)
+        {
+            controller.enemy.isWalking = false;
+        }
+        else controller.enemy.isWalking = true;
         controller.getAngleTarget();
         controller.AIPathing.destination = controller.chaseTarget.position;
     }

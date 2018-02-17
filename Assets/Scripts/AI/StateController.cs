@@ -36,7 +36,7 @@ public class StateController : MonoBehaviour
 
         AIPathing = GetComponent<AIPath>();
         AIPathing.maxSpeed = enemy.moveSpeed;
-        AIPathing.endReachedDistance = enemy.attackRange;
+        AIPathing.endReachedDistance = enemy.attackRange -1f;
         AIPathing.rotationIn2D = true;
 
         //wayPointList = new List<Transform>();
@@ -67,8 +67,9 @@ public class StateController : MonoBehaviour
     {
         if (!aiActive)
             return;
+        
         currentState.UpdateState(this);
-
+        enemy.UpdateAnim(this);
     }
 
     public void TransitionToState(State nextState)
@@ -87,7 +88,7 @@ public class StateController : MonoBehaviour
     }
     public bool CheckAttackReady()
     {
-       Debug.Log(AScountdown );
+       //Debug.Log(AScountdown );
         AScountdown -= Time.deltaTime;
         if (AScountdown <= 0)
         {
@@ -125,17 +126,15 @@ public void UpdateAS()
             Vector2 direction = AIPathing.velocity;
             angle = Vector2.Angle(direction, new Vector2(0, -1));
             if (direction.x < 0) angle = 360 - angle;
-            anim.SetFloat("Angle", angle);           
-        } 
-
-        //Debug.Log(angle);
+            enemy.Angle = angle;       
+        }       
     }
     public void getAngleTarget()
     {
         Vector2 direction = chaseTarget.position - transform.position;
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
         if (direction.x < 0) angle = 360 - angle;
-        anim.SetFloat("Angle", angle);
+        enemy.Angle = angle;
         //Debug.Log(angle);
     }
 }

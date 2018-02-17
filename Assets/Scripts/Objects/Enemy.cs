@@ -18,10 +18,18 @@ abstract public class Enemy : ScriptableObject
     public float chaseRange;
     public float chaseRangeBuffer;
 
-    abstract public void Attack(StateController controller);
+    abstract public void Attack();
+   
 
     public void recevoirDegats(int damage)
     {
         hp -= damage;
     }
+
+    //Animation
+    [HideInInspector] public StateController controller;
+    [HideInInspector] public bool isWalking;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public float Angle;
+     abstract public void UpdateAnim(StateController controller);
 }

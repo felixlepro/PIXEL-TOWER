@@ -8,18 +8,250 @@ public class Knight : Enemy
 
     public Knight()
     {
+
         hp = 100;
     }
 
-    public override void Attack(StateController controller)
+    public override void Attack()
     {
-        controller.anim.SetBool("isMoving", false);
         controller.getAngleTarget();
 
     }
+
+
+    //Animations-----------------------------------------
+
+    float stateStartTime;
+    float timeInState
+    {
+        get { return Time.time - stateStartTime; }
+    }
+
+    const string IdleF = "KIdleFront";
+    const string IdleB = "KIdleBack";
+    const string IdleL = "KIdleLeft";
+    const string IdleR = "KIdleRight";
+
+    const string WalkF = "KWalkFront";
+    const string WalkB = "KWalkBack";
+    const string WalkL = "KWalkLeft";
+    const string WalkR = "KWalkRight";
+
+    const string AttackS = "KAttackS";
+    const string AttackSE = "KAttackSE";
+    const string AttackE = "KAttackE";
+    const string AttackNE = "KAttackNE";
+    const string AttackN = "KAttackN";
+    const string AttackNW = "KAttackNW";
+    const string AttackW = "KAttackW";
+    const string AttackSW = "KAttackSW";
+
+    enum State
+    {
+        IdleFront,
+        IdleBack,
+        IdleLeft,
+        IdleRight,
+
+        WalkingFront,
+        WalkingBack,
+        WalkingLeft,
+        WalkingRight,
+
+        AttackingS,
+        AttackingSE,
+        AttackingE,
+        AttackingNE,
+        AttackingN,
+        AttackingNW,
+        AttackingW,
+        AttackingSW
+
+    }
+
+    State state;
+    Vector2 velocity;
+    float horzInput;
+    bool jumpJustPressed;
+    bool jumpHeld;
+    int airJumpsDone = 0;
+
+
+
+    public override void UpdateAnim(StateController c)
+    {
+        if(controller == null)
+        {
+            controller = c;
+        }
+        UpdateAnimState();
+        ContinueState();
+    }
     
+    void UpdateAnimState()
+    {
+        Debug.Log(isAttacking);
+        if (isAttacking)
+        {
+            if (!(controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackS) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSE)
+               || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackE) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNE)
+               || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
+               || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
+            {
+               // Debug.Log("animattack");
+                if (Angle <= 22 || Angle >= 336) SetOrKeepState(State.AttackingS);
+                else if (Angle >= 22 && Angle <= 66) SetOrKeepState(State.AttackingSE);
+                else if (Angle >= 66 && Angle <= 114) SetOrKeepState(State.AttackingE);
+                else if (Angle >= 114 && Angle <= 157) SetOrKeepState(State.AttackingNE);
+                else if (Angle >= 157 && Angle <= 203) SetOrKeepState(State.AttackingN);
+                else if (Angle >= 203 && Angle <= 248) SetOrKeepState(State.AttackingNW);
+                else if (Angle >= 248 && Angle <= 293) SetOrKeepState(State.AttackingW);
+                else if (Angle >= 293 && Angle <= 336) SetOrKeepState(State.AttackingSW);
+            }
+        }
+        else if (isWalking)
+        {
+           // Debug.Log("animawalk");
+            if (Angle >= 316 || Angle <= 44) SetOrKeepState(State.WalkingFront);
+            else if (Angle < 314 && Angle > 226) SetOrKeepState(State.WalkingLeft);
+            else if (Angle < 224 && Angle > 136) SetOrKeepState(State.WalkingBack);
+            else if (Angle < 134 && Angle > 46) SetOrKeepState(State.WalkingRight);
+        }
+
+        else
+        {
+            //Debug.Log("animIdle");
+            if (Angle >= 315.5 || Angle <= 44.5) SetOrKeepState(State.IdleFront);
+            else if (Angle <= 314.5 && Angle >= 225.5) SetOrKeepState(State.IdleLeft);
+            else if (Angle <= 224.5 && Angle >= 135.5) SetOrKeepState(State.IdleBack);
+            else if (Angle <= 134.5 && Angle >= 45.5) SetOrKeepState(State.IdleRight);
+        }
+        
+            // Debug.Log("animStay");
+        }
+    void SetOrKeepState(State state)
+    {
+        if (this.state == state) return;
+            EnterState(state);
+    }
+
+    void EnterState(State state)
+    {
+        //ExitState();
+        switch (state)
+        {
+            //Walking
+            case State.WalkingLeft:
+                controller.anim.Play(WalkL);
+                break;
+            case State.WalkingFront:
+                controller.anim.Play(WalkF);
+                break;
+            case State.WalkingBack:
+                controller.anim.Play(WalkB);
+                break;
+            case State.WalkingRight:
+                controller.anim.Play(WalkR);
+                break;
+
+                //Idle
+            case State.IdleFront :
+                controller.anim.Play(IdleF);
+                break;
+            case State.IdleRight :
+                controller.anim.Play(IdleR);
+                break;
+            case State.IdleBack:
+                controller.anim.Play(IdleB);
+                break;
+            case State.IdleLeft:
+                controller.anim.Play(IdleL);
+                break;
+
+                //Attacking
+            case State.AttackingS :
+                controller.anim.Play(AttackS);
+
+                break;
+            case State.AttackingSE :
+                controller.anim.Play(AttackSE);
+                break;
+            case State.AttackingE :
+                controller.anim.Play(AttackE);
+                break;
+            case State.AttackingNE:
+                controller.anim.Play(AttackNE);
+                break;
+            case State.AttackingN:
+                controller.anim.Play(AttackN);
+                break;
+            case State.AttackingNW:
+                controller.anim.Play(AttackNW);
+                break;
+            case State.AttackingW:
+                controller.anim.Play(AttackW);
+                break;
+            case State.AttackingSW:
+                controller.anim.Play(AttackSW);
+                break;
+
+        }
+
+        this.state = state;
+        stateStartTime = Time.time;
+    }
+
+    //void ExitState()
+    //{
+    //}
+
+    void ContinueState()
+    {
+        switch (state)
+        {
+
+            //case State.RunningLeft:
+            //case State.RunningRight:
+            //    if (!RunOrJump()) EnterState(State.Idle);
+            //    break;
+
+            //case State.JumpingUp:
+            //    if (velocity.y < 0) EnterState(State.JumpingDown);
+            //    if (jumpJustPressed && airJumpsDone < 1)
+            //    {
+            //        EnterState(State.JumpingUp);
+            //        airJumpsDone++;
+            //    }
+            //    break;
+
+            //case State.JumpingDown:
+            //    if (grounded) EnterState(State.Landing);
+            //    if (jumpJustPressed && airJumpsDone < 1)
+            //    {
+            //        EnterState(State.JumpingUp);
+            //        airJumpsDone++;
+            //    }
+            //    break;
+
+            //case State.Landing:
+            //    if (timeInState > 0.2f) EnterState(State.Idle);
+            //    else if (timeInState > 0.1f) RunOrJump();
+            //    break;
+        }
+    }
+
+    //bool DirectionIdle()
+    //{
+
+    //    if (jumpJustPressed && grounded) SetOrKeepState(State.JumpingUp);
+    //    else if (horzInput < 0) SetOrKeepState(State.RunningLeft);
+    //    else if (horzInput > 0) SetOrKeepState(State.RunningRight);
+    //    else return false;
+    //    return true;
+    //}
 
     
 
 }
 
+    
