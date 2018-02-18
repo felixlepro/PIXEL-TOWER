@@ -12,8 +12,12 @@ public class AttackDecision : Decision {
 
     private bool Look(StateController controller)
     {
-        float distance = Vector3.Distance(controller.chaseTarget.position, controller.transform.position);
-        if (distance <= controller.enemy.attackRange && controller.CheckAttackReady()) return true;
+        float distance = Vector3.Distance(controller.chaseTarget.transform.position, controller.transform.position);
+        if (distance <= controller.enemy.attackRange && controller.CheckAttackReady())
+        {
+            controller.AIPathing.maxSpeed = 0;
+            return true;
+        }
         else return false;
     }
 }

@@ -99,14 +99,14 @@ public class Knight : Enemy
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
             {
                // Debug.Log("animattack");
-                if (Angle <= 22 || Angle >= 336) SetOrKeepState(State.AttackingS);
-                else if (Angle >= 22 && Angle <= 66) SetOrKeepState(State.AttackingSE);
-                else if (Angle >= 66 && Angle <= 114) SetOrKeepState(State.AttackingE);
-                else if (Angle >= 114 && Angle <= 157) SetOrKeepState(State.AttackingNE);
-                else if (Angle >= 157 && Angle <= 203) SetOrKeepState(State.AttackingN);
-                else if (Angle >= 203 && Angle <= 248) SetOrKeepState(State.AttackingNW);
-                else if (Angle >= 248 && Angle <= 293) SetOrKeepState(State.AttackingW);
-                else if (Angle >= 293 && Angle <= 336) SetOrKeepState(State.AttackingSW);
+                if (Angle <= 24 || Angle >= 334) SetOrKeepState(State.AttackingS);
+                else if (Angle >= 24 && Angle <= 64) SetOrKeepState(State.AttackingSE);
+                else if (Angle >= 64 && Angle <= 116) SetOrKeepState(State.AttackingE);
+                else if (Angle >= 116 && Angle <= 155) SetOrKeepState(State.AttackingNE);
+                else if (Angle >= 155 && Angle <= 205) SetOrKeepState(State.AttackingN);
+                else if (Angle >= 205 && Angle <= 246) SetOrKeepState(State.AttackingNW);
+                else if (Angle >= 246 && Angle <= 295) SetOrKeepState(State.AttackingW);
+                else if (Angle >= 295 && Angle <= 334) SetOrKeepState(State.AttackingSW);
             }
         }
         else if (isWalking)

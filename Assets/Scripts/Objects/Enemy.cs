@@ -31,5 +31,6 @@ abstract public class Enemy : ScriptableObject
     [HideInInspector] public bool isWalking;
     [HideInInspector] public bool isAttacking;
     [HideInInspector] public float Angle;
+    public float HowLargeisHeRadius;
      abstract public void UpdateAnim(StateController controller);
 }

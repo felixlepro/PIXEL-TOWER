@@ -10,7 +10,7 @@ public class StateController : MonoBehaviour
     public State currentState;
     public Enemy enemy;
     public State remainState;
-    public Transform chaseTarget;
+    public GameObject chaseTarget;
 
 
     [HideInInspector] SpriteRenderer spriteR;
@@ -21,6 +21,8 @@ public class StateController : MonoBehaviour
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public float AScountdown = 0;
     [HideInInspector] public Animator anim;
+    [HideInInspector] public Collider2D[] targetCollider;
+    [HideInInspector] public Collider2D enemyCollider;
 
     private bool aiActive;
 
@@ -36,10 +38,14 @@ public class StateController : MonoBehaviour
 
         AIPathing = GetComponent<AIPath>();
         AIPathing.maxSpeed = enemy.moveSpeed;
-        AIPathing.endReachedDistance = enemy.attackRange -1f;
+        AIPathing.endReachedDistance = enemy.HowLargeisHeRadius *1.5f ;
+        AIPathing.slowdownDistance =enemy.HowLargeisHeRadius*2.5f ;
         AIPathing.rotationIn2D = true;
 
+        enemyCollider = GetComponentInChildren<Collider2D>();
+        targetCollider = GetComponents<Collider2D>();
         //wayPointList = new List<Transform>();
+
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
         aiActive = true;                                                                                        //temporaire
         foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
@@ -131,7 +137,7 @@ public void UpdateAS()
     }
     public void getAngleTarget()
     {
-        Vector2 direction = chaseTarget.position - transform.position;
+        Vector2 direction = chaseTarget.transform.position - transform.position;
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
         if (direction.x < 0) angle = 360 - angle;
         enemy.Angle = angle;
