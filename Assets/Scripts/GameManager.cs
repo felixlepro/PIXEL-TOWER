@@ -8,13 +8,18 @@ public class GameManager : MonoBehaviour {
 
     public float levelStartDelay = 2f;
     public static GameManager instance = null;
+    public int coinCount = 0;
 
+    private Text coinCounttext;
     private Board boardScript;
     private int level = 1;
     private List<Enemy> enemies;
     private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
+
+   
+
 
     // Use this for initialization
     void Awake()
@@ -62,11 +67,13 @@ public class GameManager : MonoBehaviour {
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
         boardScript.SetupBoard();
-        
+      
     }
 
     // Update is called once per frame
     void Update () {
-		
-	}
+
+      //  coinCounttext.text = ("Coins: " + coinCount); 
+
+    }
 }

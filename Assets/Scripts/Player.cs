@@ -8,22 +8,39 @@ public class Player : MonoBehaviour {
     public float speed;
     public float rotationBuffer;
     public float restartDelay = 1f;
+    public int valuePerCoin = 1;
+    public int coins;
+    public Text coinText;
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
+   
     Vector3 movement;
 
     Transform weaponTransform;
     SpriteRenderer graphicsSpriteR;
 
-    void Start()
+     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren < Animator > ();
 
         weaponTransform = transform.Find("WeaponRotation");
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
+
+        coins = GameManager.instance.coinCount;
+        coinText.text ="Coins: " + coins;
+    }
+
+    private void OnDisable()
+    {
+       GameManager.instance.coinCount = coins;
+    }
+    public void gainCoin()
+    {
+        coins += valuePerCoin;
+        coinText.text = "Coins: " + coins;
     }
 
     private void Restart()
@@ -39,11 +56,16 @@ public class Player : MonoBehaviour {
             enabled = false;
         }
 
-        else if ((other.tag == "Sylvain") & (Input.GetKeyDown("Enter")))
+        else if (other.tag == "Sylvain") //& (Input.GetKeyDown("Enter"))
         {
            
         }
 
+        else if (other.tag == "Coin")
+        {
+            gainCoin();
+            other.gameObject.SetActive(false);
+        }
     }
 
 

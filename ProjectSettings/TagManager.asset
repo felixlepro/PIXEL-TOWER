@@ -8,6 +8,8 @@ TagManager:
   - Exit
   - Exit2
   - Sylvain
+  - Coin
+  - GameManager
   layers:
   - Default
   - TransparentFX
