@@ -390,6 +390,7 @@ MonoBehaviour:
   restartDelay: 1
   weaponDistance: 1.25
   ratioWeaponPivot: 1
+  angle: 0
   weapon: {fileID: 0}
 --- !u!212 &212253938044269730
 SpriteRenderer:

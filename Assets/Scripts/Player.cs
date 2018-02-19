@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     public float weaponDistance = 1.25f;
     [Range(0f, 1f)]
     public float ratioWeaponPivot;
+    public float angle;
     
 
 
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        angle = Vector2.Angle(direction, new Vector2(0, -1));
 
         if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
