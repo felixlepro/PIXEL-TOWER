@@ -5,17 +5,30 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/Knight")]
 public class Knight : Enemy
 {
+    GameObject attackColliderObject;
+    float attackChargeTime = 5f;
 
     public Knight()
     {
 
         hp = 100;
+        
     }
 
     public override void Attack()
     {
         controller.getAngleTarget();
+        controller.Invoke("activateHB()", attackChargeTime);
 
+
+    }
+    public override void endAttack()
+    {
+        controller.attackHitbox.enabled = false;
+    }
+    void activateHB()
+    {
+        controller.attackHitbox.enabled = true;
     }
 
 
@@ -90,7 +103,7 @@ public class Knight : Enemy
     
     void UpdateAnimState()
     {
-        Debug.Log(isAttacking);
+        //Debug.Log(isAttacking);
         if (isAttacking)
         {
             if (!(controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackS) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSE)
@@ -98,6 +111,7 @@ public class Knight : Enemy
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
             {
+                controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
                // Debug.Log("animattack");
                 if (Angle <= 24 || Angle >= 334) SetOrKeepState(State.AttackingS);
                 else if (Angle >= 24 && Angle <= 64) SetOrKeepState(State.AttackingSE);
@@ -215,43 +229,9 @@ public class Knight : Enemy
             //    if (!RunOrJump()) EnterState(State.Idle);
             //    break;
 
-            //case State.JumpingUp:
-            //    if (velocity.y < 0) EnterState(State.JumpingDown);
-            //    if (jumpJustPressed && airJumpsDone < 1)
-            //    {
-            //        EnterState(State.JumpingUp);
-            //        airJumpsDone++;
-            //    }
-            //    break;
-
-            //case State.JumpingDown:
-            //    if (grounded) EnterState(State.Landing);
-            //    if (jumpJustPressed && airJumpsDone < 1)
-            //    {
-            //        EnterState(State.JumpingUp);
-            //        airJumpsDone++;
-            //    }
-            //    break;
-
-            //case State.Landing:
-            //    if (timeInState > 0.2f) EnterState(State.Idle);
-            //    else if (timeInState > 0.1f) RunOrJump();
-            //    break;
+            
         }
     }
-
-    //bool DirectionIdle()
-    //{
-
-    //    if (jumpJustPressed && grounded) SetOrKeepState(State.JumpingUp);
-    //    else if (horzInput < 0) SetOrKeepState(State.RunningLeft);
-    //    else if (horzInput > 0) SetOrKeepState(State.RunningRight);
-    //    else return false;
-    //    return true;
-    //}
-
-    
-
 }
 
     

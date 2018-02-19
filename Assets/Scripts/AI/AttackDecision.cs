@@ -15,7 +15,10 @@ public class AttackDecision : Decision {
         float distance = Vector3.Distance(controller.chaseTarget.transform.position, controller.transform.position);
         if (distance <= controller.enemy.attackRange && controller.CheckAttackReady())
         {
+            controller.enemy.isAttacking = true;
+            controller.enemy.isWalking = false;
             controller.AIPathing.maxSpeed = 0;
+            Debug.Log("attaking");
             return true;
         }
         else return false;

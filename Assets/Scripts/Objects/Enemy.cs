@@ -19,7 +19,7 @@ abstract public class Enemy : ScriptableObject
     public float chaseRangeBuffer;
 
     abstract public void Attack();
-   
+    abstract public void endAttack();
 
     public void recevoirDegats(int damage)
     {

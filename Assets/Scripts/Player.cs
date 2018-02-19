@@ -60,6 +60,10 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
+        if (other.tag == "enemy")   
+        {
+
+        }
         
     }
 

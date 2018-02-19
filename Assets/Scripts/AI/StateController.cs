@@ -23,10 +23,10 @@ public class StateController : MonoBehaviour
     [HideInInspector] public Animator anim;
     [HideInInspector] public Collider2D[] targetCollider;
     [HideInInspector] public Collider2D enemyCollider;
+    [HideInInspector] public Collider2D attackHitbox;
 
     private bool aiActive;
-
-
+   
     void Awake()
     {
 
@@ -44,6 +44,7 @@ public class StateController : MonoBehaviour
 
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = GetComponents<Collider2D>();
+        attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponent<Collider2D>();
         //wayPointList = new List<Transform>();
 
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
