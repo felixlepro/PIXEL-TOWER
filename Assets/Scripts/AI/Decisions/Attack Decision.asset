@@ -8,12 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c32cbb253eb2ee4f9859a10b3f632cc, type: 3}
-  m_Name: New Weapon
+  m_Script: {fileID: 11500000, guid: f06dc9e3416ed1444a1c7ec1850a6d5d, type: 3}
+  m_Name: Attack Decision
   m_EditorClassIdentifier: 
-  weaponName: xaxa
-  artNormal: {fileID: 0}
-  artAttack: {fileID: 0}
-  attackDamage: 5
-  attackSpeed: 0
-  angleAttack: 0

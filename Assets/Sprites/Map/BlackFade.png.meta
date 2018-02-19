@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f32a21d5cb45da246a2480a0ceb716e7
-timeCreated: 1518113190
+timeCreated: 1518720117
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -98,8 +98,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -48, y: 48}
-        - {x: -48, y: -48}
-        - {x: 48, y: -48}
+        - {x: -48, y: -27.33554}
+        - {x: 48, y: -26.540771}
         - {x: 48, y: 48}
       physicsShape:
       - - {x: -48, y: 48}

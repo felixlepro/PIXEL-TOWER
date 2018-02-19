@@ -26,11 +26,16 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
-    public void SetupBoard()
+    public void SetupBoard(int lvl)
     {
         
-        boardHolder = new GameObject("Board Holder");
 
+
+        boardHolder = new GameObject("Board Holder");
+        if (lvl !=1)
+        {
+            Destroy(boardHolder);
+        }
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
@@ -168,10 +173,7 @@ public class Board : MonoBehaviour {
                 {
                     InstantiateObject(floorTiles, i, j);
                 }
-                if (tiles[i][j] == TileType.Wall )
-                {
-                    InstantiateObject(voidTile , i, j+.72f);
-                }
+                
 
                 if (tiles[i][j] == TileType.Wall && j > 0 )
                 {
@@ -196,6 +198,7 @@ public class Board : MonoBehaviour {
                     if (tiles[i][j + 1] == TileType.Floor)
                     {
                         InstantiateObject(mur_Sud, i, j+1.1f);
+                        InstantiateObject(voidTile, i, j+.72f);
                     }
                     
 
@@ -236,4 +239,5 @@ public class Board : MonoBehaviour {
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
     }
+   
 }

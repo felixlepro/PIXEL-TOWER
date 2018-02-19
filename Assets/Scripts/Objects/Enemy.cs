@@ -18,7 +18,8 @@ abstract public class Enemy : ScriptableObject
     public float chaseRange;
     public float chaseRangeBuffer;
 
-    abstract public void Attack(StateController controller);
+    abstract public void Attack();
+   
 
     public void recevoirDegats(int damage)
     {
@@ -26,4 +27,12 @@ abstract public class Enemy : ScriptableObject
         Debug.Log(hp);
 
     }
+
+    //Animation
+    [HideInInspector] public StateController controller;
+    [HideInInspector] public bool isWalking;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public float Angle;
+    public float HowLargeisHeRadius;
+     abstract public void UpdateAnim(StateController controller);
 }
