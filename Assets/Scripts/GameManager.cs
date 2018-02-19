@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 
    
 
+    //METTRE LA BOOL DE PROG COMME DANS COIN ET GAMEMANAGER AVEC BOOL ET SHOPMANAGER
+
 
     // Use this for initialization
     void Awake()
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour {
     {
         levelImage.SetActive(false);
         doingSetup = false;
-        Debug.Log("GrosCaca");
+        Debug.Log("allo");
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

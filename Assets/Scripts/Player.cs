@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     public int valuePerCoin = 1;
     public int coins;
     public Text coinText;
+   // public bool shopYN;
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour {
     {
        GameManager.instance.coinCount = coins;
     }
-    public void gainCoin()
+    protected void gainCoin()
     {
         coins += valuePerCoin;
         coinText.text = "Coins: " + coins;
@@ -48,7 +49,12 @@ public class Player : MonoBehaviour {
         SceneManager.LoadScene(0);//C'EST LA QU'ON CHANGE LA SCENE CALISS
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OpenShop()
+    {
+        SceneManager.LoadScene("Scene_Open_Shop");
+    }
+
+private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Exit")
         {
@@ -56,29 +62,31 @@ public class Player : MonoBehaviour {
             enabled = false;
         }
 
-        else if (other.tag == "Sylvain") //& (Input.GetKeyDown("Enter"))
+       if (other.tag == "Sylvain")
         {
-           
+            OpenShop();
         }
 
-        else if (other.tag == "Coin")
+       if (other.tag == "Coin")
         {
             gainCoin();
             other.gameObject.SetActive(false);
         }
     }
 
-
-
-
-        void Update()
+  /* public bool GetShopActive()
+    {
+        return shopYN;
+    }
+  */
+    void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
         Move(horizontal, vertical);
 
-        faceMouse();
+        FaceMouse();
     }
 
     void FixedUpdate()
@@ -99,7 +107,7 @@ public class Player : MonoBehaviour {
     }
 
 
-    void faceMouse()
+    void FaceMouse()
     {
         Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
         Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
