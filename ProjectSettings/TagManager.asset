@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Exit
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

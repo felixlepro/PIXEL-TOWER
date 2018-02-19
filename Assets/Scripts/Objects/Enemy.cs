@@ -23,5 +23,7 @@ abstract public class Enemy : ScriptableObject
     public void recevoirDegats(int damage)
     {
         hp -= damage;
+        Debug.Log(hp);
+
     }
 }

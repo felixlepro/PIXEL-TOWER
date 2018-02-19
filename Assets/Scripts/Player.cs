@@ -30,22 +30,18 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        weapon = new Sword(10);
+        
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren < Animator > ();
         hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
-      
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
 
         
     }
 
-    public void EnvoyerDegat(Enemy cible)
-    {
-        cible.recevoirDegats(weapon.GetDamage());
-    }
+    
 
     private void OnDisable()
     {
@@ -64,16 +60,7 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
-        if (other.tag == "Enemy")
-        {
-            
-            StateController enemyScript = other.gameObject.GetComponent<StateController>();
-            EnvoyerDegat(enemyScript.enemy);
-            if(enemyScript.enemy.hp <= 0)
-            {
-                enemyScript.gameObject.SetActive(false);
-            }
-        }
+        
     }
 
         void Update()
