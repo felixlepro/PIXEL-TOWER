@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
+public class PlayerCopie : MonoBehaviour
+{
     public float speed;
     public float rotationBuffer;
     public float restartDelay = 1f;
     public float weaponDistance = 1.25f;
     [Range(0f, 1f)]
     public float ratioWeaponPivot;
-    public Vector3 direction;
-    
-
+    public float angle;
+    public List<PositionPlus> chemin;
 
     public Weapon weapon;
-    
+
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
@@ -27,22 +27,22 @@ public class Player : MonoBehaviour {
     GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
- 
+
 
     void Start()
     {
-        
+
         playerRigidbody = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren < Animator > ();
+        anim = GetComponentInChildren<Animator>();
         hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
-        graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
+        graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
 
-        
+
     }
 
-    
+
 
     private void OnDisable()
     {
@@ -61,51 +61,47 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
-        
+
     }
 
-        void Update()
+    void Update()
     {
-        
+
     }
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = chemin[0].position.x;
+        float vertical = chemin[0].position.y;
         Move(horizontal, vertical);
-
-        faceMouse();
+        faceMouse(chemin[0].direction);
+        chemin.RemoveAt(0);
     }
     private void Move(float h, float v)
     {
+       Vector3 nouvPlace =new Vector3(h, v);
 
-        movement.Set(h, v, 0f);
-        movement = movement.normalized * speed * Time.deltaTime;
-        playerRigidbody.MovePosition(transform.position + movement);
-        if (h == 0 && v == 0)
+        if (transform.position == nouvPlace )
         {
             anim.SetBool("IsMoving", false);
         }
         else anim.SetBool("IsMoving", true);
+        transform.position = nouvPlace; 
     }
 
 
-    void faceMouse()
+    void faceMouse(Vector3 direction)
     {
         Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
         Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        
+        angle = Vector2.Angle(direction, new Vector2(0, -1));
 
         if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
         {
             transform.localScale = faceLeft;
             weaponTransform.localScale = new Vector3(-1, -1, 0);
-            
+
             //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
@@ -113,7 +109,7 @@ public class Player : MonoBehaviour {
         {
             transform.localScale = faceRight;
             weaponTransform.localScale = new Vector3(1, 1, 0);
-           
+
             //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
@@ -132,6 +128,3 @@ public class Player : MonoBehaviour {
 
 
 }
-
-           
-            

@@ -6,12 +6,14 @@ public class TimeRewinding : MonoBehaviour
 {
     int temps = 0;
     bool isRewinding = false;
-    List<PositionPlus> position;
-    PositionPlus pet = new PositionPlus(transform.position, 0f);
-
+    List<PositionPlus> positionRewind;
+    List<PositionPlus> positionCopie;
+    public GameObject playerCopie;
+    public PlayerCopie scriptCopie;
     void Start()
     {
-        position = new List<PositionPlus>();
+        positionRewind = new List<PositionPlus>();
+        positionCopie = new List<PositionPlus>();
     }
 
     void Update()
@@ -30,33 +32,26 @@ public class TimeRewinding : MonoBehaviour
         }
         else
         {
-            if (temps == 0)
-            {
-                Record();
-                temps = 1;
-            }
-            else
-            {
-                temps = 0;
-            }
+            Record();
 
         }
     }
     void Rewind()
     {
-        if (position.Count > 0)
+        if (positionRewind.Count > 0)
         {
-           // transform.position = position[0].;
-            position.RemoveAt(0);
+            transform.position = positionRewind[0].position ;
+            positionCopie.Insert(0, positionRewind[0]);
+            positionRewind.RemoveAt(0);
         }
 
     }
     void Record()
     {
-        if (position.Count > Mathf.Round(1f / Time.fixedDeltaTime))
-            position.RemoveAt(position.Count - 1);
-        //PositionPlus pet = new PositionPlus(transform.position, 0f);
-        //position.Insert(0, );
+        if (positionRewind.Count > Mathf.Round(1f / Time.fixedDeltaTime))
+            positionRewind.RemoveAt(positionRewind.Count - 1);
+
+        positionRewind.Insert(0, new PositionPlus(transform.position, new Vector3 (1,1)));
     }
 
     public void StartRewind()
@@ -67,6 +62,10 @@ public class TimeRewinding : MonoBehaviour
     public void StopRewind()
     {
         isRewinding = false;
+        Instantiate(playerCopie, transform.position, Quaternion.identity);
+        //marche pas
+        scriptCopie = GetComponent<PlayerCopie>();
+        scriptCopie.chemin = positionCopie;
     }
 }
 

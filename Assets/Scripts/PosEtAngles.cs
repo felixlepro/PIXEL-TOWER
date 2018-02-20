@@ -4,11 +4,11 @@ using UnityEngine;
 public class PositionPlus {
 
     public Vector3 position;
-    public float angle;
+    public Vector3 direction;
 
-    PositionPlus(Vector3 _position,float _angle)
+    public PositionPlus(Vector3 _position,Vector3 _direction)
     {
         position = _position;
-        angle = _angle;
+        direction=_direction;
     }
 }
