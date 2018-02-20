@@ -13,7 +13,7 @@ public class AttackAction : Action
     private void Attack(StateController controller)
     {
             
-            controller.enemy.Attack();
+            //controller.enemy.Attack();
             
 
     }

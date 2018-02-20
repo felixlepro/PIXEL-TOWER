@@ -14,7 +14,6 @@ public class StateController : MonoBehaviour
 
 
     [HideInInspector] SpriteRenderer spriteR;
-
     [HideInInspector] public AIPath AIPathing;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
@@ -30,7 +29,7 @@ public class StateController : MonoBehaviour
     void Awake()
     {
 
-        spriteR = GetComponentInChildren<SpriteRenderer>();
+        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = enemy.wColor;
 
         anim = GetComponentInChildren<Animator>();
@@ -43,7 +42,7 @@ public class StateController : MonoBehaviour
         AIPathing.rotationIn2D = true;
 
         enemyCollider = GetComponentInChildren<Collider2D>();
-        targetCollider = GetComponents<Collider2D>();
+        targetCollider = chaseTarget.GetComponents<Collider2D>();
         attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponent<Collider2D>();
         //wayPointList = new List<Transform>();
 
@@ -77,6 +76,16 @@ public class StateController : MonoBehaviour
         
         currentState.UpdateState(this);
         enemy.UpdateAnim(this);
+        spriteOrderInLayer();
+    }
+
+    void spriteOrderInLayer()
+    {
+        if (chaseTarget.transform.position.y <= transform.position.y)
+        {
+            spriteR.sortingOrder = -2;
+        }
+        else spriteR.sortingOrder = 2;
     }
 
     public void TransitionToState(State nextState)
@@ -99,7 +108,7 @@ public class StateController : MonoBehaviour
         AScountdown -= Time.deltaTime;
         if (AScountdown <= 0)
         {
-            Debug.Log("true");
+           // Debug.Log("true");
             AScountdown = enemy.attackSpeed;
             return true;
         }
@@ -143,5 +152,11 @@ public void UpdateAS()
         if (direction.x < 0) angle = 360 - angle;
         enemy.Angle = angle;
         //Debug.Log(angle);
+    }
+
+    public void manageMainAttack()
+    {
+        Debug.Log("mainAttack");
+        enemy.mainAttack();
     }
 }

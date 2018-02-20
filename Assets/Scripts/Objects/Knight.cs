@@ -6,7 +6,7 @@ using UnityEngine;
 public class Knight : Enemy
 {
     GameObject attackColliderObject;
-    float attackChargeTime = 5f;
+    float attackChargeTime = 0;
 
     public Knight()
     {
@@ -15,20 +15,29 @@ public class Knight : Enemy
         
     }
 
-    public override void Attack()
+    public override void startAttack()
     {
+        Debug.Log("StartAttack");
         controller.getAngleTarget();
-        controller.Invoke("activateHB()", attackChargeTime);
+        //controller.Invoke("manageMainAttack", attackChargeTime);
+        mainAttack();
 
 
     }
-    public override void endAttack()
+
+    public override void mainAttack()
     {
-        controller.attackHitbox.enabled = false;
-    }
-    void activateHB()
-    {
-        controller.attackHitbox.enabled = true;
+        Debug.Log("MainAttack");
+        foreach (Collider2D pc in controller.targetCollider)
+        {
+            if (controller.attackHitbox.IsTouching(pc))
+            {
+                Debug.Log("collided");
+                pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage,pc.gameObject.transform.position- controller.transform.position, 0.5f);
+                break;
+            }
+        }
+
     }
 
 

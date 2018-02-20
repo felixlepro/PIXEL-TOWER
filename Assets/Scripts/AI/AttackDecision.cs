@@ -18,6 +18,7 @@ public class AttackDecision : Decision {
             controller.enemy.isAttacking = true;
             controller.enemy.isWalking = false;
             controller.AIPathing.maxSpeed = 0;
+            controller.enemy.startAttack();
             Debug.Log("attaking");
             return true;
         }

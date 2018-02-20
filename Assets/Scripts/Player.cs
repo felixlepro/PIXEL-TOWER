@@ -9,18 +9,27 @@ public class Player : MonoBehaviour {
     public float rotationBuffer;
     public float restartDelay = 1f;
     public float weaponDistance = 1.25f;
+
     [Range(0f, 1f)]
     public float ratioWeaponPivot;
     
 
 
     public Weapon weapon;
-    
+
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
     private int hp;
-    Vector3 movement;
+
+    private float knockBackAmount = 0;
+    private float knockBackAmountOverTime = 1;
+    private float knockBackAmountOverTimeMinimum = 0.85f;
+    private const float knockBackMultiplier = 20;
+    private float knockBackTime = 1;
+    private Vector3 knockBackDirection;
+
+    private Vector3 movement;
 
     Transform weaponTransform;
     GameObject weaponChild;
@@ -40,9 +49,33 @@ public class Player : MonoBehaviour {
 
         
     }
+    void FixedUpdate()
+    {
+        if (knockBackAmountOverTime >= knockBackAmountOverTimeMinimum)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            Move(horizontal, vertical);
+        }
+        else
+        {
+            knockBack();
+        }
+
+        faceMouse();
+    }
+
+    public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
+    {
+        hp -= dammage;
+        knockBackDirection = kbDirection;
+        knockBackAmount = kbAmmount;
+        knockBackAmountOverTime = 0;
+        Debug.Log("Player:  " + hp);
+    }
+
 
     
-
     private void OnDisable()
     {
         GameManager.instance.playerHp = hp;
@@ -66,20 +99,16 @@ public class Player : MonoBehaviour {
         }
         
     }
-
-        void Update()
+    private void knockBack()
     {
-        
+        Vector3 kb = knockBackDirection.normalized * knockBackAmount * Time.deltaTime * knockBackMultiplier * (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
+        playerRigidbody.MovePosition(transform.position + kb);
+       // knockBackTime /= knockBackAmount;
+        knockBackAmountOverTime += Time.deltaTime * knockBackTime;
     }
 
-    void FixedUpdate()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Move(horizontal, vertical);
 
-        faceMouse();
-    }
+    
     private void Move(float h, float v)
     {
 
@@ -132,6 +161,15 @@ public class Player : MonoBehaviour {
         weaponTransform.position = new Vector3(ratioWeaponPivot * weaponDistance, weaponTransform.position.y, weaponTransform.position.z);
         weaponChild.transform.position = new Vector3(weaponDistance - (ratioWeaponPivot * weaponDistance) + weaponTransform.position.x, weaponChild.transform.position.y, weaponChild.transform.position.z);
     }
+
+    //private Vector3 vecteurUnitaire(Vector3 vecteur)
+    //{
+    //    if (vecteur.x == 0 && vecteur.y ==0 &&vecteur.z == 0)
+    //    {
+    //        vecteur /= vecteur.magnitude;
+    //    }
+    //    return vecteur;
+    //}
 
 
 }
