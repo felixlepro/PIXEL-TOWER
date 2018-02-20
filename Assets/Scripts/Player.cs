@@ -71,7 +71,7 @@ public class Player : MonoBehaviour {
         knockBackDirection = kbDirection;
         knockBackAmount = kbAmmount;
         knockBackAmountOverTime = 0;
-        Debug.Log("Player:  " + hp);
+      //  Debug.Log("Player:  " + hp);
     }
 
 

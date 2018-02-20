@@ -18,6 +18,7 @@ public class StateController : MonoBehaviour
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public float timeElapsed;
     [HideInInspector] public float AScountdown = 0;
     [HideInInspector] public Animator anim;
     [HideInInspector] public Collider2D[] targetCollider;
@@ -100,8 +101,23 @@ public class StateController : MonoBehaviour
     public bool CheckIfCountDownElapsed(float duration)
     {
         stateTimeElapsed += Time.deltaTime;
+        //Debug.Log(stateTimeElapsed + "      " + duration);
         return (stateTimeElapsed >= duration);
     }
+
+    public bool CheckIfCountDownElapsed2(float duration)
+    {
+        timeElapsed += Time.deltaTime;
+        Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
+        if (timeElapsed >= duration)
+        {
+            timeElapsed = 0;
+            return true;
+        }
+        else return false;
+            
+    }
+
     public bool CheckAttackReady()
     {
        //Debug.Log(AScountdown );
@@ -114,8 +130,11 @@ public class StateController : MonoBehaviour
         }
         else return false;
     }
+   
 
-public void UpdateAS()
+
+
+    public void UpdateAS()
     {
         AScountdown -= Time.deltaTime;
     }
@@ -152,11 +171,5 @@ public void UpdateAS()
         if (direction.x < 0) angle = 360 - angle;
         enemy.Angle = angle;
         //Debug.Log(angle);
-    }
-
-    public void manageMainAttack()
-    {
-        Debug.Log("mainAttack");
-        enemy.mainAttack();
     }
 }
