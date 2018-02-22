@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public int valuePerCoin = 1;
     public int coins;
     public Text coinText;
-   // public bool shopYN;
+   
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -62,12 +62,17 @@ private void OnTriggerEnter2D(Collider2D other)
             enabled = false;
         }
 
-       if (other.tag == "Sylvain")
+        //Si le player collide avec un objet de tag sylvain, la bool du shop manager devien true, sinon, elle devien false
+        if (other.tag == "Sylvain")
         {
-            OpenShop();
+            ShopManager.shopWantsToOpen = true;
+        }
+        else
+        {
+            ShopManager.shopWantsToOpen = false;
         }
 
-       if (other.tag == "Coin")
+            if (other.tag == "Coin")
         {
             gainCoin();
             other.gameObject.SetActive(false);
@@ -81,6 +86,7 @@ private void OnTriggerEnter2D(Collider2D other)
   */
     void Update()
     {
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

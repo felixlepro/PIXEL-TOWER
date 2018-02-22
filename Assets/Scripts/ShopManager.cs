@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopManager : MonoBehaviour {
+public class ShopManager : MonoBehaviour
+{
 
-    public static bool ShopWantsToOpen;
-    public GameObject panel;
+    public static bool shopWantsToOpen = false;
+    public GameObject canvas;
+    
 
-    void OpenShop()
+    private void Start()
     {
-        
+        canvas.SetActive(false);
     }
-
-    private void Update()
-    {
-        
+    private void openShop()
+     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            if (ShopWantsToOpen)
+            if(shopWantsToOpen)
             {
-                panel.SetActive(true);
+                canvas.SetActive(true);
+                shopWantsToOpen = false;
+            }
+            else
+            {
+                canvas.SetActive(false);
+                shopWantsToOpen = true;
             }
         }
-        
+    }
+   
+private void FixedUpdate()
+    {
+        //si le joueur appuy sur z et qu'il collide avec un tag de Sylvain, le shop ouvre
+        openShop();
+          
     }
 }
