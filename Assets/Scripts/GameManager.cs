@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-
         if (instance == null)
             instance = this;
         else if (instance != this)

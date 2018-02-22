@@ -26,6 +26,10 @@ public class StateController : MonoBehaviour
 
     private bool aiActive;
 
+    public void Death()
+    {
+        gameObject.SetActive(false);
+    }
 
     void Awake()
     {
@@ -98,7 +102,7 @@ public class StateController : MonoBehaviour
         AScountdown -= Time.deltaTime;
         if (AScountdown <= 0)
         {
-            Debug.Log("true");
+            //Debug.Log("true");
             AScountdown = enemy.attackSpeed;
             return true;
         }

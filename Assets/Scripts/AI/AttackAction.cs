@@ -15,6 +15,6 @@ public class AttackAction : Action
             controller.enemy.isAttacking = true;
             controller.enemy.isWalking = false;
             controller.enemy.Attack();
-              Debug.Log("attaking");
+              //Debug.Log("attaking");
     }
 }
