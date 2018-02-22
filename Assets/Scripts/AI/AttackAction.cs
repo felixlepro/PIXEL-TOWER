@@ -12,9 +12,9 @@ public class AttackAction : Action
 
     private void Attack(StateController controller)
     {
-            controller.enemy.isAttacking = true;
-            controller.enemy.isWalking = false;
-            controller.enemy.Attack();
-              //Debug.Log("attaking");
+            
+            controller.enemy.mainAttack();
+           
+
     }
 }

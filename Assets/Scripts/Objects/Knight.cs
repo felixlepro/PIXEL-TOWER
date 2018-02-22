@@ -5,17 +5,77 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/Knight")]
 public class Knight : Enemy
 {
+    GameObject attackColliderObject;
+   const float attackChargeTime = 0.7f;
+    float colorAlpha = 0;
+    const float colorAlphaMax = 0.2f;
+    bool attackDone = false;
+    float time = 0;
 
     Knight()
     {
         hp = 100;
+        
     }
 
-    public override void Attack()
+    public override void startAttack()
     {
+        controller.AIPathing.maxSpeed = 0;
+        //Debug.Log("StartAttack");
         controller.getAngleTarget();
-
+        controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
+        attackDone = false;
     }
+
+    public override void mainAttack()
+    {
+        // Debug.Log(attackDone);
+        if (!attackDone)
+        {
+            time += Time.deltaTime;
+            colorAlpha = colorAlphaMax * (1 -(1-(time / attackChargeTime)) * (1-(time / attackChargeTime))* (1 - (time / attackChargeTime)));
+            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+
+            if (controller.CheckIfCountDownElapsed2(attackChargeTime))
+            {
+                Debug.Log("MainAttack");
+                foreach (Collider2D pc in controller.targetCollider)
+                {
+                    if (controller.attackHitbox.IsTouching(pc))
+                    {
+                        // Debug.Log("collided");
+                        pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position, 0.5f);
+                        break;
+                    }
+
+                }
+                attackDone = true;
+                Debug.Log(attackDone);
+            }
+        }
+        else
+        {
+            if (time > 0)
+            {
+                time -= Time.deltaTime * 2;
+                colorAlpha = colorAlphaMax * time / attackChargeTime;
+                controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            }
+            else
+            {
+                controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+                time = 0;
+            }
+        }
+         
+    }
+    public override void endAttack()
+    {
+        controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        time = 0;
+    }
+
+
 
     //Animations-----------------------------------------
 
@@ -236,43 +296,9 @@ public class Knight : Enemy
             //    if (!RunOrJump()) EnterState(State.Idle);
             //    break;
 
-            //case State.JumpingUp:
-            //    if (velocity.y < 0) EnterState(State.JumpingDown);
-            //    if (jumpJustPressed && airJumpsDone < 1)
-            //    {
-            //        EnterState(State.JumpingUp);
-            //        airJumpsDone++;
-            //    }
-            //    break;
-
-            //case State.JumpingDown:
-            //    if (grounded) EnterState(State.Landing);
-            //    if (jumpJustPressed && airJumpsDone < 1)
-            //    {
-            //        EnterState(State.JumpingUp);
-            //        airJumpsDone++;
-            //    }
-            //    break;
-
-            //case State.Landing:
-            //    if (timeInState > 0.2f) EnterState(State.Idle);
-            //    else if (timeInState > 0.1f) RunOrJump();
-            //    break;
+            
         }
     }
-
-    //bool DirectionIdle()
-    //{
-
-    //    if (jumpJustPressed && grounded) SetOrKeepState(State.JumpingUp);
-    //    else if (horzInput < 0) SetOrKeepState(State.RunningLeft);
-    //    else if (horzInput > 0) SetOrKeepState(State.RunningRight);
-    //    else return false;
-    //    return true;
-    //}
-
-    
-
 }
 
     

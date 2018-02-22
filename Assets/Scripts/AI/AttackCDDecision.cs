@@ -13,7 +13,12 @@ public class AttackCDDecision : Decision {
 
     private bool CD(StateController controller)
     {
-        if (controller.CheckIfCountDownElapsed(controller.anim.GetCurrentAnimatorStateInfo(0).length)) return true;
+        if (controller.CheckIfCountDownElapsed(controller.anim.GetCurrentAnimatorStateInfo(0).length))
+        {
+            controller.enemy.endAttack();
+            controller.enemy.isAttacking = false;
+            return true;
+        }
         return false;
     }
 }
