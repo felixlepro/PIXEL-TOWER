@@ -38,9 +38,11 @@ public class TimeRewinding : MonoBehaviour
     }
     void Rewind()
     {
-        if (positionRewind.Count > 1)
+        if (positionRewind.Count > 2)
         {
             transform.position = positionRewind[0].position;
+            positionCopie.Insert(0, positionRewind[0]);
+            positionRewind.RemoveAt(0);
             positionCopie.Insert(0, positionRewind[0]);
             positionRewind.RemoveAt(0);
         }
