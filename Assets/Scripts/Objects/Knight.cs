@@ -62,10 +62,20 @@ public class Knight : Enemy
                 colorAlpha = colorAlphaMax * time / attackChargeTime;
                 controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             }
-            else time = 0;
+            else
+            {
+                controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+                time = 0;
+            }
         }
+         
     }
-     
+    public override void endAttack()
+    {
+        controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        time = 0;
+    }
+
 
 
     //Animations-----------------------------------------
