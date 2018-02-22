@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TimeRewinding : MonoBehaviour
 {
-    int temps = 0;
     bool isRewinding = false;
     List<PositionPlus> positionRewind;
     public List<PositionPlus> positionCopie;
