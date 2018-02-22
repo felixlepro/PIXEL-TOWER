@@ -7,9 +7,9 @@ public class TimeRewinding : MonoBehaviour
     int temps = 0;
     bool isRewinding = false;
     List<PositionPlus> positionRewind;
-    List<PositionPlus> positionCopie;
+    public List<PositionPlus> positionCopie;
     public GameObject playerCopie;
-    public PlayerCopie scriptCopie;
+    public Player scriptPlayer;
     void Start()
     {
         positionRewind = new List<PositionPlus>();
@@ -38,11 +38,15 @@ public class TimeRewinding : MonoBehaviour
     }
     void Rewind()
     {
-        if (positionRewind.Count > 0)
+        if (positionRewind.Count > 1)
         {
-            transform.position = positionRewind[0].position ;
+            transform.position = positionRewind[0].position;
             positionCopie.Insert(0, positionRewind[0]);
             positionRewind.RemoveAt(0);
+        }
+        else
+        {
+            transform.position = positionRewind[0].position;
         }
 
     }
@@ -51,7 +55,8 @@ public class TimeRewinding : MonoBehaviour
         if (positionRewind.Count > Mathf.Round(1f / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
-        positionRewind.Insert(0, new PositionPlus(transform.position, new Vector3 (1,1)));
+        scriptPlayer = GameObject.Find("Pilot").GetComponent<Player>();
+        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction));
     }
 
     public void StartRewind()
@@ -62,10 +67,12 @@ public class TimeRewinding : MonoBehaviour
     public void StopRewind()
     {
         isRewinding = false;
-        Instantiate(playerCopie, transform.position, Quaternion.identity);
-        //marche pas
-        scriptCopie = GetComponent<PlayerCopie>();
-        scriptCopie.chemin = positionCopie;
+
+        PlayerCopie fantome = Instantiate(playerCopie, transform.position, Quaternion.identity).GetComponent<PlayerCopie>();
+        
+        fantome.Initialize(positionCopie);
+
+        
     }
 }
 

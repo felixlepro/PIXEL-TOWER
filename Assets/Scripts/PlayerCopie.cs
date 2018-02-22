@@ -13,7 +13,7 @@ public class PlayerCopie : MonoBehaviour
     [Range(0f, 1f)]
     public float ratioWeaponPivot;
     public float angle;
-    public List<PositionPlus> chemin;
+    public List<PositionPlus> chemin = new List<PositionPlus>();
 
     public Weapon weapon;
 
@@ -27,11 +27,15 @@ public class PlayerCopie : MonoBehaviour
     GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
+    // Costructeur
+    public void Initialize(List<PositionPlus> listPos)
+    {
+        chemin = listPos;
+    }
 
 
     void Start()
     {
-
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         hp = GameManager.instance.playerHp;
@@ -63,19 +67,23 @@ public class PlayerCopie : MonoBehaviour
         }
 
     }
-
-    void Update()
-    {
-
-    }
+    
 
     void FixedUpdate()
     {
-        float horizontal = chemin[0].position.x;
-        float vertical = chemin[0].position.y;
-        Move(horizontal, vertical);
-        faceMouse(chemin[0].direction);
-        chemin.RemoveAt(0);
+        if (chemin.Count > 0)
+        {
+            float horizontal = chemin[0].position.x;
+            float vertical = chemin[0].position.y;
+            Move(horizontal, vertical);
+            faceMouse(chemin[0].direction);
+            chemin.RemoveAt(0);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
     private void Move(float h, float v)
     {
@@ -86,7 +94,7 @@ public class PlayerCopie : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
         else anim.SetBool("IsMoving", true);
-        transform.position = nouvPlace; 
+        transform.position = nouvPlace;
     }
 
 

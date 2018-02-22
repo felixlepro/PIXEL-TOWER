@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public float weaponDistance = 1.25f;
     [Range(0f, 1f)]
     public float ratioWeaponPivot;
-    public Vector3 direction;
+    public Vector2 direction;
     
 
 
@@ -64,10 +64,6 @@ public class Player : MonoBehaviour {
         
     }
 
-        void Update()
-    {
-        
-    }
 
     void FixedUpdate()
     {
