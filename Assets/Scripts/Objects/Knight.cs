@@ -6,7 +6,11 @@ using UnityEngine;
 public class Knight : Enemy
 {
     GameObject attackColliderObject;
-    float attackChargeTime = 0;
+   const float attackChargeTime = 0.7f;
+    float colorAlpha = 0;
+    const float colorAlphaMax = 0.2f;
+    bool attackDone = false;
+    float time = 0;
 
     public Knight()
     {
@@ -17,28 +21,61 @@ public class Knight : Enemy
 
     public override void startAttack()
     {
-        Debug.Log("StartAttack");
+        controller.AIPathing.maxSpeed = 0;
+        //Debug.Log("StartAttack");
         controller.getAngleTarget();
-        //controller.Invoke("manageMainAttack", attackChargeTime);
-        mainAttack();
-
-
+        controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
+        attackDone = false;
     }
 
     public override void mainAttack()
     {
-        Debug.Log("MainAttack");
-        foreach (Collider2D pc in controller.targetCollider)
+        // Debug.Log(attackDone);
+        if (!attackDone)
         {
-            if (controller.attackHitbox.IsTouching(pc))
+            time += Time.deltaTime;
+            colorAlpha = colorAlphaMax * (1 -(1-(time / attackChargeTime)) * (1-(time / attackChargeTime))* (1 - (time / attackChargeTime)));
+            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+
+            if (controller.CheckIfCountDownElapsed2(attackChargeTime))
             {
-                Debug.Log("collided");
-                pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage,pc.gameObject.transform.position- controller.transform.position, 0.5f);
-                break;
+                Debug.Log("MainAttack");
+                foreach (Collider2D pc in controller.targetCollider)
+                {
+                    if (controller.attackHitbox.IsTouching(pc))
+                    {
+                        // Debug.Log("collided");
+                        pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position, 0.5f);
+                        break;
+                    }
+
+                }
+                attackDone = true;
+                Debug.Log(attackDone);
             }
         }
-
+        else
+        {
+            if (time > 0)
+            {
+                time -= Time.deltaTime * 2;
+                colorAlpha = colorAlphaMax * time / attackChargeTime;
+                controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            }
+            else
+            {
+                controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+                time = 0;
+            }
+        }
+         
     }
+    public override void endAttack()
+    {
+        controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        time = 0;
+    }
+
 
 
     //Animations-----------------------------------------
@@ -120,7 +157,6 @@ public class Knight : Enemy
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
             {
-                controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
                // Debug.Log("animattack");
                 if (Angle <= 24 || Angle >= 334) SetOrKeepState(State.AttackingS);
                 else if (Angle >= 24 && Angle <= 64) SetOrKeepState(State.AttackingSE);

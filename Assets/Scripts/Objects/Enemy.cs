@@ -20,6 +20,7 @@ abstract public class Enemy : ScriptableObject
 
     abstract public void startAttack();
     abstract public void mainAttack();
+    abstract public void endAttack();
 
     public void recevoirDegats(int damage)
     {
