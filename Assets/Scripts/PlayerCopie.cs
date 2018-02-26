@@ -14,6 +14,7 @@ public class PlayerCopie : MonoBehaviour
     public float ratioWeaponPivot;
     public float angle;
     public List<PositionPlus> chemin = new List<PositionPlus>();
+    public GameObject player;
 
     public Weapon weapon;
 
@@ -81,6 +82,9 @@ public class PlayerCopie : MonoBehaviour
         }
         else
         {
+            TimeRewinding.isFantoming = false;
+            //GetComponentInParent<StateController>().chaseTarget = player;
+            Debug.Log("caca");
             Destroy(this.gameObject);
         }
         

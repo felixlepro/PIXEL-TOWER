@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeRewinding : MonoBehaviour
 {
     bool isRewinding = false;
+    public static bool isFantoming = false;
     List<PositionPlus> positionRewind;
     public List<PositionPlus> positionCopie;
     public GameObject playerCopie;
@@ -25,7 +26,7 @@ public class TimeRewinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isRewinding)
+        if (isRewinding && !isFantoming )
         {
             Rewind();
         }
@@ -53,7 +54,7 @@ public class TimeRewinding : MonoBehaviour
     }
     void Record()
     {
-        if (positionRewind.Count > Mathf.Round(1f / Time.fixedDeltaTime))
+        if (positionRewind.Count > Mathf.Round(2f / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
         scriptPlayer = GameObject.Find("Pilot").GetComponent<Player>();
@@ -68,12 +69,20 @@ public class TimeRewinding : MonoBehaviour
     public void StopRewind()
     {
         isRewinding = false;
-
-        PlayerCopie fantome = Instantiate(playerCopie, transform.position, Quaternion.identity).GetComponent<PlayerCopie>();
+        if (!isFantoming )
+        {
+            PlayerCopie fantome = Instantiate(playerCopie, transform.position, Quaternion.identity).GetComponent<PlayerCopie>();
+            isFantoming = true;
+            fantome.Initialize(positionCopie);
+        }
         
-        fantome.Initialize(positionCopie);
+       
 
         
+    }
+    public void FantomeMort()
+    {
+        isFantoming = false;
     }
 }
 
