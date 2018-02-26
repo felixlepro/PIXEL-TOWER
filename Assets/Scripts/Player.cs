@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
 
     public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
     {
-        CameraShaker.Instance.ShakeOnce(dammage * 0.5f,8f,0.1f,1f);
+        CameraShaker.Instance.ShakeOnce(dammage * 0.25f,8f,0.1f,1f);
         hp -= dammage;
         knockBackDirection = kbDirection;
         knockBackAmount = kbAmmount;
