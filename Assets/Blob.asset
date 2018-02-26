@@ -8,23 +8,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1027877d2f455846a2c944dfc08ecea, type: 3}
-  m_Name: New Enemy
+  m_Script: {fileID: 11500000, guid: 6ad5c6d038f49354b9f27f0ed31a7410, type: 3}
+  m_Name: Blob
   m_EditorClassIdentifier: 
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 15
-  attackSpeed: 2
-  attackRange: 3.5
-  moveSpeed: 7
-  animator: {fileID: 9100000, guid: e9ee8002a404c4942ad78f36aa4a557c, type: 2}
+  attackDamage: 10
+  attackSpeed: 1
+  attackRange: 0
+  moveSpeed: 8
+  animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  hp: 49860
-  chaseRange: 30
+  hp: 100
+  chaseRange: 25
   chaseRangeBuffer: 5
   controller: {fileID: 0}
-  isWalking: 0
+  isWalking: 1
   isAttacking: 0
   isDying: 0
-  Angle: 278.12466
-  HowLargeisHeRadius: 1.5
+  Angle: 180
+  HowLargeisHeRadius: 0
