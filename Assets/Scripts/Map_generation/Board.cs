@@ -20,6 +20,7 @@ public class Board : MonoBehaviour {
     public GameObject mur_Est;
     public GameObject mur_Ouest;
     public GameObject voidTile;
+    public GameObject waypoint;
 
     private TileType[][] tiles;
     private Room[] rooms;
@@ -172,6 +173,12 @@ public class Board : MonoBehaviour {
                 if (tiles[i][j] == TileType.Floor)
                 {
                     InstantiateObject(floorTiles, i, j);
+                    IntRange rand = new IntRange(1,10);
+                    if (rand.Random  == 1)
+                    {
+                        InstantiateObject(waypoint, i, j);
+                    }
+
                 }
                 
 
