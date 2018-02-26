@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 10
+  attackDamage: 15
   attackSpeed: 2
   attackRange: 3.5
   moveSpeed: 7
@@ -25,5 +25,5 @@ MonoBehaviour:
   controller: {fileID: 0}
   isWalking: 0
   isAttacking: 0
-  Angle: 271.60626
+  Angle: 145.95538
   HowLargeisHeRadius: 1.5

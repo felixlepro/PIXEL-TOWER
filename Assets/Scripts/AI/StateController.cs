@@ -108,7 +108,7 @@ public class StateController : MonoBehaviour
     public bool CheckIfCountDownElapsed2(float duration)
     {
         timeElapsed += Time.deltaTime;
-        Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
+       // Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
         if (timeElapsed >= duration)
         {
             timeElapsed = 0;

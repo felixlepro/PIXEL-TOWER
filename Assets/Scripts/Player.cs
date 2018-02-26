@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using EZCameraShake;
 
 public class Player : MonoBehaviour {
     public float speed;
@@ -67,11 +68,13 @@ public class Player : MonoBehaviour {
 
     public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
     {
+        CameraShaker.Instance.ShakeOnce(dammage * 0.5f,8f,0.1f,1f);
         hp -= dammage;
         knockBackDirection = kbDirection;
         knockBackAmount = kbAmmount;
         knockBackAmountOverTime = 0;
-      //  Debug.Log("Player:  " + hp);
+        graphicsSpriteR.color = new Color(1f, 0, 0, 1f);
+        //  Debug.Log("Player:  " + hp);
     }
 
 
@@ -101,10 +104,20 @@ public class Player : MonoBehaviour {
     }
     private void knockBack()
     {
-        Vector3 kb = knockBackDirection.normalized * knockBackAmount * Time.deltaTime * knockBackMultiplier * (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
+        float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime)  ;
+        Debug.Log(curve);
+        
+        graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+
+        Vector3 kb = knockBackDirection.normalized * knockBackAmount  * knockBackMultiplier * curve * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + kb);
        // knockBackTime /= knockBackAmount;
         knockBackAmountOverTime += Time.deltaTime * knockBackTime;
+
+        if (knockBackAmountOverTime > knockBackAmountOverTimeMinimum)
+        {
+            graphicsSpriteR.color = new Color(1f, 1, 1, 1f);
+        }
     }
 
 

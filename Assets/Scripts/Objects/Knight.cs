@@ -8,7 +8,7 @@ public class Knight : Enemy
     GameObject attackColliderObject;
    const float attackChargeTime = 0.7f;
     float colorAlpha = 0;
-    const float colorAlphaMax = 0.2f;
+    const float colorAlphaMax = 1f;
     bool attackDone = false;
     float time = 0;
 
@@ -39,7 +39,7 @@ public class Knight : Enemy
 
             if (controller.CheckIfCountDownElapsed2(attackChargeTime))
             {
-                Debug.Log("MainAttack");
+               // Debug.Log("MainAttack");
                 foreach (Collider2D pc in controller.targetCollider)
                 {
                     if (controller.attackHitbox.IsTouching(pc))
@@ -51,7 +51,7 @@ public class Knight : Enemy
 
                 }
                 attackDone = true;
-                Debug.Log(attackDone);
+             //   Debug.Log(attackDone);
             }
         }
         else
