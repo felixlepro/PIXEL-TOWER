@@ -513,6 +513,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a695b0fc4ba65c0409d20032cbe27c32, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &432675477 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1923641403025688, guid: 4c417dd74b4ebfa428bfa412b48055a6,
+    type: 2}
+  m_PrefabInternal: {fileID: 558340223}
+--- !u!114 &432675484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 432675477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680832d156578c54fbdc946cc4d20f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
+    type: 2}
 --- !u!1 &454302501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,11 +1232,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1131364326}
---- !u!1 &1148455348 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1699821906566694, guid: 55336882b5bf7f44bae2a9f18942a05b,
-    type: 2}
-  m_PrefabInternal: {fileID: 783602029}
 --- !u!4 &1148455354 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4782755021029106, guid: 55336882b5bf7f44bae2a9f18942a05b,
@@ -2120,6 +2133,7 @@ MonoBehaviour:
   mur_Est: {fileID: 1330389026989350, guid: 621005def8aae794baad7901b0463a70, type: 2}
   mur_Ouest: {fileID: 1110770197726566, guid: 58bbdb613e0d5d848908cf063b836faa, type: 2}
   voidTile: {fileID: 1276719814318878, guid: 8e7321b0d93b4b2499a70acfbd1b1de7, type: 2}
+  waypoint: {fileID: 1041490332679330, guid: b74324f99a2d47642959b8ee2b3cfb7b, type: 2}
 --- !u!4 &2136353623
 Transform:
   m_ObjectHideFlags: 0
