@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Board : MonoBehaviour {
     public enum TileType
@@ -25,11 +26,16 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
-    public void SetupBoard()
+    public void SetupBoard(int lvl)
     {
         
-        boardHolder = new GameObject("Board Holder");
 
+
+        boardHolder = new GameObject("Board Holder");
+        if (lvl !=1)
+        {
+            Destroy(boardHolder);
+        }
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
@@ -37,6 +43,8 @@ public class Board : MonoBehaviour {
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
+        AstarPath.active.Scan();
+
     }
 
     private void SetUpTilesArray()
@@ -163,18 +171,15 @@ public class Board : MonoBehaviour {
             {
                 if (tiles[i][j] == TileType.Floor)
                 {
-                    Instantiate(floorTiles, i, j);
+                    InstantiateObject(floorTiles, i, j);
                 }
-                if (tiles[i][j] == TileType.Wall )
-                {
-                    Instantiate(voidTile , i, j+.72f);
-                }
+                
 
                 if (tiles[i][j] == TileType.Wall && j > 0 )
                 {
                     if (tiles[i][j-1]==TileType.Floor )
                     {
-                        Instantiate(mur_Nord, i, j);
+                        InstantiateObject(mur_Nord, i, j);
                     }
                     
 
@@ -184,7 +189,7 @@ public class Board : MonoBehaviour {
                     
                     if (tiles[i + 1][j] == TileType.Floor)
                     {
-                        Instantiate(mur_Ouest, i + .35f, j + .72f);
+                        InstantiateObject(mur_Ouest, i + .35f, j + .72f);
                     }
 
                 }
@@ -192,7 +197,8 @@ public class Board : MonoBehaviour {
                 {
                     if (tiles[i][j + 1] == TileType.Floor)
                     {
-                        Instantiate(mur_Sud, i, j+1.1f);
+                        InstantiateObject(mur_Sud, i, j+1.1f);
+                        InstantiateObject(voidTile, i, j+.72f);
                     }
                     
 
@@ -201,7 +207,7 @@ public class Board : MonoBehaviour {
                 {
                     if (tiles[i - 1][j] == TileType.Floor)
                     {
-                        Instantiate(mur_Est, i - .35f, j + .72f);
+                        InstantiateObject(mur_Est, i - .35f, j + .72f);
                     }
 
                 }
@@ -223,7 +229,7 @@ public class Board : MonoBehaviour {
     //    // Set the tile's parent to the board holder.
     //    tileInstance.transform.parent = boardHolder.transform;
     //}
-    void Instantiate(GameObject prefab,float x,float y)
+    void InstantiateObject(GameObject prefab,float x,float y)
     {
         Vector3 position = new Vector3(2f * x, 2f * y, 0f);
 
@@ -233,4 +239,5 @@ public class Board : MonoBehaviour {
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
     }
+   
 }

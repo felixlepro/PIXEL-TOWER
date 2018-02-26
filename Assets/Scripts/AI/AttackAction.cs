@@ -12,11 +12,9 @@ public class AttackAction : Action
 
     private void Attack(StateController controller)
     {
+            
+            controller.enemy.mainAttack();
+           
 
-        if(Vector3.Distance(controller.chaseTarget.position, controller.transform.position) <= controller.enemy.attackRange 
-            && controller.CheckIfCountDownElapsed(controller.enemy.attackSpeed))
-        {
-            controller.enemy.Attack();
-        }
     }
 }

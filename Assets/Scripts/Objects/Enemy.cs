@@ -13,9 +13,45 @@ abstract public class Enemy : ScriptableObject
     public  float moveSpeed;
     public RuntimeAnimatorController animator;
     public float idleTime;
+    public int hp;
 
     public float chaseRange;
     public float chaseRangeBuffer;
 
-    abstract public void Attack();
+    abstract public void startAttack();
+    abstract public void mainAttack();
+    abstract public void endAttack();
+
+    public void recevoirDegats(int damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+        if(hp <= 0)
+        {
+            isWalking = false;
+            isAttacking = false;
+            isDying = true;
+            controller.AIPathing.enabled = false;
+            controller.Invoke("Death", controller.anim.GetCurrentAnimatorClipInfo(0).Length);
+        }
+        else
+        {
+            isDying = false;
+        }
+    }
+
+    private void Death()
+    {
+        controller.gameObject.SetActive(false);
+    }
+
+
+    //Animation
+    [HideInInspector] public StateController controller;
+    [HideInInspector] public bool isWalking;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool isDying = false;
+    [HideInInspector] public float Angle;
+    public float HowLargeisHeRadius;
+     abstract public void UpdateAnim(StateController controller);
 }

@@ -10,6 +10,9 @@ TagManager:
   - Sylvain
   - Coin
   - GameManager
+  - Obstacle
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

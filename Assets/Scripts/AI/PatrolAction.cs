@@ -8,7 +8,8 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        
+        controller.UpdateAS();
+        controller.getAnglePath();
         Patrol(controller);
     }
 
@@ -16,21 +17,24 @@ public class PatrolAction : Action
     {
         
         // controller.target.position = controller.wayPointList[controller.nextWayPoint].position;
-        controller.AIPath.destination  = controller.wayPointList[controller.nextWayPoint].position;
+        controller.AIPathing.destination  = controller.wayPointList[controller.nextWayPoint].position;
 
-        if ((controller.AIPath.reachedEndOfPath || !controller.AIPath.hasPath) && !controller.AIPath.pathPending)
+        if ((controller.AIPathing.reachedEndOfPath || !controller.AIPathing.hasPath) && !controller.AIPathing.pathPending)
         {
             if (Idle(controller)) {
-                controller.anim.SetBool("isMoving", true);
+                //controller.anim.SetBool("isMoving", true);
+                controller.enemy.isWalking = true;
                 controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
-                controller.AIPath.destination = controller.wayPointList[controller.nextWayPoint].position;
-                controller.AIPath.SearchPath();
+                controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
+                controller.AIPathing.SearchPath();
                 // Debug.Log(controller.AIPath.destination);
-                Debug.Log("pipi");
+                Debug.Log("moving = true");
             }
             else
             {
-                controller.anim.SetBool("isMoving", false);
+                //controller.anim.SetBool("isMoving", false);
+                controller.enemy.isWalking = false;
+                Debug.Log("moving = false");
             }
         }
     }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public float levelStartDelay = 2f;
     public static GameManager instance = null;
     public int coinCount = 0;
+    public int playerHp = 100;
 
     private Text coinCounttext;
     private Board boardScript;
@@ -26,7 +27,6 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
-        
         boardScript = GetComponent<Board>();
+
         InitGame();
     }
 
@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour {
     {
         levelImage.SetActive(false);
         doingSetup = false;
-        Debug.Log("allo");
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -68,8 +67,7 @@ public class GameManager : MonoBehaviour {
         levelText.text = "Level " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
-        boardScript.SetupBoard();
-      
+        boardScript.SetupBoard(level );
     }
 
     // Update is called once per frame
