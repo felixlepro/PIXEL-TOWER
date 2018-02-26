@@ -387,7 +387,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: KDieLeft
+  m_Name: KDieRight
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -479,7 +479,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: KDieRight
+  m_Name: KDieLeft
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions: []
@@ -541,7 +541,7 @@ AnimatorStateMachine:
     m_Position: {x: 96, y: -480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102950812163481538}
-    m_Position: {x: 540, y: -240, z: 0}
+    m_Position: {x: 252, y: -48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102654416766259318}
     m_Position: {x: 540, y: -192, z: 0}

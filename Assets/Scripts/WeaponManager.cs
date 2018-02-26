@@ -8,17 +8,17 @@ public class WeaponManager: MonoBehaviour
     public Weapon weapon ;
     private SpriteRenderer spriteR;
     private Animator anim;
-    //private BoxCollider2D coll;
+    private BoxCollider2D coll;
     private float timeElapsed;
-
+    private float time;
 
     void Start()
     {
         weapon.Attack();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         spriteR.color = weapon.wColor;
-        //coll = gameObject.GetComponent<BoxCollider2D>();
-        //coll.enabled = false;
+        coll = gameObject.GetComponent<BoxCollider2D>();
+        coll.enabled = false;
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = weapon.animator;
         weapon.setUpAS();
@@ -29,12 +29,8 @@ public class WeaponManager: MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            StateController enemyScript = other.gameObject.GetComponent<StateController>();
+            StateController enemyScript = other.gameObject.GetComponentInParent<StateController>();
             EnvoyerDegat(enemyScript.enemy);
-            if (enemyScript.enemy.hp <= 0)
-            {
-                enemyScript.gameObject.SetActive(false);
-            }
         }
     }
 
@@ -46,19 +42,22 @@ public class WeaponManager: MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        
+        if (Input.GetMouseButtonDown(0) && CheckIfCountDownElapsed(weapon.attackSpeed))
         {
             attack();
+            coll.enabled = true;
         }
+        else
+        {
+            coll.enabled = false;
+        }
+        
     }
 
     void attack()
     {
-        if (CheckIfCountDownElapsed(weapon.attackSpeed))
-        {
             anim.SetTrigger("PlayerAttack");
-        }
     }
 
      bool CheckIfCountDownElapsed(float duration)

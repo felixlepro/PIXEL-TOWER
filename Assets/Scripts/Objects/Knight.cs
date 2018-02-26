@@ -12,9 +12,8 @@ public class Knight : Enemy
     bool attackDone = false;
     float time = 0;
 
-    public Knight()
+    Knight()
     {
-
         hp = 100;
         
     }
@@ -76,8 +75,6 @@ public class Knight : Enemy
         time = 0;
     }
 
-
-
     //Animations-----------------------------------------
 
     float stateStartTime;
@@ -104,6 +101,8 @@ public class Knight : Enemy
     const string AttackNW = "KAttackNW";
     const string AttackW = "KAttackW";
     const string AttackSW = "KAttackSW";
+    const string DieRight = "KDieRight";
+    const string DieLeft = "KDieLeft";
 
     enum State
     {
@@ -124,7 +123,9 @@ public class Knight : Enemy
         AttackingN,
         AttackingNW,
         AttackingW,
-        AttackingSW
+        AttackingSW,
+        DyingRight,
+        DyingLeft
 
     }
 
@@ -146,7 +147,7 @@ public class Knight : Enemy
         UpdateAnimState();
         ContinueState();
     }
-    
+
     void UpdateAnimState()
     {
         //Debug.Log(isAttacking);
@@ -157,7 +158,7 @@ public class Knight : Enemy
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
                || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || controller.anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
             {
-               // Debug.Log("animattack");
+                // Debug.Log("animattack");
                 if (Angle <= 24 || Angle >= 334) SetOrKeepState(State.AttackingS);
                 else if (Angle >= 24 && Angle <= 64) SetOrKeepState(State.AttackingSE);
                 else if (Angle >= 64 && Angle <= 116) SetOrKeepState(State.AttackingE);
@@ -170,11 +171,23 @@ public class Knight : Enemy
         }
         else if (isWalking)
         {
-           // Debug.Log("animawalk");
+            // Debug.Log("animawalk");
             if (Angle >= 316 || Angle <= 44) SetOrKeepState(State.WalkingFront);
             else if (Angle < 314 && Angle > 226) SetOrKeepState(State.WalkingLeft);
             else if (Angle < 224 && Angle > 136) SetOrKeepState(State.WalkingBack);
             else if (Angle < 134 && Angle > 46) SetOrKeepState(State.WalkingRight);
+        }
+        else if (isDying)
+        {
+            if (Angle >= 180 && Angle <= 360)
+            {
+                SetOrKeepState(State.DyingLeft);
+            }
+            else if (Angle < 180 && Angle > 0)
+            {
+                SetOrKeepState(State.DyingRight);
+            }
+            
         }
 
         else
@@ -254,6 +267,13 @@ public class Knight : Enemy
                 controller.anim.Play(AttackSW);
                 break;
 
+            //Dying
+            case State.DyingLeft:
+                controller.anim.Play(DieLeft);
+                break;
+            case State.DyingRight:
+                controller.anim.Play(DieRight);
+                break;
         }
 
         this.state = state;

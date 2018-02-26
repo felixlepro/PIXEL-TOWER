@@ -26,13 +26,32 @@ abstract public class Enemy : ScriptableObject
     {
         hp -= damage;
         Debug.Log(hp);
+        if(hp <= 0)
+        {
+            isWalking = false;
+            isAttacking = false;
+            isDying = true;
+            controller.AIPathing.enabled = false;
+            controller.Invoke("Death", controller.anim.GetCurrentAnimatorClipInfo(0).Length);
 
+        }
+        else
+        {
+            isDying = false;
+        }
     }
+
+    private void Death()
+    {
+        controller.gameObject.SetActive(false);
+    }
+
 
     //Animation
     [HideInInspector] public StateController controller;
     [HideInInspector] public bool isWalking;
     [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool isDying = false;
     [HideInInspector] public float Angle;
     public float HowLargeisHeRadius;
      abstract public void UpdateAnim(StateController controller);

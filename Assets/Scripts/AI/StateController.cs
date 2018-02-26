@@ -173,3 +173,10 @@ public class StateController : MonoBehaviour
         //Debug.Log(angle);
     }
 }
+
+    public void Death()
+    {
+        gameObject.SetActive(false);
+    }
+
+           // Debug.Log("true");
