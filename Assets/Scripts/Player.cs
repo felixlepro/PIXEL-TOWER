@@ -11,7 +11,6 @@ public class Player : MonoBehaviour {
     public int valuePerCoin = 1;
     public int coins;
     public Text coinText;
-   
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -30,19 +29,21 @@ public class Player : MonoBehaviour {
         weaponTransform = transform.Find("WeaponRotation");
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
 
-        coins = GameManager.instance.coinCount;
-        coinText.text ="Coins: " + coins;
+        
+        coinText.text ="Coins: " + GameManager.instance.coinCount;
     }
 
-    private void OnDisable()
+   
+    
+    protected void GainCoin()
     {
-       GameManager.instance.coinCount = coins;
+        GameManager.instance.coinCount = valuePerCoin;
+        coinText.text = "Coins: " + GameManager.instance.coinCount;
+
     }
-    protected void gainCoin()
-    {
-        coins += valuePerCoin;
-        coinText.text = "Coins: " + coins;
-    }
+
+    
+
 
     private void Restart()
     {
@@ -72,9 +73,9 @@ private void OnTriggerEnter2D(Collider2D other)
             ShopManager.shopWantsToOpen = false;
         }
 
-            if (other.tag == "Coin")
+        if (other.tag == "Coin")
         {
-            gainCoin();
+            GainCoin();
             other.gameObject.SetActive(false);
         }
     }

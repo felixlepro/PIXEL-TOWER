@@ -7,13 +7,15 @@ public class ShopManager : MonoBehaviour
 
     public static bool shopWantsToOpen = false;
     public GameObject canvas;
-    
+    public int prixItem = 2;
+     
+
 
     private void Start()
     {
         canvas.SetActive(false);
     }
-    private void openShop()
+    private void OpenShop()
      {
         if(Input.GetKeyDown(KeyCode.Z))
         {
@@ -29,11 +31,22 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-   
-private void FixedUpdate()
+    private void AcheterItem()
+    {
+        if(GameManager.instance.coinCount >= prixItem)
+        {
+            //BuyButton(1).interactable = true;
+
+            //if()
+            //{
+            //    GameManager.instance.coinCount -= prixItem;
+            //}
+        }
+    }
+    private void FixedUpdate()
     {
         //si le joueur appuy sur z et qu'il collide avec un tag de Sylvain, le shop ouvre
-        openShop();
+        OpenShop();
           
     }
 }
