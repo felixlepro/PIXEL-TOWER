@@ -106,7 +106,7 @@ public class Player : MonoBehaviour {
     private void knockBack()
     {
         float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime)  ;
-        Debug.Log(curve);
+        //Debug.Log(curve);
         
         graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 

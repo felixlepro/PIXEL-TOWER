@@ -27,8 +27,10 @@ public class WeaponManager: MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Colision");
         if (other.tag == "Enemy")
         {
+            Debug.Log("En");
             StateController enemyScript = other.gameObject.GetComponentInParent<StateController>();
             EnvoyerDegat(enemyScript.enemy);
         }
@@ -36,8 +38,9 @@ public class WeaponManager: MonoBehaviour
 
     public void EnvoyerDegat(Enemy cible)
     {
-        cible.recevoirDegats(weapon.GetDamage());
         Debug.Log(weapon.GetDamage());
+        cible.recevoirDegats(weapon.GetDamage());
+        
     }
 
     void Update()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,20 +14,31 @@ public class StateController : MonoBehaviour
     public GameObject chaseTarget;
 
 
-    [HideInInspector] SpriteRenderer spriteR;
-    [HideInInspector] public AIPath AIPathing;
-    [HideInInspector] public List<Transform> wayPointList;
-    [HideInInspector] public int nextWayPoint;
-    [HideInInspector] public float stateTimeElapsed;
-    [HideInInspector] public float timeElapsed;
-    [HideInInspector] public float AScountdown = 0;
-    [HideInInspector] public Animator anim;
-    [HideInInspector] public Collider2D[] targetCollider;
-    [HideInInspector] public Collider2D enemyCollider;
-    [HideInInspector] public Collider2D attackHitbox;
+    [HideInInspector]
+    SpriteRenderer spriteR;
+    [HideInInspector]
+    public AIPath AIPathing;
+    [HideInInspector]
+    public List<Transform> wayPointList;
+    [HideInInspector]
+    public int nextWayPoint;
+    [HideInInspector]
+    public float stateTimeElapsed;
+    [HideInInspector]
+    public float timeElapsed;
+    [HideInInspector]
+    public float AScountdown = 0;
+    [HideInInspector]
+    public Animator anim;
+    [HideInInspector]
+    public Collider2D[] targetCollider;
+    [HideInInspector]
+    public Collider2D enemyCollider;
+    [HideInInspector]
+    public Collider2D attackHitbox;
 
     private bool aiActive;
-   
+
     void Awake()
     {
 
@@ -38,8 +50,8 @@ public class StateController : MonoBehaviour
 
         AIPathing = GetComponent<AIPath>();
         AIPathing.maxSpeed = enemy.moveSpeed;
-        AIPathing.endReachedDistance = enemy.HowLargeisHeRadius *1.5f ;
-        AIPathing.slowdownDistance =enemy.HowLargeisHeRadius*2.5f ;
+        AIPathing.endReachedDistance = enemy.HowLargeisHeRadius * 1.5f;
+        AIPathing.slowdownDistance = enemy.HowLargeisHeRadius * 2.5f;
         AIPathing.rotationIn2D = true;
 
         enemyCollider = GetComponentInChildren<Collider2D>();
@@ -74,7 +86,7 @@ public class StateController : MonoBehaviour
     {
         if (!aiActive)
             return;
-        
+
         currentState.UpdateState(this);
         enemy.UpdateAnim(this);
         spriteOrderInLayer();
@@ -108,29 +120,29 @@ public class StateController : MonoBehaviour
     public bool CheckIfCountDownElapsed2(float duration)
     {
         timeElapsed += Time.deltaTime;
-       // Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
+        // Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
         if (timeElapsed >= duration)
         {
             timeElapsed = 0;
             return true;
         }
         else return false;
-            
+
     }
 
     public bool CheckAttackReady()
     {
-       //Debug.Log(AScountdown );
+        //Debug.Log(AScountdown );
         AScountdown -= Time.deltaTime;
         if (AScountdown <= 0)
         {
-           // Debug.Log("true");
+            // Debug.Log("true");
             AScountdown = enemy.attackSpeed;
             return true;
         }
         else return false;
     }
-   
+
 
 
 
@@ -153,7 +165,7 @@ public class StateController : MonoBehaviour
         return false;
     }
 
-    public void getAnglePath()                                     //à garder
+    public void getAnglePath()                                     //� garder
     {
         float angle = 0;
         if (!AIPathing.reachedEndOfPath)
@@ -161,9 +173,10 @@ public class StateController : MonoBehaviour
             Vector2 direction = AIPathing.velocity;
             angle = Vector2.Angle(direction, new Vector2(0, -1));
             if (direction.x < 0) angle = 360 - angle;
-            enemy.Angle = angle;       
-        }       
+            enemy.Angle = angle;
+        }
     }
+
     public void getAngleTarget()
     {
         Vector2 direction = chaseTarget.transform.position - transform.position;
@@ -172,11 +185,13 @@ public class StateController : MonoBehaviour
         enemy.Angle = angle;
         //Debug.Log(angle);
     }
-}
 
     public void Death()
     {
         gameObject.SetActive(false);
     }
 
-           // Debug.Log("true");
+    //Debug.Log("true");
+
+}
+

@@ -33,7 +33,6 @@ abstract public class Enemy : ScriptableObject
             isDying = true;
             controller.AIPathing.enabled = false;
             controller.Invoke("Death", controller.anim.GetCurrentAnimatorClipInfo(0).Length);
-
         }
         else
         {
