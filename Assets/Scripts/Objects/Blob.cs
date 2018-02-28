@@ -18,20 +18,8 @@ public class Blob : Enemy {
     }
     public override void mainAttack()
     {
-        if (controller.CheckIfCountDownElapsed(attackSpeed))
-        {
-            foreach (Collider2D pc in controller.targetCollider)
-            {
-                if (controller.attackHitbox.IsTouching(pc))
-                {
-                    // Debug.Log("collided");
-                    pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position, 1f);
-                    break;
-                }
-
-            }
-        }
-    
+        controller .chaseTarget .GetComponent<Player>() .RecevoirDegats(attackDamage, controller.chaseTarget.gameObject.transform.position - controller.transform.position, knockBackAmount);
+        resetAttackCD();
     }
     public override void endAttack()
     {
@@ -47,7 +35,7 @@ public class Blob : Enemy {
         get { return Time.time - stateStartTime; }
     }
 
-    const string IdleF = "KIdleFront";
+    const string IdleF = "IdleF";
 
     const string MoveFL = "MoveFL";
     const string MoveFR = "MoveFR";

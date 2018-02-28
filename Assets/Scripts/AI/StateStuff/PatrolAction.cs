@@ -8,7 +8,6 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        controller.UpdateAS();
         controller.getAnglePath();
         Patrol(controller);
     }

@@ -15,16 +15,18 @@ MonoBehaviour:
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 10
   attackSpeed: 1
+  currentAttackCD: -0.0049227215
   attackRange: 0
-  moveSpeed: 8
+  moveSpeed: 6
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  hp: 100
+  hp: -140
+  knockbackAmount: 15
   chaseRange: 25
   chaseRangeBuffer: 5
   controller: {fileID: 0}
   isWalking: 1
   isAttacking: 0
-  isDying: 0
-  Angle: 180
+  isDying: 1
+  Angle: 90.2169
   HowLargeisHeRadius: 0
