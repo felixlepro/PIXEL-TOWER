@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 212160190105401188}
   - component: {fileID: 95461742140263782}
   - component: {fileID: 58016235435284124}
+  - component: {fileID: 58999916679575766}
   m_Layer: 0
   m_Name: EnemyGraphics
   m_TagString: Enemy
@@ -113,7 +114,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
@@ -128,12 +129,27 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
   m_Radius: 1.1
+--- !u!58 &58999916679575766
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1813769062592844}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!95 &95461742140263782
 Animator:
   serializedVersion: 3
@@ -191,6 +207,8 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: 1ee584ee234c39b4f8dc4c49deff6c76, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
   chaseTarget: {fileID: 0}
+  timeUntilNextAttack: 0
+  hp: 0
   AIPathing: {fileID: 0}
   wayPointList: []
   nextWayPoint: 0

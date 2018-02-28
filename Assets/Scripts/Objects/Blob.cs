@@ -18,7 +18,8 @@ public class Blob : Enemy {
     }
     public override void mainAttack()
     {
-        controller .chaseTarget .GetComponent<Player>() .RecevoirDegats(attackDamage, controller.chaseTarget.gameObject.transform.position - controller.transform.position, knockBackAmount);
+        //Debug.Log("mainAttack");
+        controller.chaseTarget.GetComponent<Player>() .RecevoirDegats(attackDamage, controller.chaseTarget.gameObject.transform.position - controller.transform.position, knockBackAmount);
         resetAttackCD();
     }
     public override void endAttack()

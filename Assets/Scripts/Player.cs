@@ -79,10 +79,13 @@ public class Player : MonoBehaviour {
     {
         CameraShaker.Instance.ShakeOnce(dammage * 0.25f, 8f, 0.1f, 1f);
         player.hp -= dammage;
-        knockBackDirection = kbDirection;
-        knockBackAmount = kbAmmount;
-        knockBackAmountOverTime = 0;
-        couleurKb = new Color(1f, 0, 0, 1f);
+        if (kbAmmount != 0)
+        {
+            knockBackDirection = kbDirection;
+            knockBackAmount = kbAmmount;
+            knockBackAmountOverTime = 0;
+        }
+        graphicsSpriteR.color = new Color(1f, 0, 0, 1f);
     }
 
 

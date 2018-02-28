@@ -14,34 +14,26 @@ public class StateController : MonoBehaviour
     public GameObject chaseTarget;
 
 
-    [HideInInspector]
-    SpriteRenderer spriteR;
-    [HideInInspector]
-    public AIPath AIPathing;
-    [HideInInspector]
-    public List<Transform> wayPointList;
-    [HideInInspector]
-    public int nextWayPoint;
-    [HideInInspector]
-    public float stateTimeElapsed;
-    [HideInInspector]
-    public float timeElapsed;
-    [HideInInspector]
-    public float AScountdown = 0;
-    [HideInInspector]
-    public Animator anim;
-    [HideInInspector]
-    public Collider2D[] targetCollider;
-    [HideInInspector]
-    public Collider2D enemyCollider;
-    [HideInInspector]
-    public Collider2D attackHitbox;
+
+    [HideInInspector] public float timeUntilNextAttack;
+    [HideInInspector] public float hp;
+
+    [HideInInspector] SpriteRenderer spriteR;
+    [HideInInspector]  public AIPath AIPathing;
+    [HideInInspector] public List<Transform> wayPointList;
+    [HideInInspector]  public int nextWayPoint;
+    [HideInInspector]  public float stateTimeElapsed;
+    [HideInInspector]   public float timeElapsed;
+    [HideInInspector]  public float AScountdown = 0;
+    [HideInInspector]  public Animator anim;
+    [HideInInspector]  public Collider2D[] targetCollider;
+    [HideInInspector]  public Collider2D enemyCollider;
+    [HideInInspector]  public Collider2D attackHitbox;
 
     private bool aiActive;
 
     void Awake()
     {
-
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = enemy.wColor;
 
@@ -65,6 +57,7 @@ public class StateController : MonoBehaviour
         {
             wayPointList.Add(wp.transform);
         }
+        enemy.controller = this;
     }
 
     public void SetupAI(bool aiActivationFromGameManager, List<Transform> wayPointsFromGameManager)
@@ -90,8 +83,9 @@ public class StateController : MonoBehaviour
         currentState.UpdateState(this);
         enemy.UpdateAnim(this);
         spriteOrderInLayer();
-    }
+        enemy.UpdatecurrentAttackCD();
 
+    }
     void spriteOrderInLayer()
     {
         if (chaseTarget.transform.position.y <= transform.position.y)
@@ -100,6 +94,8 @@ public class StateController : MonoBehaviour
         }
         else spriteR.sortingOrder = 2;
     }
+
+
 
     public void TransitionToState(State nextState)
     {
@@ -128,27 +124,6 @@ public class StateController : MonoBehaviour
         }
         else return false;
 
-    }
-
-    public bool CheckAttackReady()
-    {
-        //Debug.Log(AScountdown );
-        AScountdown -= Time.deltaTime;
-        if (AScountdown <= 0)
-        {
-            // Debug.Log("true");
-            AScountdown = enemy.attackSpeed;
-            return true;
-        }
-        else return false;
-    }
-
-
-
-
-    public void UpdateAS()
-    {
-        AScountdown -= Time.deltaTime;
     }
 
     private void OnExitState()

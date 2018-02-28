@@ -9,8 +9,11 @@ public class AttackActionBlob : Action {
 
     public override void Act(StateController controller)
     {
+        //Debug.Log("act");
         if (controller.enemy.checkIfAttackIsReady ())
         {
+            controller.AIPathing.maxSpeed = controller.enemy.moveSpeed;
+            //Debug.Log("rdy");
             foreach (Collider2D pc in controller.targetCollider)
             {
                 if (controller.attackHitbox.IsTouching(pc))
@@ -22,6 +25,10 @@ public class AttackActionBlob : Action {
 
             }
            
+        }
+        else
+        {
+            controller.AIPathing.maxSpeed = controller.enemy.moveSpeed * (1 - (controller.enemy.timeUntilNextAttack / controller.enemy.attackSpeed)); //* (1 - (controller.enemy.timeUntilNextAttack / controller.enemy.attackSpeed));
         }
     }
 
