@@ -9,11 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c32cbb253eb2ee4f9859a10b3f632cc, type: 3}
-  m_Name: New Weapon
+  m_Name: Dave2
   m_EditorClassIdentifier: 
   weaponName: xaxa
-  artNormal: {fileID: 0}
-  artAttack: {fileID: 0}
-  attackDamage: 5
+  wColor: {r: 0, g: 0, b: 0, a: 0}
+  attackDamage: 20
   attackSpeed: 0
-  angleAttack: 0
+  animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}

@@ -13,6 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: cac
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 0
+  attackDamage: 5
+  cost: 0
+  range: 0
   attackSpeed: 0
   animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
+  description: 

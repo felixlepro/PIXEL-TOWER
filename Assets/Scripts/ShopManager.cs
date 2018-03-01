@@ -47,6 +47,6 @@ public class ShopManager : MonoBehaviour
     {
         //si le joueur appuy sur z et qu'il collide avec un tag de Sylvain, le shop ouvre
         OpenShop();
-          
+      
     }
 }

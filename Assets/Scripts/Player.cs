@@ -9,8 +9,7 @@ public class Player : MonoBehaviour {
     public float speed;
     public float rotationBuffer;
     public float restartDelay = 1f;
- public int valuePerCoin = 1;
-    public int coins;
+    public int valuePerCoin = 1;
     public Text coinText;
     public float weaponDistance = 1.25f;
    
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
-    Vector3 movement;
+    //Vector3 movement;
 
     private float knockBackAmount = 0;
     private float knockBackAmountOverTime = 1;
@@ -36,8 +35,8 @@ public class Player : MonoBehaviour {
     private const float knockBackMultiplier = 20;
     private float knockBackTime = 1;
     private Vector3 knockBackDirection;
-
-    private Vector3 movement;
+    public int coins;
+    //private Vector3 movement;
 
     Transform weaponTransform;
     GameObject weaponChild;
@@ -52,6 +51,18 @@ public class Player : MonoBehaviour {
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
+        coins = GameManager.instance.coinCount;
+        coinText.text = "Coins: " + coins;
+    }
+    private void OnDisable()
+    {
+        GameManager.instance.playerHp = hp;
+        GameManager.instance.coinCount = coins;
+    }
+    public void gainCoin()
+    {
+        coins += valuePerCoin;
+        coinText.text = "Coins: " + coins;
     }
     void FixedUpdate()
     {
@@ -65,6 +76,9 @@ public class Player : MonoBehaviour {
         {
             knockBack();
         }
+    }
+
+
 
     private void Restart()
     {
@@ -78,28 +92,18 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
-    }
-
-  
-
-    private void Restart()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Exit")
+        if ((other.tag == "sylvain"))
         {
-            Invoke("Restart", restartDelay);
-            enabled = false;
+            ShopManager.shopWantsToOpen = true;
         }
-        if (other.tag == "enemy")   
+        if (other.tag == "Coin")
         {
-
+            gainCoin();
+            other.gameObject.SetActive(false);
         }
-        
+
     }
+
     private void knockBack()
     {
         float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime)  ;
@@ -118,7 +122,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-
+   
     
     private void Move(float h, float v)
     {
@@ -181,22 +185,9 @@ public class Player : MonoBehaviour {
     //    }
     //    return vecteur;
     //}
-
-
-}
-
-           
-            
-   
-    public float weaponDistance = 1.25f;
-    private int hp;
- 
-
-    void Start()
-
-        
-        faceMouse();
+         
     public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
+    {
         CameraShaker.Instance.ShakeOnce(dammage * 0.25f,8f,0.1f,1f);
         hp -= dammage;
         knockBackDirection = kbDirection;
@@ -206,6 +197,5 @@ public class Player : MonoBehaviour {
         //  Debug.Log("Player:  " + hp);
     }
     
-    private void OnDisable()
-    {
-        GameManager.instance.playerHp = hp;
+   
+}
