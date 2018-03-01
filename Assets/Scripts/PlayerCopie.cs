@@ -83,8 +83,7 @@ public class PlayerCopie : MonoBehaviour
         else
         {
             TimeRewinding.isFantoming = false;
-            //GetComponentInParent<StateController>().chaseTarget = player;
-            Debug.Log("caca");
+            Debug.Log("Mort");
             Destroy(this.gameObject);
         }
         

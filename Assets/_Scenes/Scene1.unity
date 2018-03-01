@@ -742,6 +742,10 @@ Prefab:
       propertyPath: chaseTarget
       value: 
       objectReference: {fileID: 1887307830}
+    - target: {fileID: 1874242672480488, guid: 4c417dd74b4ebfa428bfa412b48055a6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c417dd74b4ebfa428bfa412b48055a6, type: 2}
   m_IsPrefabParent: 0
@@ -802,6 +806,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114596416209805874, guid: 55336882b5bf7f44bae2a9f18942a05b,
+        type: 2}
+      propertyPath: playerCopie
+      value: 
+      objectReference: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}
   m_IsPrefabParent: 0
@@ -1278,11 +1288,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4465145399478566, guid: 8d2f0ad944af9e74ab09c0688c15c222, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 92.95913
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 4465145399478566, guid: 8d2f0ad944af9e74ab09c0688c15c222, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 94.32457
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 4465145399478566, guid: 8d2f0ad944af9e74ab09c0688c15c222, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2245,6 +2255,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 621005def8aae794baad7901b0463a70, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1955506002 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1874242672480488, guid: 4c417dd74b4ebfa428bfa412b48055a6,
+    type: 2}
+  m_PrefabInternal: {fileID: 514653077}
+--- !u!114 &1955506006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1955506002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680832d156578c54fbdc946cc4d20f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
+    type: 2}
 --- !u!1 &2136353621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,4 +2347,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStartDelay: 2
+  coinCount: 0
   playerHp: 100
