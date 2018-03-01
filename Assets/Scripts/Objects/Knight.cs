@@ -6,7 +6,7 @@ using UnityEngine;
 public class Knight : Enemy
 {
     GameObject attackColliderObject;
-   const float attackChargeTime = 0.7f;
+    const float attackChargeTime = 0.7f;
     float colorAlpha = 0;
     const float colorAlphaMax = 1f;
     bool attackDone = false;
@@ -44,7 +44,8 @@ public class Knight : Enemy
                     if (controller.attackHitbox.IsTouching(pc))
                     {
                         // Debug.Log("collided");
-                        pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position, 0.5f);
+                        pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position,knockBackAmount);
+                        resetAttackCD();
                         break;
                     }
 

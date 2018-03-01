@@ -13,14 +13,7 @@ public class ChaseAction : Action
     private void Chase(StateController controller)
     {
         controller.AIPathing.maxSpeed = controller.enemy.moveSpeed;
-        //foreach (Collider2D targetCollider in controller.targetCollider )
-        //{
-        //    if (controller.enemyCollider.IsTouching(targetCollider))
-        //    {
-        //        controller.AIPathing.maxSpeed = 0;
-        //        controller.enemy.isWalking = false;
-        //    }
-        //}
+
        
         controller.enemy.isAttacking = false;
         if (controller.AIPathing.reachedEndOfPath)

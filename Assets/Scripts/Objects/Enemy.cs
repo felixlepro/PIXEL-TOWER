@@ -14,6 +14,8 @@ abstract public class Enemy : ScriptableObject
     public RuntimeAnimatorController animator;
     public float idleTime;
     public int hp;
+    public float knockBackAmount;
+    [HideInInspector]public float timeUntilNextAttack = 0;
 
     public float chaseRange;
     public float chaseRangeBuffer;
@@ -45,6 +47,21 @@ abstract public class Enemy : ScriptableObject
         controller.gameObject.SetActive(false);
     }
 
+    public void UpdatecurrentAttackCD()
+    {
+        if (timeUntilNextAttack > 0)
+        {
+            timeUntilNextAttack -= Time.deltaTime;
+        }
+    }
+    public bool checkIfAttackIsReady()
+    {
+        return (timeUntilNextAttack <= 0);
+    }
+    public void resetAttackCD()
+    {
+        timeUntilNextAttack = attackSpeed;
+    }
 
     //Animation
     [HideInInspector] public StateController controller;

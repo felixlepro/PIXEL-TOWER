@@ -227,10 +227,12 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!50 &50316550609006100
 Rigidbody2D:
   serializedVersion: 4
@@ -262,9 +264,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 1.4538121, y: -0.0025740117}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.09751077, y: 0.49459702}
+    oldSize: {x: 3.625, y: 1.25}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 3.6390896, y: 0.7926024}
+  m_EdgeRadius: 0
 --- !u!61 &61286294605791612
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -276,9 +289,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.05961418, y: -0.7748985}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0170174, y: 1.119194}
+  m_EdgeRadius: 0
 --- !u!61 &61750572812829484
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -290,9 +314,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.034063578, y: 0.38755417}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.6081271, y: 1.1995697}
+  m_EdgeRadius: 0
 --- !u!95 &95446784793202812
 Animator:
   serializedVersion: 3
@@ -319,7 +354,7 @@ Animator:
   m_GameObject: {fileID: 1759313095692000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -340,6 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1699821906566694}
   weapon: {fileID: 11400000, guid: 337b73bc70318dd418eb0c9146676cbd, type: 2}
+  chargeAttackKey: 323
 --- !u!114 &114596416209805874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,6 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70294fdadc7536349a114c078450d336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
+    type: 2}
+  scriptPlayer: {fileID: 0}
 --- !u!114 &114840780252780958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,13 +401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523076eab3952ff4caa8b6539859302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7.5
   rotationBuffer: 15
   restartDelay: 1
-  weaponDistance: 1.25
-  ratioWeaponPivot: 1
-  angle: 0
-  weapon: {fileID: 0}
+  player: {fileID: 11400000, guid: db782df26369bb6478edacc6ddee327f, type: 2}
+  direction: {x: 0, y: 0}
+  timeUntilNextAttack: 0
+  knockBackAmount: 0
+  knockBackAmountOverTime: 1
+  knockBackAmountOverTimeMinimum: 0.85
+  knockBackTime: 1
+  knockBackDirection: {x: 0, y: 0, z: 0}
+  couleurKb: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &212253938044269730
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -378,6 +421,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -393,17 +437,25 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 2f8fbb6de41f27e48ac1a971180b15c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212528504565289828
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -413,6 +465,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -428,17 +481,25 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4bd75a753437fa4ca3b86e4c4e2fcea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212825790158323966
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -448,6 +509,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -463,14 +525,22 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eb6fbae4a2e593d40b71a4294a144081, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

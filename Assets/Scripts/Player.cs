@@ -6,48 +6,44 @@ using UnityEngine.SceneManagement;
 using EZCameraShake;
 
 public class Player : MonoBehaviour {
-    public float speed;
+    
     public float rotationBuffer;
     public float restartDelay = 1f;
     public int valuePerCoin = 1;
     public Text coinText;
-    public float weaponDistance = 1.25f;
-   
-    Vector3 movement;
-    private int hp;
- 
-    [Range(0f, 1f)]
-    public float ratioWeaponPivot;
-    public Vector2 direction;
-    
+    // public float weaponDistance = 1.25f;
+    public PlayerObject player;
 
-
-    public Weapon weapon;
-
+    [HideInInspector]public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
-    //Vector3 movement;
+    private int hp;
 
-    private float knockBackAmount = 0;
-    private float knockBackAmountOverTime = 1;
-    private float knockBackAmountOverTimeMinimum = 0.85f;
-    private const float knockBackMultiplier = 20;
-    private float knockBackTime = 1;
-    private Vector3 knockBackDirection;
-    public int coins;
-    //private Vector3 movement;
+    private Animator anim;
+    private Vector3 movement;
+    private bool FacingMouse = true;
 
     Transform weaponTransform;
     GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
+    [HideInInspector] public float timeUntilNextAttack;
+
+    [HideInInspector] public float knockBackAmount = 0;
+    [HideInInspector] public float knockBackAmountOverTime = 1;
+    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.85f;
+    [HideInInspector] public float knockBackTime = 1;
+    [HideInInspector] public Vector3 knockBackDirection;
+    [HideInInspector] public Color couleurKb = Color.white;
+
     void Start()
     {
         
         playerRigidbody = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren < Animator > ();
-        hp = GameManager.instance.playerHp;
+        anim = GetComponentInChildren<Animator>();
+        anim.runtimeAnimatorController = player.animator;
+        player.hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
@@ -77,8 +73,42 @@ public class Player : MonoBehaviour {
             knockBack();
         }
     }
+    public void knockBack()
+    {
+        float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
+        //Debug.Log(curve);
+
+        graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+
+        Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
+        playerRigidbody.MovePosition(transform.position + kb);
+        // knockBackTime /= knockBackAmount;
+        knockBackAmountOverTime += Time.deltaTime * knockBackTime;
+
+        if (knockBackAmountOverTime > knockBackAmountOverTimeMinimum)
+        {
+            graphicsSpriteR.color = new Color(1f, 1, 1, 1f);
+        }
+    }
+
+    public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
+    {
+        CameraShaker.Instance.ShakeOnce(dammage * 0.25f, 8f, 0.1f, 1f);
+        player.hp -= dammage;
+        if (kbAmmount != 0)
+        {
+            knockBackDirection = kbDirection;
+            knockBackAmount = kbAmmount;
+            knockBackAmountOverTime = 0;
+        }
+        graphicsSpriteR.color = new Color(1f, 0, 0, 1f);
+    }
 
 
+    private void OnDisable()
+    {
+        GameManager.instance.playerHp = player.hp;
+    }
 
     private void Restart()
     {
@@ -103,32 +133,15 @@ public class Player : MonoBehaviour {
         }
 
     }
+    
 
-    private void knockBack()
-    {
-        float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime)  ;
-        //Debug.Log(curve);
-        
-        graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-        Vector3 kb = knockBackDirection.normalized * knockBackAmount  * knockBackMultiplier * curve * Time.deltaTime;
-        playerRigidbody.MovePosition(transform.position + kb);
-       // knockBackTime /= knockBackAmount;
-        knockBackAmountOverTime += Time.deltaTime * knockBackTime;
-
-        if (knockBackAmountOverTime > knockBackAmountOverTimeMinimum)
-        {
-            graphicsSpriteR.color = new Color(1f, 1, 1, 1f);
-        }
-    }
-
-   
     
     private void Move(float h, float v)
     {
 
         movement.Set(h, v, 0f);
-        movement = movement.normalized * speed * Time.deltaTime;
+        movement = movement.normalized * player.speed * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + movement);
         if (h == 0 && v == 0)
         {
@@ -140,62 +153,42 @@ public class Player : MonoBehaviour {
 
     void FaceMouse()
     {
-        Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
-        Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
-
-        if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        if (FacingMouse)
         {
-            transform.localScale = faceLeft;
-            weaponTransform.localScale = new Vector3(-1, -1, 0);
-            
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+            Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
+            Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            float angle = Vector2.Angle(direction, new Vector2(0, -1));
+
+            if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+            {
+                transform.localScale = faceLeft;
+                weaponTransform.localScale = new Vector3(-1, -1, 0);
+
+                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
+            }
+            else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+            {
+                transform.localScale = faceRight;
+                weaponTransform.localScale = new Vector3(1, 1, 0);
+
+                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
+            }
+
+            if (angle > 115) graphicsSpriteR.sortingOrder = 1;
+            else graphicsSpriteR.sortingOrder = -1;
+
+            anim.SetFloat("DirectionAngle", angle);
+            weaponTransform.right = direction;
         }
-        else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
-        {
-            transform.localScale = faceRight;
-            weaponTransform.localScale = new Vector3(1, 1, 0);
-           
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
-
-        }
-
-        if (angle > 115) graphicsSpriteR.sortingOrder = 1;
-        else graphicsSpriteR.sortingOrder = -1;
-
-        anim.SetFloat("DirectionAngle", angle);
-        weaponTransform.right = direction;
     }
-    void setWeaponPivot()
+    public void doFaceMouse(bool fm)
     {
-        weaponTransform.position = new Vector3(ratioWeaponPivot * weaponDistance, weaponTransform.position.y, weaponTransform.position.z);
-        weaponChild.transform.position = new Vector3(weaponDistance - (ratioWeaponPivot * weaponDistance) + weaponTransform.position.x, weaponChild.transform.position.y, weaponChild.transform.position.z);
+        FacingMouse = fm;
     }
-
-    //private Vector3 vecteurUnitaire(Vector3 vecteur)
-    //{
-    //    if (vecteur.x == 0 && vecteur.y ==0 &&vecteur.z == 0)
-    //    {
-    //        vecteur /= vecteur.magnitude;
-    //    }
-    //    return vecteur;
-    //}
-         
-    public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
-    {
-        CameraShaker.Instance.ShakeOnce(dammage * 0.25f,8f,0.1f,1f);
-        hp -= dammage;
-        knockBackDirection = kbDirection;
-        knockBackAmount = kbAmmount;
-        knockBackAmountOverTime = 0;
-        graphicsSpriteR.color = new Color(1f, 0, 0, 1f);
-        //  Debug.Log("Player:  " + hp);
-    }
-    
-   
 }
