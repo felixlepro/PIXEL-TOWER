@@ -16,17 +16,17 @@ MonoBehaviour:
   attackDamage: 10
   attackSpeed: 1
   attackRange: 0
-  moveSpeed: 10
+  moveSpeed: 7
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  hp: 0
+  hp: -2
   knockBackAmount: 15
-  timeUntilNextAttack: 0.585945
+  timeUntilNextAttack: -0.004123781
   chaseRange: 25
   chaseRangeBuffer: 5
   controller: {fileID: 0}
   isWalking: 1
   isAttacking: 0
   isDying: 1
-  Angle: 15.419124
+  Angle: 303.67532
   HowLargeisHeRadius: 0

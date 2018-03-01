@@ -18,10 +18,13 @@ public class Player : MonoBehaviour {
 
     private Animator anim;
     private Vector3 movement;
+    private bool FacingMouse = true;
 
     Transform weaponTransform;
     GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
+
+    [HideInInspector] public float timeUntilNextAttack;
 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] public float knockBackAmountOverTime = 1;
@@ -132,36 +135,43 @@ public class Player : MonoBehaviour {
 
     void faceMouse()
     {
-        Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
-        Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
-
-        if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+        if (FacingMouse)
         {
-            transform.localScale = faceLeft;
-            weaponTransform.localScale = new Vector3(-1, -1, 0);
-            
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+            Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
+            Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            float angle = Vector2.Angle(direction, new Vector2(0, -1));
+
+            if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+            {
+                transform.localScale = faceLeft;
+                weaponTransform.localScale = new Vector3(-1, -1, 0);
+
+                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
+            }
+            else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
+            {
+                transform.localScale = faceRight;
+                weaponTransform.localScale = new Vector3(1, 1, 0);
+
+                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
+
+            }
+
+            if (angle > 115) graphicsSpriteR.sortingOrder = 1;
+            else graphicsSpriteR.sortingOrder = -1;
+
+            anim.SetFloat("DirectionAngle", angle);
+            weaponTransform.right = direction;
         }
-        else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
-        {
-            transform.localScale = faceRight;
-            weaponTransform.localScale = new Vector3(1, 1, 0);
-           
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
-
-        }
-
-        if (angle > 115) graphicsSpriteR.sortingOrder = 1;
-        else graphicsSpriteR.sortingOrder = -1;
-
-        anim.SetFloat("DirectionAngle", angle);
-        weaponTransform.right = direction;
+    }
+    public void doFaceMouse(bool fm)
+    {
+        FacingMouse = fm;
     }
 }
 

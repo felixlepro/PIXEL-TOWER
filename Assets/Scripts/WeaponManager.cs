@@ -5,12 +5,16 @@ using UnityEngine;
 public class WeaponManager: MonoBehaviour
 {
     public GameObject player;
-    public Weapon weapon ;
+    public Sword  weapon;
     private SpriteRenderer spriteR;
     private Animator anim;
     private BoxCollider2D coll;
-    private float timeElapsed;
+
+    private float chargeDoneRatio;
+    private float timeUntilNextAttack;
     private float time;
+    private float currentChargeTime;
+    public KeyCode chargeAttackKey;
 
     void Start()
     {
@@ -38,35 +42,89 @@ public class WeaponManager: MonoBehaviour
 
     public void EnvoyerDegat(Enemy cible)
     {
-        Debug.Log(weapon.GetDamage());
-        cible.recevoirDegats(weapon.GetDamage());
-        
+        if (currentChargeTime < weapon.chargeTime)
+        {
+            Debug.Log(weapon.GetDamage());
+            cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus*chargeDoneRatio * chargeDoneRatio));
+        }
+
+        else 
+        {
+            cible.recevoirDegats(weapon.attackDamageChargedBonus + weapon.attackDamage);
+        }
     }
 
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0) && CheckIfCountDownElapsed(weapon.attackSpeed))
+        UpdateTimeUntilNextAttack();
+
+        if (timeUntilNextAttack <= 0)
         {
-            attack();
-            coll.enabled = true;
+
+            if (Input.GetKey(chargeAttackKey) && (currentChargeTime < weapon.chargeTime))
+            {
+                currentChargeTime += Time.deltaTime;
+                chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
+                anim.speed = 1+ (chargeDoneRatio * chargeDoneRatio * 1.5f);
+                anim.SetBool("AttackCharge", true);
+
+            }
+            else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
+            {
+                anim.SetBool("AttackCharge", true);
+                anim.speed = 2.5f;
+            }
+            else if (Input.GetKeyUp(chargeAttackKey))
+            {
+                coll.enabled = true;
+                attack();
+            }
+           
         }
         else
         {
             coll.enabled = false;
         }
-        
-    }
 
+        //if (Input.GetMouseButtonDown(0) && (timeUntilNextAttack <= 0))
+        //{
+        //    attack();
+        //    coll.enabled = true;
+        //}
+        //else
+        //{
+        //    coll.enabled = false;
+        //}
+
+    }
+    
     void attack()
     {
-            anim.SetTrigger("PlayerAttack");
+        anim.speed = 1;
+        anim.SetBool("AttackCharge", false);
+        anim.SetBool("AttackChargeMax", false);
+        anim.SetTrigger("PlayerAttack");
+        ResetAttackTimer();
+        currentChargeTime = 0;
+        GetComponentInParent<Player>().doFaceMouse(false);
+        Invoke("facingMouse", anim.GetCurrentAnimatorStateInfo(0).length * anim.GetCurrentAnimatorStateInfo(0).speed);
+    }
+    void facingMouse()
+    {
+        GetComponentInParent<Player>().doFaceMouse(true);
     }
 
-     bool CheckIfCountDownElapsed(float duration)
+    void UpdateTimeUntilNextAttack()
     {
-        timeElapsed += Time.deltaTime;
-        return (timeElapsed >= duration);
+        if (timeUntilNextAttack > 0)
+        {
+            timeUntilNextAttack -= Time.deltaTime;
+        }
     }
+    private void ResetAttackTimer()
+    {
+        timeUntilNextAttack = weapon.attackSpeed;
+    }
+
 
 }
