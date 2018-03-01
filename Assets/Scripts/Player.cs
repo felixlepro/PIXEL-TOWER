@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     public float restartDelay = 1f;
     public int valuePerCoin = 1;
     public Text coinText;
+    public int coins;
     // public float weaponDistance = 1.25f;
     public PlayerObject player;
 
@@ -19,8 +20,6 @@ public class Player : MonoBehaviour {
     private BoxCollider2D boxCollider;
     private Animator anim;
     private int hp;
-
-    private Animator anim;
     private Vector3 movement;
     private bool FacingMouse = true;
 
@@ -67,6 +66,7 @@ public class Player : MonoBehaviour {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Move(horizontal, vertical);
+            FaceMouse();
         }
         else
         {
@@ -105,11 +105,7 @@ public class Player : MonoBehaviour {
     }
 
 
-    private void OnDisable()
-    {
-        GameManager.instance.playerHp = player.hp;
-    }
-
+  
     private void Restart()
     {
         SceneManager.LoadScene(0);
@@ -153,8 +149,10 @@ public class Player : MonoBehaviour {
 
     void FaceMouse()
     {
+        Debug.Log("caca");
         if (FacingMouse)
         {
+            Debug.Log("caca2");
             Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
             Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 

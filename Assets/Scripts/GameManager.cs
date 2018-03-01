@@ -63,11 +63,11 @@ public class GameManager : MonoBehaviour {
         doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        levelText.text = "Level " + level;
-        levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
-        boardScript.SetupBoard(level );
+        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
+       //levelText.text = "Level " + level;
+       // levelImage.SetActive(true);
+       // Invoke("HideLevelImage", levelStartDelay);
+        boardScript.SetupBoard(level);
     }
 
     // Update is called once per frame

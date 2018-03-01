@@ -26,7 +26,7 @@ public class WeaponManager: MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = weapon.animator;
         weapon.setUpAS();
-        Debug.Log(weapon.GetDamage());
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,7 +44,7 @@ public class WeaponManager: MonoBehaviour
     {
         if (currentChargeTime < weapon.chargeTime)
         {
-            Debug.Log(weapon.GetDamage());
+            
             cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus*chargeDoneRatio * chargeDoneRatio));
         }
 
