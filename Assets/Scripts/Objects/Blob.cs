@@ -9,7 +9,7 @@ public class Blob : Enemy
 
     Blob()
     {
-        hp = 100;
+        maxHp = 100;
     }
 }
 

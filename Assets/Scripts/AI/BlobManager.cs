@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlobManager : EnemyManager {
 
-    const float attackCD = 1f;
+     float attackCD = 1f;
 
     private void Update()
     {
@@ -15,6 +15,10 @@ public class BlobManager : EnemyManager {
     }
     new public bool checkIfAttackIsReady()
     {
+        if(enemy.attackSpeed - attackCD < 0)
+        {
+            attackCD = enemy.attackSpeed;
+        }
         return (timeUntilNextAttack <= enemy.attackSpeed - attackCD);
     }
     public override void TryAttack()

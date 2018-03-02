@@ -30,7 +30,7 @@ abstract public class EnemyManager : MonoBehaviour {
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = enemy.wColor;
 
-        hp = enemy.hp;
+        hp = enemy.maxHp;
     }
     private void Update()
     {

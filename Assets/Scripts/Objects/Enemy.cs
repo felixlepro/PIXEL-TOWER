@@ -13,7 +13,7 @@ abstract public class Enemy : ScriptableObject
     public float moveSpeed;
     public RuntimeAnimatorController animator;
     public float idleTime;
-    public int hp;
+    public int maxHp;
     public float knockBackAmount;
     
     public float chaseRange;

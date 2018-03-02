@@ -8,7 +8,7 @@ public class Knight : Enemy
 
     Knight()
     {
-        hp = 100;
+        maxHp = 100;
 
     }
 
