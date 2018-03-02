@@ -19,14 +19,14 @@ MonoBehaviour:
   moveSpeed: 5
   animator: {fileID: 9100000, guid: e9ee8002a404c4942ad78f36aa4a557c, type: 2}
   idleTime: 0.5
-  hp: -8
+  hp: 100
   knockBackAmount: 10
-  timeUntilNextAttack: -0.012092207
+  timeUntilNextAttack: -0.043141205
   chaseRange: 30
   chaseRangeBuffer: 5
   controller: {fileID: 0}
   isWalking: 0
-  isAttacking: 0
+  isAttacking: 1
   isDying: 1
-  Angle: 299.00992
+  Angle: 17.415241
   HowLargeisHeRadius: 1.5

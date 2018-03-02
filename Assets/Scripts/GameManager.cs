@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public int coinCount = 0;
     public int playerHp = 100;
+    public bool inLevel = true;
 
     private Text coinCounttext;
     private Board boardScript;

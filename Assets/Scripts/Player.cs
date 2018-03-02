@@ -108,7 +108,16 @@ public class Player : MonoBehaviour {
   
     private void Restart()
     {
-        SceneManager.LoadScene(0);
+        if (GameManager.instance.inLevel)
+        {
+            SceneManager.LoadScene("SceneShop", LoadSceneMode.Single);
+            GameManager.instance.inLevel = false;
+        }
+        else
+        {
+            SceneManager.LoadScene("SceneLevel", LoadSceneMode.Single);
+            GameManager.instance.inLevel = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
