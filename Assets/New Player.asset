@@ -11,13 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9f26a104fc62a41b379bf9cd0dcd40, type: 3}
   m_Name: New Player
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: -555
   speed: 10
-  weapon: {fileID: 11400000, guid: 337b73bc70318dd418eb0c9146676cbd, type: 2}
+  weapon: {fileID: 11400000, guid: cad66827291014641be2a4b6cf890529, type: 2}
   animator: {fileID: 9100000, guid: db42350e5f820ce40a6e56b474f9b637, type: 2}
-  knockBackAmount: 10
-  knockBackAmountOverTime: 0.8599997
-  knockBackAmountOverTimeMinimum: 0.85
-  knockBackTime: 1
-  knockBackDirection: {x: 1.0939331, y: -0.6630173, z: -0.0000008419156}
-  couleurKb: {r: 1, g: 0, b: 0, a: 1}
