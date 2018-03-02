@@ -173,7 +173,7 @@ public class Board : MonoBehaviour {
                 if (tiles[i][j] == TileType.Floor)
                 {
                     InstantiateObject(floorTiles, i, j);
-                    IntRange rand = new IntRange(1,10);
+                    IntRange rand = new IntRange(1,5);
                     if (rand.Random  == 1)
                     {
                         InstantiateObject(waypoint, i, j);

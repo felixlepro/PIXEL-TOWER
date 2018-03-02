@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 95798619859733514}
   - component: {fileID: 61007216717262534}
   m_Layer: 8
-  m_Name: Weapon
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fb37ae1edd02a48b318b19ef2f8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1699821906566694}
   weapon: {fileID: 11400000, guid: 337b73bc70318dd418eb0c9146676cbd, type: 2}
   chargeAttackKey: 323
 --- !u!114 &114596416209805874
@@ -403,6 +402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationBuffer: 15
   restartDelay: 1
+  valuePerCoin: 1
+  coinText: {fileID: 0}
+  coins: 0
   player: {fileID: 11400000, guid: db782df26369bb6478edacc6ddee327f, type: 2}
   direction: {x: 0, y: 0}
   timeUntilNextAttack: 0

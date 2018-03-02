@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour {
     private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
+    [HideInInspector] public List<Transform> wayPointList;
 
-   
+
 
     //METTRE LA BOOL DE PROG COMME DANS COIN ET GAMEMANAGER AVEC BOOL ET SHOPMANAGER
 
@@ -70,7 +71,17 @@ public class GameManager : MonoBehaviour {
        // Invoke("HideLevelImage", levelStartDelay);
         //boardScript.SetupBoard(level);
     }
-
+    void SetupAI()
+    {
+        foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
+        {
+            wayPointList.Add(wp.transform);
+        }
+        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire
+        {
+            em.GetComponent<StateController>().SetupAI(true, wayPointList);
+        }
+    }
     // Update is called once per frame
     void Update () {
 

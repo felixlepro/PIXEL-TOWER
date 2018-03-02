@@ -14,7 +14,7 @@ MonoBehaviour:
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 15
-  attackSpeed: 0.75
+  attackSpeed: 1
   attackRange: 3
   moveSpeed: 5
   animator: {fileID: 9100000, guid: e9ee8002a404c4942ad78f36aa4a557c, type: 2}

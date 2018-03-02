@@ -14,8 +14,9 @@ public class Player : MonoBehaviour {
     public int coins;
     // public float weaponDistance = 1.25f;
     public PlayerObject player;
+    public GameObject weaponObject;
 
-    [HideInInspector]public Vector2 direction;
+    [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour {
     private bool FacingMouse = true;
 
     Transform weaponTransform;
-    GameObject weaponChild;
+    //GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
 
     [HideInInspector] public float timeUntilNextAttack;
@@ -42,9 +43,13 @@ public class Player : MonoBehaviour {
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = player.animator;
-        player.hp = GameManager.instance.playerHp;
+        //player.hp = GameManager.instance.playerHp;
+
         weaponTransform = transform.Find("WeaponRotation");
-        weaponChild = GameObject.Find("Weapon");
+       //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
+       // weaponObject.transform.parent = weaponTransform;
+       // weaponObject.name = "Weapon";
+
         graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
         coins = GameManager.instance.coinCount;
         coinText.text = "Coins: " + coins;
