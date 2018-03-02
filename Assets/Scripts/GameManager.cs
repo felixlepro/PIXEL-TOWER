@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
        //levelText.text = "Level " + level;
        // levelImage.SetActive(true);
        // Invoke("HideLevelImage", levelStartDelay);
-        boardScript.SetupBoard(level);
+        //boardScript.SetupBoard(level);
     }
 
     // Update is called once per frame

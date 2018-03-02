@@ -129,7 +129,7 @@ public class Player : MonoBehaviour {
         }
         if ((other.tag == "sylvain"))
         {
-            ShopManager.shopWantsToOpen = true;
+            
         }
         if (other.tag == "Coin")
         {
@@ -158,10 +158,10 @@ public class Player : MonoBehaviour {
 
     void FaceMouse()
     {
-        Debug.Log("caca");
+        //Debug.Log("caca");
         if (FacingMouse)
         {
-            Debug.Log("caca2");
+            //Debug.Log("caca2");
             Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
             Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 
