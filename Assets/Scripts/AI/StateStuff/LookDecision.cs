@@ -14,7 +14,7 @@ public class LookDecision : Decision
     private bool Look(StateController controller)
     {
         float distance = Vector3.Distance(controller.chaseTarget.transform.position, controller.transform.position);
-        if (distance <= controller.enemy.chaseRange)  return true;      
+        if (distance <= controller.enemyManager.enemy.chaseRange)  return true;      
         else return false;
     }
 }

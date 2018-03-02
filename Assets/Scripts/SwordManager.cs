@@ -35,11 +35,11 @@ public class SwordManager: MonoBehaviour
         {
             Debug.Log("En");
             StateController enemyScript = other.gameObject.GetComponentInParent<StateController>();
-            EnvoyerDegat(enemyScript.enemy);
+            EnvoyerDegat(enemyScript.enemyManager);
         }
     }
 
-    public void EnvoyerDegat(Enemy cible)
+    public void EnvoyerDegat(EnemyManager cible)
     {
         if (currentChargeTime < weapon.chargeTime)
         {

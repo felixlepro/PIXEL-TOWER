@@ -9,23 +9,22 @@ public class StateController : MonoBehaviour
 {
 
     public State currentState;
-    public Enemy enemy;
+    //public Enemy enemy;
     public State remainState;
     public GameObject chaseTarget;
-
+    public EnemyManager enemyManager;
 
 
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public float hp;
 
-    [HideInInspector] SpriteRenderer spriteR;
     [HideInInspector]  public AIPath AIPathing;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector]  public int nextWayPoint;
     [HideInInspector]  public float stateTimeElapsed;
     [HideInInspector]   public float timeElapsed;
     [HideInInspector]  public float AScountdown = 0;
-    [HideInInspector]  public Animator anim;
+   // [HideInInspector]  public Animator anim;
     [HideInInspector]  public Collider2D[] targetCollider;
     [HideInInspector]  public Collider2D enemyCollider;
     [HideInInspector]  public Collider2D attackHitbox;
@@ -34,16 +33,16 @@ public class StateController : MonoBehaviour
 
     void Awake()
     {
-        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteR.color = enemy.wColor;
 
-        anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = enemy.animator;
 
         AIPathing = GetComponent<AIPath>();
-        AIPathing.maxSpeed = enemy.moveSpeed;
-        AIPathing.endReachedDistance = enemy.HowLargeisHeRadius * 1.5f;
-        AIPathing.slowdownDistance = enemy.HowLargeisHeRadius * 2.5f;
+        if (AIPathing  == null)
+        {
+            Debug.Log("path = null");
+        }
+        AIPathing.maxSpeed = enemyManager.enemy.moveSpeed;
+        AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
+        AIPathing.slowdownDistance = enemyManager.enemy.HowLargeisHeRadius * 2.5f;
         AIPathing.rotationIn2D = true;
 
         enemyCollider = GetComponentInChildren<Collider2D>();
@@ -53,11 +52,11 @@ public class StateController : MonoBehaviour
 
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
         aiActive = true;                                                                                        //temporaire
-        foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
-        {
-            wayPointList.Add(wp.transform);
-        }
-        enemy.controller = this;
+        //foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
+        //{
+        //    wayPointList.Add(wp.transform);
+        //}
+      //  enemy.controller = this;
     }
 
     public void SetupAI(bool aiActivationFromGameManager, List<Transform> wayPointsFromGameManager)
@@ -81,19 +80,9 @@ public class StateController : MonoBehaviour
             return;
 
         currentState.UpdateState(this);
-        enemy.UpdateAnim(this);
-        spriteOrderInLayer();
-        enemy.UpdatecurrentAttackCD();
 
     }
-    void spriteOrderInLayer()
-    {
-        if (chaseTarget.transform.position.y <= transform.position.y)
-        {
-            spriteR.sortingOrder = -2;
-        }
-        else spriteR.sortingOrder = 2;
-    }
+    
 
 
 
@@ -131,14 +120,14 @@ public class StateController : MonoBehaviour
         stateTimeElapsed = 0;
     }
 
-    public bool checkAnimfinished()
-    {
-        if (enemy.attackSpeed - AScountdown > anim.GetCurrentAnimatorStateInfo(0).length)
-        {
-            return true;
-        }
-        return false;
-    }
+    //public bool checkAnimfinished()
+    //{
+    //    if (enemy.attackSpeed - AScountdown > anim.GetCurrentAnimatorStateInfo(0).length)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
     public void getAnglePath()                                     //à garder
     {
@@ -148,7 +137,7 @@ public class StateController : MonoBehaviour
             Vector2 direction = AIPathing.velocity;
             angle = Vector2.Angle(direction, new Vector2(0, -1));
             if (direction.x < 0) angle = 360 - angle;
-            enemy.Angle = angle;
+            enemyManager.Angle = angle;
         }
     }
 
@@ -157,14 +146,14 @@ public class StateController : MonoBehaviour
         Vector2 direction = chaseTarget.transform.position - transform.position;
         float angle = Vector2.Angle(direction, new Vector2(0, -1));
         if (direction.x < 0) angle = 360 - angle;
-        enemy.Angle = angle;
+        enemyManager.Angle = angle;
         //Debug.Log(angle);
     }
 
-    public void Death()
-    {
-        gameObject.SetActive(false);
-    }
+    //public void Death()
+    //{
+    //    gameObject.SetActive(false);
+    //}
 
     //Debug.Log("true");
 

@@ -13,10 +13,9 @@ public class AttackCDDecision : Decision {
 
     private bool CD(StateController controller)
     {
-        if (controller.CheckIfCountDownElapsed(controller.anim.GetCurrentAnimatorStateInfo(0).length))
+        if (controller.CheckIfCountDownElapsed(controller.enemyManager.anim.GetCurrentAnimatorStateInfo(0).length))
         {
-            controller.enemy.endAttack();
-            controller.enemy.isAttacking = false;
+            controller.enemyManager.isAttacking = false;
             return true;
         }
         return false;

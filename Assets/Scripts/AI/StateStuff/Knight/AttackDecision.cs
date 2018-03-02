@@ -13,11 +13,11 @@ public class AttackDecision : Decision {
     private bool Look(StateController controller)
     {
         float distance = Vector3.Distance(controller.chaseTarget.transform.position, controller.transform.position);
-        if (distance <= controller.enemy.attackRange && controller.enemy.checkIfAttackIsReady())
+        if (distance <= controller.enemyManager.enemy.attackRange && controller.enemyManager.checkIfAttackIsReady())
         {
-            controller.enemy.isAttacking = true;
-            controller.enemy.isWalking = false;
-            controller.enemy.startAttack();
+            controller.enemyManager.isAttacking = true;
+            controller.enemyManager.isWalking = false;
+            controller.enemyManager.TryAttack();
             Debug.Log("attaking");
             return true;
         }

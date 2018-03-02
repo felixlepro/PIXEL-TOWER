@@ -12,18 +12,19 @@ public class ChaseAction : Action
 
     private void Chase(StateController controller)
     {
-        controller.AIPathing.maxSpeed = controller.enemy.moveSpeed;
+        Debug.Log("Chasing");
+        //controller.AIPathing.maxSpeed = controller.enemyManager.enemy.moveSpeed;
 
        
-        controller.enemy.isAttacking = false;
+        controller.enemyManager.isAttacking = false;
         if (controller.AIPathing.reachedEndOfPath)
         {
             
-            controller.enemy.isWalking = false;
+            controller.enemyManager.isWalking = false;
         }
         else
         {
-            controller.enemy.isWalking = true;
+            controller.enemyManager.isWalking = true;
 
         }
         controller.getAngleTarget();

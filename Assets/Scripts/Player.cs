@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
     [HideInInspector] public float knockBackAmountOverTime = 1;
     [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.85f;
     [HideInInspector] public float knockBackTime = 1;
-    [HideInInspector] public Vector3 knockBackDirection;
+    [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
     void Start()
@@ -81,13 +81,12 @@ public class Player : MonoBehaviour {
     public void knockBack()
     {
         float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
-        //Debug.Log(curve);
-
         graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+
+        Debug.Log(knockBackDirection.normalized);
 
         Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + kb);
-        // knockBackTime /= knockBackAmount;
         knockBackAmountOverTime += Time.deltaTime * knockBackTime;
 
         if (knockBackAmountOverTime > knockBackAmountOverTimeMinimum)
@@ -163,10 +162,8 @@ public class Player : MonoBehaviour {
 
     void FaceMouse()
     {
-        Debug.Log("caca");
         if (FacingMouse)
         {
-            Debug.Log("caca2");
             Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
             Vector3 faceLeft = new Vector3(-Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
 

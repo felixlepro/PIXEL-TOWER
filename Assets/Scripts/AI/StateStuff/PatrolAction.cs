@@ -22,7 +22,7 @@ public class PatrolAction : Action
         {
             if (Idle(controller)) {
                 //controller.anim.SetBool("isMoving", true);
-                controller.enemy.isWalking = true;
+                controller.enemyManager.isWalking = true;
                 controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
                 controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
                 controller.AIPathing.SearchPath();
@@ -32,14 +32,14 @@ public class PatrolAction : Action
             else
             {
                 //controller.anim.SetBool("isMoving", false);
-                controller.enemy.isWalking = false;
+                controller.enemyManager.isWalking = false;
                 Debug.Log("moving = false");
             }
         }
     }
     private bool Idle(StateController controller)
     { 
-        if (controller.CheckIfCountDownElapsed(controller.enemy.idleTime))
+        if (controller.CheckIfCountDownElapsed(controller.enemyManager.enemy.idleTime))
         {
             int rng = Random.Range(0, 4);
             if (rng == 0)
