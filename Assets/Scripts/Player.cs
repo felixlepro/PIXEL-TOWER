@@ -133,7 +133,7 @@ public class Player : MonoBehaviour {
         }
         if ((other.tag == "sylvain"))
         {
-            ShopManager.shopWantsToOpen = true;
+            
         }
         if (other.tag == "Coin")
         {
