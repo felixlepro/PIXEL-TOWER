@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
     public int coins;
     // public float weaponDistance = 1.25f;
     public PlayerObject player;
-    public GameObject weaponObject;
+   // public GameObject weaponObject;
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;

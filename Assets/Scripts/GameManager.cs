@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour {
        // levelImage.SetActive(true);
        // Invoke("HideLevelImage", levelStartDelay);
         boardScript.SetupBoard(level);
+        SetupAI();
     }
     void SetupAI()
     {

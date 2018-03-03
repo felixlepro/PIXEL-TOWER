@@ -32,12 +32,46 @@ abstract public class EnemyManager : MonoBehaviour {
 
         hp = enemy.maxHp;
     }
-    private void Update()
+
+    public void attack()
     {
-        
+        foreach (Collider2D pc in controller.targetCollider)
+        {
+            if (controller.attackHitbox.IsTouching(pc))
+            {
+                pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - controller.transform.position, enemy.knockBackAmount);
+                resetAttackCD();
+                break;
+            }
+
+        }
+    }
+    public void idling()
+    {
+        float time = Random.Range(0, 10) * enemy.idleTime;
+        isWalking = false;
+        Invoke("newPath", time);
+       
+    }
+    private void newPath()
+    {   
+            controller.enemyManager.isWalking = true;
+            controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
+        controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
+            controller.AIPathing.SearchPath();
     }
 
-   public void spriteOrderInLayer()
+
+    //public void checkDistanceToPlayer()
+    //{
+    //    if ((controller.chaseTarget.transform.position - transform.position).magnitude <= enemy.size)
+    //    {
+    //        //controller.AIPathing.reachedEndOfPath = true;
+    //    }
+  
+    //}
+
+    public void spriteOrderInLayer()
     {
         if (controller.chaseTarget.transform.position.y <= transform.position.y)
         {

@@ -18,9 +18,9 @@ public class StateController : MonoBehaviour
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public float hp;
 
-    [HideInInspector]  public AIPath AIPathing;
+    [HideInInspector]  public AILerp AIPathing;
     [HideInInspector] public List<Transform> wayPointList;
-    [HideInInspector]  public int nextWayPoint;
+    [HideInInspector]  public int nextWayPoint = 0;
     [HideInInspector]  public float stateTimeElapsed;
     [HideInInspector]   public float timeElapsed;
     [HideInInspector]  public float AScountdown = 0;
@@ -29,20 +29,16 @@ public class StateController : MonoBehaviour
     [HideInInspector]  public Collider2D enemyCollider;
     [HideInInspector]  public Collider2D attackHitbox;
 
-    private bool aiActive;
+    private bool aiActive = false;
 
     void Awake()
     {
 
 
-        AIPathing = GetComponent<AIPath>();
-        if (AIPathing  == null)
-        {
-            Debug.Log("path = null");
-        }
-        AIPathing.maxSpeed = enemyManager.enemy.moveSpeed;
-        AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
-        AIPathing.slowdownDistance = enemyManager.enemy.HowLargeisHeRadius * 2.5f;
+        AIPathing = GetComponent<AILerp>();
+        AIPathing.speed  = enemyManager.enemy.moveSpeed;
+      //  AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
+        //AIPathing.slowdownDistance = enemyManager.enemy.HowLargeisHeRadius * 2.5f;
         AIPathing.rotationIn2D = true;
 
         enemyCollider = GetComponentInChildren<Collider2D>();
@@ -50,8 +46,7 @@ public class StateController : MonoBehaviour
         attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponent<Collider2D>();
         //wayPointList = new List<Transform>();
 
-        // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);
-        aiActive = true;                                                                                        //temporaire
+        // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);                                                                                    //temporaire
         //foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
         //{
         //    wayPointList.Add(wp.transform);
@@ -64,14 +59,8 @@ public class StateController : MonoBehaviour
 
         wayPointList = wayPointsFromGameManager;
         aiActive = aiActivationFromGameManager;
-        if (aiActive)
-        {
-            AIPathing.enabled = true;
-        }
-        else
-        {
-            AIPathing.enabled = false;
-        }
+        Random.seed = System.DateTime.Now.Millisecond;
+        nextWayPoint = Random.Range(0, wayPointList.Count);
     }
 
     void Update()
@@ -134,9 +123,9 @@ public class StateController : MonoBehaviour
         float angle = 0;
         if (!AIPathing.reachedEndOfPath)
         {
-            Vector2 direction = AIPathing.velocity;
-            angle = Vector2.Angle(direction, new Vector2(0, -1));
-            if (direction.x < 0) angle = 360 - angle;
+            //Vector2 direction = AIPathing.velocity;
+            //angle = Vector2.Angle(direction, new Vector2(0, -1));
+            //if (direction.x < 0) angle = 360 - angle;
             enemyManager.Angle = angle;
         }
     }

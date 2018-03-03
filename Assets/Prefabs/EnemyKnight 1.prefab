@@ -74,6 +74,8 @@ GameObject:
   - component: {fileID: 114344796246818148}
   - component: {fileID: 114403027892796644}
   - component: {fileID: 114562340482489990}
+  - component: {fileID: 114683808125261122}
+  - component: {fileID: 114681881427446796}
   m_Layer: 0
   m_Name: EnemyKnight 1
   m_TagString: EnemyManager
@@ -88,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931763787068262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 97.95913, y: 99.32457, z: 0.085105464}
+  m_LocalPosition: {x: 86.07309, y: -38.04811, z: 0.96321934}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4071827570834126}
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ce213c8f4cd8e44a5b80b83307f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: ec6625e2b4976d343b09ea97274ebeda, type: 2}
+  currentState: {fileID: 11400000, guid: 0358432988c39d344b2b76422a2d66c6, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
   chaseTarget: {fileID: 0}
   enemyManager: {fileID: 114403027892796644}
@@ -253,6 +255,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
     type: 2}
+--- !u!114 &114681881427446796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931763787068262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 0
+  subdivisions: 2
+  iterations: 2
+  strength: 0.3
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
+--- !u!114 &114683808125261122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931763787068262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  repathRate: 0.1
+  canSearch: 1
+  canMove: 1
+  speed: 3
+  enableRotation: 0
+  rotationIn2D: 0
+  rotationSpeed: 10
+  interpolatePathSwitches: 1
+  switchPathInterpolationSpeed: 5
+  targetCompatibility: {fileID: 0}
 --- !u!114 &114885545434799126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,7 +329,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931763787068262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
@@ -303,7 +348,7 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   rotationSpeed: 0
   slowdownDistance: 0
-  pickNextWaypointDist: 1
+  pickNextWaypointDist: 0.5
   endReachedDistance: 0.5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 0

@@ -20,7 +20,7 @@ public class KnightManager : EnemyManager {
 
     public override void TryAttack()
     {
-        controller.AIPathing.maxSpeed = 0;
+        controller.AIPathing.speed = 0;
         //Debug.Log("StartAttack");
         controller.getAngleTarget();
         controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
@@ -52,24 +52,12 @@ public class KnightManager : EnemyManager {
        
     }
 
-    public void attack()
-    {
-        foreach (Collider2D pc in controller.targetCollider)
-        {
-            if (controller.attackHitbox.IsTouching(pc))
-            {
-                pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - controller.transform.position, enemy.knockBackAmount);
-                resetAttackCD();
-                break;
-            }
-
-        }
-    }
+    
     public void endAttack()
     {
         controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
         time = 0;
-        controller.AIPathing.maxSpeed = enemy.moveSpeed;
+        controller.AIPathing.speed = enemy.moveSpeed;
         controller.enemyManager.isAttacking = true;
         controller.enemyManager.isWalking = false; 
 

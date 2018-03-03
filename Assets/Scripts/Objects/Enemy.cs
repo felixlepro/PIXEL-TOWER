@@ -18,7 +18,7 @@ abstract public class Enemy : ScriptableObject
     
     public float chaseRange;
     public float chaseRangeBuffer;
-    public float HowLargeisHeRadius;
+    public float size;
 
    
 }

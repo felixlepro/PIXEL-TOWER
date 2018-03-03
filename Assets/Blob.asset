@@ -14,13 +14,13 @@ MonoBehaviour:
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 10
-  attackSpeed: 5
+  attackSpeed: 3
   attackRange: 0
-  moveSpeed: 10
+  moveSpeed: 7
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  hp: 357
+  maxHp: 100
   knockBackAmount: 15
-  chaseRange: 25
+  chaseRange: 20
   chaseRangeBuffer: 5
   HowLargeisHeRadius: 0

@@ -15,42 +15,12 @@ public class PatrolAction : Action
     private void Patrol(StateController controller)
     {
         
-        // controller.target.position = controller.wayPointList[controller.nextWayPoint].position;
         controller.AIPathing.destination  = controller.wayPointList[controller.nextWayPoint].position;
 
         if ((controller.AIPathing.reachedEndOfPath || !controller.AIPathing.hasPath) && !controller.AIPathing.pathPending)
         {
-            if (Idle(controller)) {
-                //controller.anim.SetBool("isMoving", true);
-                controller.enemyManager.isWalking = true;
-                controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
-                controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
-                controller.AIPathing.SearchPath();
-                // Debug.Log(controller.AIPath.destination);
-                Debug.Log("moving = true");
-            }
-            else
-            {
-                //controller.anim.SetBool("isMoving", false);
-                controller.enemyManager.isWalking = false;
-                Debug.Log("moving = false");
-            }
+            Debug.Log("goIdle");
+            controller.enemyManager.idling();
         }
-    }
-    private bool Idle(StateController controller)
-    { 
-        if (controller.CheckIfCountDownElapsed(controller.enemyManager.enemy.idleTime))
-        {
-            int rng = Random.Range(0, 4);
-            if (rng == 0)
-            {
-                return true;
-            }
-            else
-            {
-                controller.stateTimeElapsed = 0;
-            }
-        }
-        return false;
     }
 }

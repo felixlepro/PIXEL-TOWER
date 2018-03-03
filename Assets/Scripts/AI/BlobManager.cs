@@ -25,7 +25,7 @@ public class BlobManager : EnemyManager {
     {
         if (checkIfAttackIsReady())
         {
-            controller.AIPathing.maxSpeed = enemy.moveSpeed;
+            controller.AIPathing.speed = enemy.moveSpeed;
             Debug.Log("rdy");
             foreach (Collider2D pc in controller.targetCollider)
             {
@@ -42,7 +42,7 @@ public class BlobManager : EnemyManager {
         if (timeUntilNextAttack > 0)
         {
             Debug.Log((timeUntilNextAttack / enemy.attackSpeed));
-            controller.AIPathing.maxSpeed = enemy.moveSpeed * ((1 - (timeUntilNextAttack / enemy.attackSpeed)));
+            controller.AIPathing.speed = enemy.moveSpeed * ((1 - (timeUntilNextAttack / enemy.attackSpeed)));
         }
         
     }
