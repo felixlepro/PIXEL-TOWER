@@ -21,6 +21,8 @@ MonoBehaviour:
   idleTime: 0.5
   maxHp: 100
   knockBackAmount: 15
+  immuneTime: 2
   chaseRange: 10
   chaseRangeBuffer: 5
   size: 0
+  hpLostOnAttack: 0

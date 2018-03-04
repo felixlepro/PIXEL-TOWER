@@ -23,13 +23,15 @@ GameObject:
   - component: {fileID: 114432140505526336}
   - component: {fileID: 114519354339216302}
   - component: {fileID: 114434318785287364}
+  - component: {fileID: 114763816393491384}
+  - component: {fileID: 114501265182246342}
   m_Layer: 0
   m_Name: EnemyBlob 1
   m_TagString: EnemyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1526033635971586
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 99, y: 99, z: 0.085105464}
+  m_LocalPosition: {x: 87.11395, y: -38.37268, z: 0.96321934}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4742755626589672}
@@ -174,7 +176,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
@@ -193,7 +195,7 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   rotationSpeed: 0
   slowdownDistance: 0
-  pickNextWaypointDist: 1
+  pickNextWaypointDist: 0.5
   endReachedDistance: 0.5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 0
@@ -219,6 +221,34 @@ MonoBehaviour:
   isDying: 0
   Angle: 0
   spriteR: {fileID: 0}
+  knockBackAmount: 0
+  knockBackAmountOverTime: 1
+  knockBackAmountOverTimeMinimum: 0.85
+  knockBackTime: 1
+  knockBackDirection: {x: 0, y: 0}
+  couleurKb: {r: 1, g: 1, b: 1, a: 1}
+  enemyBlob: {fileID: 11400000, guid: 1ee584ee234c39b4f8dc4c49deff6c76, type: 2}
+--- !u!114 &114501265182246342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327544550791342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 0
+  subdivisions: 2
+  iterations: 2
+  strength: 0.3
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
 --- !u!114 &114519354339216302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ce213c8f4cd8e44a5b80b83307f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: e7024e8e3e423e94d8c5a661cd0b4338, type: 2}
+  currentState: {fileID: 11400000, guid: 686c29cc04c5fa34d9af2305a526c5ad, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
   chaseTarget: {fileID: 0}
   enemyManager: {fileID: 114434318785287364}
@@ -245,6 +275,28 @@ MonoBehaviour:
   targetCollider: []
   enemyCollider: {fileID: 0}
   attackHitbox: {fileID: 0}
+--- !u!114 &114763816393491384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327544550791342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  repathRate: 0.1
+  canSearch: 1
+  canMove: 1
+  speed: 3
+  enableRotation: 0
+  rotationIn2D: 0
+  rotationSpeed: 10
+  interpolatePathSwitches: 1
+  switchPathInterpolationSpeed: 5
+  targetCompatibility: {fileID: 0}
 --- !u!114 &114857469027985538
 MonoBehaviour:
   m_ObjectHideFlags: 1

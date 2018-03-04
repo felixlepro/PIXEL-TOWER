@@ -16,6 +16,7 @@ abstract public class Weapon : ScriptableObject
 
     public float chargeTime;
     public int attackDamageChargedBonus;
+    public float knockBackAmount;
 
 
 }

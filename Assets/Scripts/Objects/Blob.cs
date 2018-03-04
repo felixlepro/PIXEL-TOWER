@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/Blob")]
 public class Blob : Enemy
 {
+    public float hpLostOnAttack;
 
     Blob()
     {

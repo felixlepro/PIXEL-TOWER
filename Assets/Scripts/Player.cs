@@ -12,9 +12,8 @@ public class Player : MonoBehaviour {
     public int valuePerCoin = 1;
     public Text coinText;
     public int coins;
-    // public float weaponDistance = 1.25f;
     public PlayerObject player;
-   // public GameObject weaponObject;
+    private bool immune = false;
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
@@ -25,8 +24,8 @@ public class Player : MonoBehaviour {
     private bool FacingMouse = true;
 
     Transform weaponTransform;
-    //GameObject weaponChild;
     SpriteRenderer graphicsSpriteR;
+    SpriteRenderer weaponSprite;
 
     [HideInInspector] public float timeUntilNextAttack;
 
@@ -50,7 +49,8 @@ public class Player : MonoBehaviour {
        // weaponObject.transform.parent = weaponTransform;
        // weaponObject.name = "Weapon";
 
-        graphicsSpriteR = GetComponentInChildren< SpriteRenderer>();
+        graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
+        weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
         coinText.text = "Coins: " + coins;
     }
@@ -73,42 +73,75 @@ public class Player : MonoBehaviour {
             Move(horizontal, vertical);
             FaceMouse();
         }
-        else
-        {
-            knockBack();
-        }
     }
-    public void knockBack()
+
+    
+
+    public void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime)
     {
-        float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
-        graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
-
-        Debug.Log(knockBackDirection.normalized);
-
-        Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
-        playerRigidbody.MovePosition(transform.position + kb);
-        knockBackAmountOverTime += Time.deltaTime * knockBackTime;
-
-        if (knockBackAmountOverTime > knockBackAmountOverTimeMinimum)
+        if (!immune)
         {
-            graphicsSpriteR.color = new Color(1f, 1, 1, 1f);
+            CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
+            hp -= damage;
+            if (kbAmmount != 0)
+            {
+                knockBackDirection = kbDirection;
+                knockBackAmount = kbAmmount;
+                knockBackAmountOverTime = 0;
+                StartCoroutine("KnockBack");
+            }
+            immune = true;
+            StartCoroutine("ImmuneAnim");
+            Invoke("StopImmunity", immuneTime);
         }
+        
     }
-
-    public void RecevoirDegats(int dammage, Vector3 kbDirection, float kbAmmount)
+    IEnumerator KnockBack()
     {
-        CameraShaker.Instance.ShakeOnce(dammage * 0.25f, 8f, 0.1f, 1f);
-        player.hp -= dammage;
-        if (kbAmmount != 0)
+        graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
+        while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-            knockBackDirection = kbDirection;
-            knockBackAmount = kbAmmount;
-            knockBackAmountOverTime = 0;
+            float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
+            graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
+
+            Debug.Log(knockBackDirection.normalized);
+
+            Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
+            playerRigidbody.MovePosition(transform.position + kb);
+            knockBackAmountOverTime += Time.deltaTime * knockBackTime;
+            yield return null;
         }
-        graphicsSpriteR.color = new Color(1f, 0, 0, 1f);
+        graphicsSpriteR.color = new Color(1f, 1, 1, graphicsSpriteR.color[3]);
+
     }
 
+    IEnumerator ImmuneAnim()
+    {
+        float alpha = 0.225f;
+        //float curve;
+        float time = 0;
+        while (immune)
+        {
+            time += Time.deltaTime;
+            if (alpha == 1f)
+            {
+                alpha = 0.2f;
+            }
+            else alpha = 1;
+            //curve = Mathf.Cos(time*6*Mathf.PI)/3 + 0.75f;
+            //Debug.Log(curve);
+            graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
+            weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
+            yield return new WaitForSeconds(0.075f);
+        }
+    }
 
+    private void StopImmunity()
+    {
+        immune = false;
+        graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], 1f);
+        weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], 1f);
+    }
   
     private void Restart()
     {

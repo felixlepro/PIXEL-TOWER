@@ -5,17 +5,21 @@ using UnityEngine;
 public class KnightManager : EnemyManager {
 
     GameObject attackColliderObject;
-    const float attackChargeTime = 0.7f;
     float colorAlpha = 0;
     const float colorAlphaMax = 1f;
     bool attackDone = false;
-    float time = 0;
+ 
+    public Knight enemyKnight;
 
     private void Update()
     {
         UpdateAnim();
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
+    }
+    public override void GetEnemy()
+    {
+        enemy = enemyKnight;
     }
 
     public override void TryAttack()
@@ -25,25 +29,26 @@ public class KnightManager : EnemyManager {
         controller.getAngleTarget();
         controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         attackDone = false;
-        StartCoroutine("AttackFade", attackChargeTime );
+        StartCoroutine("AttackFade", enemyKnight.attackChargeTime );
     }
     IEnumerator AttackFade()
     {
-       
-        while (time < attackChargeTime)
+        float time = 0;
+        anim.speed = 0.7f/ enemyKnight.attackChargeTime;
+        while (time < enemyKnight.attackChargeTime)
         {
             time += Time.deltaTime;
-            colorAlpha = colorAlphaMax * (1 - (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)));
+            colorAlpha = colorAlphaMax * (1 - (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)));
             controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
 
-        attack();
+        Attack();
 
         while (time > 0)
         {
             time -= Time.deltaTime * 2;
-            colorAlpha = colorAlphaMax * time / attackChargeTime;
+            colorAlpha = colorAlphaMax * time / enemyKnight.attackChargeTime;
             controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
@@ -51,15 +56,24 @@ public class KnightManager : EnemyManager {
         endAttack();
        
     }
-
+    public override void Damaged()
+    {
+        if (isAttacking = true)
+        {
+            StopCoroutine("AttackFade");
+           // resetAttackCD();
+            endAttack();
+        }
+           
+    }
     
     public void endAttack()
     {
         controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-        time = 0;
         controller.AIPathing.speed = enemy.moveSpeed;
-        controller.enemyManager.isAttacking = true;
-        controller.enemyManager.isWalking = false; 
+        controller.enemyManager.isAttacking = false;
+        anim.speed = 1;
+        //controller.enemyManager.isWalking = false; 
 
     }
     //public void mainAttack()

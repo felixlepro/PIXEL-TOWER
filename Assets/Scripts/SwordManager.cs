@@ -44,12 +44,12 @@ public class SwordManager: MonoBehaviour
         if (currentChargeTime < weapon.chargeTime)
         {
             
-            cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus*chargeDoneRatio * chargeDoneRatio));
+            cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus*chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);
         }
 
         else 
         {
-            cible.recevoirDegats(weapon.attackDamageChargedBonus + weapon.attackDamage);
+            cible.recevoirDegats(weapon.attackDamageChargedBonus + weapon.attackDamage, cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);
         }
     }
 

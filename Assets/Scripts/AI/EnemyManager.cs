@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 abstract public class EnemyManager : MonoBehaviour {
 
     public int hp;
     public float timeUntilNextAttack;
-    public Enemy enemy;
+    [HideInInspector] public Enemy enemy;
 
+    private Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
     [HideInInspector] public StateController controller;
     [HideInInspector] public bool isWalking;
@@ -17,12 +19,24 @@ abstract public class EnemyManager : MonoBehaviour {
 
     [HideInInspector] public SpriteRenderer spriteR;
 
+    [HideInInspector] public float knockBackAmount = 0;
+    [HideInInspector] public float knockBackAmountOverTime = 1;
+    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.85f;
+    [HideInInspector] public float knockBackTime = 1;
+    [HideInInspector] public Vector2 knockBackDirection;
+    [HideInInspector] public Color couleurKb = Color.white;
+
     abstract public void TryAttack();
+    abstract public void Damaged();
+    abstract public void GetEnemy();
 
     void Start()
     {
+        enemyRigidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<StateController>();
         //controller.enemyManager = this;
+
+        GetEnemy();
 
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = enemy.animator;
@@ -33,13 +47,13 @@ abstract public class EnemyManager : MonoBehaviour {
         hp = enemy.maxHp;
     }
 
-    public void attack()
+    public void Attack()
     {
         foreach (Collider2D pc in controller.targetCollider)
         {
             if (controller.attackHitbox.IsTouching(pc))
             {
-                pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - controller.transform.position, enemy.knockBackAmount);
+                pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - transform.position, enemy.knockBackAmount, enemy.immuneTime );
                 resetAttackCD();
                 break;
             }
@@ -79,9 +93,23 @@ abstract public class EnemyManager : MonoBehaviour {
         }
         else spriteR.sortingOrder = 2;
     }
-    public void recevoirDegats(int damage)
+    public void recevoirDegats(int damage, Vector3 kbDirection, float kbAmmount)
     {
         hp -= damage;
+        CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
+        Damaged();
+        if (kbAmmount != 0)
+        {
+            knockBackDirection = kbDirection;
+            knockBackAmount = kbAmmount;
+            knockBackAmountOverTime = 0;
+            StartCoroutine("KnockBack");
+        }
+
+        VerifyDeath();
+    }
+    public void VerifyDeath()
+    {
         if (hp <= 0)
         {
             isWalking = false;
@@ -94,6 +122,25 @@ abstract public class EnemyManager : MonoBehaviour {
         {
             isDying = false;
         }
+    }
+
+    IEnumerator KnockBack()
+    {
+        spriteR.color = new Color(1f, 0, 0, 1f);
+        while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
+        {
+            float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
+            spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+
+            Debug.Log(knockBackDirection.normalized);
+
+            Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
+            enemyRigidbody .MovePosition(transform.position + kb);
+            knockBackAmountOverTime += Time.deltaTime * knockBackTime;
+            yield return null;
+        }
+        spriteR.color = new Color(1f, 1, 1, 1f);
+
     }
 
     private void Death()

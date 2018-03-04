@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9f26a104fc62a41b379bf9cd0dcd40, type: 3}
   m_Name: New Player
   m_EditorClassIdentifier: 
-  hp: -555
+  hp: 200
   speed: 10
   weapon: {fileID: 11400000, guid: cad66827291014641be2a4b6cf890529, type: 2}
   animator: {fileID: 9100000, guid: db42350e5f820ce40a6e56b474f9b637, type: 2}

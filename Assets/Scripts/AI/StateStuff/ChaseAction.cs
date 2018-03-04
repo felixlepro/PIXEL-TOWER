@@ -12,7 +12,7 @@ public class ChaseAction : Action
 
     private void Chase(StateController controller)
     {
-        Debug.Log("Chasing");
+       // Debug.Log("Chasing");
         //controller.AIPathing.maxSpeed = controller.enemyManager.enemy.moveSpeed;
 
        

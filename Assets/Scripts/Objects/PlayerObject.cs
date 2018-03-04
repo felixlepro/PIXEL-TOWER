@@ -10,5 +10,6 @@ public class PlayerObject : ScriptableObject  {
     public float speed;
     public Weapon weapon;
     public RuntimeAnimatorController animator;
+
  
 }

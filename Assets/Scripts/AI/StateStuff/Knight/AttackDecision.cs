@@ -18,7 +18,7 @@ public class AttackDecision : Decision {
             controller.enemyManager.isAttacking = true;
             controller.enemyManager.isWalking = false;
             controller.enemyManager.TryAttack();
-            Debug.Log("attaking");
+           // Debug.Log("attaking");
             return true;
         }
         else return false;

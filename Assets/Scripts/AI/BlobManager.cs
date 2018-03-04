@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlobManager : EnemyManager {
 
      float attackCD = 1f;
+    public Blob enemyBlob;
 
     private void Update()
     {
@@ -12,6 +13,10 @@ public class BlobManager : EnemyManager {
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
        
+    }
+    public override void GetEnemy()
+    {
+        enemy = enemyBlob;
     }
     new public bool checkIfAttackIsReady()
     {
@@ -27,16 +32,7 @@ public class BlobManager : EnemyManager {
         {
             controller.AIPathing.speed = enemy.moveSpeed;
             Debug.Log("rdy");
-            foreach (Collider2D pc in controller.targetCollider)
-            {
-                if (controller.attackHitbox.IsTouching(pc))
-                {
-                     Debug.Log("collided");
-                    Attack();
-                    break;
-                }
-
-            }
+            Attack();
 
         }
         if (timeUntilNextAttack > 0)
@@ -46,10 +42,10 @@ public class BlobManager : EnemyManager {
         }
         
     }
-    public void Attack()
+    public override void Damaged()
     {
-        controller.chaseTarget.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, controller.chaseTarget.gameObject.transform.position - controller.transform.position, enemy.knockBackAmount);
-        resetAttackCD();
+        hp -= Mathf.FloorToInt(enemy.maxHp / enemyBlob.hpLostOnAttack);
+        VerifyDeath();
     }
 
     //Animations-----------------------------------------

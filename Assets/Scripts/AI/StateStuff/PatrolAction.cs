@@ -19,7 +19,7 @@ public class PatrolAction : Action
 
         if ((controller.AIPathing.reachedEndOfPath || !controller.AIPathing.hasPath) && !controller.AIPathing.pathPending)
         {
-            Debug.Log("goIdle");
+           // Debug.Log("goIdle");
             controller.enemyManager.idling();
         }
     }
