@@ -59,7 +59,7 @@ public class KnightManager : EnemyManager {
     }
     public override void Damaged()
     {
-        if (isAttacking = true)
+        if (isAttacking == true)
         {
             StopCoroutine("AttackFade");
            // resetAttackCD();

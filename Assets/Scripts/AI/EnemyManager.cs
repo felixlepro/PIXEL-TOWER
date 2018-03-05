@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using Pathfinding;
 
 abstract public class EnemyManager : MonoBehaviour {
 
@@ -25,6 +26,10 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
+
+    public GameObject chaseTarget;
+    [HideInInspector]   public AILerp AIPathing;
+    [HideInInspector]   public List<Transform> wayPointList;
 
     abstract public void TryAttack();
     abstract public void Damaged();
@@ -87,7 +92,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
     public void spriteOrderInLayer()
     {
-        if (controller.chaseTarget.transform.position.y <= transform.position.y)
+        if (chaseTarget.transform.position.y <= transform.position.y)
         {
             spriteR.sortingOrder = -2;
         }

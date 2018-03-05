@@ -11,15 +11,14 @@ public class StateController : MonoBehaviour
     public State currentState;
     //public Enemy enemy;
     public State remainState;
-    public GameObject chaseTarget;
+   
     public EnemyManager enemyManager;
 
 
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public float hp;
 
-    [HideInInspector]  public AILerp AIPathing;
-    [HideInInspector] public List<Transform> wayPointList;
+    
     [HideInInspector]  public int nextWayPoint = 0;
     [HideInInspector]  public float stateTimeElapsed;
     [HideInInspector]   public float timeElapsed;
@@ -59,7 +58,7 @@ public class StateController : MonoBehaviour
 
         wayPointList = wayPointsFromGameManager;
         aiActive = aiActivationFromGameManager;
-        Random.seed = System.DateTime.Now.Millisecond;
+       // Random.seed = System.DateTime.Now.Millisecond;
         nextWayPoint = Random.Range(0, wayPointList.Count);
     }
 
