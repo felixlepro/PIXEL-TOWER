@@ -118,7 +118,7 @@ public class Player : MonoBehaviour {
     IEnumerator ImmuneAnim()
     {
         float alpha = 0.225f;
-        //float curve;
+       // float curve;
         float time = 0;
         while (immune)
         {
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour {
                 alpha = 0.2f;
             }
             else alpha = 1;
-            //curve = Mathf.Cos(time*6*Mathf.PI)/3 + 0.75f;
+            //curve = Mathf.Cos(time*2000*Mathf.PI)/3 + 0.75f;
             //Debug.Log(curve);
             graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
             weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);

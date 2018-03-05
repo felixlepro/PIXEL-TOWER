@@ -31,6 +31,7 @@ public class KnightManager : EnemyManager {
         attackDone = false;
         StartCoroutine("AttackFade", enemyKnight.attackChargeTime );
     }
+
     IEnumerator AttackFade()
     {
         float time = 0;
