@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardScript = GetComponent<Board>();
-
         InitGame();
     }
 

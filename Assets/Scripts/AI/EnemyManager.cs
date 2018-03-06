@@ -154,7 +154,7 @@ abstract public class EnemyManager : MonoBehaviour {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
             spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-            Debug.Log(knockBackDirection.normalized);
+          //  Debug.Log(knockBackDirection.normalized);
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             enemyRigidbody .MovePosition(transform.position + kb);

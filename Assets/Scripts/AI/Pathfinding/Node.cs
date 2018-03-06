@@ -5,9 +5,9 @@ using UnityEngine;
 public class Node {
 
     public bool walkable;
-    public Vector2 worldPosition;
+   public Vector2 worldPosition;
 
-    public Node(bool walkabl, Vector3 worldPos)
+    public Node(bool walkabl, Vector2 worldPos)
     {
         walkable = walkabl;
         worldPosition = worldPos;
