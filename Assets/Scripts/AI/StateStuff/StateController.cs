@@ -7,6 +7,8 @@ using Pathfinding;
 
 public class StateController : MonoBehaviour
 {
+   // public AILerp AIPathing;
+
 
     public State currentState;
     //public Enemy enemy;
@@ -24,9 +26,7 @@ public class StateController : MonoBehaviour
     [HideInInspector]   public float timeElapsed;
     [HideInInspector]  public float AScountdown = 0;
    // [HideInInspector]  public Animator anim;
-    [HideInInspector]  public Collider2D[] targetCollider;
-    [HideInInspector]  public Collider2D enemyCollider;
-    [HideInInspector]  public Collider2D attackHitbox;
+
 
     private bool aiActive = false;
 
@@ -34,15 +34,8 @@ public class StateController : MonoBehaviour
     {
 
 
-        AIPathing = GetComponent<AILerp>();
-        AIPathing.speed  = enemyManager.enemy.moveSpeed;
-      //  AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
-        //AIPathing.slowdownDistance = enemyManager.enemy.HowLargeisHeRadius * 2.5f;
-        AIPathing.rotationIn2D = true;
-
-        enemyCollider = GetComponentInChildren<Collider2D>();
-        targetCollider = chaseTarget.GetComponents<Collider2D>();
-        attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponent<Collider2D>();
+       
+      
         //wayPointList = new List<Transform>();
 
         // wayPointList.AddRange(GameObject.FindWithTag("waypoints").transform);                                                                                    //temporaire
@@ -56,10 +49,10 @@ public class StateController : MonoBehaviour
     public void SetupAI(bool aiActivationFromGameManager, List<Transform> wayPointsFromGameManager)
     {
 
-        wayPointList = wayPointsFromGameManager;
+        enemyManager.wayPointList = wayPointsFromGameManager;
         aiActive = aiActivationFromGameManager;
        // Random.seed = System.DateTime.Now.Millisecond;
-        nextWayPoint = Random.Range(0, wayPointList.Count);
+        nextWayPoint = Random.Range(0, enemyManager.wayPointList.Count);
     }
 
     void Update()
@@ -90,18 +83,18 @@ public class StateController : MonoBehaviour
         return (stateTimeElapsed >= duration);
     }
 
-    public bool CheckIfCountDownElapsed2(float duration)
-    {
-        timeElapsed += Time.deltaTime;
-        // Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
-        if (timeElapsed >= duration)
-        {
-            timeElapsed = 0;
-            return true;
-        }
-        else return false;
+    //public bool CheckIfCountDownElapsed2(float duration)
+    //{
+    //    timeElapsed += Time.deltaTime;
+    //    // Debug.Log(timeElapsed + "      " + duration  + (timeElapsed >= duration));
+    //    if (timeElapsed >= duration)
+    //    {
+    //        timeElapsed = 0;
+    //        return true;
+    //    }
+    //    else return false;
 
-    }
+    //}
 
     private void OnExitState()
     {
@@ -117,26 +110,7 @@ public class StateController : MonoBehaviour
     //    return false;
     //}
 
-    public void getAnglePath()                                     //à garder
-    {
-        float angle = 0;
-        if (!AIPathing.reachedEndOfPath)
-        {
-            //Vector2 direction = AIPathing.velocity;
-            //angle = Vector2.Angle(direction, new Vector2(0, -1));
-            //if (direction.x < 0) angle = 360 - angle;
-            enemyManager.Angle = angle;
-        }
-    }
-
-    public void getAngleTarget()
-    {
-        Vector2 direction = chaseTarget.transform.position - transform.position;
-        float angle = Vector2.Angle(direction, new Vector2(0, -1));
-        if (direction.x < 0) angle = 360 - angle;
-        enemyManager.Angle = angle;
-        //Debug.Log(angle);
-    }
+   
 
     //public void Death()
     //{

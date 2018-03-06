@@ -24,10 +24,10 @@ public class KnightManager : EnemyManager {
 
     public override void TryAttack()
     {
-        controller.AIPathing.speed = 0;
+        AIPathing.speed = 0;
         //Debug.Log("StartAttack");
-        controller.getAngleTarget();
-        controller.attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
+        getAngleTarget();
+        attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         attackDone = false;
         StartCoroutine("AttackFade", enemyKnight.attackChargeTime );
     }
@@ -40,7 +40,7 @@ public class KnightManager : EnemyManager {
         {
             time += Time.deltaTime;
             colorAlpha = colorAlphaMax * (1 - (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)));
-            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
 
@@ -50,7 +50,7 @@ public class KnightManager : EnemyManager {
         {
             time -= Time.deltaTime * 2;
             colorAlpha = colorAlphaMax * time / enemyKnight.attackChargeTime;
-            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
 
@@ -70,8 +70,8 @@ public class KnightManager : EnemyManager {
     
     public void endAttack()
     {
-        controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-        controller.AIPathing.speed = enemy.moveSpeed;
+        attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        AIPathing.speed = enemy.moveSpeed;
         controller.enemyManager.isAttacking = false;
         anim.speed = 1;
         //controller.enemyManager.isWalking = false; 
