@@ -13,6 +13,8 @@ TagManager:
   - Obstacle
   - Enemy
   - Weapon
+  - EnemyManager
+  - Chest
   layers:
   - Default
   - TransparentFX

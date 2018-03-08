@@ -27,6 +27,10 @@ public class SwordManager: WeaponManager
             EnemyManager enemyManager = other.gameObject.GetComponentInParent<EnemyManager>();
             EnvoyerDegat(enemyManager);
         }
+        else if (other.tag== "Chest")
+        {
+            other.gameObject.GetComponent<Chest>().OpenChest();
+        }
     }
 
     protected override void ChargeWeapon()
