@@ -119,11 +119,11 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         hp -= damage;
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
-        Damaged();
-        if (kbAmmount != 0)
+        knockBackAmount = kbAmmount;
+        Damaged();  
+        if (knockBackAmount != 0)
         {
             knockBackDirection = kbDirection;
-            knockBackAmount = kbAmmount;
             knockBackAmountOverTime = 0;
             StartCoroutine("KnockBack");
         }

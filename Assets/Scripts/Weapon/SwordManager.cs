@@ -24,8 +24,8 @@ public class SwordManager: WeaponManager
         if (other.tag == "Enemy")
         {
             //Debug.Log("En");
-            StateController enemyScript = other.gameObject.GetComponentInParent<StateController>();
-            EnvoyerDegat(enemyScript.enemyManager);
+            EnemyManager enemyManager = other.gameObject.GetComponentInParent<EnemyManager>();
+            EnvoyerDegat(enemyManager);
         }
     }
 
@@ -43,6 +43,7 @@ public class SwordManager: WeaponManager
     protected override  void ReleaseChargedWeapon()
     {
         coll.enabled = true;
+
         attack();
     }
     protected override void WeaponOnCD()
