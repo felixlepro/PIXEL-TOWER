@@ -29,18 +29,18 @@ public class SwordFireManager : SwordManager
         }
     }
 
-    IEnumerator BurnthemAlive()
-    {
-        float time = 0;
+    //IEnumerator BurnthemAlive()
+    //{
+    //    float time = 0;
        
-        while (time < sf.chanceProc)
-        {
-            time += Time.deltaTime;
+    //    while (time < sf.chanceProc)
+    //    {
+    //        time += Time.deltaTime;
             
-            yield return new WaitForSeconds(1f);
+    //        yield return new WaitForSeconds(1f);
 
-        }
-    }
+    //    }
+    //}
 
     public int Rand()
     {    
