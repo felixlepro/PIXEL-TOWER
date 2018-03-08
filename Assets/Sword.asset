@@ -19,6 +19,7 @@ MonoBehaviour:
   attackSpeed: 0.5
   animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
   description: 
+  sprite: {fileID: 0}
   chargeTime: 1
   attackDamageChargedBonus: 10
   knockBackAmount: 10
