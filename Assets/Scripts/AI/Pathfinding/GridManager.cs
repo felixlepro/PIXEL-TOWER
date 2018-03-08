@@ -12,18 +12,45 @@ public class GridManager : MonoBehaviour
     Node[,] grid;
     int gridSizeX;
     int gridSizeY;
-
+    public bool enableGizmos;
+    Vector3 worldBotLeft;
     public float nodeRadius = 0.5f;
 
 
     public void CreateGrid(int[,] board)
     {
-        Vector3 worldBotLeft = new Vector3(-0.5f/nodeRadius, 0,0);        //transform.position + Vector3.left * board.GetLength(0) + Vector3.down * board.GetLength(1);
+        //Vector3 worldBotLeft = new Vector3(-1, 0,0);        //transform.position + Vector3.left * board.GetLength(0) + Vector3.down * board.GetLength(1);
+        //int gridSizeXmin = 100;
+        //int gridSizeYmin = 100;
+        //int gridSizeXmax = 0;
+        //int gridSizeYmax = 0;
+        //for (int x = 0; x < board.GetLength(0); x++)
+        //{
+        //    for (int y = 0; y < board.GetLength(1); y++)
+        //    {
+        //        bool walkable = (board[x, y] == 1);
 
-        gridSizeX = Mathf.RoundToInt(board.GetLength(0)/nodeRadius);
-        gridSizeY = Mathf.RoundToInt(board.GetLength(1)/nodeRadius);
+        //        if (x < gridSizeXmin && walkable)      gridSizeXmin = x;      
+        //        if (y < gridSizeYmin && walkable)     gridSizeYmin = y;
+
+        //        if (x > gridSizeXmax && walkable) gridSizeXmax = x;
+        //        if (y > gridSizeYmax && walkable) gridSizeYmax = y;
+        //    }
+        //}
+        //Debug.Log(gridSizeXmin + "   X   " + gridSizeXmax);
+        //Debug.Log(gridSizeYmin + "   Y   " + gridSizeYmax);
+        //gridSizeX = Mathf.RoundToInt((gridSizeXmax - gridSizeXmin)/nodeRadius);
+        //gridSizeY = Mathf.RoundToInt((gridSizeYmax - gridSizeYmin)/nodeRadius);
+
+        //grid = new Node[gridSizeX, gridSizeY];
+        //worldBotLeft = new Vector3((gridSizeXmin-1)/nodeRadius, gridSizeYmin/nodeRadius, 0);
+
+        gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
+        gridSizeY = Mathf.RoundToInt((board.GetLength(1)) /nodeRadius);
 
         grid = new Node[gridSizeX, gridSizeY];
+        worldBotLeft = new Vector3(-1,0, 0);
+
         for (int x = 0; x < gridSizeX; x++)
         {
             for (int y = 0; y < gridSizeY; y++)
@@ -34,7 +61,6 @@ public class GridManager : MonoBehaviour
                 bool walkable = (board[nx, ny] == 1);
                 Vector3 worldPoint = worldBotLeft + Vector3.right * (nodeRadius*2 * x + nodeRadius) + Vector3.up * (nodeRadius*2  * y + nodeRadius);
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
-                //   Debug.Log(x + "   " + y);
             }
 
         }
@@ -62,8 +88,8 @@ public class GridManager : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
-        float percentX = (worldPosition.x  + 0.5f / nodeRadius) / (gridSizeX);
-        float percentY = (worldPosition.y ) / (gridSizeY);
+        float percentX = (worldPosition.x - worldBotLeft.x) / (gridSizeX);
+        float percentY = (worldPosition.y - worldBotLeft.y) / (gridSizeY);
 
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
@@ -72,39 +98,51 @@ public class GridManager : MonoBehaviour
         int y = Mathf.FloorToInt((gridSizeY) * percentY);
 
         if (x > gridSizeX - 1)   x = gridSizeX - 1;
-        if (y > gridSizeY - 1)   y = gridSizeX - 1;
-        
+        if (y > gridSizeY - 1)   y = gridSizeY - 1;
+
         return grid[x, y];
     }
 
     public List<Node> path; //enlever
+    bool drawThat = false;
     void OnDrawGizmos()
     {
-        if (grid != null)
+        if (enableGizmos)
         {
-            Node seekerNode = NodeFromWorldPoint(player.position);
+            if (grid != null)
             {
-                foreach (Node n in grid)
+                Node seekerNode = NodeFromWorldPoint(player.position);
                 {
-                    Gizmos.color = (n.walkable) ? new Color(1, 1, 1, 0.25f) : new Color(1, 0, 0, 0.5f);
-                    if (seekerNode == n)
+                    foreach (Node n in grid)
                     {
-                        Gizmos.color = Color.green;
-                    }
-                    if (path != null)
-                    {
-                        if (path.Contains(n))
+                        Gizmos.color = (n.walkable) ? new Color(1, 1, 1, 0.25f) : new Color(1, 0, 0, 0.5f);
+                        drawThat = false;
+                        if (seekerNode == n)
                         {
-                            Debug.Log("n");
-
-                            Gizmos.color = Color.black;
+                            Gizmos.color = Color.green;
+                            drawThat = true;
                         }
+                        if (path != null)
+                        {
+                            if (path.Contains(n))
+                            {
+                                Gizmos.color = Color.black;
+                                drawThat = true;
+                            }
+                        }
+
+                       if (drawThat) Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+
                     }
-
-                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius*2 - .1f));
-
                 }
             }
+        }
+    }
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
         }
     }
 

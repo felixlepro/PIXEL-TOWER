@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class Board : MonoBehaviour {
     public enum TileType
@@ -49,7 +48,6 @@ public class Board : MonoBehaviour {
     }
     private int[,] TyleTypeToInt(TileType[][] t)
     {
-        //Debug.Log(t.Length + "        " + t[0].Length);
         int[,] grid = new int[t.Length,t[0].Length];
         for (int x = 0; x < t.Length; x++)
         {

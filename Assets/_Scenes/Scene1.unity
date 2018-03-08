@@ -457,15 +457,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4044165477507344, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 97.95913
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4044165477507344, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 99.32457
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 4044165477507344, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.085105464
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4044165477507344, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1665,15 +1665,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4290830489452062, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 99
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4290830489452062, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 99
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 4290830489452062, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.085105464
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4290830489452062, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1715,7 +1715,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1887307830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96, y: 96, z: 0}
+  m_LocalPosition: {x: 70, y: 70, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 876493921}
@@ -2761,11 +2761,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609afb766145a8a489a7e7c5d14398c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hauteur: 100
-  largeur: 100
+  hauteur: 70
+  largeur: 70
   numRooms:
-    min: 30
-    max: 50
+    min: 20
+    max: 30
   hautRoom:
     min: 3
     max: 10
@@ -2823,7 +2823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 363638870}
-  nodeRadius: 0.5
+  enableGizmos: 1
+  nodeRadius: 0.25
 --- !u!114 &2136353626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,3 +2838,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seeker: {fileID: 363638870}
   target: {fileID: 965434107}
+  repathingRate: 0.5

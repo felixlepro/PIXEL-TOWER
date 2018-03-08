@@ -104,7 +104,7 @@ public class Player : MonoBehaviour {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
             graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
 
-            Debug.Log(knockBackDirection.normalized);
+         //   Debug.Log(knockBackDirection.normalized);
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             playerRigidbody.MovePosition(transform.position + kb);
