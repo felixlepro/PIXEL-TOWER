@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class Board : MonoBehaviour {
     public enum TileType
@@ -27,7 +26,7 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
-    public void SetupBoard(int lvl)
+    public  void SetupBoard(int lvl)
     {
         
 
@@ -42,10 +41,22 @@ public class Board : MonoBehaviour {
         CreateRoomsAndCorridors();
         SetTilesValuesForRooms();
         SetTilesValuesForCorridors();
-
         InstantiateTiles();
-        AstarPath.active.Scan();
+        GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
 
+
+    }
+    private int[,] TyleTypeToInt(TileType[][] t)
+    {
+        int[,] grid = new int[t.Length,t[0].Length];
+        for (int x = 0; x < t.Length; x++)
+        {
+            for (int y = 0; y < t[x].Length; y++)
+            {
+                grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
+            }
+        }
+        return grid;
     }
 
     private void SetUpTilesArray()

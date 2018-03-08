@@ -17,7 +17,7 @@ public class ChaseAction : Action
 
        
         controller.enemyManager.isAttacking = false;
-        if (controller.AIPathing.reachedEndOfPath)
+        if (controller.enemyManager.AIPathing.reachedEndOfPath)
         {
             
             controller.enemyManager.isWalking = false;
@@ -27,7 +27,7 @@ public class ChaseAction : Action
             controller.enemyManager.isWalking = true;
 
         }
-        controller.getAngleTarget();
-        controller.AIPathing.destination = controller.chaseTarget.transform.position;
+        controller.enemyManager.getAngleTarget();
+        controller.enemyManager.AIPathing.destination = controller.enemyManager.chaseTarget.transform.position;
     }
 }

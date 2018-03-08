@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using Pathfinding;
 
 abstract public class EnemyManager : MonoBehaviour {
 
@@ -26,12 +27,29 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
+    [HideInInspector] public Collider2D[] targetCollider;
+    [HideInInspector] public Collider2D enemyCollider;
+    [HideInInspector] public Collider2D attackHitbox;
+    public GameObject chaseTarget;
+    [HideInInspector]   public AILerp AIPathing;
+    [HideInInspector]   public List<Transform> wayPointList;
+
     abstract public void TryAttack();
     abstract public void Damaged();
     abstract public void GetEnemy();
 
     void Start()
     {
+        AIPathing = GetComponent<AILerp>();
+        AIPathing.speed = enemy.moveSpeed;
+        //  AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
+        //AIPathing.slowdownDistance = enemyManager.enemy.HowLargeisHeRadius * 2.5f;
+        AIPathing.rotationIn2D = true;
+
+
+        chaseTarget = GetComponentInParent<TargetManager>().chaseTarget;
+        hp = enemy.maxHp;
+
         enemyRigidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<StateController>();
         //controller.enemyManager = this;
@@ -44,14 +62,18 @@ abstract public class EnemyManager : MonoBehaviour {
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = enemy.wColor;
 
-        hp = enemy.maxHp;
+        enemyCollider = GetComponentInChildren<Collider2D>();
+        targetCollider = chaseTarget.GetComponents<Collider2D>();
+        attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponent<Collider2D>();
+
+        
     }
 
     public void Attack()
     {
-        foreach (Collider2D pc in controller.targetCollider)
+        foreach (Collider2D pc in targetCollider)
         {
-            if (controller.attackHitbox.IsTouching(pc))
+            if (attackHitbox.IsTouching(pc))
             {
                 pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - transform.position, enemy.knockBackAmount, enemy.immuneTime );
                 resetAttackCD();
@@ -70,9 +92,9 @@ abstract public class EnemyManager : MonoBehaviour {
     private void newPath()
     {   
             controller.enemyManager.isWalking = true;
-            controller.nextWayPoint = Random.Range(0, controller.wayPointList.Count);
-        controller.AIPathing.destination = controller.wayPointList[controller.nextWayPoint].position;
-            controller.AIPathing.SearchPath();
+            controller.nextWayPoint = Random.Range(0, wayPointList.Count);
+        AIPathing.destination = wayPointList[controller.nextWayPoint].position;
+            AIPathing.SearchPath();
     }
 
 
@@ -87,7 +109,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
     public void spriteOrderInLayer()
     {
-        if (controller.chaseTarget.transform.position.y <= transform.position.y)
+        if (chaseTarget.transform.position.y <= transform.position.y)
         {
             spriteR.sortingOrder = -2;
         }
@@ -115,7 +137,7 @@ abstract public class EnemyManager : MonoBehaviour {
             isWalking = false;
             isAttacking = false;
             isDying = true;
-            controller.AIPathing.enabled = false;
+            AIPathing.enabled = false;
             Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
         else
@@ -132,7 +154,7 @@ abstract public class EnemyManager : MonoBehaviour {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
             spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-            Debug.Log(knockBackDirection.normalized);
+          //  Debug.Log(knockBackDirection.normalized);
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             enemyRigidbody .MovePosition(transform.position + kb);
@@ -162,5 +184,26 @@ abstract public class EnemyManager : MonoBehaviour {
     public void resetAttackCD()
     {
         timeUntilNextAttack = enemy.attackSpeed;
+    }
+
+    public void getAnglePath()                                     //à garder
+    {
+        float angle = 0;
+        if (!AIPathing.reachedEndOfPath)
+        {
+            //Vector2 direction = AIPathing.velocity;
+            //angle = Vector2.Angle(direction, new Vector2(0, -1));
+            //if (direction.x < 0) angle = 360 - angle;
+            Angle = angle;
+        }
+    }
+
+    public void getAngleTarget()
+    {
+        Vector2 direction = chaseTarget.transform.position - transform.position;
+        float angle = Vector2.Angle(direction, new Vector2(0, -1));
+        if (direction.x < 0) angle = 360 - angle;
+        Angle = angle;
+        //Debug.Log(angle);
     }
 }

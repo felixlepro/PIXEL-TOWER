@@ -8,16 +8,16 @@ public class PatrolAction : Action
 {
     public override void Act(StateController controller)
     {
-        controller.getAnglePath();
+        controller.enemyManager.getAnglePath();
         Patrol(controller);
     }
 
     private void Patrol(StateController controller)
     {
-        
-        controller.AIPathing.destination  = controller.wayPointList[controller.nextWayPoint].position;
 
-        if ((controller.AIPathing.reachedEndOfPath || !controller.AIPathing.hasPath) && !controller.AIPathing.pathPending)
+        controller.enemyManager.AIPathing.destination  = controller.enemyManager.wayPointList[controller.nextWayPoint].position;
+
+        if ((controller.enemyManager.AIPathing.reachedEndOfPath || !controller.enemyManager.AIPathing.hasPath) && !controller.enemyManager.AIPathing.pathPending)
         {
            // Debug.Log("goIdle");
             controller.enemyManager.idling();

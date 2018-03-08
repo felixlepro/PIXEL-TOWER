@@ -30,7 +30,7 @@ public class BlobManager : EnemyManager {
     {
         if (checkIfAttackIsReady())
         {
-            controller.AIPathing.speed = enemy.moveSpeed;
+            AIPathing.speed = enemy.moveSpeed;
             Debug.Log("rdy");
             Attack();
 
@@ -38,7 +38,7 @@ public class BlobManager : EnemyManager {
         if (timeUntilNextAttack > 0)
         {
             Debug.Log((timeUntilNextAttack / enemy.attackSpeed));
-            controller.AIPathing.speed = enemy.moveSpeed * ((1 - (timeUntilNextAttack / enemy.attackSpeed)));
+            AIPathing.speed = enemy.moveSpeed * ((1 - (timeUntilNextAttack / enemy.attackSpeed)));
         }
         
     }

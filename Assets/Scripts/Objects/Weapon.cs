@@ -13,6 +13,7 @@ abstract public class Weapon : ScriptableObject
     public float attackSpeed; //  attaque/seconde
     public RuntimeAnimatorController animator;
     public string description;
+    public Sprite sprite;
 
     public float chargeTime;
     public int attackDamageChargedBonus;

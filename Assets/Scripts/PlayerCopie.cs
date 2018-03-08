@@ -82,7 +82,7 @@ public class PlayerCopie : MonoBehaviour
         }
         else
         {
-            TimeRewinding.isFantoming = false;
+            GameObject.Find("Pilot").GetComponent<TimeRewinding>().FantomeMort();
             Debug.Log("Mort");
             Destroy(this.gameObject);
         }

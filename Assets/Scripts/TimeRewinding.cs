@@ -74,6 +74,7 @@ public class TimeRewinding : MonoBehaviour
             PlayerCopie fantome = Instantiate(playerCopie, transform.position, Quaternion.identity).GetComponent<PlayerCopie>();
             isFantoming = true;
             fantome.Initialize(positionCopie);
+            GetComponent<EnemyManager>().chaseTarget = GameObject.Find("PilotCopie");
         }
         
        
@@ -83,6 +84,9 @@ public class TimeRewinding : MonoBehaviour
     public void FantomeMort()
     {
         isFantoming = false;
+        Debug.Log("caca");
+        if(GetComponent<EnemyManager>().chaseTarget == null)
+            Debug.Log("minro pu");
     }
 }
 
