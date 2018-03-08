@@ -42,6 +42,7 @@ public class KnightManager : EnemyManager {
             colorAlpha = colorAlphaMax * (1 - (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)));
             controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
+            
         }
 
         Attack();

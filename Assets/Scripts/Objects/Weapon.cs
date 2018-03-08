@@ -19,4 +19,10 @@ abstract public class Weapon : ScriptableObject
     public float knockBackAmount;
 
 
+
+    public int getDamage()
+    {
+        return attackDamage;
+    }
+
 }
