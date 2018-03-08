@@ -88,8 +88,9 @@ public class GridManager : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
-        float percentX = (worldPosition.x - worldBotLeft.x) / (gridSizeX);
-        float percentY = (worldPosition.y - worldBotLeft.y) / (gridSizeY);
+        float percentX = (worldPosition.x - worldBotLeft.x)/ ((gridSizeX)*nodeRadius*2);
+        float percentY = (worldPosition.y - worldBotLeft.y)/ ((gridSizeY)*nodeRadius*2);
+
 
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
@@ -131,7 +132,8 @@ public class GridManager : MonoBehaviour
                             }
                         }
 
-                       if (drawThat) Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+                        if (drawThat)
+                            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
 
                     }
                 }
