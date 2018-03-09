@@ -5,7 +5,7 @@ using System;
 
 public class PathFinding : MonoBehaviour
 {
-    public Transform target;
+    //public Transform target;
     PathRequestManager requestManager;
     GridManager grid;
 
@@ -16,11 +16,11 @@ public class PathFinding : MonoBehaviour
     }
 
 
-    public void StartFindPath(Vector3 startPos)
+    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     {
-        Vector3 targetPos = target.transform.position;
         StartCoroutine(FindPath(startPos, targetPos));
     }
+
 
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
@@ -65,6 +65,8 @@ public class PathFinding : MonoBehaviour
 
                         if (!openSet.Contains(neighbour))
                             openSet.Add(neighbour);
+                        else
+                            openSet.UpdateItem(neighbour);
                     }
                 }
             }

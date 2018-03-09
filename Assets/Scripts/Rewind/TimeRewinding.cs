@@ -76,7 +76,7 @@ public class TimeRewinding : MonoBehaviour
             fantome.Initialize(positionCopie);
             
            
-            GameObject.Find("GameManager").GetComponent<PathFinding>().target  = GameObject.Find("PilotCopie(Clone)").transform;
+            GameObject.Find("Enemies").GetComponent<PlayerTarget >().playerTarget  = GameObject.Find("PilotCopie(Clone)").transform;
             
         }
         
@@ -87,7 +87,7 @@ public class TimeRewinding : MonoBehaviour
     public void FantomeMort()
     {
         isFantoming = false;
-       GameObject.Find("GameManager").GetComponent<PathFinding>().target = GameObject.Find("Pilot").transform;
+        GameObject.Find("Enemies").GetComponent<PlayerTarget>().playerTarget = GameObject.Find("Pilot").transform;
        
     }
 }

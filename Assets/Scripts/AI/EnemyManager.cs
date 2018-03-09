@@ -30,7 +30,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public Collider2D[] targetCollider;
     [HideInInspector] public Collider2D enemyCollider;
     [HideInInspector] public Collider2D attackHitbox;
-    public GameObject chaseTarget;
+    public Transform chaseTarget;
     [HideInInspector]   public AILerp AIPathing;
     [HideInInspector]   public List<Transform> wayPointList;
 
@@ -47,7 +47,7 @@ abstract public class EnemyManager : MonoBehaviour {
         AIPathing.rotationIn2D = true;
 
 
-        chaseTarget = GetComponentInParent<TargetManager>().chaseTarget;
+        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
         hp = enemy.maxHp;
 
         enemyRigidbody = GetComponent<Rigidbody2D>();

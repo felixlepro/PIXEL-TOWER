@@ -63,7 +63,7 @@ public class RewindEnemi : MonoBehaviour
     public void StopRewind()
     {
         isRewinding = false;
-        GetComponentInParent<EnemyManager>().chaseTarget = playerCopie;
+       // GetComponentInParent<EnemyManager>().chaseTarget = playerCopie;
     }
 }
 

@@ -6,14 +6,15 @@ public class Unit : MonoBehaviour
     float speed =5;
     Vector3[] path;
     int targetIndex;
-
+    public Transform target;
+    public float updateTimer;
     float time = 0;
     void Update()
     {
         time += Time.deltaTime;
-        if (time > 1)
+        if (time > updateTimer)
         {
-            PathRequestManager.RequestPath(transform.position, OnPathFound);
+            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
             time = 0;
         }
     }
@@ -58,7 +59,7 @@ public class Unit : MonoBehaviour
         {
             for (int i = targetIndex; i < path.Length; i++)
             {
-                Gizmos.color = Color.black;
+                Gizmos.color = Color.white;
                 Gizmos.DrawCube(path[i], Vector3.one);
 
                 if (i == targetIndex)
