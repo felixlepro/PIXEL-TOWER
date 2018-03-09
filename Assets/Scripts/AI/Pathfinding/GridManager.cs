@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public Transform player;
     //public LayerMask unwalkableMask;
     //public int gridSizeX, gridSizeY;
     // public float nodeRadius;
@@ -14,11 +13,13 @@ public class GridManager : MonoBehaviour
     int gridSizeY;
     public bool enableGizmos;
     Vector3 worldBotLeft;
+    Vector2  gridWorldSize;
     public float nodeRadius = 0.5f;
 
 
     public void CreateGrid(int[,] board)
     {
+        
         //Vector3 worldBotLeft = new Vector3(-1, 0,0);        //transform.position + Vector3.left * board.GetLength(0) + Vector3.down * board.GetLength(1);
         //int gridSizeXmin = 100;
         //int gridSizeYmin = 100;
@@ -47,7 +48,7 @@ public class GridManager : MonoBehaviour
 
         gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) /nodeRadius);
-
+        gridWorldSize = new Vector2(gridSizeX * nodeRadius * 2, gridSizeY * nodeRadius * 2);
         grid = new Node[gridSizeX, gridSizeY];
         worldBotLeft = new Vector3(-1,0, 0);
 
@@ -88,57 +89,49 @@ public class GridManager : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
-        float percentX = (worldPosition.x - worldBotLeft.x)/ ((gridSizeX)*nodeRadius*2);
-        float percentY = (worldPosition.y - worldBotLeft.y)/ ((gridSizeY)*nodeRadius*2);
+        //float percentX = (worldPosition.x - worldBotLeft.x)/ ((gridSizeX)*nodeRadius*2);
+        //float percentY = (worldPosition.y - worldBotLeft.y)/ ((gridSizeY)*nodeRadius*2);
 
 
+        //percentX = Mathf.Clamp01(percentX);
+        //percentY = Mathf.Clamp01(percentY);
+
+        //int x = Mathf.FloorToInt((gridSizeX) * percentX);
+        //int y = Mathf.FloorToInt((gridSizeY) * percentY);
+
+        //if (x > gridSizeX - 1)   x = gridSizeX - 1;
+        //if (y > gridSizeY - 1)   y = gridSizeY - 1;
+
+        //return grid[x, y];
+
+        Vector3 localPosition = worldPosition - worldBotLeft;
+
+        float percentX = (localPosition.x) / gridWorldSize.x;
+        float percentY = (localPosition.y) / gridWorldSize.y;
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
-        int x = Mathf.FloorToInt((gridSizeX) * percentX);
-        int y = Mathf.FloorToInt((gridSizeY) * percentY);
-
-        if (x > gridSizeX - 1)   x = gridSizeX - 1;
-        if (y > gridSizeY - 1)   y = gridSizeY - 1;
+        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
+        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
         return grid[x, y];
     }
 
-    public List<Node> path; //enlever
-    bool drawThat = false;
     void OnDrawGizmos()
     {
-        if (enableGizmos)
-        {
-            if (grid != null)
+
+            if (grid != null && enableGizmos)
             {
-                Node seekerNode = NodeFromWorldPoint(player.position);
                 {
                     foreach (Node n in grid)
                     {
                         Gizmos.color = (n.walkable) ? new Color(1, 1, 1, 0.25f) : new Color(1, 0, 0, 0.5f);
-                        drawThat = false;
-                        if (seekerNode == n)
-                        {
-                            Gizmos.color = Color.green;
-                            drawThat = true;
-                        }
-                        if (path != null)
-                        {
-                            if (path.Contains(n))
-                            {
-                                Gizmos.color = Color.black;
-                                drawThat = true;
-                            }
-                        }
-
-                        if (drawThat)
-                            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+                        Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
 
                     }
                 }
             }
-        }
+        
     }
     public int MaxSize
     {
