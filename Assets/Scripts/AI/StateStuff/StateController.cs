@@ -21,7 +21,6 @@ public class StateController : MonoBehaviour
     [HideInInspector] public float hp;
 
     
-    [HideInInspector]  public int nextWayPoint = 0;
     [HideInInspector]  public float stateTimeElapsed;
     [HideInInspector]   public float timeElapsed;
     [HideInInspector]  public float AScountdown = 0;
@@ -46,13 +45,13 @@ public class StateController : MonoBehaviour
       //  enemy.controller = this;
     }
 
-    public void SetupAI(bool aiActivationFromGameManager, List<Transform> wayPointsFromGameManager)
+    public void SetupAI(bool aiActivationFromGameManager, List<Vector3> wayPointsFromGameManager)
     {
 
         enemyManager.wayPointList = wayPointsFromGameManager;
         aiActive = aiActivationFromGameManager;
        // Random.seed = System.DateTime.Now.Millisecond;
-        nextWayPoint = Random.Range(0, enemyManager.wayPointList.Count);
+        enemyManager.nextWayPoint = Random.Range(0, enemyManager.wayPointList.Count);
     }
 
     void Update()

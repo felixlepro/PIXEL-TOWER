@@ -18,6 +18,7 @@ public class Node : IHeapItem<Node> {
         worldPosition = worldPos;
         gridX = gridXx;
         gridY = gridYy;
+       if (walkable) GameObject.Find("GameManager").GetComponent<GameManager>().wayPointList.Add(worldPos);
     }
 
     public int fCost

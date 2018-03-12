@@ -3,18 +3,22 @@ using System.Collections;
 
 public class Unit : MonoBehaviour
 {
-    float speed =5;
+    public float speed;
+    public Vector3 targetPosition;
+    public float repathRate;
+    [HideInInspector] public bool requestPath = true;
+
     Vector3[] path;
     int targetIndex;
-    public Transform target;
-    public float updateTimer;
     float time = 0;
+
+
     void Update()
     {
         time += Time.deltaTime;
-        if (time > updateTimer)
+        if (time > repathRate && requestPath)
         {
-            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+            PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
             time = 0;
         }
     }
@@ -51,6 +55,18 @@ public class Unit : MonoBehaviour
             yield return null;
 
         }
+    }
+
+    public void enablePathing()
+    {
+        requestPath = true;
+        PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
+        time = 0;
+    }
+    public void disablePathing()
+    {
+        requestPath = false;
+        StopCoroutine("FollowPath");
     }
 
     public void OnDrawGizmos()

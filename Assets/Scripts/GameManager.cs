@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
-    [HideInInspector] public List<Transform> wayPointList;
+    [HideInInspector] public List<Vector3> wayPointList;
 
 
 
@@ -73,10 +73,6 @@ public class GameManager : MonoBehaviour {
     }
     void SetupAI()
     {
-        foreach (GameObject wp in GameObject.FindGameObjectsWithTag("waypoints"))                                     //temporaire
-        {
-            wayPointList.Add(wp.transform);
-        }
         foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire
         {
             em.GetComponent<StateController>().SetupAI(true, wayPointList);

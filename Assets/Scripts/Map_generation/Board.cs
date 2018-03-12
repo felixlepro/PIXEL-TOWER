@@ -19,7 +19,6 @@ public class Board : MonoBehaviour {
     public GameObject mur_Est;
     public GameObject mur_Ouest;
     public GameObject voidTile;
-    public GameObject waypoint;
 
     private TileType[][] tiles;
     private Room[] rooms;
@@ -48,12 +47,15 @@ public class Board : MonoBehaviour {
     }
     private int[,] TyleTypeToInt(TileType[][] t)
     {
+        int NodeContour = GetComponent<GridManager>().NodeContour;
+
         int[,] grid = new int[t.Length,t[0].Length];
         for (int x = 0; x < t.Length; x++)
         {
             for (int y = 0; y < t[x].Length; y++)
             {
                 grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
+
             }
         }
         return grid;
@@ -184,11 +186,6 @@ public class Board : MonoBehaviour {
                 if (tiles[i][j] == TileType.Floor)
                 {
                     InstantiateObject(floorTiles, i, j);
-                    IntRange rand = new IntRange(1,5);
-                    if (rand.Random  == 1)
-                    {
-                        InstantiateObject(waypoint, i, j);
-                    }
 
                 }
                 

@@ -13,12 +13,16 @@ abstract public class EnemyManager : MonoBehaviour {
     private Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
     [HideInInspector] public StateController controller;
+    [HideInInspector] public SpriteRenderer spriteR;
+
+    [HideInInspector] public Collider2D[] targetCollider;
+    [HideInInspector] public Collider2D enemyCollider;
+    [HideInInspector] public Collider2D attackHitbox;
+
     [HideInInspector] public bool isWalking;
     [HideInInspector] public bool isAttacking;
     [HideInInspector] public bool isDying = false;
     [HideInInspector] public float Angle;
-
-    [HideInInspector] public SpriteRenderer spriteR;
 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] public float knockBackAmountOverTime = 1;
@@ -27,12 +31,14 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
-    [HideInInspector] public Collider2D[] targetCollider;
-    [HideInInspector] public Collider2D enemyCollider;
-    [HideInInspector] public Collider2D attackHitbox;
     public Transform chaseTarget;
+
     [HideInInspector]   public AILerp AIPathing;
-    [HideInInspector]   public List<Transform> wayPointList;
+
+    [HideInInspector]   public List<Vector3> wayPointList;
+    [HideInInspector] public int nextWayPoint = 0;
+
+    [HideInInspector] public Unit pathingUnit;
 
     abstract public void TryAttack();
     abstract public void Damaged();
@@ -40,6 +46,9 @@ abstract public class EnemyManager : MonoBehaviour {
 
     void Start()
     {
+        pathingUnit = GetComponent<Unit>();
+        pathingUnit.speed = enemy.moveSpeed;
+
         AIPathing = GetComponent<AILerp>();
         AIPathing.speed = enemy.moveSpeed;
         //  AIPathing.endReachedDistance = enemyManager.enemy.HowLargeisHeRadius * 1.5f;
@@ -84,17 +93,23 @@ abstract public class EnemyManager : MonoBehaviour {
     }
     public void idling()
     {
-        float time = Random.Range(0, 10) * enemy.idleTime;
+        float time = Random.Range(1, 5) * enemy.idleTime;
         isWalking = false;
-        Invoke("newPath", time);
-       
+        pathingUnit.disablePathing();
+        Debug.Log("DisabledPathing");
+        Invoke("newPath", time);    
     }
     private void newPath()
     {   
-            controller.enemyManager.isWalking = true;
-            controller.nextWayPoint = Random.Range(0, wayPointList.Count);
-        AIPathing.destination = wayPointList[controller.nextWayPoint].position;
-            AIPathing.SearchPath();
+            isWalking = true;
+            nextWayPoint = Random.Range(0, wayPointList.Count-1);
+
+            pathingUnit.targetPosition = wayPointList[nextWayPoint];
+             Debug.Log(wayPointList[nextWayPoint]);
+            pathingUnit.enablePathing();
+              Debug.Log("EnabledPathing");
+        //AIPathing.destination = wayPointList[controller.nextWayPoint].position;
+        //AIPathing.SearchPath();
     }
 
 

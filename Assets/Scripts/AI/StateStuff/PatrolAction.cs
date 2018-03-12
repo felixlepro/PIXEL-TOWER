@@ -15,11 +15,12 @@ public class PatrolAction : Action
     private void Patrol(StateController controller)
     {
 
-        controller.enemyManager.AIPathing.destination  = controller.enemyManager.wayPointList[controller.nextWayPoint].position;
+        controller.enemyManager.pathingUnit.targetPosition  = controller.enemyManager.wayPointList[controller.enemyManager.nextWayPoint];
 
-        if ((controller.enemyManager.AIPathing.reachedEndOfPath || !controller.enemyManager.AIPathing.hasPath) && !controller.enemyManager.AIPathing.pathPending)
+        float distance = Mathf.Abs((controller.transform.position - controller.enemyManager.pathingUnit.targetPosition).magnitude);
+        if (distance < 1 && controller.enemyManager.pathingUnit.requestPath)
         {
-           // Debug.Log("goIdle");
+            Debug.Log("idle");
             controller.enemyManager.idling();
         }
     }
