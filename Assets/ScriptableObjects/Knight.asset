@@ -16,13 +16,13 @@ MonoBehaviour:
   attackDamage: 15
   attackSpeed: 1
   attackRange: 3
-  moveSpeed: 10
+  moveSpeed: 4
   animator: {fileID: 9100000, guid: e9ee8002a404c4942ad78f36aa4a557c, type: 2}
   idleTime: 0.5
   maxHp: 200
   knockBackAmount: 10
   immuneTime: 0.7
-  chaseRange: 0
-  chaseRangeBuffer: 0
+  chaseRange: 12
+  chaseRangeBuffer: 4
   size: 0
   attackChargeTime: 0.75

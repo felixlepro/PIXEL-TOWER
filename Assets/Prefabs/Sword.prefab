@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
-  chargeAttackKey: 323
 --- !u!212 &212209205937007904
 SpriteRenderer:
   m_ObjectHideFlags: 1

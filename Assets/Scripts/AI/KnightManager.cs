@@ -24,8 +24,8 @@ public class KnightManager : EnemyManager {
 
     public override void TryAttack()
     {
-        AIPathing.speed = 0;
-        //Debug.Log("StartAttack");
+        pathingUnit.speed = 0;
+        pathingUnit.disablePathing();
         getAngleTarget();
         attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         attackDone = false;
@@ -71,8 +71,9 @@ public class KnightManager : EnemyManager {
     
     public void endAttack()
     {
+        pathingUnit.speed = currentSpeed;
+        pathingUnit.enablePathing();
         attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-        AIPathing.speed = enemy.moveSpeed;
         controller.enemyManager.isAttacking = false;
         anim.speed = 1;
         //controller.enemyManager.isWalking = false; 

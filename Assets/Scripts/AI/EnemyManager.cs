@@ -7,10 +7,11 @@ using Pathfinding;
 abstract public class EnemyManager : MonoBehaviour {
 
     public int hp;
+    public float currentSpeed;
     public float timeUntilNextAttack;
     [HideInInspector] public Enemy enemy;
 
-    private Rigidbody2D enemyRigidbody;
+    [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
     [HideInInspector] public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
@@ -46,8 +47,9 @@ abstract public class EnemyManager : MonoBehaviour {
 
     void Start()
     {
+        currentSpeed = enemy.moveSpeed;
         pathingUnit = GetComponent<Unit>();
-        pathingUnit.speed = enemy.moveSpeed;
+        pathingUnit.speed = currentSpeed;
 
         AIPathing = GetComponent<AILerp>();
         AIPathing.speed = enemy.moveSpeed;
@@ -96,7 +98,6 @@ abstract public class EnemyManager : MonoBehaviour {
         float time = Random.Range(1, 5) * enemy.idleTime;
         isWalking = false;
         pathingUnit.disablePathing();
-        Debug.Log("DisabledPathing");
         Invoke("newPath", time);    
     }
     private void newPath()
@@ -163,6 +164,8 @@ abstract public class EnemyManager : MonoBehaviour {
 
     IEnumerator KnockBack()
     {
+        pathingUnit.speed = 0;
+        pathingUnit.disablePathing();
         spriteR.color = new Color(1f, 0, 0, 1f);
         while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
@@ -177,7 +180,8 @@ abstract public class EnemyManager : MonoBehaviour {
             yield return null;
         }
         spriteR.color = new Color(1f, 1, 1, 1f);
-
+        pathingUnit.enablePathing();
+        pathingUnit.speed = currentSpeed;
     }
 
     private void Death()

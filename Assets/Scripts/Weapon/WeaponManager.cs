@@ -12,7 +12,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected  float timeUntilNextAttack;
     protected float time;
     protected float currentChargeTime;
-    public KeyCode chargeAttackKey;
+     KeyCode chargeAttackKey = KeyCode.Mouse0;
 
     protected abstract void ChargeWeapon();
     protected abstract void MaxChargeWeapon();
