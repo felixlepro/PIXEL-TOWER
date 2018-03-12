@@ -40,15 +40,18 @@ public abstract class WeaponManager : MonoBehaviour {
             {
                 currentChargeTime += Time.deltaTime;
                 ChargeWeapon();
+                
 
             }
             else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
             {
                 MaxChargeWeapon();
+                
             }
             else if (Input.GetKeyUp(chargeAttackKey))
             {
                 ReleaseChargedWeapon();
+                
             }
 
         }

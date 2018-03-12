@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 200
   speed: 10
-  weapon: {fileID: 11400000, guid: cad66827291014641be2a4b6cf890529, type: 2}
+  weapon: {fileID: 11400000, guid: e1834d4c57a7a9b409885d5084c58ad0, type: 2}
   animator: {fileID: 9100000, guid: db42350e5f820ce40a6e56b474f9b637, type: 2}
