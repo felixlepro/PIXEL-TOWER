@@ -19,28 +19,16 @@ public class BlobManager : EnemyManager {
         
     public override void AttackSuccessful()
     {
-        StartCoroutine("Slow");
+        Slow(0.9f, enemy.attackSpeed, true);
     }
-    IEnumerator Slow()
-    {
-        float speed = 1f;
-        float time = 0;
-        while (time < enemy.attackSpeed)
-        {
-            currentSpeed /= speed;
-            speed = (time / enemy.attackSpeed) * 0.9f + 0.1f;
-            currentSpeed *= speed;
-
-            time += Time.deltaTime;
-            yield return null;
-        }
-    }
+    
     public override void Damaged()
     {
         hp -= Mathf.FloorToInt(enemy.maxHp / enemyBlob.hpLostOnAttack);
         VerifyDeath();
     }
 
+   
     //Animations-----------------------------------------
 
     float stateStartTime;

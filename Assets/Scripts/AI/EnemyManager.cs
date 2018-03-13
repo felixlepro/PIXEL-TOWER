@@ -243,4 +243,45 @@ abstract public class EnemyManager : MonoBehaviour {
         Angle = angle;
         //Debug.Log(angle);
     }
+    public void Slow(float slowAmount, float duration, bool fade)
+    {
+        if (fade)
+        {
+            StartCoroutine(SlowFade(slowAmount,duration));
+        }
+        else
+        {
+            StartCoroutine(SlowNonFade(slowAmount,duration));
+        }
+
+    }
+    IEnumerator SlowNonFade(float slowAmount ,float duration)
+    {
+        float time = 0;
+
+        currentSpeed *= (1 - slowAmount);
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        currentSpeed /= (1 - slowAmount);
+
+
+    }
+    IEnumerator SlowFade(float slowAmount, float duration)
+    {
+        float speed = 1f;
+        float time = 0;
+        while (time < duration)
+        {
+            currentSpeed /= speed;
+            speed = (time / duration) * slowAmount + 1 - slowAmount;
+            currentSpeed *= speed;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+        currentSpeed /= speed;
+    }
 }

@@ -15,7 +15,7 @@ public class SwordIce : Sword
         wColor = Color.blue;
         attackDamage = 20;
         slowTime = 3;
-        slowMultip = 0.65;
+        slowMultip = 0.65f;
         chanceSlowProc = 48;
     }
 
