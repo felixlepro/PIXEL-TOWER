@@ -29,7 +29,7 @@ public class SwordIceManager : MonoBehaviour {
         if (Rand() <= slowChances)
         {
             float time = 0;
-
+            PlsSlow();
             while (time < slowTimer)
             {
                 time += Time.deltaTime;

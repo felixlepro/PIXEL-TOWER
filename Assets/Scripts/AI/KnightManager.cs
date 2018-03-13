@@ -142,7 +142,6 @@ public class KnightManager : EnemyManager {
     {
 
         UpdateAnimState();
-        ContinueState();
     }
 
     void UpdateAnimState()
@@ -276,24 +275,4 @@ public class KnightManager : EnemyManager {
         this.state = state;
         stateStartTime = Time.time;
     }
-
-    //void ExitState()
-    //{
-    //}
-
-    void ContinueState()
-    {
-        switch (state)
-        {
-
-            //case State.RunningLeft:
-            //case State.RunningRight:
-            //    if (!RunOrJump()) EnterState(State.Idle);
-            //    break;
-
-
-        }
-    }
-
-    
 }

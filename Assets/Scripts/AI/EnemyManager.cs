@@ -266,8 +266,6 @@ abstract public class EnemyManager : MonoBehaviour {
             yield return null;
         }
         currentSpeed /= (1 - slowAmount);
-
-
     }
     IEnumerator SlowFade(float slowAmount, float duration)
     {

@@ -51,7 +51,9 @@ public abstract class WeaponManager : MonoBehaviour {
             else if (Input.GetKeyUp(chargeAttackKey))
             {
                 ReleaseChargedWeapon();
-                
+                currentChargeTime = 0;
+
+
             }
 
         }
@@ -67,7 +69,6 @@ public abstract class WeaponManager : MonoBehaviour {
         {
             cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);
         }
-
         else
         {
             cible.recevoirDegats(weapon.attackDamageChargedBonus + weapon.attackDamage, cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);

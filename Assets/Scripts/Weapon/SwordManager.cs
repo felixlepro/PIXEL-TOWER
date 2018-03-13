@@ -12,8 +12,10 @@ public class SwordManager: WeaponManager
         weapon = GetComponentInParent<Player>().player.weapon;
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         spriteR.color = weapon.wColor;
+
         coll = gameObject.GetComponent<BoxCollider2D>();
         coll.enabled = false;
+
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = weapon.animator;     
     }

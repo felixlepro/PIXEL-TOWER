@@ -70,13 +70,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4044165477507344}
-  - component: {fileID: 114885545434799126}
-  - component: {fileID: 114933918862482814}
   - component: {fileID: 114344796246818148}
   - component: {fileID: 114403027892796644}
   - component: {fileID: 114562340482489990}
-  - component: {fileID: 114683808125261122}
-  - component: {fileID: 114681881427446796}
   - component: {fileID: 50066667998974078}
   - component: {fileID: 114525260239547998}
   m_Layer: 0
@@ -93,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931763787068262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 68, y: 67, z: 0}
+  m_LocalPosition: {x: 86.07309, y: -38.04811, z: 0.96321934}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4071827570834126}
@@ -122,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 1448959277736504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 0.31, y: 0.241, z: 1}
+  m_LocalScale: {x: 0.217, y: 0.217, z: 1}
   m_Children: []
   m_Father: {fileID: 4983758500272670}
   m_RootOrder: 0
@@ -214,7 +210,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 8}
+  m_Size: {x: 7, y: 7}
   m_EdgeRadius: 0
 --- !u!95 &95964868394623858
 Animator:
@@ -273,19 +269,16 @@ MonoBehaviour:
   spriteR: {fileID: 0}
   targetCollider: []
   enemyCollider: {fileID: 0}
-  attackHitbox: {fileID: 0}
+  attackHitbox:
+  - {fileID: 0}
   isWalking: 0
   isAttacking: 0
   isDying: 0
   Angle: 0
   knockBackAmount: 0
-  knockBackAmountOverTime: 1
-  knockBackAmountOverTimeMinimum: 0.85
-  knockBackTime: 1
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
   chaseTarget: {fileID: 0}
-  AIPathing: {fileID: 0}
   wayPointList: []
   nextWayPoint: 0
   pathingUnit: {fileID: 0}
@@ -303,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  repathRate: 0
+  repathRate: 0.1
   requestPath: 1
 --- !u!114 &114562340482489990
 MonoBehaviour:
@@ -318,104 +311,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
     type: 2}
---- !u!114 &114681881427446796
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931763787068262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  smoothType: 0
-  subdivisions: 2
-  iterations: 2
-  strength: 0.3
-  uniformLength: 1
-  maxSegmentLength: 2
-  bezierTangentLength: 0.4
-  offset: 0.2
-  factor: 0.1
---- !u!114 &114683808125261122
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931763787068262}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
-  repathRate: 0.1
-  canSearch: 1
-  canMove: 1
-  speed: 3
-  enableRotation: 0
-  rotationIn2D: 0
-  rotationSpeed: 10
-  interpolatePathSwitches: 1
-  switchPathInterpolationSpeed: 5
-  targetCompatibility: {fileID: 0}
---- !u!114 &114885545434799126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931763787068262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &114933918862482814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931763787068262}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
-  repathRate: 0.2
-  canSearch: 1
-  canMove: 1
-  maxSpeed: 10
-  gravity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffset: 1
-  rotationIn2D: 0
-  targetCompatibility: {fileID: 0}
-  rotationSpeed: 0
-  slowdownDistance: 0
-  pickNextWaypointDist: 0.5
-  endReachedDistance: 0.5
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 0
-  whenCloseToDestination: 0
 --- !u!212 &212098840464227978
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -6,16 +6,7 @@ public class CrossbowManager : WeaponManager
 {
     public GameObject bolt;
     private List<Bolt> boltList = new List<Bolt>();
-    private Vector3 direction;
-	// Use this for initialization
-	void Start () {
-        weapon = GetComponentInParent<Player>().player.weapon;
-        spriteR = gameObject.GetComponent<SpriteRenderer>();
-        spriteR.color = weapon.wColor;
-        anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = weapon.animator;
-        
-    }
+
 
     protected override void ChargeWeapon()
     {
@@ -34,7 +25,7 @@ public class CrossbowManager : WeaponManager
 
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
+        Vector3 direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
 
         boltList[boltList.Count - 1].Setup(weapon.attackDamage, direction, weapon.knockBackAmount, 8f);
         ResetAttackTimer();

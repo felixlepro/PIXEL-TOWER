@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon/Bow")]
 public class Bow : Weapon
 {
-
+    public float boltSpeed;
 }
