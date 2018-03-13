@@ -18,17 +18,6 @@ public class SwordFire : Sword
         burnTime = 4;
     }
 
-    //public int getBurnValue()
-    //{
-    //   return chanceProc;
-
-    //}
-
-
-    //public void setBurnValue(int valueBurn)
-    //{
-    //chanceProc = valueBurn;
-
-    //}
+   
 
 }

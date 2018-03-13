@@ -9,12 +9,17 @@ public class SwordFireManager : SwordManager
 {
     public SwordFire sf;
     public Enemy enemy;
+    public EnemyManager enemyM;
+    private Vector3 vZero = new Vector3(0,0,0);
+    private float flZero = 0f;
     int burnChances;
     int nbRand;
     int enemyhp;
+    int burnTimer;
     private void Start()
     {
         burnChances = sf.chanceProc;
+        burnTimer = sf.burnTime;
         nbRand = Rand();
         Debug.Log(nbRand); 
     }
@@ -24,23 +29,27 @@ public class SwordFireManager : SwordManager
     {
         if(Rand() <= burnChances)
         {
-
+            StartCoroutine("BurnThemAlive", 0.5);
 
         }
     }
 
-    //IEnumerator BurnthemAlive()
-    //{
-    //    float time = 0;
-       
-    //    while (time < sf.chanceProc)
-    //    {
-    //        time += Time.deltaTime;
-            
-    //        yield return new WaitForSeconds(1f);
+    IEnumerator BurnThemAlive()
+    {
+        float time = 0;
 
-    //    }
-    //}
+        while (time < burnTimer)
+        {
+            time += Time.deltaTime;
+            BurnPerSec(); 
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public void BurnPerSec()
+    {
+        enemyM.recevoirDegats(5,vZero,0f);
+    }
 
     public int Rand()
     {    
