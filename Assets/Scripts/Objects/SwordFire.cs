@@ -7,14 +7,14 @@ public class SwordFire : Sword
 {
 
 
-    public int chanceProc;
+    public int chanceBurnProc;
     public int burnTime;
 
     public SwordFire()
     {
         wColor = Color.yellow;
         attackDamage = 20;
-        chanceProc = 30;
+        chanceBurnProc = 30;
         burnTime = 4;
     }
 

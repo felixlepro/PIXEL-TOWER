@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using Random = UnityEngine.Random; 
 using System.Collections.Generic;
 
 
@@ -14,11 +15,10 @@ public class SwordFireManager : SwordManager
     private float flZero = 0f;
     int burnChances;
     int nbRand;
-    int enemyhp;
     int burnTimer;
     private void Start()
     {
-        burnChances = sf.chanceProc;
+        burnChances = sf.chanceBurnProc;
         burnTimer = sf.burnTime;
         nbRand = Rand();
         Debug.Log(nbRand); 
