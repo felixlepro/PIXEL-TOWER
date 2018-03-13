@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 abstract public class Weapon : ScriptableObject
 {
+    public GameObject weaponPrefab;
     public string weaponName;
     public Color wColor;
     public int attackDamage;
@@ -18,8 +19,6 @@ abstract public class Weapon : ScriptableObject
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
-
-
 
     public int getDamage()
     {

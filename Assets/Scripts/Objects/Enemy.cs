@@ -15,6 +15,7 @@ abstract public class Enemy : ScriptableObject
     public float idleTime;
     public int maxHp;
     public float knockBackAmount;
+    public float gettingKnockedBackAmount;
     public float immuneTime;
 
     public float chaseRange;

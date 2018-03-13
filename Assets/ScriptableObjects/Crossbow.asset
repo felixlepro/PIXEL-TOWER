@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483f211ffd42f8845ae2bde7088646cb, type: 3}
   m_Name: Crossbow
   m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b,
+    type: 2}
   weaponName: Crossbow
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 5

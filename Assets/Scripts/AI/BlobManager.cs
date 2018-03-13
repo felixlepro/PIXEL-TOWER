@@ -4,43 +4,36 @@ using UnityEngine;
 
 public class BlobManager : EnemyManager {
 
-     float attackCD = 1f;
     public Blob enemyBlob;
 
-    private void Update()
-    {
-        UpdateAnim();
-        spriteOrderInLayer();
-        UpdatecurrentAttackCD();
-       
-    }
+    
     public override void GetEnemy()
     {
         enemy = enemyBlob;
     }
-    new public bool checkIfAttackIsReady()
-    {
-        if(enemy.attackSpeed - attackCD < 0)
-        {
-            attackCD = enemy.attackSpeed;
-        }
-        return (timeUntilNextAttack <= enemy.attackSpeed - attackCD);
-    }
+   
     public override void TryAttack()
     {
-        if (checkIfAttackIsReady())
-        {
-            AIPathing.speed = enemy.moveSpeed;
-            Debug.Log("rdy");
             Attack();
-
-        }
-        if (timeUntilNextAttack > 0)
-        {
-            Debug.Log((timeUntilNextAttack / enemy.attackSpeed));
-            AIPathing.speed = enemy.moveSpeed * ((1 - (timeUntilNextAttack / enemy.attackSpeed)));
-        }
+    }
         
+    public override void AttackSuccessful()
+    {
+        StartCoroutine("Slow");
+    }
+    IEnumerator Slow()
+    {
+        float speed = 1f;
+        float time = 0;
+        while (time < enemy.attackSpeed)
+        {
+            currentSpeed /= speed;
+            speed = (time / enemy.attackSpeed) * 0.9f + 0.1f;
+            currentSpeed *= speed;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
     }
     public override void Damaged()
     {
@@ -89,7 +82,7 @@ public class BlobManager : EnemyManager {
 
 
 
-    public void UpdateAnim()
+    public override void UpdateAnim()
     {
 
         UpdateAnimState();

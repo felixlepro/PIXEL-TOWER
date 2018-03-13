@@ -38,21 +38,21 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        
+
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = player.animator;
         //player.hp = GameManager.instance.playerHp;
 
         weaponTransform = transform.Find("WeaponRotation");
-       //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
-       // weaponObject.transform.parent = weaponTransform;
-       // weaponObject.name = "Weapon";
+        //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
+        // weaponObject.transform.parent = weaponTransform;
+        // weaponObject.name = "Weapon";
+        ChangeWeapon(player.weapon);
 
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
-        weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
-        coinText.text = "Coins: " + coins;
+        coinText.text = "Coins: " + coins;       
     }
     private void OnDisable()
     {
@@ -130,6 +130,11 @@ public class Player : MonoBehaviour {
             else alpha = 1;
             //curve = Mathf.Cos(time*2000*Mathf.PI)/3 + 0.75f;
             //Debug.Log(curve);
+
+            if(weaponSprite == null)
+            {
+                weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
+            } 
             graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
             weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
             yield return new WaitForSeconds(0.075f);
@@ -232,5 +237,26 @@ public class Player : MonoBehaviour {
     public void doFaceMouse(bool fm)
     {
         FacingMouse = fm;
+    }
+
+    public void ChangeWeapon(Weapon newWeapon)
+    {
+        player.weapon = newWeapon;
+        InstantiateWeapon(newWeapon.weaponPrefab);
+        weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
+    }
+    void InstantiateWeapon(GameObject prefab)
+    {
+        foreach (Transform child in weaponTransform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        GameObject weaponInstance = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+
+        weaponInstance.transform.parent = weaponTransform;
+        weaponInstance.transform.localScale = prefab.transform.localScale;
+        weaponInstance.transform.localPosition = prefab.transform.position;
+
     }
 }

@@ -20,18 +20,17 @@ GameObject:
   m_Component:
   - component: {fileID: 4290830489452062}
   - component: {fileID: 114857469027985538}
-  - component: {fileID: 114432140505526336}
   - component: {fileID: 114519354339216302}
   - component: {fileID: 114434318785287364}
-  - component: {fileID: 114763816393491384}
-  - component: {fileID: 114501265182246342}
+  - component: {fileID: 114415609931410876}
+  - component: {fileID: 50500600916201916}
   m_Layer: 0
   m_Name: EnemyBlob 1
   m_TagString: EnemyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1526033635971586
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 87.11395, y: -38.37268, z: 0.96321934}
+  m_LocalPosition: {x: 72, y: 74, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4742755626589672}
@@ -108,6 +107,26 @@ Transform:
   m_Father: {fileID: 4290830489452062}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50500600916201916
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327544550791342}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!58 &58205722261418146
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -170,36 +189,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114432140505526336
+--- !u!114 &114415609931410876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Script: {fileID: 11500000, guid: 498dde72b7fcfa542a647ca1d4057b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  speed: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   repathRate: 0.2
-  canSearch: 1
-  canMove: 1
-  maxSpeed: 1
-  gravity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffset: 1
-  rotationIn2D: 0
-  targetCompatibility: {fileID: 0}
-  rotationSpeed: 0
-  slowdownDistance: 0
-  pickNextWaypointDist: 0.5
-  endReachedDistance: 0.5
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 0
-  whenCloseToDestination: 0
+  requestPath: 1
 --- !u!114 &114434318785287364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,43 +216,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+  currentSpeed: 0
   timeUntilNextAttack: 0
   enemy: {fileID: 11400000, guid: 1ee584ee234c39b4f8dc4c49deff6c76, type: 2}
+  enemyRigidbody: {fileID: 0}
   anim: {fileID: 0}
   controller: {fileID: 0}
+  spriteR: {fileID: 0}
+  targetCollider: []
+  enemyCollider: {fileID: 0}
+  attackHitbox: []
   isWalking: 0
   isAttacking: 0
   isDying: 0
   Angle: 0
-  spriteR: {fileID: 0}
   knockBackAmount: 0
-  knockBackAmountOverTime: 1
-  knockBackAmountOverTimeMinimum: 0.85
-  knockBackTime: 1
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
+  chaseTarget: {fileID: 0}
+  wayPointList: []
+  nextWayPoint: 0
+  pathingUnit: {fileID: 0}
   enemyBlob: {fileID: 11400000, guid: 1ee584ee234c39b4f8dc4c49deff6c76, type: 2}
---- !u!114 &114501265182246342
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327544550791342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  smoothType: 0
-  subdivisions: 2
-  iterations: 2
-  strength: 0.3
-  uniformLength: 1
-  maxSegmentLength: 2
-  bezierTangentLength: 0.4
-  offset: 0.2
-  factor: 0.1
 --- !u!114 &114519354339216302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,41 +251,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 686c29cc04c5fa34d9af2305a526c5ad, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
-  chaseTarget: {fileID: 0}
   enemyManager: {fileID: 114434318785287364}
   timeUntilNextAttack: 0
   hp: 0
-  AIPathing: {fileID: 0}
-  wayPointList: []
-  nextWayPoint: 0
   stateTimeElapsed: 0
   timeElapsed: 0
   AScountdown: 0
-  targetCollider: []
-  enemyCollider: {fileID: 0}
-  attackHitbox: {fileID: 0}
---- !u!114 &114763816393491384
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327544550791342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
-  repathRate: 0.1
-  canSearch: 1
-  canMove: 1
-  speed: 3
-  enableRotation: 0
-  rotationIn2D: 0
-  rotationSpeed: 10
-  interpolatePathSwitches: 1
-  switchPathInterpolationSpeed: 5
-  targetCompatibility: {fileID: 0}
 --- !u!114 &114857469027985538
 MonoBehaviour:
   m_ObjectHideFlags: 1

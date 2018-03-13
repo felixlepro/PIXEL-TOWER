@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Unit : MonoBehaviour
 {
-    public float speed;
-    public Vector3 targetPosition;
+    [HideInInspector] public float speed;
+    [HideInInspector] public Vector3 targetPosition;
     public float repathRate;
     [HideInInspector] public bool requestPath = true;
 
@@ -36,24 +36,27 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
-        while (true)
+        if (path.Length > 0)
         {
-            if (transform.position == currentWaypoint)
+            Vector3 currentWaypoint = path[0];
+            while (true)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
+                if (transform.position == currentWaypoint)
                 {
-                    targetIndex = 0;
-                    path = new Vector3[0];
-                    yield break;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        targetIndex = 0;
+                        path = new Vector3[0];
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];
+
+                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                yield return null;
+
             }
-
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
-
         }
     }
 

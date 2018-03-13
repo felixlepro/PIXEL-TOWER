@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
-  chargeAttackKey: 323
+  bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
 --- !u!212 &212378961993274990
 SpriteRenderer:
   m_ObjectHideFlags: 1

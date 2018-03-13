@@ -11,12 +11,6 @@ public class KnightManager : EnemyManager {
  
     public Knight enemyKnight;
 
-    private void Update()
-    {
-        UpdateAnim();
-        spriteOrderInLayer();
-        UpdatecurrentAttackCD();
-    }
     public override void GetEnemy()
     {
         enemy = enemyKnight;
@@ -27,7 +21,7 @@ public class KnightManager : EnemyManager {
         pathingUnit.speed = 0;
         pathingUnit.disablePathing();
         getAngleTarget();
-        attackHitbox.gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
+        attackHitbox[0].gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         attackDone = false;
         StartCoroutine("AttackFade", enemyKnight.attackChargeTime );
     }
@@ -40,7 +34,7 @@ public class KnightManager : EnemyManager {
         {
             time += Time.deltaTime;
             colorAlpha = colorAlphaMax * (1 - (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)));
-            attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
             
         }
@@ -51,7 +45,7 @@ public class KnightManager : EnemyManager {
         {
             time -= Time.deltaTime * 2;
             colorAlpha = colorAlphaMax * time / enemyKnight.attackChargeTime;
-            attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
 
@@ -60,73 +54,27 @@ public class KnightManager : EnemyManager {
     }
     public override void Damaged()
     {
-        if (isAttacking == true)
+        if (enemy.gettingKnockedBackAmount !=0 && isAttacking == true)
         {
             StopCoroutine("AttackFade");
-           // resetAttackCD();
             endAttack();
         }
-           
     }
     
     public void endAttack()
     {
         pathingUnit.speed = currentSpeed;
         pathingUnit.enablePathing();
-        attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
         controller.enemyManager.isAttacking = false;
         anim.speed = 1;
         //controller.enemyManager.isWalking = false; 
 
     }
-    //public void mainAttack()
-    //{
-    //    // Debug.Log(attackDone);
-    //    if (!attackDone)
-    //    {
-    //        time += Time.deltaTime;
-    //        colorAlpha = colorAlphaMax * (1 - (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)));
-    //        controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+    public override void AttackSuccessful()
+    {
+    }
 
-    //        if (controller.CheckIfCountDownElapsed2(attackChargeTime))
-    //        {
-    //            // Debug.Log("MainAttack");
-    //            foreach (Collider2D pc in controller.targetCollider)
-    //            {
-    //                if (controller.attackHitbox.IsTouching(pc))
-    //                {
-    //                    // Debug.Log("collided");
-    //                    pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - controller.transform.position, knockBackAmount);
-    //                    resetAttackCD();
-    //                    break;
-    //                }
-
-    //            }
-    //            attackDone = true;
-    //            //   Debug.Log(attackDone);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (time > 0)
-    //        {
-    //            time -= Time.deltaTime * 2;
-    //            colorAlpha = colorAlphaMax * time / attackChargeTime;
-    //            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
-    //        }
-    //        else
-    //        {
-    //            controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-    //            time = 0;
-    //        }
-    //    }
-
-    //}
-    //public override void endAttack()
-    //{
-    //    controller.attackHitbox.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-    //    time = 0;
-    //}
     //Animations-----------------------------------------
 
     float stateStartTime;
@@ -190,7 +138,7 @@ public class KnightManager : EnemyManager {
 
 
 
-    public  void UpdateAnim()
+    public override void UpdateAnim()
     {
 
         UpdateAnimState();

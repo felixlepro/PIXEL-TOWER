@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c32cbb253eb2ee4f9859a10b3f632cc, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794,
+    type: 2}
   weaponName: cac
   wColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   attackDamage: 10
