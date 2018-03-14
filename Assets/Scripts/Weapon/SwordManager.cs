@@ -48,7 +48,7 @@ public class SwordManager: WeaponManager
     protected override  void ReleaseChargedWeapon()
     {
         coll.enabled = true;
-
+        Debug.Log("release");
         attack();
     }
     protected override void WeaponOnCD()

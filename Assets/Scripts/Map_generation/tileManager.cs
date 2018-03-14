@@ -5,8 +5,8 @@ using UnityEngine;
 public class tileManager : MonoBehaviour {
 
     SpriteRenderer[] spriteR;
-    public Sprite sprite1;
-    public Sprite sprite2;
+    public Sprite[] spritee;
+
 
     void Start()
     {
@@ -14,15 +14,10 @@ public class tileManager : MonoBehaviour {
         spriteR = GetComponentsInChildren<SpriteRenderer>();
         foreach (SpriteRenderer caca in spriteR)
         {
-            int rng = Random.Range(0, 2);
-            if (0 == rng)
-            {
-                caca.sprite = sprite1;
-            }
-            else
-            {
-                caca.sprite = sprite2;
-            }
+            int rng = Random.Range(0, spritee.Length);
+            caca.sprite = spritee[rng];
+            int rng2 = Random.Range(0, 3);
+            caca.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 90 * rng2);
         } 
 	}
 }
