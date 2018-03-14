@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private Text coinCounttext;
     private Board boardScript;
     private int level = 1;
-    private List<Enemy> enemies;
+    private List<EnemyManager> enemies;
     private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        enemies = new List<Enemy>();
+        enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
         InitGame();
     }

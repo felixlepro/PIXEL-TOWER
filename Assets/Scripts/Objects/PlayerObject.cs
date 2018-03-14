@@ -8,7 +8,8 @@ using EZCameraShake;
 public class PlayerObject : ScriptableObject  {
     public int hp;
     public float speed;
-    public Weapon weapon;
+    public GameObject weaponObject;
+    public WeaponManager weapon;
     public RuntimeAnimatorController animator;
 
  

@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
-public class SwordIceManager : MonoBehaviour {
+public class SwordIceManager : SwordManager
+{
 
-    public SwordIce sI;
-    public Enemy enemy;
-    public EnemyManager enemyM;
+    public int chanceSlowProc;
+    public int slowTime;
+    public float slowMultip;
+
+
+    public EnemyManager enemy;
     private Vector3 vZero = new Vector3(0, 0, 0);
     private float flZero = 0f;
     int slowChances;
     int nbRand;
     int slowTimer;
     float slowMult;
+
+    public SwordIceManager()
+    {
+        wColor = Color.blue;
+        attackDamage = 20;
+        slowTime = 3;
+        slowMultip = 0.65f;
+        chanceSlowProc = 48;
+    }
     private void Start()
     {
-        slowMult = sI.slowMultip; 
-        slowChances = sI.chanceSlowProc;
-        slowTimer = sI.slowTime;
+        slowMult = slowMultip;
+        slowChances = chanceSlowProc;
+        slowTimer = slowTime;
         nbRand = Rand();
         Debug.Log(nbRand);
     }
-
 
     private void MightSlow()
     {
@@ -33,7 +45,7 @@ public class SwordIceManager : MonoBehaviour {
             while (time < slowTimer)
             {
                 time += Time.deltaTime;
-                PlsSlow(); 
+                PlsSlow();
             }
 
             PlsDontSlow();
@@ -44,12 +56,12 @@ public class SwordIceManager : MonoBehaviour {
 
     public void PlsSlow()
     {
-        enemy.moveSpeed *= slowMult;
+        enemy.maxMoveSpeed *= slowMult;
     }
 
     public void PlsDontSlow()
     {
-        enemy.moveSpeed /= slowMult;
+        enemy.maxMoveSpeed /= slowMult;
     }
 
     public int Rand()

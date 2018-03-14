@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour {
+    public RuntimeAnimatorController animChest;
+    public int nbCoins;
 
-    [HideInInspector] public Animator animChest;
-     public ChestObject chest;
+
+    [HideInInspector] public Animator anim;
     public GameObject coinGO;
 
     private void Start()
     {
-        animChest = GetComponent<Animator>();
-        animChest.runtimeAnimatorController = chest.animChest;
+        anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = animChest;
     }
     public void OpenChest()
     {
-        animChest.SetTrigger("Open");
-        for (int coin =0; coin < chest.nbCoins; coin ++)
+        anim.SetTrigger("Open");
+        for (int coin =0; coin < nbCoins; coin ++)
         {
             Instantiate(coinGO, transform.position, Quaternion.identity);
         }

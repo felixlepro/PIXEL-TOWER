@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class KnightManager : EnemyManager {
 
+    public float attackChargeTime;
+
     GameObject attackColliderObject;
     float colorAlpha = 0;
     const float colorAlphaMax = 1f;
     bool attackDone = false;
- 
-    public Knight enemyKnight;
-
-    public override void GetEnemy()
-    {
-        enemy = enemyKnight;
-    }
 
     public override void TryAttack()
     {
@@ -23,17 +18,17 @@ public class KnightManager : EnemyManager {
         getAngleTarget();
         attackHitbox[0].gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         attackDone = false;
-        StartCoroutine("AttackFade", enemyKnight.attackChargeTime );
+        StartCoroutine("AttackFade", attackChargeTime );
     }
 
     IEnumerator AttackFade()
     {
         float time = 0;
-        anim.speed = 0.7f/ enemyKnight.attackChargeTime;
-        while (time < enemyKnight.attackChargeTime)
+        anim.speed = 0.7f/ attackChargeTime;
+        while (time < attackChargeTime)
         {
             time += Time.deltaTime;
-            colorAlpha = colorAlphaMax * (1 - (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)) * (1 - (time / enemyKnight.attackChargeTime)));
+            colorAlpha = colorAlphaMax * (1 - (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)));
             attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
             
@@ -44,7 +39,7 @@ public class KnightManager : EnemyManager {
         while (time > 0)
         {
             time -= Time.deltaTime * 2;
-            colorAlpha = colorAlphaMax * time / enemyKnight.attackChargeTime;
+            colorAlpha = colorAlphaMax * time / attackChargeTime;
             attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
@@ -54,7 +49,7 @@ public class KnightManager : EnemyManager {
     }
     public override void Damaged()
     {
-        if (enemy.gettingKnockedBackAmount !=0 && isAttacking == true)
+        if (gettingKnockedBackAmount !=0 && isAttacking == true)
         {
             StopCoroutine("AttackFade");
             endAttack();

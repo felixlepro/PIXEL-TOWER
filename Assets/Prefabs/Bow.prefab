@@ -70,7 +70,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb43be8bebe4dde47985f0cb420ee8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  weaponPrefab: {fileID: 1781025517976478}
+  weaponName: 
+  wColor: {r: 1, g: 1, b: 1, a: 1}
+  attackDamage: 0
+  cost: 0
+  range: 50
+  attackSpeed: 25
+  animator: {fileID: 9100000, guid: 08c7696b68e6a2749bf75cf2b718578b, type: 2}
+  description: 
+  sprite: {fileID: 0}
+  basePosition: {x: 0.35, y: 0, z: 0}
+  baseScale: {x: 1, y: 1, z: 1}
+  chargeTime: 1
+  attackDamageChargedBonus: 30
+  knockBackAmount: 10
+  boltSpeed: 25
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
 --- !u!212 &212623114865415482
 SpriteRenderer:

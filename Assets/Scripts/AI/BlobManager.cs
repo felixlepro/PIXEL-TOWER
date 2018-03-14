@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class BlobManager : EnemyManager {
 
-    public Blob enemyBlob;
+    public float hpLostOnAttack;
 
-    
-    public override void GetEnemy()
-    {
-        enemy = enemyBlob;
-    }
    
     public override void TryAttack()
     {
@@ -19,12 +14,12 @@ public class BlobManager : EnemyManager {
         
     public override void AttackSuccessful()
     {
-        Slow(0.9f, enemy.attackSpeed, true);
+        Slow(0.9f, attackSpeed, true);
     }
     
     public override void Damaged()
     {
-        hp -= Mathf.FloorToInt(enemy.maxHp / enemyBlob.hpLostOnAttack);
+        hp -= Mathf.FloorToInt(maxHp / hpLostOnAttack);
         VerifyDeath();
     }
 

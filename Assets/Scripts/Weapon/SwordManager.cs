@@ -9,15 +9,14 @@ public class SwordManager: WeaponManager
 
     void Start()
     {
-        weapon = GetComponentInParent<Player>().player.weapon;
         spriteR = gameObject.GetComponent<SpriteRenderer>();
-        spriteR.color = weapon.wColor;
+        spriteR.color = wColor;
 
         coll = gameObject.GetComponent<BoxCollider2D>();
         coll.enabled = false;
 
         anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = weapon.animator;     
+        anim.runtimeAnimatorController = animator;     
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,7 +36,7 @@ public class SwordManager: WeaponManager
 
     protected override void ChargeWeapon()
     {
-        chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
+        chargeDoneRatio = (currentChargeTime / chargeTime);
         anim.speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
         anim.SetBool("AttackCharge", true);
     }

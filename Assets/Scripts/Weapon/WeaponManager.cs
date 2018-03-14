@@ -4,7 +4,23 @@ using UnityEngine;
 
 public abstract class WeaponManager : MonoBehaviour {
 
-    [HideInInspector] public Weapon weapon;
+    public GameObject weaponPrefab;
+    public string weaponName;
+    public Color wColor;
+    public int attackDamage;
+    public int cost;
+    public float range;
+    public float attackSpeed; //  attackCD
+    public RuntimeAnimatorController animator;
+    public string description;
+    public Sprite sprite;
+    public Vector3 basePosition = new Vector3(0.35f, 0, 0);
+    public Vector3 baseScale = new Vector3(1, 1, 1);
+
+    public float chargeTime;
+    public int attackDamageChargedBonus;
+    public float knockBackAmount;
+
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
@@ -21,12 +37,11 @@ public abstract class WeaponManager : MonoBehaviour {
 
     void Start()
     {
-        weapon = GetComponentInParent<Player>().player.weapon;
         spriteR = gameObject.GetComponent<SpriteRenderer>();
-        spriteR.color = weapon.wColor;
+        spriteR.color = wColor;
        
         anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = weapon.animator;
+        anim.runtimeAnimatorController = animator;
     }
 
     void Update()
@@ -36,14 +51,14 @@ public abstract class WeaponManager : MonoBehaviour {
         if (timeUntilNextAttack <= 0)
         {
 
-            if (Input.GetKey(chargeAttackKey) && (currentChargeTime < weapon.chargeTime))
+            if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
             {
                 currentChargeTime += Time.deltaTime;
                 ChargeWeapon();
                 
 
             }
-            else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
+            else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= chargeTime))
             {
                 MaxChargeWeapon();
                 
@@ -65,13 +80,13 @@ public abstract class WeaponManager : MonoBehaviour {
 
     public void EnvoyerDegat(EnemyManager cible)
     {
-        if (currentChargeTime < weapon.chargeTime)
+        if (currentChargeTime < chargeTime)
         {
-            cible.recevoirDegats(weapon.attackDamage + Mathf.FloorToInt(weapon.attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);
+            cible.recevoirDegats(attackDamage + Mathf.FloorToInt(attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
         else
         {
-            cible.recevoirDegats(weapon.attackDamageChargedBonus + weapon.attackDamage, cible.gameObject.transform.position - transform.position, weapon.knockBackAmount);
+            cible.recevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
     }
 
@@ -88,7 +103,7 @@ public abstract class WeaponManager : MonoBehaviour {
     }
      protected void ResetAttackTimer()
     {
-        timeUntilNextAttack = weapon.attackSpeed;
+        timeUntilNextAttack = attackSpeed;
     }
 
 }

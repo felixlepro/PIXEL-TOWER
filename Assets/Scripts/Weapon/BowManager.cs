@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BowManager : WeaponManager {
+    public float boltSpeed;
+
 
     public GameObject bolt;
     private List<Bolt> boltList = new List<Bolt>();
@@ -10,7 +12,7 @@ public class BowManager : WeaponManager {
     protected override void ChargeWeapon()
     {
         anim.SetBool("AttackCharge", true);
-        chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
+        chargeDoneRatio = (currentChargeTime / chargeTime);
        // anim.speed = anim.GetCurrentAnimatorStateInfo(0).length / weapon.chargeTime;
     }
 
@@ -30,7 +32,7 @@ public class BowManager : WeaponManager {
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector3 direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
 
-        boltList[boltList.Count - 1].Setup(weapon.attackDamage, direction, weapon.knockBackAmount, 25 * chargeDoneRatio);
+        boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio);
         ResetAttackTimer();
     }
 

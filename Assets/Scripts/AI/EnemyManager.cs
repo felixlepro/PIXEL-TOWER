@@ -5,10 +5,28 @@ using EZCameraShake;
 
 abstract public class EnemyManager : MonoBehaviour {
 
+    public string EnemyName;
+    public Color wColor = Color.white;
+    public int attackDamage;
+    public float attackSpeed; //  attaque/seconde
+    public float attackRange;
+    public float maxMoveSpeed;
+    public RuntimeAnimatorController animator;
+    public float idleTime;
+    public int maxHp;
+    public float maxKnockBackAmount;
+    public float gettingKnockedBackAmount;
+    public float immuneTime;
+
+    public float chaseRange;
+    public float chaseRangeBuffer;
+    public float size;
+
+
+
     public int hp;
-    public float currentSpeed;
-    public float timeUntilNextAttack;
-    [HideInInspector] public Enemy enemy;
+    [HideInInspector] public float currentSpeed;
+    [HideInInspector] public float timeUntilNextAttack;
 
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
@@ -25,13 +43,12 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public float Angle;
 
     [HideInInspector] public float knockBackAmount = 0;
-    //[HideInInspector] const float knockBackAmountOverTime = 1;
     [HideInInspector] const float knockBackAmountOverTimeMinimum = 0.85f;
     [HideInInspector] const float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
-    public Transform chaseTarget;
+    [HideInInspector] public Transform chaseTarget;
 
     [HideInInspector]   public List<Vector3> wayPointList;
     [HideInInspector] public int nextWayPoint = 0;
@@ -40,30 +57,27 @@ abstract public class EnemyManager : MonoBehaviour {
 
     abstract public void TryAttack();
     abstract public void Damaged();
-    abstract public void GetEnemy();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
 
     void Start()
     {
-        currentSpeed = enemy.moveSpeed;
+        currentSpeed = maxMoveSpeed;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
 
         chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
-        hp = enemy.maxHp;
+        hp = maxHp;
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<StateController>();
         //controller.enemyManager = this;
 
-        GetEnemy();
-
         anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = enemy.animator;
+        anim.runtimeAnimatorController = animator;
 
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteR.color = enemy.wColor;
+        spriteR.color = wColor;
 
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
@@ -87,7 +101,7 @@ abstract public class EnemyManager : MonoBehaviour {
             {
                 if (ah.IsTouching(pc))
                 {
-                    pc.gameObject.GetComponent<Player>().RecevoirDegats(enemy.attackDamage, pc.gameObject.transform.position - transform.position, enemy.knockBackAmount, enemy.immuneTime);
+                    pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - transform.position, maxKnockBackAmount, immuneTime);
                     AttackSuccessful();
                     resetAttackCD();
                     break;
@@ -97,7 +111,7 @@ abstract public class EnemyManager : MonoBehaviour {
     }
     public void idling()
     {
-        float time = Random.Range(1, 5) * enemy.idleTime;
+        float time = Random.Range(1, 5) * idleTime;
         isWalking = false;
         pathingUnit.disablePathing();
         Invoke("newPath", time);    
@@ -137,7 +151,7 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         hp -= damage;
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
-        knockBackAmount = kbAmmount * enemy.gettingKnockedBackAmount;
+        knockBackAmount = kbAmmount * gettingKnockedBackAmount;
         Damaged();  
         if (knockBackAmount != 0)
         {
@@ -220,7 +234,7 @@ abstract public class EnemyManager : MonoBehaviour {
     }
     public void resetAttackCD()
     {
-        timeUntilNextAttack = enemy.attackSpeed;
+        timeUntilNextAttack = attackSpeed;
     }
 
     public void getAnglePath()                                     //à garder

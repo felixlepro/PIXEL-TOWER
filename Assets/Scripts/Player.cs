@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
         //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
         // weaponObject.transform.parent = weaponTransform;
         // weaponObject.name = "Weapon";
-        ChangeWeapon(player.weapon);
+        //ChangeWeapon(player.weaponObject);
 
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
@@ -239,10 +239,18 @@ public class Player : MonoBehaviour {
         FacingMouse = fm;
     }
 
-    public void ChangeWeapon(Weapon newWeapon)
+    public void ChangeWeapon(GameObject newWeapon)
     {
-        player.weapon = newWeapon;
-        InstantiateWeapon(newWeapon.weaponPrefab);
+        player.weaponObject = newWeapon;
+        player.weapon = player.weaponObject.GetComponent<WeaponManager>();
+        // InstantiateWeapon(newWeapon.weaponPrefab);
+        foreach (Transform child in weaponTransform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        newWeapon.transform.parent = weaponTransform;
+        newWeapon.transform.localScale = player.weapon.baseScale;
+        newWeapon.transform.localPosition = player.weapon.basePosition;
         weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
     }
     void InstantiateWeapon(GameObject prefab)

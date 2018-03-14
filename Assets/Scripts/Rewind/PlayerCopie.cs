@@ -16,7 +16,7 @@ public class PlayerCopie : MonoBehaviour
     public List<PositionPlus> chemin = new List<PositionPlus>();
     public GameObject player;
 
-    public Weapon weapon;
+    public WeaponManager weapon;
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
