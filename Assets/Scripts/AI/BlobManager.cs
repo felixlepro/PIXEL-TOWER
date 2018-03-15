@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlobManager : EnemyManager {
 
-    public float hpLostOnAttack;
+    public float hpRatioLostOnAttack;
 
    
     public override void TryAttack()
@@ -15,12 +15,14 @@ public class BlobManager : EnemyManager {
     public override void AttackSuccessful()
     {
         Slow(0.9f, attackSpeed, true);
+        hp -= Mathf.FloorToInt(maxHp * hpRatioLostOnAttack);
+        StartCoroutine("RedOnly");
+        VerifyDeath();
     }
     
     public override void Damaged()
     {
-        hp -= Mathf.FloorToInt(maxHp / hpLostOnAttack);
-        VerifyDeath();
+       
     }
 
    
@@ -67,8 +69,8 @@ public class BlobManager : EnemyManager {
 
     public override void UpdateAnim()
     {
-
         UpdateAnimState();
+
     }
 
     void UpdateAnimState()
@@ -77,7 +79,6 @@ public class BlobManager : EnemyManager {
 
         if (isWalking)
         {
-            // Debug.Log("animawalk");
             if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
             else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
             else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);

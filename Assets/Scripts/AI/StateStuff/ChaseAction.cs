@@ -13,6 +13,7 @@ public class ChaseAction : Action
     private void Chase(StateController controller)
     {
         controller.enemyManager.isAttacking = false;
+        controller.enemyManager.isWalking = true;
         //if (controller.enemyManager.AIPathing.reachedEndOfPath)
         //{
             

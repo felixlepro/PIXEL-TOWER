@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
     int targetIndex;
     float time = 0;
 
+    [HideInInspector] public Vector3 direction;
 
     void Update()
     {
@@ -54,6 +55,7 @@ public class Unit : MonoBehaviour
                 }
 
                 transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                direction =currentWaypoint - transform.position;
                 yield return null;
 
             }
