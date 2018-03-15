@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
     public Text coinText;
     public int coins;
     public PlayerObject player;
-    private bool immune = false;
+    public bool immune = false;
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
