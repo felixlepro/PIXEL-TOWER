@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour {
     public RuntimeAnimatorController animChest;
     public int nbCoins;
-
+    Collider2D col;
 
     [HideInInspector] public Animator anim;
     public GameObject coinGO;
@@ -22,5 +22,6 @@ public class Chest : MonoBehaviour {
         {
             Instantiate(coinGO, transform.position, Quaternion.identity);
         }
+        Destroy(col);
     }
 }

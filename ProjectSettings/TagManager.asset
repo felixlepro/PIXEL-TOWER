@@ -15,6 +15,7 @@ TagManager:
   - Weapon
   - EnemyManager
   - Chest
+  - OpenChest
   layers:
   - Default
   - TransparentFX

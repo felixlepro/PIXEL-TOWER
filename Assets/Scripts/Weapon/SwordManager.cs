@@ -31,6 +31,7 @@ public class SwordManager: WeaponManager
         else if (other.tag== "Chest")
         {
             other.gameObject.GetComponent<Chest>().OpenChest();
+            other.tag = "OpenChest";
         }
     }
 

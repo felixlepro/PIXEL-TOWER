@@ -4,13 +4,37 @@ using UnityEngine;
 
 public class CoinExplosion : MonoBehaviour {
 
-	// Use this for initialization
+    public float  vitesse = 10000f;
+    public Vector3 direction;
+    int angle;
+    AudioSource audio;
+    
 	void Start () {
-		
+        angle = Random.Range(1, 360);
+        direction =  new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized ;
+        audio = GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void FixedUpdate () {
+        transform.position += direction * vitesse;
+        if (vitesse > 0.0005)
+        {
+            vitesse *= 0.995f;
+        }
+        
 	}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name == "MurPrototypeFond(Clone)" || other.name == "MurAvant(Clone)")
+        {
+            direction.y = -direction.y;
+            vitesse *= 0.9f;
+        }
+        else if (other.name == "MurGauche(Clone)" || other.name == "MurDroit(Clone)")
+        {
+            direction.x = -direction.x;
+            vitesse *= 0.9f;
+        }
+        audio.Play();
+    }
 }
