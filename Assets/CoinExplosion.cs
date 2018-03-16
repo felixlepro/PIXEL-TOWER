@@ -28,12 +28,10 @@ public class CoinExplosion : MonoBehaviour {
         if (other.name == "MurPrototypeFond(Clone)" || other.name == "MurAvant(Clone)")
         {
             direction.y = -direction.y;
-            vitesse *= 0.9f;
         }
         else if (other.name == "MurGauche(Clone)" || other.name == "MurDroit(Clone)")
         {
             direction.x = -direction.x;
-            vitesse *= 0.9f;
         }
         audio.Play();
     }
