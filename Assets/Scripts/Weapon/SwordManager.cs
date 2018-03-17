@@ -5,18 +5,18 @@ using UnityEngine;
 public class SwordManager: WeaponManager 
 {
     private BoxCollider2D coll;
-
+    Animator[] anima;
 
     void Start()
     {
-        spriteR = gameObject.GetComponent<SpriteRenderer>();
+        spriteR = gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = wColor;
 
         coll = gameObject.GetComponent<BoxCollider2D>();
         coll.enabled = false;
 
-        anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = animator;     
+        anima = GetComponentsInChildren<Animator>();
+        //anima[].runtimeAnimatorController = animator;     
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -38,13 +38,13 @@ public class SwordManager: WeaponManager
     protected override void ChargeWeapon()
     {
         chargeDoneRatio = (currentChargeTime / chargeTime);
-        anim.speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
-        anim.SetBool("AttackCharge", true);
+        anima[0].speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
+        anima[0].SetBool("AttackCharge", true);
     }
     protected override  void MaxChargeWeapon()
     {
-        anim.SetBool("AttackCharge", true);
-        anim.speed = 2.5f;
+        anima[0].SetBool("AttackCharge", true);
+        anima[0].speed = 2.5f;
     }
     protected override  void ReleaseChargedWeapon()
     {
@@ -92,13 +92,18 @@ public class SwordManager: WeaponManager
     
     void attack()
     {
-        anim.speed = 1;
-        anim.SetBool("AttackCharge", false);
-        anim.SetBool("AttackChargeMax", false);
-        anim.SetTrigger("PlayerAttack");
+        anima[0].speed = 1;
+        anima[0].SetBool("AttackCharge", false);
+        anima[0].SetBool("AttackChargeMax", false);
+        anima[0].SetTrigger("PlayerAttack");
+        Invoke("triggerSwipe", 0.1f);
         ResetAttackTimer();
         currentChargeTime = 0;
         GetComponentInParent<Player>().doFaceMouse(false);
-        Invoke("facingMouse", anim.GetCurrentAnimatorStateInfo(0).length * anim.GetCurrentAnimatorStateInfo(0).speed);
+        Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed);
+    }
+    void triggerSwipe()
+    {
+        anima[1].SetTrigger("Swipe");
     }
 }

@@ -156,7 +156,6 @@ abstract public class EnemyManager : MonoBehaviour {
     public void recevoirDegats(int damage, Vector3 kbDirection, float kbAmmount)
     {
         hp -= damage;
-        Debug.Log(hp + "     " + damage);
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
         knockBackAmount = kbAmmount * gettingKnockedBackAmount;
         Damaged();  
