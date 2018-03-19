@@ -16,4 +16,4 @@ MonoBehaviour:
   weaponObject: {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794,
     type: 2}
   weapon: {fileID: 114122825993965852, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
-  animator: {fileID: 9100000, guid: db42350e5f820ce40a6e56b474f9b637, type: 2}
+  animator: {fileID: 22100000, guid: 33ae4e9c827631a44a0a22a8820b5ce0, type: 2}
