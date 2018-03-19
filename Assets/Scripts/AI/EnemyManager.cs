@@ -21,7 +21,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public float chaseRange;
     public float chaseRangeBuffer;
     public float size;
-
+    public AudioClip dun;
 
 
     public int hp;
@@ -96,6 +96,7 @@ abstract public class EnemyManager : MonoBehaviour {
         UpdatecurrentAttackCD();
 
     }
+    
     public void Attack()
     {
         if (!targetCollider[0].gameObject.GetComponent<Player>().immune)

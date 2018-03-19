@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212598487089321842}
   - component: {fileID: 61155355752593868}
   - component: {fileID: 114758326782906424}
+  - component: {fileID: 95320532497461626}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Chest
@@ -35,7 +36,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1050157812518948}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 68.47, y: 70.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -67,6 +68,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8125, y: 1.3125}
   m_EdgeRadius: 0
+--- !u!95 &95320532497461626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050157812518948}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 10097f9fa65ed234f9b47843b4764b0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114758326782906424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4e6c864ded1cd43a2f342cb680eb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animChest: {fileID: 0}
-  chest: {fileID: 0}
+  animChest: {fileID: 9100000, guid: 10097f9fa65ed234f9b47843b4764b0c, type: 2}
+  nbCoins: 10
+  anim: {fileID: 0}
   coinGO: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
 --- !u!212 &212598487089321842
 SpriteRenderer:
@@ -114,13 +133,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.29, y: 0.21}
+  m_Size: {x: 1.8125, y: 1.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

@@ -17,6 +17,8 @@ public class LookDecision : Decision
         if (distance <= controller.enemyManager.chaseRange)
         {
             controller.enemyManager.enemyCollider.isTrigger = false;
+            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(controller.enemyManager.dun);
+
             return true;
         }
         else
@@ -26,3 +28,4 @@ public class LookDecision : Decision
         }
     }
 }
+    

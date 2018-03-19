@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public int coinCount = 0;
     public int playerHp = 100;
     public bool inLevel = true;
+    public AudioSource audio;
 
     private Text coinCounttext;
     private Board boardScript;
@@ -38,8 +39,13 @@ public class GameManager : MonoBehaviour {
         enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
         InitGame();
+        audio = GetComponent<AudioSource>();
     }
-
+    public void PlaySound(AudioClip clip)
+    {
+        audio.clip = clip;
+        audio.Play();
+    }
     private void HideLevelImage()
     {
         levelImage.SetActive(false);

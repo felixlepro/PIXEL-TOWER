@@ -114,7 +114,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   repathRate: 0.2
   requestPath: 1
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &114434318785287364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,13 +224,14 @@ MonoBehaviour:
   maxMoveSpeed: 7
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  maxHp: 50
+  maxHp: 100
   maxKnockBackAmount: 15
   gettingKnockedBackAmount: 1
   immuneTime: 1
   chaseRange: 15
   chaseRangeBuffer: 5
   size: 0
+  dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
   hp: 0
   currentSpeed: 0
   timeUntilNextAttack: 0
@@ -251,7 +253,7 @@ MonoBehaviour:
   wayPointList: []
   nextWayPoint: 0
   pathingUnit: {fileID: 0}
-  hpLostOnAttack: 2
+  hpRatioLostOnAttack: 0.3
 --- !u!114 &114519354339216302
 MonoBehaviour:
   m_ObjectHideFlags: 1

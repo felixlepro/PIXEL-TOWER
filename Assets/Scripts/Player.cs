@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     public int coins;
     public PlayerObject player;
     public bool immune = false;
+    public AudioClip coinSound;
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
@@ -176,7 +177,8 @@ public class Player : MonoBehaviour {
         if (other.tag == "Coin")
         {
             gainCoin();
-            other.gameObject.SetActive(false);
+            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(coinSound);
+            Destroy(other.gameObject);
         }
 
     }
