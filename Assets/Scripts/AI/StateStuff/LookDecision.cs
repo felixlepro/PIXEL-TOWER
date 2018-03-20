@@ -17,6 +17,8 @@ public class LookDecision : Decision
         if (distance <= controller.enemyManager.chaseRange)
         {
             controller.enemyManager.enemyCollider.isTrigger = false;
+            controller.enemyManager.currentSpeed *= 1.25f;
+            controller.enemyManager.Root(1);
             GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(controller.enemyManager.dun);
 
             return true;

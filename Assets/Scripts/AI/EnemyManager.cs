@@ -25,6 +25,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
 
     public int hp;
+    [HideInInspector] public bool isRooted = false;
     [HideInInspector] public float currentSpeed;
     [HideInInspector] public float timeUntilNextAttack;
 
@@ -87,10 +88,9 @@ abstract public class EnemyManager : MonoBehaviour {
     }
     private void Update()
     {
-        if (pathingUnit.speed != 0)
-        {
-            pathingUnit.speed = currentSpeed;
-        }
+        if (isRooted)     pathingUnit.speed = 0;    
+       else               pathingUnit.speed = currentSpeed;
+        if (!isAttacking)      anim.speed = currentSpeed / maxMoveSpeed;
         UpdateAnim();
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
@@ -302,5 +302,14 @@ abstract public class EnemyManager : MonoBehaviour {
             yield return null;
         }
         currentSpeed /= speed;
+    }
+    public void Root(float time)
+    {
+        isRooted = true;
+        Invoke("UnRoot", time);
+    }
+    public void UnRoot()
+    {
+        isRooted = false;
     }
 }
