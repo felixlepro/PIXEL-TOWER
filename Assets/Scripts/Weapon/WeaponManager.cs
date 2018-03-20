@@ -11,19 +11,21 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost;
     public float range;
     public float attackSpeed; //  attackCD
-    public RuntimeAnimatorController animator;
-    public string description;
-    public Sprite sprite;
-    public Vector3 basePosition = new Vector3(0.35f, 0, 0);
-    public Vector3 baseScale = new Vector3(1, 1, 1);
+    
+    
 
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
-
+    public RuntimeAnimatorController animator;
+    public Sprite sprite;
+    public string description;
+    public Vector3 basePosition = new Vector3(0.35f, 0, 0);
+    public Vector3 baseScale = new Vector3(1, 1, 1);
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
+    protected Player player;
     protected float chargeDoneRatio;
     protected  float timeUntilNextAttack;
     protected float time;
@@ -37,6 +39,7 @@ public abstract class WeaponManager : MonoBehaviour {
 
     void Start()
     {
+        player = GetComponentInParent<Player>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         spriteR.color = wColor;
        
@@ -67,6 +70,7 @@ public abstract class WeaponManager : MonoBehaviour {
             {
                 ReleaseChargedWeapon();
                 currentChargeTime = 0;
+                chargeDoneRatio = 0;
 
 
             }

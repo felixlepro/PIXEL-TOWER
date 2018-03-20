@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BowManager : WeaponManager {
     public float boltSpeed;
-
+    public float slowAmount;
 
     public GameObject bolt;
     private List<Bolt> boltList = new List<Bolt>();
@@ -12,18 +12,20 @@ public class BowManager : WeaponManager {
     protected override void ChargeWeapon()
     {
         anim.SetBool("AttackCharge", true);
+        player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
         chargeDoneRatio = (currentChargeTime / chargeTime);
-       // anim.speed = anim.GetCurrentAnimatorStateInfo(0).length / weapon.chargeTime;
+        player.currentSpeed *= (1 - (slowAmount * (1-(1-chargeDoneRatio)*(1-chargeDoneRatio))));
+
     }
 
     protected override void MaxChargeWeapon()
     {
-        anim.speed = 1;
     }
 
     protected override void ReleaseChargedWeapon()
     {
-        anim.speed = 1;
+        player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
+
         anim.SetBool("AttackCharge", false);
         anim.SetTrigger("PlayerAttack");
         boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());

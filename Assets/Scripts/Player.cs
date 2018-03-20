@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     public PlayerObject player;
     public bool immune = false;
     public AudioClip coinSound;
+    [HideInInspector ] public float currentSpeed;
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
@@ -39,7 +40,7 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-
+        currentSpeed=player.maxSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = player.animator;
@@ -190,7 +191,7 @@ public class Player : MonoBehaviour {
     {
 
         movement.Set(h, v, 0f);
-        movement = movement.normalized * player.speed * Time.deltaTime;
+        movement = movement.normalized * currentSpeed * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + movement);
         if (h == 0 && v == 0)
         {
@@ -268,5 +269,44 @@ public class Player : MonoBehaviour {
         weaponInstance.transform.localScale = prefab.transform.localScale;
         weaponInstance.transform.localPosition = prefab.transform.position;
 
+    }
+    public void Slow(float slowAmount, float duration, bool fade)
+    {
+        if (fade)
+        {
+            StartCoroutine(SlowFade(slowAmount, duration));
+        }
+        else
+        {
+            StartCoroutine(SlowNonFade(slowAmount, duration));
+        }
+
+    }
+    IEnumerator SlowNonFade(float slowAmount, float duration)
+    {
+        float time = 0;
+
+        currentSpeed *= (1 - slowAmount);
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        currentSpeed /= (1 - slowAmount);
+    }
+    IEnumerator SlowFade(float slowAmount, float duration)
+    {
+        float speed = 1f;
+        float time = 0;
+        while (time < duration)
+        {
+            currentSpeed /= speed;
+            speed = (time / duration) * slowAmount + 1 - slowAmount;
+            currentSpeed *= speed;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+        currentSpeed /= speed;
     }
 }
