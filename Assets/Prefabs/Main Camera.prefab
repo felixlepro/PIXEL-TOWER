@@ -22,8 +22,7 @@ GameObject:
   - component: {fileID: 20364681223352336}
   - component: {fileID: 124448085176532246}
   - component: {fileID: 81342250849720830}
-  - component: {fileID: 114606221599900094}
-  - component: {fileID: 114470273860187162}
+  - component: {fileID: 114210670259462956}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -37,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298376864071572}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -30}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.886044, y: -137.37268, z: -29.121885}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +63,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -74,10 +73,12 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!81 &81342250849720830
 AudioListener:
   m_ObjectHideFlags: 1
@@ -85,7 +86,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298376864071572}
   m_Enabled: 1
---- !u!114 &114470273860187162
+--- !u!114 &114210670259462956
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,21 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultPosInfluence: {x: 0.5, y: 0.5, z: 0.5}
-  DefaultRotInfluence: {x: 0.25, y: 0.25, z: 0.75}
---- !u!114 &114606221599900094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298376864071572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6826333d7daa34ab9a50ccf42dab62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  MouseFollowAmount: 0
+  DefaultPosInfluence: {x: 0.22, y: 0.22, z: 0.1}
+  DefaultRotInfluence: {x: 0.5, y: 0.5, z: 0.75}
 --- !u!124 &124448085176532246
 Behaviour:
   m_ObjectHideFlags: 1

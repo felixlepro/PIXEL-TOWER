@@ -213,7 +213,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
 
-            enemyRigidbody .MovePosition(transform.position + kb);
+            enemyRigidbody.MovePosition(transform.position + kb);
             //transform.position = Vector3.MoveTowards(transform.position, transform.position+kb, Time.deltaTime);
             kbAmountOverTime += Time.deltaTime * knockBackTime;
             yield return null;

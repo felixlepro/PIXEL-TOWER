@@ -21,6 +21,7 @@ public class CoinExplosion : MonoBehaviour {
         {
             vitesse *= 0.995f;
         }
+        else vitesse = 0;
         
 	}
     private void OnTriggerEnter2D(Collider2D other)

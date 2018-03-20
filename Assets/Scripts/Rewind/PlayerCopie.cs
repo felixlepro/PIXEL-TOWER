@@ -17,8 +17,7 @@ public class PlayerCopie : MonoBehaviour
     public GameObject player;
 
     public WeaponManager weapon;
-
-    private Rigidbody2D playerRigidbody;
+    
     private BoxCollider2D boxCollider;
     private Animator anim;
     private int hp;
@@ -37,7 +36,6 @@ public class PlayerCopie : MonoBehaviour
 
     void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");

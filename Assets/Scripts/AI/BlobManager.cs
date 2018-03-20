@@ -59,11 +59,7 @@ public class BlobManager : EnemyManager {
     }
 
     State state;
-    Vector2 velocity;
-    float horzInput;
-    bool jumpJustPressed;
-    bool jumpHeld;
-    int airJumpsDone = 0;
+    
 
 
 

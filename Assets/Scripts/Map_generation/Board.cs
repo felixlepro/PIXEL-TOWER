@@ -47,7 +47,7 @@ public class Board : MonoBehaviour {
     }
     private int[,] TyleTypeToInt(TileType[][] t)
     {
-        int NodeContour = GetComponent<GridManager>().NodeContour;
+        //int NodeContour = GetComponent<GridManager>().NodeContour;
 
         int[,] grid = new int[t.Length,t[0].Length];
         for (int x = 0; x < t.Length; x++)
