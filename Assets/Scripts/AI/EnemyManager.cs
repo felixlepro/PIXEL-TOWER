@@ -202,6 +202,7 @@ abstract public class EnemyManager : MonoBehaviour {
     }
     public IEnumerator KnockBack()
     {
+        yield return new WaitForFixedUpdate();
         pathingUnit.speed = 0;
         pathingUnit.disablePathing();
         float kbAmountOverTime = 0;
@@ -218,7 +219,7 @@ abstract public class EnemyManager : MonoBehaviour {
             enemyRigidbody.MovePosition(transform.position + kb);
             //transform.position = Vector3.MoveTowards(transform.position, transform.position+kb, Time.deltaTime);
             kbAmountOverTime += Time.deltaTime * knockBackTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         spriteR.color = new Color(1f, 1, 1, 1f);
         pathingUnit.enablePathing();

@@ -100,6 +100,7 @@ public class Player : MonoBehaviour {
     }
     IEnumerator KnockBack()
     {
+        yield return new WaitForFixedUpdate();
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
         while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour {
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             playerRigidbody.MovePosition(transform.position + kb);
             knockBackAmountOverTime += Time.deltaTime * knockBackTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         graphicsSpriteR.color = new Color(1f, 1, 1, graphicsSpriteR.color[3]);
 
