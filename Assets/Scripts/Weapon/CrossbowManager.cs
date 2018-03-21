@@ -30,7 +30,7 @@ public class CrossbowManager : WeaponManager
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector3 direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
 
-        boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed);
+        boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed);
         ResetAttackTimer();
     }
 

@@ -174,10 +174,12 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         if (hp <= 0)
         {
+            currentSpeed = 0;
             isWalking = false;
             isAttacking = false;
             isDying = true;
-            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
+            UpdateAnim();
+            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length*anim.speed);
         }
         else
         {
@@ -225,7 +227,8 @@ abstract public class EnemyManager : MonoBehaviour {
 
     private void Death()
     {
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
+        //this.gameObject.SetActive(false);
     }
 
     public void UpdatecurrentAttackCD()

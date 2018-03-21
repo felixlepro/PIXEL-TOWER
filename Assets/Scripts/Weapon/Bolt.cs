@@ -4,29 +4,53 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour {
 
+    public float slowDownAmount;
+
+   public float lifeTime;
+    float time = 0;
+    private bool UpdateSpeed = true;
     private int damage;
     private float speedBolt;
+    float maxSpeedBolt;
     private float knockBack;
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
+    Collider2D collider;
 
     // Use this for initialization
     void Start () {
         boltRigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
     }
 
 	// Update is called once per frame
 	void Update () {
-        direction = direction.normalized * speedBolt * Time.deltaTime;
-        boltRigidbody.MovePosition(transform.position + direction);
+        time += Time.deltaTime;
+        if (time >= lifeTime)
+        {
+            StartCoroutine(fadeToDeath());
+        }
+
+
+        if (UpdateSpeed)
+        {
+            speedBolt -= slowDownAmount * Time.deltaTime;
+            if (speedBolt > 2)
+            {
+                direction = direction.normalized * speedBolt * Time.deltaTime;
+                boltRigidbody.MovePosition(transform.position + direction);
+            }
+            else Destroy(this.gameObject);
+        }
     }
 
-    public void Setup(int dam, Vector3 dir, float kb, float speed)
+    public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed)
     {
         damage = dam;
         direction = dir;
         knockBack = kb;
         speedBolt = speed;
+        maxSpeedBolt = maxSpeed;
         this.gameObject.transform.right = direction;
     }
 
@@ -34,13 +58,33 @@ public class Bolt : MonoBehaviour {
     {
         if(other.tag == "Enemy")
         {
-            StateController enemyScript = other.gameObject.GetComponentInParent<StateController>();
-            enemyScript.enemyManager.recevoirDegats(damage, direction, knockBack);
-            Destroy(this.gameObject);
+            collider.enabled = false;
+            EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
+            damage = Mathf.RoundToInt(damage * speedBolt/maxSpeedBolt);
+            em.recevoirDegats(damage, direction, knockBack* speedBolt / maxSpeedBolt);
+            //Destroy(this.gameObject);
+            UpdateSpeed = false;
+            transform.parent = em.gameObject.transform;
+
         }
         else if(other.tag == "Obstacle")
         {
-            Destroy(this.gameObject);
+            collider.enabled = false;
+            //Destroy(this.gameObject);
+            UpdateSpeed = false;
         }
+    }
+
+    IEnumerator fadeToDeath()
+    {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        while (sprite.color.a > 0)
+        {
+            Color tmp = sprite.color;
+            tmp.a -= Time.deltaTime/0.5f;
+            sprite.color = tmp;
+            yield return null;
+        }
+        Destroy(this.gameObject);
     }
 }
