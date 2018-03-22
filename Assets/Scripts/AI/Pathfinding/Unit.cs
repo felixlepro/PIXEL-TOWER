@@ -111,6 +111,14 @@ public class Unit : MonoBehaviour
             }
         }
     }
+    public bool IsWalking()
+    {
+        if (path == null || path.Length ==0)
+        {
+            return false;
+        }
+        return true;
+    }
 }
 //using UnityEngine;
  //using System.Collections;
