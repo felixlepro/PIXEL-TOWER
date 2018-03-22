@@ -61,6 +61,7 @@ abstract public class EnemyManager : MonoBehaviour {
     abstract public void Damaged();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
+    abstract public void gonnaDie();
 
     void Start()
     {
@@ -73,7 +74,6 @@ abstract public class EnemyManager : MonoBehaviour {
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<StateController>();
-        //controller.enemyManager = this;
 
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = animator;
@@ -132,14 +132,9 @@ abstract public class EnemyManager : MonoBehaviour {
             isWalking = true;
             nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
-        //pathingUnit.RequestPath(wayPointList[nextWayPoint]);
         pathingUnit.targetPosition = wayPointList[nextWayPoint];        
         pathingUnit.enablePathing();
 
-        // Debug.Log(wayPointList[nextWayPoint]);
-        //Debug.Log("EnabledPathing");
-        //AIPathing.destination = wayPointList[controller.nextWayPoint].position;
-        //AIPathing.SearchPath();
     }
 
 
@@ -180,6 +175,7 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         if (hp <= 0)
         {
+            gonnaDie();
             currentSpeed = 0;
             isWalking = false;
             isAttacking = false;
@@ -192,17 +188,19 @@ abstract public class EnemyManager : MonoBehaviour {
             isDying = false;
         }
     }
-   void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "obstacle" && !other.isTrigger)
-        {
-            hitAWall = true;
-        }
-    }
-    void OnTriggerExit2D(Collider2D other)
-    {
-        hitAWall = false;
-    }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    Debug.Log("triggered");
+    //    if (other.tag == "Obstacle" && !other.isTrigger)
+    //    {
+    //        Debug.Log("triggered");
+    //        hitAWall = true;
+    //    }
+    //}
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    hitAWall = false;
+    //}
 
     public IEnumerator RedOnly()
     {
@@ -210,7 +208,7 @@ abstract public class EnemyManager : MonoBehaviour {
         spriteR.color = new Color(1f, 0, 0, 1f);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-            if (!hitAWall)
+           // if (!hitAWall)
             {
                 float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
                 spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);

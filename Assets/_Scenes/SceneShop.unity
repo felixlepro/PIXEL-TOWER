@@ -332,6 +332,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &375635679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375635673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c321b7be99b4242bd1b86c5555ac0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 857591495}
+  openIt: 0
 --- !u!1 &433139353
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,8 +682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520a69b8df9f8584883a132a9bb07a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopInfo: {fileID: 0}
-  shopMenu: {fileID: 857591495}
 --- !u!1001 &816424297
 Prefab:
   m_ObjectHideFlags: 0
@@ -833,13 +844,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 857591495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520a69b8df9f8584883a132a9bb07a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopInfo: {fileID: 0}
-  shopMenu: {fileID: 857591495}
 --- !u!1 &930553534
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour
     [HideInInspector] public Vector3 targetPosition;
     public float repathRate;
     [HideInInspector] public bool requestPath = true;
+    [HideInInspector]
+    public bool requestProcessing = false;
 
     Vector3[] path;
     int targetIndex;
@@ -17,9 +19,10 @@ public class Unit : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if ((time > repathRate && requestPath) &&(path == null || path.Length <= 0 || path[path.Length - 1] != targetPosition))
+        if ((time > repathRate && requestPath)&& !requestProcessing &&(path == null || path.Length <= 0 || path[path.Length - 1] != targetPosition))
         {
             PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
+            requestProcessing = true;
             time = 0;
         }
         //if (path == null || path.Length <= 0)
@@ -43,6 +46,7 @@ public class Unit : MonoBehaviour
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
+        requestProcessing = false;
         if (pathSuccessful)
         {
             path = newPath;
