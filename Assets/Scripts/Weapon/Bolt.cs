@@ -85,7 +85,7 @@ public class Bolt : MonoBehaviour {
         while (sprite.color.a > 0)
         {
             Color tmp = sprite.color;
-            tmp.a -= Time.deltaTime/0.5f;
+            tmp.a -= Time.deltaTime/4;
             sprite.color = tmp;
             yield return null;
         }

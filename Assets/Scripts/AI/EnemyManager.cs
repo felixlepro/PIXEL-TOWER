@@ -185,7 +185,7 @@ abstract public class EnemyManager : MonoBehaviour {
             isAttacking = false;
             isDying = true;
             UpdateAnim();
-            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length*anim.speed);
+            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
         else
         {
