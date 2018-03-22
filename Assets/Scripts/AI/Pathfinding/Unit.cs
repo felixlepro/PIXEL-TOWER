@@ -17,11 +17,28 @@ public class Unit : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time > repathRate && requestPath)
+        if ((time > repathRate && requestPath) &&(path == null || path.Length <= 0 || path[path.Length - 1] != targetPosition))
         {
             PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
             time = 0;
         }
+        //if (path == null || path.Length <= 0)
+        //{
+        //    if (time > repathRate && requestPath)
+        //    {
+        //        PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
+        //        time = 0;
+        //    }
+        //}
+        //else
+        //{
+        //    if (time > repathRate && requestPath &&  path[path.Length - 1] != targetPosition)
+        //    {
+        //        PathRequestManager.RequestPath(transform.position, targetPosition, OnPathFound);
+        //        time = 0;
+        //    }
+        //}
+        
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)

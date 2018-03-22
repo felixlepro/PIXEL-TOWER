@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114281943543242298}
   - component: {fileID: 50838222471975566}
   - component: {fileID: 61634230184892698}
+  - component: {fileID: 95487871871006814}
   m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
@@ -88,6 +89,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.03}
   m_EdgeRadius: 0
+--- !u!95 &95487871871006814
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537247388328212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb750cc388a8b6041a3c1f2bde076a8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114281943543242298
 MonoBehaviour:
   m_ObjectHideFlags: 1
