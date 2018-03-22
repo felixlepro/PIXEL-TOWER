@@ -810,7 +810,7 @@ CircleCollider2D:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 546547300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -826,7 +826,7 @@ CircleCollider2D:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 546547300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -936,7 +936,7 @@ CircleCollider2D:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 576914843}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -1021,17 +1021,18 @@ MonoBehaviour:
   attackDamage: 10
   attackSpeed: 1
   attackRange: 0
-  maxMoveSpeed: 7
+  maxMoveSpeed: 30
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
   maxHp: 500
   maxKnockBackAmount: 15
   gettingKnockedBackAmount: 1
   immuneTime: 1
-  chaseRange: 15
+  chaseRange: 0
   chaseRangeBuffer: 5
   size: 0
   dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
+  hitAWall: 0
   hp: 0
   isRooted: 0
   currentSpeed: 0
@@ -2539,8 +2540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableGizmos: 1
-  nodeRadius: 0.2
-  NodeContour: 1
+  nodeRadius: 0.5
 --- !u!114 &2136353626
 MonoBehaviour:
   m_ObjectHideFlags: 0

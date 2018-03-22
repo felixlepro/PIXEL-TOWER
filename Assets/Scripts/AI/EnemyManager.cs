@@ -22,6 +22,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public float chaseRangeBuffer;
     public float size;
     public AudioClip dun;
+    public bool hitAWall = false;
 
 
     public int hp;
@@ -121,17 +122,22 @@ abstract public class EnemyManager : MonoBehaviour {
         float time = Random.Range(1, 5) * idleTime;
         isWalking = false;
         pathingUnit.disablePathing();
+        Debug.Log("invoke:" + time);
+        //newPath();
         Invoke("newPath", time);    
     }
     private void newPath()
-    {   
+    {
+        Debug.Log("newpath");
             isWalking = true;
             nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
-            pathingUnit.targetPosition = wayPointList[nextWayPoint];
-             Debug.Log(wayPointList[nextWayPoint]);
-            pathingUnit.enablePathing();
-              Debug.Log("EnabledPathing");
+        //pathingUnit.RequestPath(wayPointList[nextWayPoint]);
+        pathingUnit.targetPosition = wayPointList[nextWayPoint];        
+        pathingUnit.enablePathing();
+
+        // Debug.Log(wayPointList[nextWayPoint]);
+        //Debug.Log("EnabledPathing");
         //AIPathing.destination = wayPointList[controller.nextWayPoint].position;
         //AIPathing.SearchPath();
     }
@@ -143,7 +149,7 @@ abstract public class EnemyManager : MonoBehaviour {
     //    {
     //        //controller.AIPathing.reachedEndOfPath = true;
     //    }
-  
+
     //}
 
     public void spriteOrderInLayer()
@@ -186,16 +192,31 @@ abstract public class EnemyManager : MonoBehaviour {
             isDying = false;
         }
     }
+   void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "obstacle" && !other.isTrigger)
+        {
+            hitAWall = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        hitAWall = false;
+    }
+
     public IEnumerator RedOnly()
     {
         float kbAmountOverTime = 0;
         spriteR.color = new Color(1f, 0, 0, 1f);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-            float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
-            spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+            if (!hitAWall)
+            {
+                float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
+                spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-            kbAmountOverTime += Time.deltaTime * knockBackTime * 1.75f;
+                kbAmountOverTime += Time.deltaTime * knockBackTime * 1.75f;
+            }
             yield return null;
         }
         spriteR.color = new Color(1f, 1, 1, 1f);

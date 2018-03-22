@@ -15,7 +15,7 @@ public class GridManager : MonoBehaviour
     Vector3 worldBotLeft;
     Vector2 gridWorldSize;
     public float nodeRadius;
-    public int NodeContour;
+    //public int NodeContour;
 
 
     public void CreateGrid(int[,] board)
@@ -62,23 +62,23 @@ public class GridManager : MonoBehaviour
 
                 bool walkable = (board[nx, ny] == 1);
 
-                if (walkable)
-                {
-                    for (int vx = -NodeContour; vx <= NodeContour; vx += NodeContour)
-                    {
-                        for (int vy = -NodeContour; vy <= NodeContour; vy += NodeContour)
-                        {
-                            int nvx = Mathf.FloorToInt((x + vx) * nodeRadius);
-                            int nvy = Mathf.FloorToInt((y + vy) * nodeRadius);
+                //if (walkable)
+                //{
+                //    for (int vx = -NodeContour; vx <= NodeContour; vx += NodeContour)
+                //    {
+                //        for (int vy = -NodeContour; vy <= NodeContour; vy += NodeContour)
+                //        {
+                //            int nvx = Mathf.FloorToInt((x + vx) * nodeRadius);
+                //            int nvy = Mathf.FloorToInt((y + vy) * nodeRadius);
 
-                            if (board[nvx, nvy] == 0)
-                            {
-                                walkable = false;
-                                break;
-                            }
-                        }
-                    }
-                }
+                //            if (board[nvx, nvy] == 0)
+                //            {
+                //                walkable = false;
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
 
                 Vector3 worldPoint = worldBotLeft + Vector3.right * (nodeRadius * 2 * x + nodeRadius) + Vector3.up * (nodeRadius * 2 * y + nodeRadius);
                 grid[x, y] = new Node(walkable, worldPoint, x, y);

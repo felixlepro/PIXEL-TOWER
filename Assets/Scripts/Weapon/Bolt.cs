@@ -56,20 +56,24 @@ public class Bolt : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             collider.enabled = false;
+            GetComponent<Animator>().SetTrigger("Hit");
+            transform.right = -direction;
             EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
-            damage = Mathf.RoundToInt(damage * speedBolt/maxSpeedBolt);
-            em.recevoirDegats(damage, direction, knockBack* speedBolt / maxSpeedBolt);
+            damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
+            em.recevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt);
             //Destroy(this.gameObject);
             UpdateSpeed = false;
             transform.parent = em.gameObject.transform;
 
         }
-        else if(other.tag == "Obstacle")
+        else if (other.tag == "Obstacle" && !other.isTrigger)
         {
             collider.enabled = false;
+            GetComponent<Animator>().SetTrigger("Hit");
+            transform.right = -direction;
             //Destroy(this.gameObject);
             UpdateSpeed = false;
         }
