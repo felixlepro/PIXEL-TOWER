@@ -160,7 +160,7 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("SceneLevel", LoadSceneMode.Single);
+            SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
             GameManager.instance.inLevel = true;
         }
     }
