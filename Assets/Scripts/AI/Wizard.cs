@@ -189,35 +189,44 @@ public class Wizard : EnemyManager {
 
                 //Attacking
             case State.GrosCoupL:
-                anim.Play(AttackS);
-
+                anim.Play(GrosCoup);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.GrosCoupR:
-                anim.Play(AttackSE);
+                anim.Play(GrosCoup);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.AttackNormalL:
-                anim.Play(AttackE);
+                anim.Play(AttackNormal);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.AttackNormalR:
-                anim.Play(AttackNE);
+                anim.Play(AttackNormal);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.AttackSwingL:
-                anim.Play(AttackN);
+                anim.Play(AttackSwing);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.AttackSwingR:
-                anim.Play(AttackNW);
+                anim.Play(AttackSwing);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.SummonL:
-                anim.Play(AttackW);
+                anim.Play(Summon);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.SummonR:
-                anim.Play(AttackSW);
+                anim.Play(Summon);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.TeleportL:
-                anim.Play(AttackSW);
+                anim.Play(Teleport);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
             case State.TeleportR:
-                anim.Play(AttackSW);
+                anim.Play(Teleport);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 break;
 
             //Dying
