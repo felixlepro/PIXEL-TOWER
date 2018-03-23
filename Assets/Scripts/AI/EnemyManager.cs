@@ -46,9 +46,9 @@ abstract public class EnemyManager : MonoBehaviour {
 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] const float knockBackAmountOverTimeMinimum = 0.85f;
-    [HideInInspector] const float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
+    const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
 
     [HideInInspector] public Transform chaseTarget;
 
@@ -213,7 +213,7 @@ abstract public class EnemyManager : MonoBehaviour {
                 float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
                 spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-                kbAmountOverTime += Time.deltaTime * knockBackTime * 1.75f;
+                kbAmountOverTime += Time.deltaTime * 1.75f;
             }
             yield return null;
         }
@@ -226,6 +226,8 @@ abstract public class EnemyManager : MonoBehaviour {
         pathingUnit.disablePathing();
         float kbAmountOverTime = 0;
         spriteR.color = new Color(1f, 0, 0, 1f);
+
+        float knockBackTime = (timePerKnockBackAmount / knockBackAmount);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
             float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
