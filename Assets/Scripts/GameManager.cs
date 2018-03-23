@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public int playerHp = 100;
     public bool inLevel = true;
     public AudioSource audio;
+    public AudioClip coinSound;
 
     private Text coinCounttext;
     private Board boardScript;

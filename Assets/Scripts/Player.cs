@@ -177,12 +177,7 @@ public class Player : MonoBehaviour {
         {
             
         }
-        if (other.tag == "Coin")
-        {
-            gainCoin();
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(coinSound);
-            Destroy(other.gameObject);
-        }
+        
 
     }
     
