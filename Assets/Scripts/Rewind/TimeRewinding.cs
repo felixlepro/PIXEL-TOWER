@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TimeRewinding : MonoBehaviour
 {
+    public float nbSec;
     bool isRewinding = false;
     public static bool isFantoming = false;
     List<PositionPlus> positionRewind;
@@ -54,11 +55,11 @@ public class TimeRewinding : MonoBehaviour
     }
     void Record()
     {
-        if (positionRewind.Count > Mathf.Round(2f / Time.fixedDeltaTime))
+        if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
         scriptPlayer = GameObject.Find("Pilot").GetComponent<Player>();
-        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction));
+        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKeyDown(KeyCode.Mouse0)));
     }
 
     public void StartRewind()

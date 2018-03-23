@@ -14,7 +14,6 @@ public class Player : MonoBehaviour {
     public int coins;
     public PlayerObject player;
     public bool immune = false;
-    public AudioClip coinSound;
     [HideInInspector ] public float currentSpeed;
 
     [HideInInspector] public Vector2 direction;
