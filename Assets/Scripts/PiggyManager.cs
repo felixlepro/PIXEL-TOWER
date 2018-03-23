@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PiggyManager : MonoBehaviour {
-
     public float Angle;
     public bool isWalking;
     public float speed;
@@ -19,12 +18,14 @@ public class PiggyManager : MonoBehaviour {
     List<Vector3 > listCoinD;
     Animator anim;
     SpriteRenderer spriteR;
+    Player playerS;
     Unit unity;
 
 	void Start () {
         anim = GetComponent<Animator>();
         unity = GetComponent<Unit>();
         spriteR = GetComponent<SpriteRenderer>();
+        playerS = GameObject.Find("Pilot").GetComponent<Player>();
         target = player;
 	}
 	
@@ -67,7 +68,7 @@ public class PiggyManager : MonoBehaviour {
     {
         if (other.tag == "Coin")
         {
-            //gainCoin();
+            playerS.gainCoin();
             GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound );
             chasing = false;
             Destroy(other.gameObject);
