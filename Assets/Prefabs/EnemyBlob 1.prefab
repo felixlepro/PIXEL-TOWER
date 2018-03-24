@@ -114,7 +114,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -136,12 +136,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.1
 --- !u!58 &58549616183476896
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -204,6 +204,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   repathRate: 0.2
   requestPath: 1
+  requestProcessing: 0
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &114434318785287364
 MonoBehaviour:
@@ -221,18 +222,20 @@ MonoBehaviour:
   attackDamage: 10
   attackSpeed: 1
   attackRange: 0
-  maxMoveSpeed: 7
+  maxMoveSpeed: 10
   animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
-  maxHp: 100
+  maxHp: 500
   maxKnockBackAmount: 15
   gettingKnockedBackAmount: 1
   immuneTime: 1
-  chaseRange: 15
+  chaseRange: 10
   chaseRangeBuffer: 5
   size: 0
   dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
+  hitAWall: 0
   hp: 0
+  isRooted: 0
   currentSpeed: 0
   timeUntilNextAttack: 0
   enemyRigidbody: {fileID: 0}
@@ -281,23 +284,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1327544550791342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Script: {fileID: 11500000, guid: 680832d156578c54fbdc946cc4d20f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
+    type: 2}
 --- !u!212 &212195248408954734
 SpriteRenderer:
   m_ObjectHideFlags: 1

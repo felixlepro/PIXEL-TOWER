@@ -24,8 +24,11 @@ public class BlobManager : EnemyManager {
     {
        
     }
+    public override void gonnaDie()
+    {
 
-   
+    }
+
     //Animations-----------------------------------------
 
     float stateStartTime;

@@ -69,6 +69,11 @@ public class KnightManager : EnemyManager {
     public override void AttackSuccessful()
     {
     }
+    public override void gonnaDie()
+    {
+        StopCoroutine(AttackFade());
+        attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+    }
 
     //Animations-----------------------------------------
 

@@ -22,6 +22,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public float chaseRangeBuffer;
     public float size;
     public AudioClip dun;
+    public bool hitAWall = false;
 
 
     public int hp;
@@ -45,9 +46,9 @@ abstract public class EnemyManager : MonoBehaviour {
 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] const float knockBackAmountOverTimeMinimum = 0.85f;
-    [HideInInspector] const float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
+    const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
 
     [HideInInspector] public Transform chaseTarget;
 
@@ -60,6 +61,7 @@ abstract public class EnemyManager : MonoBehaviour {
     abstract public void Damaged();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
+    abstract public void gonnaDie();
 
     void Start()
     {
@@ -72,7 +74,6 @@ abstract public class EnemyManager : MonoBehaviour {
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<StateController>();
-        //controller.enemyManager = this;
 
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = animator;
@@ -121,19 +122,19 @@ abstract public class EnemyManager : MonoBehaviour {
         float time = Random.Range(1, 5) * idleTime;
         isWalking = false;
         pathingUnit.disablePathing();
+        Debug.Log("invoke:" + time);
+        //newPath();
         Invoke("newPath", time);    
     }
     private void newPath()
-    {   
+    {
+        Debug.Log("newpath");
             isWalking = true;
             nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
-            pathingUnit.targetPosition = wayPointList[nextWayPoint];
-             Debug.Log(wayPointList[nextWayPoint]);
-            pathingUnit.enablePathing();
-              Debug.Log("EnabledPathing");
-        //AIPathing.destination = wayPointList[controller.nextWayPoint].position;
-        //AIPathing.SearchPath();
+        pathingUnit.targetPosition = wayPointList[nextWayPoint];        
+        pathingUnit.enablePathing();
+
     }
 
 
@@ -143,7 +144,7 @@ abstract public class EnemyManager : MonoBehaviour {
     //    {
     //        //controller.AIPathing.reachedEndOfPath = true;
     //    }
-  
+
     //}
 
     public void spriteOrderInLayer()
@@ -174,28 +175,46 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         if (hp <= 0)
         {
+            gonnaDie();
             currentSpeed = 0;
             isWalking = false;
             isAttacking = false;
             isDying = true;
             UpdateAnim();
-            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length*anim.speed);
+            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
         else
         {
             isDying = false;
         }
     }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    Debug.Log("triggered");
+    //    if (other.tag == "Obstacle" && !other.isTrigger)
+    //    {
+    //        Debug.Log("triggered");
+    //        hitAWall = true;
+    //    }
+    //}
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    hitAWall = false;
+    //}
+
     public IEnumerator RedOnly()
     {
         float kbAmountOverTime = 0;
         spriteR.color = new Color(1f, 0, 0, 1f);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-            float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
-            spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
+           // if (!hitAWall)
+            {
+                float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
+                spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-            kbAmountOverTime += Time.deltaTime * knockBackTime * 1.75f;
+                kbAmountOverTime += Time.deltaTime * 1.75f;
+            }
             yield return null;
         }
         spriteR.color = new Color(1f, 1, 1, 1f);
@@ -207,6 +226,8 @@ abstract public class EnemyManager : MonoBehaviour {
         pathingUnit.disablePathing();
         float kbAmountOverTime = 0;
         spriteR.color = new Color(1f, 0, 0, 1f);
+
+        float knockBackTime = (timePerKnockBackAmount / knockBackAmount);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
             float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);

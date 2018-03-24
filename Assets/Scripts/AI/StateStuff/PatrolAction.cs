@@ -14,7 +14,7 @@ public class PatrolAction : Action
 
     private void Patrol(StateController controller)
     {
-
+        //controller.enemyManager.pathingUnit.RequestPath(controller.enemyManager.wayPointList[controller.enemyManager.nextWayPoint]);
         controller.enemyManager.pathingUnit.targetPosition  = controller.enemyManager.wayPointList[controller.enemyManager.nextWayPoint];
 
         float distance = Mathf.Abs((controller.transform.position - controller.enemyManager.pathingUnit.targetPosition).magnitude);
