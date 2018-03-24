@@ -14,7 +14,6 @@ public class Player : MonoBehaviour {
     public int coins;
     public PlayerObject player;
     public bool immune = false;
-    public AudioClip coinSound;
     [HideInInspector ] public float currentSpeed;
 
     [HideInInspector] public Vector2 direction;
@@ -160,10 +159,11 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("SceneLevel", LoadSceneMode.Single);
+            SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
             GameManager.instance.inLevel = true;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -176,12 +176,7 @@ public class Player : MonoBehaviour {
         {
             
         }
-        if (other.tag == "Coin")
-        {
-            gainCoin();
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(coinSound);
-            Destroy(other.gameObject);
-        }
+        
 
     }
     

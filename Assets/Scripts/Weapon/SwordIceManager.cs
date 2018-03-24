@@ -40,15 +40,10 @@ public class SwordIceManager : SwordManager
     {
         if (Rand() <= slowChances)
         {
-            float time = 0;
+            
             PlsSlow();
-            while (time < slowTimer)
-            {
-                time += Time.deltaTime;
-                PlsSlow();
-            }
-
-            PlsDontSlow();
+           
+            Invoke("PlsDontSlow",3f);
 
         }
     }
