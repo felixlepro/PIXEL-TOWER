@@ -223,7 +223,6 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0
   maxMoveSpeed: 10
-  animator: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   idleTime: 0.5
   maxHp: 500
   maxKnockBackAmount: 15
@@ -233,7 +232,7 @@ MonoBehaviour:
   chaseRangeBuffer: 5
   size: 0
   dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
-  hitAWall: 0
+  fireStack: 0
   hp: 0
   isRooted: 0
   currentSpeed: 0

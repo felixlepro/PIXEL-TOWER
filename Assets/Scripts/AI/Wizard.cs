@@ -6,18 +6,41 @@ public class Wizard : BossManager {
 
      State state;
 
+    void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+        currentSpeed = maxMoveSpeed;
+        pathingUnit = GetComponent<Unit>();
+        pathingUnit.speed = currentSpeed;
+
+        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
+        hp = maxHp;
+
+        enemyRigidbody = GetComponent<Rigidbody2D>();
+        controller = GetComponent<StateController>();
+
+        anim = GetComponentInChildren<Animator>();
+        // anim.runtimeAnimatorController = animator;
+
+        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteR.color = wColor;
+
+        enemyCollider = GetComponentInChildren<Collider2D>();
+        targetCollider = chaseTarget.GetComponents<Collider2D>();
+
+        pathingUnit.targetPosition = chaseTarget.position;
+    }
     private void Update()
     {
-        SetOrKeepState(State.Moving);
+        pathingUnit.targetPosition = chaseTarget.position;
         if (isRooted) pathingUnit.speed = 0;
         else pathingUnit.speed = currentSpeed;
-        //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;
+        //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;;
         UpdateAnim();
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
-        TryAttack();
     }
-    public void TryAttack()
+    public override bool TryAttack()
     {
         if (checkIfAttackIsReady())
         {
@@ -27,34 +50,31 @@ public class Wizard : BossManager {
                 Instantiate(attacks[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
                 attacks[0].GetComponent <flameThrower>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
                 resetAttackCD();
-                SetOrKeepState(State.GrosCoup);
+                state = State.GrosCoup;
+                return true;
             }
             else if (distance < attacks[1].GetComponent<Attacks>().attackRange)
             {
                 Instantiate(attacks[1].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
                 attacks[1].GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, 1, 1,1);
                 resetAttackCD();
-                SetOrKeepState(State.AttackNormal);
+                state = State.AttackNormal;
+                return true;
             }
-            //foreach (GameObject go in attacks)
-            //{
-            //    float range = go.GetComponent<Attacks>().attackRange;
-            //    if (distance < range)
-            //    {
-
-                //    }
-                //}
         }
-
-
-        //if (distance <= attackRange && checkIfAttackIsReady())
-        //{
-        //    enemyManager.isAttacking = true;
-        //    enemyManager.isWalking = false;
-        //    enemyManager.TryAttack();
-        //    // Debug.Log("attaking");
-            
-        //}
+        return false;
+    }
+    public override void updateAnimState(string newState)
+    {
+        switch (newState)
+        {
+            case "Move": state = State.Moving; break;
+            case "Idle": state = State.Idling; break;
+            case "GrosCoup": state = State.GrosCoup; break;
+            case "AttackNormal": state = State.AttackNormal; break;
+            case "AttackSwing": state = State.AttackSwing; break;
+            case "Summoning": state = State.Summoning; break;
+        }
     }
     public override void gonnaDie()
     {
@@ -141,6 +161,10 @@ public class Wizard : BossManager {
         switch (state)
         {
             case State.Idling:
+            case State.IdleFR:
+            case State.IdleFL:
+            case State.IdleBR:
+            case State.IdleBL:
                 if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.IdleFR);
                 else if (Angle < 180 && Angle > 90) SetOrKeepState(State.IdleBR);
                 else if (Angle < 270 && Angle > 180) SetOrKeepState(State.IdleBL);
@@ -148,6 +172,10 @@ public class Wizard : BossManager {
                 break;
 
             case State.Moving:
+            case State.MoveBL:
+            case State.MoveFL:
+            case State.MoveFR:
+            case State.MoveBR:
                 if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
                 else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
                 else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);
@@ -155,26 +183,36 @@ public class Wizard : BossManager {
                 break;
 
             case State.GrosCoup:
+            case State.GrosCoupL:
+            case State.GrosCoupR:
                 if (Angle >= 0 && Angle <= 180) SetOrKeepState(State.GrosCoupR);
                 else if (Angle < 360 && Angle > 180) SetOrKeepState(State.GrosCoupL);
                 break;
 
             case State.AttackNormal:
+            case State.AttackNormalL:
+            case State.AttackNormalR:
                 if (Angle >= 0 && Angle <= 180) SetOrKeepState(State.AttackNormalR);
                 else if (Angle < 360 && Angle > 180) SetOrKeepState(State.AttackNormalL);
                 break;
 
             case State.AttackSwing:
+            case State.AttackSwingL:
+            case State.AttackSwingR:
                 if (Angle >= 0 && Angle <= 180) SetOrKeepState(State.AttackSwingR);
                 else if (Angle < 360 && Angle > 180) SetOrKeepState(State.AttackSwingL);
                 break;
 
             case State.Summoning:
+            case State.SummonL:
+            case State.SummonR:
                 if (Angle >= 0 && Angle <= 180) SetOrKeepState(State.SummonR );
                 else if (Angle < 360 && Angle > 180) SetOrKeepState(State.SummonL);
                 break;
 
             case State.Teleporting:
+            case State.TeleportL:
+            case State.TeleportR:
                 if (Angle >= 0 && Angle <= 180) SetOrKeepState(State.TeleportR);
                 else if (Angle < 360 && Angle > 180) SetOrKeepState(State.TeleportL);
                 break;
@@ -185,9 +223,10 @@ public class Wizard : BossManager {
                 break;
         }
     }
+
     void SetOrKeepState(State newState)
     {
-        if (this.stateAnim == newState) return;
+        if (stateAnim == newState) return;
         EnterState(newState);
     }
 
@@ -285,7 +324,7 @@ public class Wizard : BossManager {
                 break;
         }
 
-        this.stateAnim = newState;
+        stateAnim = newState;
         stateStartTime = Time.time;
     }
 

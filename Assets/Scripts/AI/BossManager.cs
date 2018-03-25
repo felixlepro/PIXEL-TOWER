@@ -10,7 +10,7 @@ abstract public class BossManager : MonoBehaviour {
     public float maxMoveSpeed;
     public int maxHp;
     public float gettingKnockedBackAmount;
-    public float attackRange;
+    //public float attackRange;
     public float chaseRange;
     public float chaseRangeBuffer;
     public int fireStack = 0;
@@ -43,9 +43,14 @@ abstract public class BossManager : MonoBehaviour {
 
     [HideInInspector] public Unit pathingUnit;
 
+    public Wizard wizard;
+
+
+    abstract public void updateAnimState(string newState);
     abstract public void gonnaDie();
     abstract public void Damaged();
     abstract public void UpdateAnim();
+    abstract public bool TryAttack();
 
     void Start()
     {

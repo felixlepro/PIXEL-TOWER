@@ -63,7 +63,10 @@ abstract public class EnemyManager : MonoBehaviour {
     abstract public void UpdateAnim();
     abstract public void gonnaDie();
 
-
+    private void Awake()
+    {
+        controller = GetComponent<StateController>();
+    }
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -97,7 +100,14 @@ abstract public class EnemyManager : MonoBehaviour {
         UpdatecurrentAttackCD();
         updateFire();
     }
-    
+
+    public void SetupAI(bool aiActivationFromGameManager, List<Vector3> wayPointsFromGameManager)
+    {
+
+        wayPointList = wayPointsFromGameManager;
+        controller.aiActive = aiActivationFromGameManager;
+        nextWayPoint = Random.Range(0, wayPointList.Count);
+    }
     public void Attack()
     {
         if (!targetCollider[0].gameObject.GetComponent<Player>().immune)

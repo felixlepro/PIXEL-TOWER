@@ -7,7 +7,6 @@ public class flameThrower : Attacks {
    
     BoxCollider2D attackHitbox;
     private Vector3 direction;
-    private float knockBack;
     Animator anim;
 
      Vector2[] f1 = {
@@ -34,7 +33,7 @@ public class flameThrower : Attacks {
     {
         attackDamage = Mathf.RoundToInt(attackDamage * damMult);
         direction = dir;
-        knockBack *= kbMult;
+        maxKnockBackAmount *= kbMult;
         this.gameObject.transform.right = direction;
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,7 +42,8 @@ public class flameThrower : Attacks {
         {
             attackHitbox.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
-            player.RecevoirDegats(attackDamage, direction, knockBack, immuneTime);
+            Debug.Log(maxKnockBackAmount);
+            player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
 
         }
        

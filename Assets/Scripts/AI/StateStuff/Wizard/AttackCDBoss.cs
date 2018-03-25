@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/AtCD")]
-public class AttackCDDecision : Decision {
-
+[CreateAssetMenu(menuName = "PluggableAI/Decisions/AttackCDBoss")]
+public class AttackCDBoss : Decision
+{
     public override bool Decide(StateController controller)
     {
         return CD(controller);
@@ -12,9 +12,8 @@ public class AttackCDDecision : Decision {
 
     private bool CD(StateController controller)
     {
-        if (controller.CheckIfCountDownElapsed(controller.enemyManager.anim.GetCurrentAnimatorStateInfo(0).length))
+        if (controller.CheckIfCountDownElapsed(controller.bossManager.anim.GetCurrentAnimatorStateInfo(0).length))
         {
-            controller.enemyManager.isAttacking = false;
             return true;
         }
         return false;

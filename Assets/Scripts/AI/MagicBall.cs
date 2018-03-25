@@ -29,7 +29,7 @@ public class MagicBall : Attacks {
         {
             Destroy(this.gameObject);
         }
-        Debug.Log(direction);
+        //Debug.Log(direction);
         ballRigidbody.MovePosition(transform.position + direction.normalized * speedBall * Time.deltaTime);
 
     }
@@ -51,7 +51,7 @@ public class MagicBall : Attacks {
             attackHitbox.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
             player.RecevoirDegats(attackDamage, direction, knockBack, immuneTime);
-
+            speedBall = 0;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
             Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
@@ -61,8 +61,8 @@ public class MagicBall : Attacks {
                 attackHitbox.enabled = false;
                 EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
                 em.recevoirDegats(attackDamage, direction, knockBack);
-
-                Animator anim = GetComponent<Animator>();
+            speedBall = 0;
+            Animator anim = GetComponent<Animator>();
                 anim.SetTrigger("Hit");
                 Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
             }
@@ -72,6 +72,7 @@ public class MagicBall : Attacks {
             attackHitbox.enabled = false;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
+            speedBall = 0;
             Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
 
         }
