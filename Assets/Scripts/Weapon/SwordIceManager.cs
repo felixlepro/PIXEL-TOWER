@@ -27,6 +27,7 @@ public class SwordIceManager : SwordManager
         slowMultip = 0.65f;
         chanceSlowProc = 48;
     }
+
     private void Start()
     {
         slowMult = slowMultip;
@@ -47,7 +48,6 @@ public class SwordIceManager : SwordManager
 
         }
     }
-
 
     public void PlsSlow()
     {

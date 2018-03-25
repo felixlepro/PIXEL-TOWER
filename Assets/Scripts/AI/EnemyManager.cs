@@ -8,10 +8,10 @@ abstract public class EnemyManager : MonoBehaviour {
     public string EnemyName;
     public Color wColor = Color.white;
     public int attackDamage;
-    public float attackSpeed; //  attaque/seconde
+    public float attackSpeed; 
     public float attackRange;
     public float maxMoveSpeed;
-    public RuntimeAnimatorController animator;
+    //public RuntimeAnimatorController animator;
     public float idleTime;
     public int maxHp;
     public float maxKnockBackAmount;
@@ -22,7 +22,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public float chaseRangeBuffer;
     public float size;
     public AudioClip dun;
-    public bool hitAWall = false;
+    public int fireStack = 0;
 
 
     public int hp;
@@ -63,8 +63,10 @@ abstract public class EnemyManager : MonoBehaviour {
     abstract public void UpdateAnim();
     abstract public void gonnaDie();
 
+
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         currentSpeed = maxMoveSpeed;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
@@ -76,7 +78,7 @@ abstract public class EnemyManager : MonoBehaviour {
         controller = GetComponent<StateController>();
 
         anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = animator;
+       // anim.runtimeAnimatorController = animator;
 
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = wColor;
@@ -84,18 +86,16 @@ abstract public class EnemyManager : MonoBehaviour {
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
         attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
-
-        
     }
     private void Update()
     {
         if (isRooted)     pathingUnit.speed = 0;    
-       else               pathingUnit.speed = currentSpeed;
+        else               pathingUnit.speed = currentSpeed;
         if (!isAttacking)      anim.speed = currentSpeed / maxMoveSpeed;
         UpdateAnim();
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
-
+        updateFire();
     }
     
     public void Attack()
@@ -183,10 +183,7 @@ abstract public class EnemyManager : MonoBehaviour {
             UpdateAnim();
             Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
-        else
-        {
-            isDying = false;
-        }
+     
     }
     //private void OnTriggerStay2D(Collider2D other)
     //{
@@ -327,6 +324,10 @@ abstract public class EnemyManager : MonoBehaviour {
             yield return null;
         }
         currentSpeed /= speed;
+    }
+    public void updateFire()
+    {
+
     }
     public void Root(float time)
     {

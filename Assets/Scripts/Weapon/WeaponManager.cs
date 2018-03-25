@@ -86,7 +86,7 @@ public abstract class WeaponManager : MonoBehaviour {
     {
         if (currentChargeTime < chargeTime)
         {
-            cible.recevoirDegats(attackDamage + Mathf.FloorToInt(attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, knockBackAmount);
+            cible.recevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage + attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
         else
         {

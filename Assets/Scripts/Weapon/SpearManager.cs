@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpearManager : WeaponManager
 {
     private BoxCollider2D coll;
-    Animator[] anima;
+    Animator anim;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class SpearManager : WeaponManager
         coll = gameObject.GetComponent<BoxCollider2D>();
         coll.enabled = false;
 
-        anima = GetComponentsInChildren<Animator>();
+        anim = GetComponent<Animator>();
         //anima[].runtimeAnimatorController = animator;     
     }
 
@@ -62,12 +62,12 @@ public class SpearManager : WeaponManager
         //anima[0].speed = 1;
         //anima[0].SetBool("AttackCharge", false);
         //anima[0].SetBool("AttackChargeMax", false);
-        anima[0].SetTrigger("IsAttacking");
+        anim.SetTrigger("IsAttacking");
         //Invoke("triggerSwipe", 0.1f);
         ResetAttackTimer();
         currentChargeTime = 0;
         GetComponentInParent<Player>().doFaceMouse(false);
-        Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed);
+        Invoke("facingMouse", anim.GetCurrentAnimatorStateInfo(0).length * anim.GetCurrentAnimatorStateInfo(0).speed);
     }
     void triggerSwipe()
     {

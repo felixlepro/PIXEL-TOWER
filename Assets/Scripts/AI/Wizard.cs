@@ -2,20 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wizard : EnemyManager {
+public class Wizard : BossManager {
 
      State state;
 
-    public override void TryAttack()
+    private void Update()
     {
+        SetOrKeepState(State.Moving);
+        if (isRooted) pathingUnit.speed = 0;
+        else pathingUnit.speed = currentSpeed;
+        //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;
+        UpdateAnim();
+        spriteOrderInLayer();
+        UpdatecurrentAttackCD();
+        TryAttack();
     }
-    public override void Damaged()
+    public void TryAttack()
     {
-    }
-    public override void AttackSuccessful()
-    {
+        if (checkIfAttackIsReady())
+        {
+            float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
+            if (distance < attacks[0].GetComponent<Attacks>().attackRange)
+            {
+                Instantiate(attacks[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
+                attacks[0].GetComponent <flameThrower>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
+                resetAttackCD();
+                SetOrKeepState(State.GrosCoup);
+            }
+            else if (distance < attacks[1].GetComponent<Attacks>().attackRange)
+            {
+                Instantiate(attacks[1].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
+                attacks[1].GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, 1, 1,1);
+                resetAttackCD();
+                SetOrKeepState(State.AttackNormal);
+            }
+            //foreach (GameObject go in attacks)
+            //{
+            //    float range = go.GetComponent<Attacks>().attackRange;
+            //    if (distance < range)
+            //    {
+
+                //    }
+                //}
+        }
+
+
+        //if (distance <= attackRange && checkIfAttackIsReady())
+        //{
+        //    enemyManager.isAttacking = true;
+        //    enemyManager.isWalking = false;
+        //    enemyManager.TryAttack();
+        //    // Debug.Log("attaking");
+            
+        //}
     }
     public override void gonnaDie()
+    {
+    }
+
+    public override void Damaged()
     {
     }
 
@@ -244,7 +289,7 @@ public class Wizard : EnemyManager {
         stateStartTime = Time.time;
     }
 
-   
+  
 }
 
 
