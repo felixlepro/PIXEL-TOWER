@@ -8,9 +8,8 @@ public class StateController : MonoBehaviour
 {
     public State currentState;
     public State remainState;
-   
-    public EnemyManager enemyManager;
-    public BossManager bossManager;
+
+    [HideInInspector] public EnemyManager enemyManager;
 
     [HideInInspector]  public float stateTimeElapsed;
     [HideInInspector]   public float timeElapsed;
@@ -19,6 +18,10 @@ public class StateController : MonoBehaviour
 
     [HideInInspector] public bool aiActive = false;
 
+    private void Awake()
+    {
+        enemyManager = GetComponent<EnemyManager>();
+    }
     void Update()
     {
         if (!aiActive)

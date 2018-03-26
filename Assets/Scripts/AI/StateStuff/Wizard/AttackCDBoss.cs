@@ -12,7 +12,7 @@ public class AttackCDBoss : Decision
 
     private bool CD(StateController controller)
     {
-        if (controller.CheckIfCountDownElapsed(controller.bossManager.anim.GetCurrentAnimatorStateInfo(0).length))
+        if (controller.CheckIfCountDownElapsed(controller.enemyManager.anim.GetCurrentAnimatorStateInfo(0).length))
         {
             return true;
         }

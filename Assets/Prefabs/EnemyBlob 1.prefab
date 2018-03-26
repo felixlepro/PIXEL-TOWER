@@ -181,7 +181,7 @@ Animator:
   m_GameObject: {fileID: 1526033635971586}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f86b14446241b24fb65c6372063ff85, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -270,11 +270,10 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 686c29cc04c5fa34d9af2305a526c5ad, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
   enemyManager: {fileID: 114434318785287364}
-  timeUntilNextAttack: 0
-  hp: 0
+  bossManager: {fileID: 0}
   stateTimeElapsed: 0
   timeElapsed: 0
-  AScountdown: 0
+  aiActive: 0
 --- !u!114 &114857469027985538
 MonoBehaviour:
   m_ObjectHideFlags: 1

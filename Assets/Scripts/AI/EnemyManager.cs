@@ -4,44 +4,43 @@ using UnityEngine;
 using EZCameraShake;
 
 abstract public class EnemyManager : MonoBehaviour {
-
     public string EnemyName;
     public Color wColor = Color.white;
-    public int attackDamage;
-    public float attackSpeed; 
-    public float attackRange;
     public float maxMoveSpeed;
-    //public RuntimeAnimatorController animator;
-    public float idleTime;
     public int maxHp;
-    public float maxKnockBackAmount;
     public float gettingKnockedBackAmount;
-    public float immuneTime;
-
+    //public float attackRange;
     public float chaseRange;
     public float chaseRangeBuffer;
-    public float size;
-    public AudioClip dun;
     public int fireStack = 0;
-
+    public float attackSpeed;
+    public Attacks[] attacks;
+    public GameObject[] attacksUPF; //attackUsingPrefabs
+    //public struct Atta 
+    //{
+    //    public int attackDamage;
+    //    public float immuneTime;
+    //    public float maxKnockBackAmount;
+    //    public float attackRange;
+    //    public GameObject prefab;
+    //    [HideInInspector] public Collider2D[] attackHitbox;
+    //}
+    
 
     public int hp;
     [HideInInspector] public bool isRooted = false;
     [HideInInspector] public float currentSpeed;
     [HideInInspector] public float timeUntilNextAttack;
-
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
     [HideInInspector] public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
-
     [HideInInspector] public Collider2D[] targetCollider;
     [HideInInspector] public Collider2D enemyCollider;
-    [HideInInspector] public Collider2D[] attackHitbox;
 
-    [HideInInspector] public bool isWalking;
-    [HideInInspector] public bool isAttacking;
-    [HideInInspector] public bool isDying = false;
+    //[HideInInspector] public bool isWalking;
+    //[HideInInspector] public bool isAttacking;
+    //[HideInInspector] public bool isDying = false;
     [HideInInspector] public float Angle;
 
     [HideInInspector] public float knockBackAmount = 0;
@@ -50,13 +49,29 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public Color couleurKb = Color.white;
     const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
 
-    [HideInInspector] public Transform chaseTarget;
+    public Transform chaseTarget;
+
+    [HideInInspector] public Unit pathingUnit;
+
+   
+    //public int attackDamage;
+    //public float attackRange;
+    //public float maxKnockBackAmount;
+    //public float immuneTime;
+
+    public float idleTime;
+    public AudioClip dun;
+
+    //[HideInInspector] public bool isWalking;
+    //[HideInInspector] public bool isAttacking;
+    //[HideInInspector] public bool isDying = false;
+
 
     [HideInInspector]   public List<Vector3> wayPointList;
     [HideInInspector] public int nextWayPoint = 0;
 
-    [HideInInspector] public Unit pathingUnit;
-
+    abstract public bool CheckAttack();
+    abstract public void setAnimState(string newState);
     abstract public void TryAttack();
     abstract public void Damaged();
     abstract public void AttackSuccessful();
@@ -67,6 +82,7 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         controller = GetComponent<StateController>();
     }
+
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -78,7 +94,7 @@ abstract public class EnemyManager : MonoBehaviour {
         hp = maxHp;
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
-        controller = GetComponent<StateController>();
+       
 
         anim = GetComponentInChildren<Animator>();
        // anim.runtimeAnimatorController = animator;
@@ -88,17 +104,15 @@ abstract public class EnemyManager : MonoBehaviour {
 
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
-        attackHitbox = gameObject.transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
     }
     private void Update()
     {
         if (isRooted)     pathingUnit.speed = 0;    
         else               pathingUnit.speed = currentSpeed;
-        if (!isAttacking)      anim.speed = currentSpeed / maxMoveSpeed;
+        anim.speed = currentSpeed / maxMoveSpeed;
         UpdateAnim();
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
-        updateFire();
     }
 
     public void SetupAI(bool aiActivationFromGameManager, List<Vector3> wayPointsFromGameManager)
@@ -108,19 +122,19 @@ abstract public class EnemyManager : MonoBehaviour {
         controller.aiActive = aiActivationFromGameManager;
         nextWayPoint = Random.Range(0, wayPointList.Count);
     }
-    public void Attack()
+    public void Attack(Attacks at)
     {
         if (!targetCollider[0].gameObject.GetComponent<Player>().immune)
         {
             foreach (Collider2D pc in targetCollider)
             {
-                foreach (Collider2D ah in attackHitbox)
+                foreach (Collider2D ah in at.attackHitbox)
                 {
                     if (ah.IsTouching(pc))
                     {
-                        pc.gameObject.GetComponent<Player>().RecevoirDegats(attackDamage, pc.gameObject.transform.position - transform.position, maxKnockBackAmount, immuneTime);
+                        pc.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, pc.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
                         AttackSuccessful();
-                        resetAttackCD();
+                        //resetAttackCD();
                         break;
                     }
                 }
@@ -130,7 +144,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public void idling()
     {
         float time = Random.Range(1, 5) * idleTime;
-        isWalking = false;
+        setAnimState("Idling");
         pathingUnit.disablePathing();
         Debug.Log("invoke:" + time);
         //newPath();
@@ -139,8 +153,8 @@ abstract public class EnemyManager : MonoBehaviour {
     private void newPath()
     {
         Debug.Log("newpath");
-            isWalking = true;
-            nextWayPoint = Random.Range(0, wayPointList.Count-1);
+        setAnimState("Moving");
+        nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
         pathingUnit.targetPosition = wayPointList[nextWayPoint];        
         pathingUnit.enablePathing();
@@ -187,9 +201,7 @@ abstract public class EnemyManager : MonoBehaviour {
         {
             gonnaDie();
             currentSpeed = 0;
-            isWalking = false;
-            isAttacking = false;
-            isDying = true;
+            setAnimState("Dying");
             UpdateAnim();
             Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
@@ -334,10 +346,6 @@ abstract public class EnemyManager : MonoBehaviour {
             yield return null;
         }
         currentSpeed /= speed;
-    }
-    public void updateFire()
-    {
-
     }
     public void Root(float time)
     {

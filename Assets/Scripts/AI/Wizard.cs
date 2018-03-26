@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wizard : BossManager {
+public class Wizard : EnemyManager {
 
      State state;
 
@@ -40,23 +40,23 @@ public class Wizard : BossManager {
         spriteOrderInLayer();
         UpdatecurrentAttackCD();
     }
-    public override bool TryAttack()
+    public override bool CheckAttack()
     {
         if (checkIfAttackIsReady())
         {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
-            if (distance < attacks[0].GetComponent<Attacks>().attackRange)
+            if (distance < attacksUPF[0].GetComponent<Attacks>().attackRange)
             {
-                Instantiate(attacks[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
-                attacks[0].GetComponent <flameThrower>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
+                Instantiate(attacksUPF[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
+                attacksUPF[0].GetComponent <flameThrower>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
                 resetAttackCD();
                 state = State.GrosCoup;
                 return true;
             }
-            else if (distance < attacks[1].GetComponent<Attacks>().attackRange)
+            else if (distance < attacksUPF[1].GetComponent<Attacks>().attackRange)
             {
-                Instantiate(attacks[1].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
-                attacks[1].GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, 1, 1,1);
+                Instantiate(attacksUPF[1].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
+                attacksUPF[1].GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, 1, 1,1);
                 resetAttackCD();
                 state = State.AttackNormal;
                 return true;
@@ -64,7 +64,7 @@ public class Wizard : BossManager {
         }
         return false;
     }
-    public override void updateAnimState(string newState)
+    public override void setAnimState(string newState)
     {
         switch (newState)
         {
@@ -74,6 +74,7 @@ public class Wizard : BossManager {
             case "AttackNormal": state = State.AttackNormal; break;
             case "AttackSwing": state = State.AttackSwing; break;
             case "Summoning": state = State.Summoning; break;
+            case "Die": state = State.Dying; break;
         }
     }
     public override void gonnaDie()
@@ -328,7 +329,15 @@ public class Wizard : BossManager {
         stateStartTime = Time.time;
     }
 
-  
+    public override void TryAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void AttackSuccessful()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 

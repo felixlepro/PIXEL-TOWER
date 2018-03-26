@@ -9,16 +9,14 @@ public class MagicBall : Attacks {
     public Vector3 direction;
     public Vector3 direction2;
     private Rigidbody2D ballRigidbody;
-    Collider2D attackHitbox;
+    //Collider2D attackHitbox;
     public float speedBall;
-
-
 
     // Use this for initialization
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-        attackHitbox = GetComponent<Collider2D>();
+        attackHitbox = GetComponents<Collider2D>();
     }
 
     // Update is called once per frame
@@ -43,12 +41,21 @@ public class MagicBall : Attacks {
         knockBack *= kbMult;
         speedBall *= speedMult;
     }
+    //public void Setup(Vector3 dir, int dam, float kb, float range, float it, float speed)
+    //{
+    //    attackDamage = dam;
+    //    maxKnockBackAmount = kb;
+    //    attackRange = range;
+    //    immuneTime = it;
+    //    direction = dir;
+    //    speedBall = speed;
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            attackHitbox.enabled = false;
+            attackHitbox[0].enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
             player.RecevoirDegats(attackDamage, direction, knockBack, immuneTime);
             speedBall = 0;
@@ -58,7 +65,7 @@ public class MagicBall : Attacks {
         }
         else if (other.tag == "EnnemieManager")
             {
-                attackHitbox.enabled = false;
+                attackHitbox[0].enabled = false;
                 EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
                 em.recevoirDegats(attackDamage, direction, knockBack);
             speedBall = 0;
@@ -69,7 +76,7 @@ public class MagicBall : Attacks {
 
         else if ((other.tag == "Obstacle" && !other.isTrigger) || other.tag == "Chest")
         {
-            attackHitbox.enabled = false;
+            attackHitbox[0].enabled = false;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
             speedBall = 0;

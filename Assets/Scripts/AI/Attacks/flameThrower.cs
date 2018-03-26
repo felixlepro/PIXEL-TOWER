@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class flameThrower : Attacks {
 
-   
-    BoxCollider2D attackHitbox;
+    new BoxCollider2D attackHitbox;
     private Vector3 direction;
     Animator anim;
 
@@ -36,6 +35,14 @@ public class flameThrower : Attacks {
         maxKnockBackAmount *= kbMult;
         this.gameObject.transform.right = direction;
     }
+    //public void Setup(Vector3 dir, int dam, float kb, float range, float it)
+    //{
+    //    attackDamage = dam;
+    //    maxKnockBackAmount = kb;
+    //    attackRange = range;
+    //    immuneTime = it;
+    //    this.gameObject.transform.right = direction;
+    //}
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
