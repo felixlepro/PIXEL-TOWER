@@ -69,7 +69,7 @@ public class Bolt : MonoBehaviour {
             transform.parent = em.gameObject.transform;
 
         }
-        else if (other.tag == "Obstacle" && !other.isTrigger)
+        else if ((other.tag == "Obstacle" && !other.isTrigger) || other.tag == "Chest")
         {
             collider.enabled = false;
             GetComponent<Animator>().SetTrigger("Hit");

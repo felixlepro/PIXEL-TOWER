@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/AtCD")]
 public class AttackCDDecision : Decision {
 
-
     public override bool Decide(StateController controller)
     {
         return CD(controller);
@@ -15,7 +14,7 @@ public class AttackCDDecision : Decision {
     {
         if (controller.CheckIfCountDownElapsed(controller.enemyManager.anim.GetCurrentAnimatorStateInfo(0).length))
         {
-            controller.enemyManager.isAttacking = false;
+            controller.enemyManager.resetAttackCD();
             return true;
         }
         return false;

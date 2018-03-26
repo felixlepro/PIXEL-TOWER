@@ -6,10 +6,32 @@ public class BlobManager : EnemyManager {
 
     public float hpRatioLostOnAttack;
 
-   
+    void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+        currentSpeed = maxMoveSpeed;
+        pathingUnit = GetComponent<Unit>();
+        pathingUnit.speed = currentSpeed;
+
+        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
+        hp = maxHp;
+
+        enemyRigidbody = GetComponent<Rigidbody2D>();
+        controller = GetComponent<StateController>();
+
+        anim = GetComponentInChildren<Animator>();
+        // anim.runtimeAnimatorController = animator;
+
+        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteR.color = wColor;
+
+        enemyCollider = GetComponentInChildren<Collider2D>();
+        targetCollider = chaseTarget.GetComponents<Collider2D>();
+        attacks[0].attackHitbox = GameObject.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
+    }
     public override void TryAttack()
     {
-            Attack();
+            Attack(attacks[0]);
     }
         
     public override void AttackSuccessful()
@@ -57,8 +79,11 @@ public class BlobManager : EnemyManager {
         MoveBR,
 
         DyingRight,
-        DyingLeft
+        DyingLeft,
 
+        Idling,
+        Moving,
+        Dying
     }
 
     State state;
@@ -76,30 +101,34 @@ public class BlobManager : EnemyManager {
     {
         //Debug.Log(isAttacking);
 
-        if (isWalking)
-        {
-            if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
-            else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
-            else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);
-            else if (Angle < 360 && Angle > 270) SetOrKeepState(State.MoveFL);
-        }
-        else if (isDying)
-        {
-            if (Angle >= 180 && Angle <= 360)
+        switch (state) { 
+            case State.Moving:
             {
-                SetOrKeepState(State.DyingLeft);
-            }
-            else if (Angle < 180 && Angle > 0)
+                if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
+                else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
+                else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);
+                else if (Angle < 360 && Angle > 270) SetOrKeepState(State.MoveFL);
+            } break;
+        case State.Dying:
             {
-                SetOrKeepState(State.DyingRight);
+                if (Angle >= 180 && Angle <= 360)
+                {
+                    SetOrKeepState(State.DyingLeft);
+                }
+                else if (Angle < 180 && Angle > 0)
+                {
+                    SetOrKeepState(State.DyingRight);
+                }
+                break;
             }
 
-        }
-
-        else
+        case State.Idling:
+        default:
         {
-            //Debug.Log("animIdle");
-            SetOrKeepState(State.IdleFront);
+                //Debug.Log("animIdle");
+                SetOrKeepState(State.IdleFront);
+            }break;
+       
         }
 
         // Debug.Log("animStay");
@@ -148,4 +177,19 @@ public class BlobManager : EnemyManager {
         stateStartTime = Time.time;
     }
 
+    public override bool CheckAttack()
+    {
+        return true;
+    }
+
+    public override void setAnimState(string newState)
+    {
+        switch (newState)
+        {
+            case "Moving": state = State.Moving; break;
+            case "Attacking": state = State.Moving; break;
+            case "Idling": state = State.Idling; break;
+            case "Dying": state = State.Dying; break;
+        }
+    }
 }

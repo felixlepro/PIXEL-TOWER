@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212024576979599482}
   - component: {fileID: 95608395983833224}
   - component: {fileID: 114562160865117662}
+  - component: {fileID: 65288492187977068}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Untagged
@@ -36,12 +37,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140736128571552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 662.1942, y: 227.50537, z: 2.6875}
+  m_LocalPosition: {x: 0.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65288492187977068
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140736128571552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.125, y: 1.5, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95608395983833224
 Animator:
   serializedVersion: 3
@@ -70,16 +83,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e7cefae61aa6e4aa34bd26ba696c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 1140736128571552}
   weaponName: 
-  wColor: {r: 0, g: 0, b: 0, a: 0}
+  wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 25
   cost: 1
   range: 0
   attackSpeed: 0
   chargeTime: 1.5
   attackDamageChargedBonus: 15
-  knockBackAmount: 20
+  knockBackAmount: 10
   animator: {fileID: 9100000, guid: 260cc1d3a734ca04b965bfbb788f19d5, type: 2}
   sprite: {fileID: 0}
   description: CRISS QUE C'EST PETER

@@ -13,10 +13,9 @@ public class AttackDecision : Decision {
     private bool Look(StateController controller)
     {
         float distance = Vector3.Distance(controller.enemyManager.chaseTarget.transform.position, controller.transform.position);
-        if (distance <= controller.enemyManager.attackRange && controller.enemyManager.checkIfAttackIsReady())
+        if (distance <= controller.enemyManager.attacks[0].attackRange && controller.enemyManager.checkIfAttackIsReady())
         {
-            controller.enemyManager.isAttacking = true;
-            controller.enemyManager.isWalking = false;
+            controller.enemyManager.setAnimState("Attacking");
             controller.enemyManager.TryAttack();
            // Debug.Log("attaking");
             return true;

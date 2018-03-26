@@ -16,6 +16,7 @@ TagManager:
   - EnemyManager
   - Chest
   - OpenChest
+  - Boss
   layers:
   - Default
   - TransparentFX

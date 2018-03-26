@@ -6,50 +6,91 @@ public class KnightManager : EnemyManager {
 
     public float attackChargeTime;
 
-    GameObject attackColliderObject;
+   // GameObject attackColliderObject;
     float colorAlpha = 0;
     const float colorAlphaMax = 1f;
-    bool attackDone = false;
+    //bool attackDone = false;
 
+    void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+        currentSpeed = maxMoveSpeed;
+        pathingUnit = GetComponent<Unit>();
+        pathingUnit.speed = currentSpeed;
+
+        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
+        hp = maxHp;
+
+        enemyRigidbody = GetComponent<Rigidbody2D>();
+        controller = GetComponent<StateController>();
+
+        anim = GetComponentInChildren<Animator>();
+        // anim.runtimeAnimatorController = animator;
+
+        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteR.color = wColor;
+
+        enemyCollider = GetComponentInChildren<Collider2D>();
+        targetCollider = chaseTarget.GetComponents<Collider2D>();
+        attacks[0].attackHitbox = transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
+    }
+    private void Update()
+    {
+        if (isRooted) pathingUnit.speed = 0;
+        else pathingUnit.speed = currentSpeed;
+        if(state != State.Attacking)  anim.speed = currentSpeed / maxMoveSpeed;
+        UpdateAnim();
+        spriteOrderInLayer();
+        UpdatecurrentAttackCD();
+    }
     public override void TryAttack()
     {
         isRooted = true;
         pathingUnit.disablePathing();
         getAngleTarget();
-        attackHitbox[0].gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
-        attackDone = false;
-        StartCoroutine("AttackFade", attackChargeTime );
+
+        anim.speed = 0.7f / attackChargeTime;
+        //Invoke("endAttack", attacks[0].GetComponent<KnightAttack>().attackChargeTime * 1.5f);
+        //Instantiate(attacks[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
+        //attacks[0].GetComponent<KnightAttack>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
+
+        attacks[0].attackHitbox[0].gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
+        StartCoroutine(AttackFade());
     }
 
     IEnumerator AttackFade()
     {
         float time = 0;
-        anim.speed = 0.7f/ attackChargeTime;
+
         while (time < attackChargeTime)
         {
             time += Time.deltaTime;
             colorAlpha = colorAlphaMax * (1 - (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)) * (1 - (time / attackChargeTime)));
-            attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attacks[0].attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
-            
+
         }
 
-        Attack();
+        Attack(attacks[0]);
 
         while (time > 0)
         {
             time -= Time.deltaTime * 2;
             colorAlpha = colorAlphaMax * time / attackChargeTime;
-            attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
+            attacks[0].attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, colorAlpha);
             yield return null;
         }
 
         endAttack();
-       
+
+    }
+    public override bool CheckAttack()
+    {
+        return true;
     }
     public override void Damaged()
     {
-        if (gettingKnockedBackAmount !=0 && isAttacking == true)
+        if (gettingKnockedBackAmount !=0 && state != State.Attacking)
         {
             StopCoroutine("AttackFade");
             endAttack();
@@ -60,8 +101,6 @@ public class KnightManager : EnemyManager {
     {
         isRooted = false;
         pathingUnit.enablePathing();
-        attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
-        controller.enemyManager.isAttacking = false;
         anim.speed = currentSpeed / maxMoveSpeed;
         //controller.enemyManager.isWalking = false; 
 
@@ -72,7 +111,7 @@ public class KnightManager : EnemyManager {
     public override void gonnaDie()
     {
         StopCoroutine(AttackFade());
-        attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
+        attacks[0].attackHitbox[0].GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 0, 0, 0);
     }
 
     //Animations-----------------------------------------
@@ -125,11 +164,16 @@ public class KnightManager : EnemyManager {
         AttackingW,
         AttackingSW,
         DyingRight,
-        DyingLeft
+        DyingLeft,
 
+        Idling,
+        Moving,
+        Attacking,
+        Dying
     }
 
     State state;
+    State stateAnim;
     Vector2 velocity;
     float horzInput;
     bool jumpJustPressed;
@@ -146,67 +190,72 @@ public class KnightManager : EnemyManager {
 
     void UpdateAnimState()
     {
-        //Debug.Log(isAttacking);
-        if (isAttacking)
+        switch (state)
         {
-            if (!(anim.GetCurrentAnimatorStateInfo(0).IsName(AttackS) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSE)
-               || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackE) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNE)
-               || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
-               || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
-            {
-                // Debug.Log("animattack");
-                if (Angle <= 24 || Angle >= 334) SetOrKeepState(State.AttackingS);
-                else if (Angle >= 24 && Angle <= 64) SetOrKeepState(State.AttackingSE);
-                else if (Angle >= 64 && Angle <= 116) SetOrKeepState(State.AttackingE);
-                else if (Angle >= 116 && Angle <= 155) SetOrKeepState(State.AttackingNE);
-                else if (Angle >= 155 && Angle <= 205) SetOrKeepState(State.AttackingN);
-                else if (Angle >= 205 && Angle <= 246) SetOrKeepState(State.AttackingNW);
-                else if (Angle >= 246 && Angle <= 295) SetOrKeepState(State.AttackingW);
-                else if (Angle >= 295 && Angle <= 334) SetOrKeepState(State.AttackingSW);
-            }
-        }
-        else if (isWalking)
-        {
-            // Debug.Log("animawalk");
-            if (Angle >= 316 || Angle <= 44) SetOrKeepState(State.WalkingFront);
-            else if (Angle < 314 && Angle > 226) SetOrKeepState(State.WalkingLeft);
-            else if (Angle < 224 && Angle > 136) SetOrKeepState(State.WalkingBack);
-            else if (Angle < 134 && Angle > 46) SetOrKeepState(State.WalkingRight);
-        }
-        else if (isDying)
-        {
-            if (Angle >= 180 && Angle <= 360)
-            {
-                SetOrKeepState(State.DyingLeft);
-            }
-            else if (Angle < 180 && Angle > 0)
-            {
-                SetOrKeepState(State.DyingRight);
-            }
+            //if (isAttacking)
+            case State.Attacking:
+                if (!(anim.GetCurrentAnimatorStateInfo(0).IsName(AttackS) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSE)
+                   || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackE) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNE)
+                   || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackN) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackNW)
+                   || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackW) || anim.GetCurrentAnimatorStateInfo(0).IsName(AttackSW)))
+                {
+                    // Debug.Log("animattack");
+                    if (Angle <= 31 || Angle >= 327) SetOrKeepState(State.AttackingS);
+                    else if (Angle >= 31 && Angle <= 57) SetOrKeepState(State.AttackingSE);
+                    else if (Angle >= 57 && Angle <= 113) SetOrKeepState(State.AttackingE);
+                    else if (Angle >= 113 && Angle <= 148) SetOrKeepState(State.AttackingNE);
+                    else if (Angle >= 148 && Angle <= 212) SetOrKeepState(State.AttackingN);
+                    else if (Angle >= 212 && Angle <= 239) SetOrKeepState(State.AttackingNW);
+                    else if (Angle >= 239 && Angle <= 302) SetOrKeepState(State.AttackingW);
+                    else if (Angle >= 302 && Angle <= 327) SetOrKeepState(State.AttackingSW);
+                }break;
 
-        }
+            //else if (isWalking)
+            case State.Moving:
+                {
+                    // Debug.Log("animawalk");
+                    if (Angle >= 316 || Angle <= 44) SetOrKeepState(State.WalkingFront);
+                    else if (Angle < 314 && Angle > 226) SetOrKeepState(State.WalkingLeft);
+                    else if (Angle < 224 && Angle > 136) SetOrKeepState(State.WalkingBack);
+                    else if (Angle < 134 && Angle > 46) SetOrKeepState(State.WalkingRight);
+                } break;
+            //else if (isDying)
+            case State.Dying:
+                {
+                    if (Angle >= 180 && Angle <= 360)
+                    {
+                        SetOrKeepState(State.DyingLeft);
+                    }
+                    else if (Angle < 180 && Angle > 0)
+                    {
+                        SetOrKeepState(State.DyingRight);
+                    }
 
-        else
-        {
-            //Debug.Log("animIdle");
-            if (Angle >= 315.5 || Angle <= 44.5) SetOrKeepState(State.IdleFront);
-            else if (Angle <= 314.5 && Angle >= 225.5) SetOrKeepState(State.IdleLeft);
-            else if (Angle <= 224.5 && Angle >= 135.5) SetOrKeepState(State.IdleBack);
-            else if (Angle <= 134.5 && Angle >= 45.5) SetOrKeepState(State.IdleRight);
-        }
+                }break;
 
+            // else
+            case State.Idling:
+            default:
+                {
+                    //Debug.Log("animIdle");
+                    if (Angle >= 315.5 || Angle <= 44.5) SetOrKeepState(State.IdleFront);
+                    else if (Angle <= 314.5 && Angle >= 225.5) SetOrKeepState(State.IdleLeft);
+                    else if (Angle <= 224.5 && Angle >= 135.5) SetOrKeepState(State.IdleBack);
+                    else if (Angle <= 134.5 && Angle >= 45.5) SetOrKeepState(State.IdleRight);
+                }break;
+        }
         // Debug.Log("animStay");
     }
-    void SetOrKeepState(State state)
+    void SetOrKeepState(State newState)
     {
-        if (this.state == state) return;
-        EnterState(state);
+        if (stateAnim == newState) return;
+        EnterState(newState);
     }
 
-    void EnterState(State state)
+    void EnterState(State newState)
     {
         //ExitState();
-        switch (state)
+        switch (newState)
         {
             //Walking
             case State.WalkingLeft:
@@ -272,7 +321,18 @@ public class KnightManager : EnemyManager {
                 break;
         }
 
-        this.state = state;
+        stateAnim = state;
         stateStartTime = Time.time;
+    }
+
+    public override void setAnimState(string newState)
+    {
+        switch (newState)
+        {
+            case "Moving": state = State.Moving; break;
+            case "Idling": state = State.Idling; break;
+            case "Attacking": state = State.Attacking; break;
+            case "Dying": state = State.Dying; break;
+        }
     }
 }

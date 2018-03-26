@@ -78,7 +78,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4375
+  m_Radius: 0.43
 --- !u!95 &95861743721119952
 Animator:
   serializedVersion: 3
@@ -107,6 +107,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf5fb7d7c843c84ab9227b38cd8c81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  immuneTime: 0
+  maxKnockBackAmount: 0
+  attackRange: 0
+  attackHitbox: []
+  prefab: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  direction2: {x: 0, y: 0, z: 0}
+  speedBall: 0
 --- !u!212 &212771666643281588
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,11 +151,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8665dcd4d3344ea4e92a1373c3dec9b4, type: 3}
-  m_Color: {r: 0.24574064, g: 0.18382353, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.875, y: 0.875}
+  m_Size: {x: 1.375, y: 1.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
