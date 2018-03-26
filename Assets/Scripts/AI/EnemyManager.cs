@@ -14,8 +14,8 @@ abstract public class EnemyManager : MonoBehaviour {
     public float chaseRangeBuffer;
     public int fireStack = 0;
     public float attackSpeed;
-    public Attacks[] attacks;
-    public GameObject[] attacksUPF; //attackUsingPrefabs
+    [HideInInspector]  public Attacks[] attacks;
+   // public GameObject[] attacksUPF; //attackUsingPrefabs
     //public struct Atta 
     //{
     //    public int attackDamage;
@@ -26,10 +26,8 @@ abstract public class EnemyManager : MonoBehaviour {
     //    [HideInInspector] public Collider2D[] attackHitbox;
     //}
     
-    public float size;
-    public AudioClip dun;
-    public bool hitAWall = false;
-    private Vector3 vZero = new Vector3(0, 0, 0);
+
+  
 
     public int burnTimer = 4;
     public int burnDamage = 5;
@@ -81,11 +79,12 @@ abstract public class EnemyManager : MonoBehaviour {
 
     abstract public bool CheckAttack();
     abstract public void setAnimState(string newState);
+    abstract public string getAnimState();
     abstract public void TryAttack();
     abstract public void Damaged();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
-    abstract public void gonnaDie();
+    abstract public void gonnaDie();    
 
     private void Awake()
     {
@@ -94,6 +93,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
     void Start()
     {
+        attacks = GetComponents<Attacks>();
         anim = GetComponentInChildren<Animator>();
         currentSpeed = maxMoveSpeed;
         pathingUnit = GetComponent<Unit>();
@@ -317,7 +317,7 @@ abstract public class EnemyManager : MonoBehaviour {
         if (direction.x < 0) angle = 360 - angle;
         Angle = angle;
     }
-    public void Slow(float slowAmount, float duration, bool fade)
+    public void Slow(float slowAmount, float duration, bool  fade)
     {
         if (fade)
         {
@@ -386,7 +386,7 @@ abstract public class EnemyManager : MonoBehaviour {
         {
             time += Time.deltaTime;
             VerifStack();        
-            recevoirDegats(burnAmount + currentStack, vZero, 0);
+            recevoirDegats(burnAmount + currentStack, Vector3.zero, 0);
             yield return new WaitForSeconds(1f);
         }
     }

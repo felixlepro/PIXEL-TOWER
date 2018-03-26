@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlobManager : EnemyManager {
+public class BlobManager : EnemyManager
+{
 
     public float hpRatioLostOnAttack;
 
@@ -31,9 +32,9 @@ public class BlobManager : EnemyManager {
     }
     public override void TryAttack()
     {
-            Attack(attacks[0]);
+        Attack(attacks[0]);
     }
-        
+
     public override void AttackSuccessful()
     {
         Slow(0.9f, attackSpeed, true);
@@ -41,10 +42,10 @@ public class BlobManager : EnemyManager {
         StartCoroutine("RedOnly");
         VerifyDeath();
     }
-    
+
     public override void Damaged()
     {
-       
+
     }
     public override void gonnaDie()
     {
@@ -87,7 +88,7 @@ public class BlobManager : EnemyManager {
     }
 
     State state;
-    
+
 
 
 
@@ -101,34 +102,37 @@ public class BlobManager : EnemyManager {
     {
         //Debug.Log(isAttacking);
 
-        switch (state) { 
+        switch (state)
+        {
             case State.Moving:
-            {
-                if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
-                else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
-                else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);
-                else if (Angle < 360 && Angle > 270) SetOrKeepState(State.MoveFL);
-            } break;
-        case State.Dying:
-            {
-                if (Angle >= 180 && Angle <= 360)
                 {
-                    SetOrKeepState(State.DyingLeft);
-                }
-                else if (Angle < 180 && Angle > 0)
-                {
-                    SetOrKeepState(State.DyingRight);
+                    if (Angle >= 0 && Angle <= 90) SetOrKeepState(State.MoveFR);
+                    else if (Angle < 180 && Angle > 90) SetOrKeepState(State.MoveBR);
+                    else if (Angle < 270 && Angle > 180) SetOrKeepState(State.MoveBL);
+                    else if (Angle < 360 && Angle > 270) SetOrKeepState(State.MoveFL);
                 }
                 break;
-            }
+            case State.Dying:
+                {
+                    if (Angle >= 180 && Angle <= 360)
+                    {
+                        SetOrKeepState(State.DyingLeft);
+                    }
+                    else if (Angle < 180 && Angle > 0)
+                    {
+                        SetOrKeepState(State.DyingRight);
+                    }
+                    break;
+                }
 
-        case State.Idling:
-        default:
-        {
-                //Debug.Log("animIdle");
-                SetOrKeepState(State.IdleFront);
-            }break;
-       
+            case State.Idling:
+            default:
+                {
+                    //Debug.Log("animIdle");
+                    SetOrKeepState(State.IdleFront);
+                }
+                break;
+
         }
 
         // Debug.Log("animStay");
@@ -191,5 +195,15 @@ public class BlobManager : EnemyManager {
             case "Idling": state = State.Idling; break;
             case "Dying": state = State.Dying; break;
         }
+    }
+    public override string getAnimState()
+    {
+        switch (state)
+        {
+            case State.Moving: return "Moving";
+            case State.Idling: return "Idling";
+            case State.Dying: return "Dying";
+        }
+        return "Idling";
     }
 }

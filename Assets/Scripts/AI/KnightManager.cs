@@ -335,4 +335,16 @@ public class KnightManager : EnemyManager {
             case "Dying": state = State.Dying; break;
         }
     }
+    public override string getAnimState()
+    {
+        switch (state)
+        {
+            case State.Moving: return "Moving";
+            case State.Idling: return "Idling";
+            case State.Attacking: return "Attacking";
+            case State.Dying: return "Dying";
+        }
+        return "Idling";
+    }
 }
+

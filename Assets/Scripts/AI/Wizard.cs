@@ -45,18 +45,18 @@ public class Wizard : EnemyManager {
         if (checkIfAttackIsReady())
         {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
-            if (distance < attacksUPF[0].GetComponent<Attacks>().attackRange)
+            if (distance < attacks[0].attackRange)
             {
-                Instantiate(attacksUPF[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
-                attacksUPF[0].GetComponent <flameThrower>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
+                GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
+               fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position, attacks[0].attackDamage, attacks[0].maxKnockBackAmount,attacks[0].immuneTime , attacks[0].speed, attacks[0].burnChance,attacks[0].freezeChance);
                 resetAttackCD();
                 state = State.GrosCoup;
                 return true;
             }
-            else if (distance < attacksUPF[1].GetComponent<Attacks>().attackRange)
+            else if (distance < attacks[1].attackRange)
             {
-                Instantiate(attacksUPF[1].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
-                attacksUPF[1].GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, 1, 1,1);
+                GameObject fB = Instantiate(attacks[1].prefab, transform.position, Quaternion.identity);
+               fB.GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, attacks[1].attackDamage, attacks[1].maxKnockBackAmount,attacks[1].immuneTime , attacks[1].speed, attacks[1].burnChance,attacks[1].freezeChance);
                 resetAttackCD();
                 state = State.AttackNormal;
                 return true;
@@ -68,14 +68,28 @@ public class Wizard : EnemyManager {
     {
         switch (newState)
         {
-            case "Move": state = State.Moving; break;
-            case "Idle": state = State.Idling; break;
+            case "Moving": state = State.Moving; break;
+            case "Idling": state = State.Idling; break;
             case "GrosCoup": state = State.GrosCoup; break;
             case "AttackNormal": state = State.AttackNormal; break;
             case "AttackSwing": state = State.AttackSwing; break;
             case "Summoning": state = State.Summoning; break;
-            case "Die": state = State.Dying; break;
+            case "Dying": state = State.Dying; break;
         }
+    }
+    public override string getAnimState()
+    {
+        switch (state)
+        {
+            case State.Moving: return "Moving";
+            case State.Idling: return "Idling";
+            case State.GrosCoup: return "GrosCoup";
+            case State.AttackNormal: return "AttackNormal";
+            case State.AttackSwing: return "AttackSwing";
+            case State.Summoning:return "Summoning";
+            case State.Dying: return "Dying";
+        }
+        return "Idling";
     }
     public override void gonnaDie()
     {

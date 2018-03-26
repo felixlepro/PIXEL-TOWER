@@ -53,19 +53,18 @@ public abstract class WeaponManager : MonoBehaviour {
     void Update()
     {
         UpdateTimeUntilNextAttack();
-
         if (timeUntilNextAttack <= 0)
         {
 
             if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
             {
+                
                 currentChargeTime += Time.deltaTime;
                 ChargeWeapon();               
             }
             else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= chargeTime))
             {
-                MaxChargeWeapon();
-                
+                MaxChargeWeapon();      
             }
             else if (Input.GetKeyUp(chargeAttackKey))
             {

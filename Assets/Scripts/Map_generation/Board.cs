@@ -25,11 +25,14 @@ public class Board : MonoBehaviour {
     private Corridor[] corridors;
     private GameObject boardHolder;
 
+    public GameObject[] enemyList;
+    public int nbrEnemyBase;
+    int level;
+    int nbrTileFloor = 0;
+
     public  void SetupBoard(int lvl)
     {
         
-
-
         boardHolder = new GameObject("Board Holder");
         if (lvl !=1)
         {
@@ -42,6 +45,7 @@ public class Board : MonoBehaviour {
         SetTilesValuesForCorridors();
         InstantiateTiles();
         GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
+        InstantiateEnemies(tiles);
 
 
     }
@@ -55,7 +59,7 @@ public class Board : MonoBehaviour {
             for (int y = 0; y < t[x].Length; y++)
             {
                 grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
-
+                nbrTileFloor += 1;
             }
         }
         return grid;
@@ -254,5 +258,31 @@ public class Board : MonoBehaviour {
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
     }
-   
+    void InstantiateEnemies(TileType[][] t)
+    {
+        Debug.Log("ca");
+        int nbrEnemy = nbrEnemyBase + Mathf.RoundToInt(level * 1.25f);
+        int[,] grid = new int[t.Length, t[0].Length];
+        for (int x = 0; x < t.Length; x++)
+        {
+            for (int y = 0; y < t[x].Length; y++)
+            {
+                if (t[x][y] == TileType.Floor)
+                {
+                   
+                    if (Random.Range(0, nbrTileFloor) > nbrEnemy)
+                    {
+                        Vector3 pos = new Vector3(2 * x, 2 * y, 0);
+                        InstantiateAnEnemy(pos);
+                    }
+                }
+            }
+        }
+    }
+    void InstantiateAnEnemy(Vector3 position)
+    {        
+            int whatEn = Random.Range(0, enemyList.Length - 1);
+            GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
+        gameObject.transform.parent = GameObject.Find("Enemies").transform;                
+    }
 }

@@ -9,10 +9,13 @@ public class StateController : MonoBehaviour
     public State currentState;
     public State remainState;
 
-    [HideInInspector] public EnemyManager enemyManager;
+    [HideInInspector]
+    public EnemyManager enemyManager;
 
-    [HideInInspector]  public float stateTimeElapsed;
-    [HideInInspector]   public float timeElapsed;
+    [HideInInspector]
+    public float stateTimeElapsed;
+    [HideInInspector]
+    public float timeElapsed;
 
 
 

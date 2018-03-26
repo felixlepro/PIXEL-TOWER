@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour {
     private GameObject levelImage;
     [HideInInspector] public List<Vector3> wayPointList;
 
-
-
     //METTRE LA BOOL DE PROG COMME DANS COIN ET GAMEMANAGER AVEC BOOL ET SHOPMANAGER
 
 
@@ -71,13 +69,17 @@ public class GameManager : MonoBehaviour {
         doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
-        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
-       //levelText.text = "Level " + level;
-       // levelImage.SetActive(true);
-       // Invoke("HideLevelImage", levelStartDelay);
         boardScript.SetupBoard(level);
+        
         SetupAI();
+        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        //levelText.text = "Level " + level;
+        // levelImage.SetActive(true);
+        // Invoke("HideLevelImage", levelStartDelay);
+
     }
+   
+
     void SetupAI()
     {
         foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire

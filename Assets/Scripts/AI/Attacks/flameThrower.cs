@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class flameThrower : Attacks {
 
-    new BoxCollider2D attackHitbox;
+    BoxCollider2D attackHitbox2;
     private Vector3 direction;
     Animator anim;
 
@@ -22,32 +22,34 @@ public class flameThrower : Attacks {
     };
     void Start()
     {
-        attackHitbox = GetComponent<BoxCollider2D>();
+        attackHitbox2 = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         StartCoroutine(attack());
     }
 
     
-    public void Setup(Vector3 dir, float damMult, float kbMult)
-    {
-        attackDamage = Mathf.RoundToInt(attackDamage * damMult);
-        direction = dir;
-        maxKnockBackAmount *= kbMult;
-        this.gameObject.transform.right = direction;
-    }
-    //public void Setup(Vector3 dir, int dam, float kb, float range, float it)
+    //public void Setup(Vector3 dir, float damMult, float kbMult)
     //{
-    //    attackDamage = dam;
-    //    maxKnockBackAmount = kb;
-    //    attackRange = range;
-    //    immuneTime = it;
+    //    attackDamage = Mathf.RoundToInt(attackDamage * damMult);
+    //    direction = dir;
+    //    maxKnockBackAmount *= kbMult;
     //    this.gameObject.transform.right = direction;
     //}
+    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, float freeze)
+    {
+        attackDamage = dam;
+        maxKnockBackAmount = kb;
+        attackRange = range;
+        immuneTime = it;
+        burnChance = burn;
+        freezeChance = freeze;
+        this.gameObject.transform.right = direction;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            attackHitbox.enabled = false;
+            attackHitbox2.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
             Debug.Log(maxKnockBackAmount);
             player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
@@ -58,16 +60,16 @@ public class flameThrower : Attacks {
 
     IEnumerator attack()
     {
-        attackHitbox.offset = f1[0];
-        attackHitbox.size = f1[1];
+        attackHitbox2.offset = f1[0];
+        attackHitbox2.size = f1[1];
         yield return new WaitForSeconds(0.05f / anim.speed);
-        attackHitbox.offset = f2[0];
-        attackHitbox.size = f2[1];
+        attackHitbox2.offset = f2[0];
+        attackHitbox2.size = f2[1];
         yield return new WaitForSeconds(0.05f / anim.speed);
-        attackHitbox.offset = f3[0];
-        attackHitbox.size = f3[1];
+        attackHitbox2.offset = f3[0];
+        attackHitbox2.size = f3[1];
         yield return new WaitForSeconds(0.1f / anim.speed);
-        attackHitbox.enabled = false;
+        attackHitbox2.enabled = false;
         yield return new WaitForSeconds(0.30f / anim.speed);
         Destroy(this.gameObject);
     }

@@ -11,6 +11,7 @@ public class BowManager : WeaponManager {
 
     protected override void ChargeWeapon()
     {
+       
         anim.SetBool("AttackCharge", true);
         player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
         chargeDoneRatio = (currentChargeTime / chargeTime);

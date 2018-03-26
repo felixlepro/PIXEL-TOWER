@@ -38,13 +38,13 @@ public class SwordManager: WeaponManager
     protected override void ChargeWeapon()
     {
         chargeDoneRatio = (currentChargeTime / chargeTime);
-        //anima[0].speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
-        //anima[0].SetBool("AttackCharge", true);
+        anima[0].speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
+        anima[0].SetBool("AttackCharge", true);
     }
     protected override  void MaxChargeWeapon()
     {
-       // anima[0].SetBool("AttackCharge", true);
-        // anima[0].speed = 2.5f;
+        //anima[0].SetBool("AttackCharge", true);
+         anima[0].speed = 2.5f;
     }
     protected override  void ReleaseChargedWeapon()
     {
@@ -92,18 +92,18 @@ public class SwordManager: WeaponManager
     
     void attack()
     {
-       // anima[0].speed = 1;
-       // anima[0].SetBool("AttackCharge", false);
-      //  anima[0].SetBool("AttackChargeMax", false);
-        anima[0].SetTrigger("IsAttacking");
-      //  Invoke("triggerSwipe", 0.1f);
-      //  ResetAttackTimer();
-       // currentChargeTime = 0;
+       anima[0].speed = 1;
+        anima[0].SetBool("AttackCharge", false);
+        anima[0].SetBool("AttackChargeMax", false);
+        anima[0].SetTrigger("PlayerAttack");
+        Invoke("triggerSwipe", 0.1f);
+        ResetAttackTimer();
+        currentChargeTime = 0;
         GetComponentInParent<Player>().doFaceMouse(false);
-        Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed);
+        Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed * 0.7f);
     }
-   // void triggerSwipe()
-    //{
-   //     anima[1].SetTrigger("Swipe");
-   // }
+    void triggerSwipe()
+    {
+        anima[1].SetTrigger("Swipe");
+    }
 }
