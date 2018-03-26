@@ -269,6 +269,12 @@ MonoBehaviour:
   attackSpeed: 1
   attacks:
   - {fileID: 114632020951264710}
+  attacksUPF: []
+  dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
+  burnTimer: 4
+  burnDamage: 5
+  maxStack: 5
+  currentStack: 0
   hp: 0
   isRooted: 0
   currentSpeed: 0
@@ -286,7 +292,6 @@ MonoBehaviour:
   chaseTarget: {fileID: 0}
   pathingUnit: {fileID: 0}
   idleTime: 0.5
-  dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
   wayPointList: []
   nextWayPoint: 0
   attackChargeTime: 0.75

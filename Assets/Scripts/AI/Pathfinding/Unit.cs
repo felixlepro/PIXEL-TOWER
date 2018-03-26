@@ -4,7 +4,7 @@ using System.Collections;
 public class Unit : MonoBehaviour
 {
     [HideInInspector] public float speed;
-    [HideInInspector] public Vector3 targetPosition;
+     public Vector3 targetPosition;
     public float repathRate;
     [HideInInspector] public bool requestPath = true;
     [HideInInspector]
