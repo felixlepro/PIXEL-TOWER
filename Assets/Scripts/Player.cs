@@ -154,12 +154,12 @@ public class Player : MonoBehaviour {
     {
         if (GameManager.instance.inLevel)
         {
-            SceneManager.LoadScene("SceneShop", LoadSceneMode.Single);
+            SceneManager.LoadScene(2);
             GameManager.instance.inLevel = false;
         }
         else
         {
-            SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
+            SceneManager.LoadScene(1);
             GameManager.instance.inLevel = true;
         }
     }
