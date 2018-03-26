@@ -69,7 +69,7 @@ abstract public class EnemyManager : MonoBehaviour {
     //public float immuneTime;
 
     public float idleTime;
-    public AudioClip dun;
+    //public AudioClip dun;
 
     //[HideInInspector] public bool isWalking;
     //[HideInInspector] public bool isAttacking;
