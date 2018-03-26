@@ -26,10 +26,7 @@ abstract public class EnemyManager : MonoBehaviour {
     //    [HideInInspector] public Collider2D[] attackHitbox;
     //}
     
-    public float size;
     public AudioClip dun;
-    public bool hitAWall = false;
-    private Vector3 vZero = new Vector3(0, 0, 0);
 
     public int burnTimer = 4;
     public int burnDamage = 5;
@@ -69,7 +66,6 @@ abstract public class EnemyManager : MonoBehaviour {
     //public float immuneTime;
 
     public float idleTime;
-    public AudioClip dun;
 
     //[HideInInspector] public bool isWalking;
     //[HideInInspector] public bool isAttacking;
@@ -386,7 +382,7 @@ abstract public class EnemyManager : MonoBehaviour {
         {
             time += Time.deltaTime;
             VerifStack();        
-            recevoirDegats(burnAmount + currentStack, vZero, 0);
+            recevoirDegats(burnAmount + currentStack, Vector3.zero , 0);
             yield return new WaitForSeconds(1f);
         }
     }

@@ -48,6 +48,7 @@ public abstract class WeaponManager : MonoBehaviour {
        
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = animator;
+        
     }
 
     void Update()
@@ -59,6 +60,7 @@ public abstract class WeaponManager : MonoBehaviour {
 
             if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
             {
+                
                 currentChargeTime += Time.deltaTime;
                 ChargeWeapon();               
             }
