@@ -24,9 +24,8 @@ public class SwordManager: WeaponManager
         //Debug.Log("Colision");
         if (other.tag == "Enemy")
         {
-            //Debug.Log("En");
-            EnemyManager enemyManager = other.gameObject.GetComponentInParent<EnemyManager>();
-            EnvoyerDegat(enemyManager);
+            //Debug.Log("En");            
+            EnvoyerDegat(other.gameObject.GetComponentInParent<EnemyManager>());
         }
         else if (other.tag== "Chest")
         {

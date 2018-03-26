@@ -23,7 +23,12 @@ abstract public class EnemyManager : MonoBehaviour {
     public float size;
     public AudioClip dun;
     public bool hitAWall = false;
+    private Vector3 vZero = new Vector3(0, 0, 0);
 
+    public int burnTimer = 4;
+    public int burnDamage = 5;
+    public int maxStack = 5;
+    public int currentStack;
 
     public int hp;
     [HideInInspector] public bool isRooted = false;
@@ -337,4 +342,30 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         isRooted = false;
     }
+
+    public void Burn()
+    {
+        StartCoroutine(IsBurning(burnTimer,burnDamage)); 
+    }
+
+    public void VerifStack()
+    {
+        if(currentStack < maxStack)
+        {
+            currentStack += 1;
+        }
+    }
+
+    IEnumerator IsBurning(int burnTime,int burnAmount)
+    {
+        float time = 0;
+        while (time < burnTime)
+        {
+            time += Time.deltaTime;
+            VerifStack();        
+            recevoirDegats(burnAmount + currentStack, vZero, 0);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 }

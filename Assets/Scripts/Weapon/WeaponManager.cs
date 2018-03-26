@@ -11,9 +11,11 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost;
     public float range;
     public float attackSpeed; //  attackCD
-    
-    
+    public bool IsFire = false;
+    public bool IsIce = false;
 
+    public int chanceBurnProc = 30;
+    public int chanceSlowProc = 40;
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
@@ -25,6 +27,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
+    protected float rand;
     protected Player player;
     protected float chargeDoneRatio;
     protected  float timeUntilNextAttack;
@@ -57,9 +60,7 @@ public abstract class WeaponManager : MonoBehaviour {
             if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
             {
                 currentChargeTime += Time.deltaTime;
-                ChargeWeapon();
-                
-
+                ChargeWeapon();               
             }
             else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= chargeTime))
             {
@@ -71,8 +72,6 @@ public abstract class WeaponManager : MonoBehaviour {
                 ReleaseChargedWeapon();
                 currentChargeTime = 0;
                 chargeDoneRatio = 0;
-
-
             }
 
         }
@@ -81,6 +80,7 @@ public abstract class WeaponManager : MonoBehaviour {
             WeaponOnCD();
         }
     }
+
 
     public void EnvoyerDegat(EnemyManager cible)
     {
@@ -92,12 +92,29 @@ public abstract class WeaponManager : MonoBehaviour {
         {
             cible.recevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
+
+        if (IsFire)
+        {
+            if (NbRand() < chanceBurnProc)
+            {
+                cible.Burn();
+            }
+        }
+        if (IsIce)
+        {
+            if (NbRand() < chanceSlowProc)
+            {
+                 //cible.Slow();
+            }          
+        }
     }
+
 
     protected void facingMouse()
     {
         GetComponentInParent<Player>().doFaceMouse(true);
     }
+
     protected void UpdateTimeUntilNextAttack()
     {
         if (timeUntilNextAttack > 0)
@@ -105,9 +122,15 @@ public abstract class WeaponManager : MonoBehaviour {
             timeUntilNextAttack -= Time.deltaTime;
         }
     }
-     protected void ResetAttackTimer()
+
+    protected void ResetAttackTimer()
     {
         timeUntilNextAttack = attackSpeed;
     }
 
+    protected int NbRand()
+    {
+        rand = Random.value;
+        return Mathf.FloorToInt(rand);
+    }
 }
