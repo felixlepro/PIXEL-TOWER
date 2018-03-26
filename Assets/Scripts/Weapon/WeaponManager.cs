@@ -11,11 +11,24 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost;
     public float range;
     public float attackSpeed; //  attackCD
-    public bool IsFire = false;
-    public bool IsIce = false;
+   
 
+//Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     public int chanceBurnProc = 30;
     public int chanceSlowProc = 40;
+
+    public int burnDuration = 4;
+    public int burnSuffered = 5;
+
+    public int slowDuration = 3;
+    public float slowValue = 0.3f;
+
+    public bool slowFadeState = false;
+
+    public bool IsFire = false;
+    public bool IsIce = false;
+ //Fin des attributs d'effets spéciaux d'armes  -Simon
+
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
@@ -26,6 +39,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public Vector3 baseScale = new Vector3(1, 1, 1);
     protected  SpriteRenderer spriteR;
     protected Animator anim;
+
 
     protected float rand;
     protected Player player;
@@ -92,19 +106,19 @@ public abstract class WeaponManager : MonoBehaviour {
         {
             cible.recevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
-
+ //Vérification de la présence ou non d'un effet spéciale sur l'arme et appel de la fonction appropriée dans EnemyManager si le joueur à un nombre aléatoire qui respecte la condition d'activation.
         if (IsFire)
         {
             if (NbRand() < chanceBurnProc)
             {
-                cible.Burn();
+                cible.Burn(burnDuration,burnSuffered);
             }
         }
         if (IsIce)
         {
             if (NbRand() < chanceSlowProc)
             {
-                 //cible.Slow();
+                 cible.Slow(slowValue,slowDuration,slowFadeState);
             }          
         }
     }
@@ -127,10 +141,10 @@ public abstract class WeaponManager : MonoBehaviour {
     {
         timeUntilNextAttack = attackSpeed;
     }
-
+//Génère un nombre random
     protected int NbRand()
     {
-        rand = Random.value;
+        rand = Random.value*100;
         return Mathf.FloorToInt(rand);
     }
 }

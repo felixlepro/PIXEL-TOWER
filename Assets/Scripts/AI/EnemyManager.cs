@@ -31,10 +31,11 @@ abstract public class EnemyManager : MonoBehaviour {
     public bool hitAWall = false;
     private Vector3 vZero = new Vector3(0, 0, 0);
 
-    public int burnTimer = 4;
-    public int burnDamage = 5;
+    public bool CoroutineFire = false;
+    public bool CoroutineIce;
     public int maxStack = 5;
     public int currentStack;
+    public float currentBurnTime;
 
     public int hp;
     [HideInInspector] public bool isRooted = false;
@@ -69,7 +70,7 @@ abstract public class EnemyManager : MonoBehaviour {
     //public float immuneTime;
 
     public float idleTime;
-    public AudioClip dun;
+   // public AudioClip dun;
 
     //[HideInInspector] public bool isWalking;
     //[HideInInspector] public bool isAttacking;
@@ -366,9 +367,16 @@ abstract public class EnemyManager : MonoBehaviour {
         isRooted = false;
     }
 
-    public void Burn()
+   
+    public void Burn(int burnTimer, int burnDamage)
     {
-        StartCoroutine(IsBurning(burnTimer,burnDamage)); 
+        currentBurnTime = 0;
+        VerifStack();
+        if (CoroutineFire == false)
+        {
+            StartCoroutine(IsBurning(burnTimer,burnDamage)); 
+        }
+       
     }
 
     public void VerifStack()
@@ -381,14 +389,15 @@ abstract public class EnemyManager : MonoBehaviour {
 
     IEnumerator IsBurning(int burnTime,int burnAmount)
     {
-        float time = 0;
-        while (time < burnTime)
+        
+        CoroutineFire = true;
+        while (currentBurnTime < burnTime)
         {
-            time += Time.deltaTime;
-            VerifStack();        
+            currentBurnTime += Time.deltaTime;       
             recevoirDegats(burnAmount + currentStack, vZero, 0);
             yield return new WaitForSeconds(1f);
         }
+        CoroutineFire = false;
     }
 
 }
