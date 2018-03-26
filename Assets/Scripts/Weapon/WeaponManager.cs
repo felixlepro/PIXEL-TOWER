@@ -16,6 +16,19 @@ public abstract class WeaponManager : MonoBehaviour {
 
     public int chanceBurnProc = 30;
     public int chanceSlowProc = 40;
+
+    public int burnDuration = 4;
+    public int burnSuffered = 5;
+
+    public int slowDuration = 3;
+    public float slowValue = 0.3f;
+
+    public bool slowFadeState = false;
+
+    public bool IsFire = false;
+    public bool IsIce = false;
+ //Fin des attributs d'effets spéciaux d'armes  -Simon
+
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
@@ -26,6 +39,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public Vector3 baseScale = new Vector3(1, 1, 1);
     protected  SpriteRenderer spriteR;
     protected Animator anim;
+
 
     protected float rand;
     protected Player player;
@@ -48,6 +62,7 @@ public abstract class WeaponManager : MonoBehaviour {
        
         anim = GetComponentInChildren<Animator>();
         anim.runtimeAnimatorController = animator;
+        
     }
 
     void Update()
@@ -129,7 +144,125 @@ public abstract class WeaponManager : MonoBehaviour {
 
     protected int NbRand()
     {
-        rand = Random.value;
+        rand = Random.value*100;
+        return Mathf.FloorToInt(rand);
+    }
+    //Mettre random avec float de legendary
+    public void WeaponSetStats()
+    {
+        isIce = false;
+        isFire = false;
+        chanceBurnProc = 30;
+        chanceSlowProc = 40;
+        burnDuration = 4;
+        burnSuffered = 5;
+        slowDuration = 3;
+        slowValue = 0.3f;
+        slowFadeState = false;
+        SetRarity();
+}
+    //a continuer
+    public void SetRarity()
+    {
+        randomR = NbRand();
+       
+    }
+    public void WeaponSetEffect(bool Fire,bool frozen)
+    {
+        if(Fire)
+        {
+            isFire = true;
+        }
+        if (frozen)
+        {
+            isIce = true;
+        }
+    }
+}
+
+    public float attackSpeed; //  attackCD
+   
+
+//Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
+    }
+
+    protected int NbRand()
+    {
+        rand = Random.value*100;
         return Mathf.FloorToInt(rand);
     }
 }
+
+    public float attackSpeed; //  attackCD
+   
+
+//Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
+    public int chanceBurnProc = 30;
+    public int chanceSlowProc = 40;
+
+    public int burnDuration = 4;
+    public int burnSuffered = 5;
+
+    public int slowDuration = 3;
+    public float slowValue = 0.3f;
+
+    public bool slowFadeState = false;
+
+    public bool IsFire = false;
+    public bool IsIce = false;
+ //Fin des attributs d'effets spéciaux d'armes  -Simon
+
+        }
+ //Vérification de la présence ou non d'un effet spéciale sur l'arme et appel de la fonction appropriée dans EnemyManager si le joueur à un nombre aléatoire qui respecte la condition d'activation.
+        if (isFire)
+        {
+            if (NbRand() < chanceBurnProc)
+            {
+                cible.Burn(burnDuration,burnSuffered);
+        }
+        if (isIce)
+        {
+            if (NbRand() < chanceSlowProc)
+            {
+                 cible.Slow(slowValue,slowDuration,slowFadeState);
+            }          
+        }
+    }
+
+
+    }
+//Génère un nombre random
+    protected int NbRand()
+    {
+        rand = Random.value*100;
+        return Mathf.FloorToInt(rand);
+    }
+}
+
+    public float attackSpeed; //  attackCD
+   
+
+//Attributs responsables des effets de Burn et de Slow ainsi que la rareté (propre à chaque arme)
+    public int chanceBurnProc;
+    public int chanceSlowProc;
+
+    public int burnDuration;
+    public int burnSuffered;
+
+    public int slowDuration;
+    public float slowValue;
+
+    public bool slowFadeState;
+
+    public bool isFire;
+    public bool isIce;
+    //rareté
+    public float randomR;
+    public float rarity;
+    public float common = 60;
+    public float rare = 25;
+    public float epic = 15;
+    public float legendary = 4.99f;
+    public float ultraLegendary = 0.01f;
+ //Fin des attributs d'effets spéciaux d'armes  -Simon
+

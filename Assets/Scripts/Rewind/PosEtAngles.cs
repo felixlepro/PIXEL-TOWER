@@ -5,9 +5,9 @@ public class PositionPlus {
 
     public Vector3 position;
     public Vector2 direction;
-    public bool click;
+    public KeyCode click;
 
-    public PositionPlus(Vector3 _position,Vector2 _direction,bool _click)
+    public PositionPlus(Vector3 _position,Vector2 _direction,KeyCode _click)
     {
         position = _position;
         direction=_direction;

@@ -61,7 +61,6 @@ public class PiggyManager : MonoBehaviour {
                 speed = 0;
             }
         }
-        
         unity.speed = speed;
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -179,7 +178,7 @@ public class PiggyManager : MonoBehaviour {
             case State.MoveR:
                 anim.Play(MoveR);
                 break;
-            
+
 
             //Idle
             case State.IdleL:
