@@ -21,32 +21,6 @@ public class GridManager : MonoBehaviour
     public void CreateGrid(int[,] board)
     {
 
-        //Vector3 worldBotLeft = new Vector3(-1, 0,0);        //transform.position + Vector3.left * board.GetLength(0) + Vector3.down * board.GetLength(1);
-        //int gridSizeXmin = 100;
-        //int gridSizeYmin = 100;
-        //int gridSizeXmax = 0;
-        //int gridSizeYmax = 0;
-        //for (int x = 0; x < board.GetLength(0); x++)
-        //{
-        //    for (int y = 0; y < board.GetLength(1); y++)
-        //    {
-        //        bool walkable = (board[x, y] == 1);
-
-        //        if (x < gridSizeXmin && walkable)      gridSizeXmin = x;      
-        //        if (y < gridSizeYmin && walkable)     gridSizeYmin = y;
-
-        //        if (x > gridSizeXmax && walkable) gridSizeXmax = x;
-        //        if (y > gridSizeYmax && walkable) gridSizeYmax = y;
-        //    }
-        //}
-        //Debug.Log(gridSizeXmin + "   X   " + gridSizeXmax);
-        //Debug.Log(gridSizeYmin + "   Y   " + gridSizeYmax);
-        //gridSizeX = Mathf.RoundToInt((gridSizeXmax - gridSizeXmin)/nodeRadius);
-        //gridSizeY = Mathf.RoundToInt((gridSizeYmax - gridSizeYmin)/nodeRadius);
-
-        //grid = new Node[gridSizeX, gridSizeY];
-        //worldBotLeft = new Vector3((gridSizeXmin-1)/nodeRadius, gridSizeYmin/nodeRadius, 0);
-
         gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) / nodeRadius);
         gridWorldSize = new Vector2(gridSizeX * nodeRadius * 2, gridSizeY * nodeRadius * 2);
@@ -105,7 +79,7 @@ public class GridManager : MonoBehaviour
 
                 if (checkX >= 0 && checkX < gridSizeY && checkY >= 0 && checkY < gridSizeY)
                 {
-                    if (grid[checkX, checkY].walkable)
+                    if (grid[checkX, checkY].walkable && (grid[node.gridX,checkY].walkable || grid[checkX, node.gridY].walkable))
                     {
                         neighbours.Add(grid[checkX, checkY]);
                     }

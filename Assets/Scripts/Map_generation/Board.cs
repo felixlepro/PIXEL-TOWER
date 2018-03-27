@@ -5,7 +5,7 @@ using UnityEngine;
 public class Board : MonoBehaviour {
     public enum TileType
     {
-        Wall,Floor
+        Wall,Floor,Chest
     }
     public int hauteur = 100;
     public int largeur = 100;
@@ -27,6 +27,11 @@ public class Board : MonoBehaviour {
 
     public GameObject[] enemyList;
     public int nbrEnemyBase;
+    public GameObject[] chestList;
+    public int nbrChestMax;
+    public int nbrChest;
+    public List<int> potentialChest;
+
     int level;
     int nbrTileFloor = 0;
 
@@ -127,6 +132,7 @@ public class Board : MonoBehaviour {
 
     void SetTilesValuesForRooms()
     {
+        SetNbrChest();
         // Go through all the rooms...
         for (int i = 0; i < rooms.Length; i++)
         {
@@ -143,10 +149,16 @@ public class Board : MonoBehaviour {
                     int yCoord = currentRoom.posY + k;
 
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    tiles[xCoord][yCoord] = TileType.Floor;
+                    if(j == Mathf.FloorToInt(currentRoom.largRoom/2) && k == Mathf.FloorToInt(currentRoom.hautRoom/2))
+                    {
+                        potentialChest.Add(xCoord);
+                        potentialChest.Add(yCoord);
+                    }
+                    else tiles[xCoord][yCoord] = TileType.Floor;
                 }
             }
         }
+        SetUpChest();
     }
 
 
@@ -195,7 +207,7 @@ public class Board : MonoBehaviour {
         {
             for (int j = 0; j < tiles[i].Length; j++)
             {
-                if (tiles[i][j] == TileType.Floor)
+                if (tiles[i][j] == TileType.Floor || tiles[i][j] == TileType.Chest)
                 {
                     InstantiateObject(floorTiles, i, j);
 
@@ -302,5 +314,45 @@ public class Board : MonoBehaviour {
         int whatEn = Random.Range(0, enemyList.Length);
         GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Enemies").transform;                
+    }
+    void AddChest(Vector3 position)
+    {
+        int whatChest = 0;//Random.Range(0, enemyList.Length);
+        GameObject enemy = Instantiate(chestList[whatChest], position + Vector3.up, Quaternion.identity);
+        enemy.transform.parent = GameObject.Find("Chests").transform;
+    }
+    void SetNbrChest()
+    {
+        int newNbrChest = 1;
+        float rng = Random.value;
+        rng = rng *rng*rng;
+        for(int i = 1; i <= nbrChestMax; i++)
+        {
+            float cossin = i;
+                float cossin2 = nbrChestMax;
+
+            if (rng < cossin/cossin2)
+            {
+                newNbrChest = i;
+                break;
+            }
+        }
+        nbrChest = newNbrChest;
+    }
+    void SetUpChest()
+    {
+        int nbrPot = potentialChest.Count / 2;
+        for(int i =0; i<nbrChest;i++)
+        {
+            int rng = Random.Range(0, nbrPot);
+            int xCoord = potentialChest[rng*2];
+            int yCoord = potentialChest[rng*2 + 1];
+            if (tiles[xCoord][yCoord] != TileType.Chest)
+            {
+                AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
+                tiles[xCoord][yCoord] = TileType.Chest;
+            }
+        }
+
     }
 }

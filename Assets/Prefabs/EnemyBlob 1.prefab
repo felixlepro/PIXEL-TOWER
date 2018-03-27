@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  repathRate: 0.2
+  repathRate: 0.1
   requestPath: 1
   requestProcessing: 0
   direction: {x: 0, y: 0, z: 0}
@@ -239,8 +239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  maxMoveSpeed: 10
-  maxHp: 500
+  maxMoveSpeed: 12
+  patrolSpeedChaseSpeedRatio: 3
+  maxHp: 150
   gettingKnockedBackAmount: 1
   chaseRange: 10
   chaseRangeBuffer: 5

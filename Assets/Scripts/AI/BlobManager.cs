@@ -10,7 +10,7 @@ public class BlobManager : EnemyManager
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        currentSpeed = maxMoveSpeed;
+        currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
 
@@ -29,6 +29,7 @@ public class BlobManager : EnemyManager
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
         attacks[0].attackHitbox = transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
+        setAnimState("Moving");
     }
     public override void TryAttack()
     {

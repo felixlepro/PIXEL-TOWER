@@ -260,8 +260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  maxMoveSpeed: 5
-  maxHp: 200
+  maxMoveSpeed: 8
+  patrolSpeedChaseSpeedRatio: 3
+  maxHp: 300
   gettingKnockedBackAmount: 0
   chaseRange: 10
   chaseRangeBuffer: 5

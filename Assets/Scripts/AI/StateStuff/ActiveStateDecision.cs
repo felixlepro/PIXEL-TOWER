@@ -10,7 +10,7 @@ public class ActiveStateDecision : Decision
         if (!controller.enemyManager.chaseTarget.gameObject.activeSelf) return false;
         else if (Vector3.Distance(controller.enemyManager.chaseTarget.transform.position, controller.transform.position) > controller.enemyManager.chaseRange + controller.enemyManager.chaseRangeBuffer)
         {
-            controller.enemyManager.currentSpeed /= 1.25f;
+            controller.enemyManager.currentSpeed /= controller.enemyManager.patrolSpeedChaseSpeedRatio;
             return false;
         }
         else return true;

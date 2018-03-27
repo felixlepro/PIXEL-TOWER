@@ -14,7 +14,7 @@ public class KnightManager : EnemyManager {
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        currentSpeed = maxMoveSpeed;
+        currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
 
@@ -33,6 +33,7 @@ public class KnightManager : EnemyManager {
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
         attacks[0].attackHitbox = transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
+        setAnimState("Moving");
     }
     private void Update()
     {

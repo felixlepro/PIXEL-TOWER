@@ -7,6 +7,7 @@ abstract public class EnemyManager : MonoBehaviour {
     public string EnemyName;
     public Color wColor = Color.white;
     public float maxMoveSpeed;
+    public float patrolSpeedChaseSpeedRatio;
     public int maxHp;
     public float gettingKnockedBackAmount;
     //public float attackRange;
@@ -94,7 +95,7 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         attacks = GetComponents<Attacks>();
         anim = GetComponentInChildren<Animator>();
-        currentSpeed = maxMoveSpeed;
+        currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
 
