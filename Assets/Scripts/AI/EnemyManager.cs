@@ -181,11 +181,11 @@ abstract public class EnemyManager : MonoBehaviour {
 
     public void spriteOrderInLayer()
     {
-        if (chaseTarget.transform.position.y <= transform.position.y)
-        {
-            spriteR.sortingOrder = -2;
-        }
-        else spriteR.sortingOrder = 2;
+        //if (chaseTarget.transform.position.y <= transform.position.y)
+        //{
+        //    spriteR.sortingOrder = -2;
+        //}
+        //else spriteR.sortingOrder = 2;
     }
     public void recevoirDegats(int damage, Vector3 kbDirection, float kbAmmount)
     {

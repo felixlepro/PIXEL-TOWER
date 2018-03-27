@@ -33,8 +33,16 @@ public class GridManager : MonoBehaviour
             {
                 int nx = Mathf.FloorToInt(x * nodeRadius);
                 int ny = Mathf.FloorToInt(y * nodeRadius);
-
-                bool walkable = (board[nx, ny] == 1);
+                bool walkable;
+                if (board[nx,ny] == 2 && Mathf.RoundToInt(y * nodeRadius) != ny) //fait en sorte que la partie du haut des tiles des chests soit walkable
+                {
+                    walkable = true;
+                }
+                else
+                {
+                     walkable = (board[nx, ny] == 1);
+                }
+                   
 
                 //if (walkable)
                 //{

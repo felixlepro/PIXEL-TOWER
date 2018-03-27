@@ -23,7 +23,7 @@ public class Board : MonoBehaviour {
     private TileType[][] tiles;
     private Room[] rooms;
     private Corridor[] corridors;
-    private GameObject boardHolder;
+    public GameObject boardHolder;
 
     public GameObject[] enemyList;
     public int nbrEnemyBase;
@@ -37,8 +37,8 @@ public class Board : MonoBehaviour {
 
     public  void SetupBoard(int lvl)
     {
-        
-        boardHolder = new GameObject("Board Holder");
+        boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
+        //boardHolder = new GameObject("Board Holder");
         if (lvl !=1)
         {
             Destroy(boardHolder);
@@ -68,6 +68,10 @@ public class Board : MonoBehaviour {
                 {
                     grid[x, y] = 1;
                     nbrTileFloor += 1;
+                }
+                else if (t[x][y] == TileType.Chest)
+                {
+                    grid[x, y] = 2;
                 }
                 else
                 {
@@ -318,7 +322,7 @@ public class Board : MonoBehaviour {
     void AddChest(Vector3 position)
     {
         int whatChest = 0;//Random.Range(0, enemyList.Length);
-        GameObject enemy = Instantiate(chestList[whatChest], position + Vector3.up, Quaternion.identity);
+        GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Chests").transform;
     }
     void SetNbrChest()

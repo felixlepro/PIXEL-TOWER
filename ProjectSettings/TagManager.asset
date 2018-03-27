@@ -51,6 +51,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MurArriere
+    uniqueID: 331026237
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fade
+    uniqueID: 3139134345
+    locked: 0
+  - name: "MurCot\xE9"
+    uniqueID: 1906002893
+    locked: 0
+  - name: MurAvant
+    uniqueID: 3927338355
     locked: 0
