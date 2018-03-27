@@ -18,14 +18,14 @@ public class LookDecision : Decision
         {
             //controller.enemyManager.enemyCollider.isTrigger = false;
             controller.enemyManager.currentSpeed *= 1.25f;
-            controller.enemyManager.Root(1);
+            controller.enemyManager.Root(0.75f);
             GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(controller.enemyManager.dun);
 
             return true;
         }
         else
         {
-            controller.enemyManager.enemyCollider.isTrigger = true;
+            //controller.enemyManager.enemyCollider.isTrigger = true;
             return false;
         }
     }

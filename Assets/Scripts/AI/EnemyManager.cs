@@ -28,11 +28,11 @@ abstract public class EnemyManager : MonoBehaviour {
     
     public AudioClip dun;
 
-    public bool CoroutineFire = false;
-    public bool CoroutineIce;
-    public int maxStack = 5;
-    public int currentStack;
-    public float currentBurnTime;
+    [HideInInspector] public bool CoroutineFire = false;
+    [HideInInspector] public bool CoroutineIce;
+    [HideInInspector] public const int maxStack = 5;
+    [HideInInspector] public int currentStack;
+    [HideInInspector] public float currentBurnTime;
 
     public int hp;
     [HideInInspector] public bool isRooted = false;
@@ -108,9 +108,10 @@ abstract public class EnemyManager : MonoBehaviour {
        // anim.runtimeAnimatorController = animator;
 
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteR.GetComponent<Collider2D>().isTrigger = false;
         spriteR.color = wColor;
 
-        enemyCollider = GetComponentInChildren<Collider2D>();
+       // enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
     }
     private void Update()
@@ -154,13 +155,11 @@ abstract public class EnemyManager : MonoBehaviour {
         float time = Random.Range(1, 5) * idleTime;
         setAnimState("Idling");
         pathingUnit.disablePathing();
-        Debug.Log("invoke:" + time);
         //newPath();
         Invoke("newPath", time);    
     }
     private void newPath()
     {
-        Debug.Log("newpath");
         setAnimState("Moving");
         nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
@@ -366,7 +365,7 @@ abstract public class EnemyManager : MonoBehaviour {
     }
 
    
-    public void Burn(int burnTimer, int burnDamage)
+    public void Burn(float burnTimer, int burnDamage)
     {
         currentBurnTime = 0;
         VerifStack();
@@ -385,13 +384,13 @@ abstract public class EnemyManager : MonoBehaviour {
         }
     }
 
-    IEnumerator IsBurning(int burnTime,int burnAmount)
+    IEnumerator IsBurning(float burnTime,int burnAmount)
     {
         
         CoroutineFire = true;
         while (currentBurnTime < burnTime)
         {
-            time += Time.deltaTime;
+            currentBurnTime += Time.deltaTime;
             VerifStack();        
             recevoirDegats(burnAmount + currentStack, Vector3.zero , 0);
             yield return new WaitForSeconds(1f);

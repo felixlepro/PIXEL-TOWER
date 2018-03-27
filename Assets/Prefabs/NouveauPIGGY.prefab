@@ -90,10 +90,10 @@ MonoBehaviour:
   Angle: 0
   isWalking: 0
   speed: 0
-  maxSpeed: 10
+  maxSpeed: 15
   player: {fileID: 0}
   chasing: 0
-  chaseSpeed: 10
+  chaseSpeed: 5
 --- !u!114 &114555648141632790
 MonoBehaviour:
   m_ObjectHideFlags: 1

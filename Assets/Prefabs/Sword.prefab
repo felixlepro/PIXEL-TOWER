@@ -176,18 +176,24 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1287666755509996}
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 20
+  attackDamage: 10
   cost: 0
-  range: 0
   attackSpeed: 0.4
-  animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
-  description: 
-  sprite: {fileID: 0}
-  basePosition: {x: 0.35, y: 0, z: 0}
-  baseScale: {x: 1, y: 1, z: 1}
+  isFire: 0
+  isIce: 0
+  chanceBurnProc: 0
+  burnDuration: 0
+  burnSuffered: 0
+  slowDuration: 0
+  slowValue: 0
   chargeTime: 1.5
   attackDamageChargedBonus: 10
   knockBackAmount: 15
+  animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
+  sprite: {fileID: 0}
+  description: 
+  basePosition: {x: 0.35, y: 0, z: 0}
+  baseScale: {x: 1, y: 1, z: 1}
 --- !u!212 &212568443491528716
 SpriteRenderer:
   m_ObjectHideFlags: 1

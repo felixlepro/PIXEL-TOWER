@@ -28,10 +28,11 @@ public class BlobManager : EnemyManager
 
         enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
-        attacks[0].attackHitbox = GameObject.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
+        attacks[0].attackHitbox = transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
     }
     public override void TryAttack()
     {
+       // Debug.Log("tryA");
         Attack(attacks[0]);
     }
 

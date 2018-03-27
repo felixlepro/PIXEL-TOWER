@@ -20,7 +20,6 @@ public class PatrolAction : Action
         float distance = Mathf.Abs((controller.transform.position - controller.enemyManager.pathingUnit.targetPosition).magnitude);
         if (distance < 1 && controller.enemyManager.pathingUnit.requestPath)
         {
-            Debug.Log("idle");
             controller.enemyManager.idling();
         }
     }

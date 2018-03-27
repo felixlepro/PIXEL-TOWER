@@ -58,8 +58,16 @@ public class Board : MonoBehaviour {
         {
             for (int y = 0; y < t[x].Length; y++)
             {
-                grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
-                nbrTileFloor += 1;
+                //grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
+                if (t[x][y] == TileType.Floor)
+                {
+                    grid[x, y] = 1;
+                    nbrTileFloor += 1;
+                }
+                else
+                {
+                    grid[x, y] = 0;
+                }
             }
         }
         return grid;
@@ -260,8 +268,10 @@ public class Board : MonoBehaviour {
     }
     void InstantiateEnemies(TileType[][] t)
     {
-        Debug.Log("ca");
-        int nbrEnemy = nbrEnemyBase + Mathf.RoundToInt(level * 1.25f);
+        Vector3 player = GameObject.Find("Pilot").transform.position;
+        int nbrEnemy = nbrEnemyBase + Mathf.RoundToInt(level * 1.5f);
+       // float enemyDensity = 1f + level * 0.1f;
+
         int[,] grid = new int[t.Length, t[0].Length];
         for (int x = 0; x < t.Length; x++)
         {
@@ -269,20 +279,28 @@ public class Board : MonoBehaviour {
             {
                 if (t[x][y] == TileType.Floor)
                 {
+                    Vector3 pos = new Vector3(2 * x, 2 * y, 0);
                    
-                    if (Random.Range(0, nbrTileFloor) > nbrEnemy)
+                    if (Vector3.Distance(pos, player) > 7 && Random.Range(1, nbrTileFloor) < nbrEnemy)
                     {
-                        Vector3 pos = new Vector3(2 * x, 2 * y, 0);
                         InstantiateAnEnemy(pos);
                     }
+                    //if (Vector3.Distance(pos,player) > 7 && enemyDensity >= Random.Range(0, 100))
+                    //{
+
+                    //    InstantiateAnEnemy(pos);
+                    // }
                 }
             }
         }
+        Debug.Log(test);
     }
+    int test = 0;
     void InstantiateAnEnemy(Vector3 position)
-    {        
-            int whatEn = Random.Range(0, enemyList.Length - 1);
-            GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
-        gameObject.transform.parent = GameObject.Find("Enemies").transform;                
+    {
+        test += 1;
+        int whatEn = Random.Range(0, enemyList.Length);
+        GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
+        enemy.transform.parent = GameObject.Find("Enemies").transform;                
     }
 }

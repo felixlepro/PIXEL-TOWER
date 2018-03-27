@@ -9,30 +9,29 @@ public abstract class WeaponManager : MonoBehaviour {
     public Color wColor;
     public int attackDamage;
     public int cost;
-    public float range;
+   // public float range;
     public float attackSpeed; //  attackCD
-    public bool IsFire = false;
-    public bool IsIce = false;
 
-    public int chanceBurnProc = 30;
-    public int chanceSlowProc = 40;
+    public bool isFire = false;
+    public bool isIce = false;
 
-    public int burnDuration = 4;
-    public int burnSuffered = 5;
+    [HideInInspector]public int chanceBurnProc = 30;
+    [HideInInspector] int chanceSlowProc = 40;
 
-    public int slowDuration = 3;
-    public float slowValue = 0.3f;
+    [HideInInspector] public float burnDuration = 4;
+    [HideInInspector] public int burnSuffered = 5;
 
-    public bool slowFadeState = false;
+    [HideInInspector] public int slowDuration = 3;
+    [HideInInspector] public float slowValue = 0.3f;
 
-    public bool IsFire = false;
-    public bool IsIce = false;
+   [HideInInspector] bool slowFadeState = false;
+
  //Fin des attributs d'effets spéciaux d'armes  -Simon
 
     public float chargeTime;
     public int attackDamageChargedBonus;
     public float knockBackAmount;
-    public RuntimeAnimatorController animator;
+    [HideInInspector] public RuntimeAnimatorController animator;
     public Sprite sprite;
     public string description;
     public Vector3 basePosition = new Vector3(0.35f, 0, 0);
@@ -48,6 +47,20 @@ public abstract class WeaponManager : MonoBehaviour {
     protected float time;
     protected float currentChargeTime;
      KeyCode chargeAttackKey = KeyCode.Mouse0;
+
+    float randomR;
+
+    float rarity;
+
+    const float common = 60;
+
+    const float rare = 25;
+
+    const float epic = 15;
+
+    const float legendary = 4.99f;
+
+    const float ultraLegendary = 0.01f;
 
     protected abstract void ChargeWeapon();
     protected abstract void MaxChargeWeapon();
@@ -107,14 +120,14 @@ public abstract class WeaponManager : MonoBehaviour {
             cible.recevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount);
         }
 
-        if (IsFire)
+        if (isFire)
         {
             if (NbRand() < chanceBurnProc)
             {
-                cible.Burn();
+                cible.Burn(burnDuration,burnSuffered);
             }
         }
-        if (IsIce)
+        else if (isIce)
         {
             if (NbRand() < chanceSlowProc)
             {
@@ -180,89 +193,102 @@ public abstract class WeaponManager : MonoBehaviour {
     }
 }
 
-    public float attackSpeed; //  attackCD
+    
    
 
 //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    }
 
-    protected int NbRand()
-    {
-        rand = Random.value*100;
-        return Mathf.FloorToInt(rand);
-    }
-}
 
-    public float attackSpeed; //  attackCD
+    //protected int NbRand()
+    //{
+    //    rand = Random.value*100;
+    //    return Mathf.FloorToInt(rand);
+    //}
+
+
+  //  public float attackSpeed; //  attackCD
    
 
 //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    public int chanceBurnProc = 30;
-    public int chanceSlowProc = 40;
+    //public int chanceBurnProc = 30;
+    //public int chanceSlowProc = 40;
 
-    public int burnDuration = 4;
-    public int burnSuffered = 5;
+    //public int burnDuration = 4;
+    //public int burnSuffered = 5;
 
-    public int slowDuration = 3;
-    public float slowValue = 0.3f;
+    //public int slowDuration = 3;
+    //public float slowValue = 0.3f;
 
-    public bool slowFadeState = false;
+    //public bool slowFadeState = false;
 
-    public bool IsFire = false;
-    public bool IsIce = false;
+    //public bool IsFire = false;
+    //public bool IsIce = false;
  //Fin des attributs d'effets spéciaux d'armes  -Simon
 
-        }
- //Vérification de la présence ou non d'un effet spéciale sur l'arme et appel de la fonction appropriée dans EnemyManager si le joueur à un nombre aléatoire qui respecte la condition d'activation.
-        if (isFire)
-        {
-            if (NbRand() < chanceBurnProc)
-            {
-                cible.Burn(burnDuration,burnSuffered);
-        }
-        if (isIce)
-        {
-            if (NbRand() < chanceSlowProc)
-            {
-                 cible.Slow(slowValue,slowDuration,slowFadeState);
-            }          
-        }
-    }
+ //       }
+ ////Vérification de la présence ou non d'un effet spéciale sur l'arme et appel de la fonction appropriée dans EnemyManager si le joueur à un nombre aléatoire qui respecte la condition d'activation.
+ //       if (isFire)
+ //       {
+ //           if (NbRand() < chanceBurnProc)
+ //           {
+ //               cible.Burn(burnDuration,burnSuffered);
+ //       }
+ //       if (isIce)
+ //       {
+ //           if (NbRand() < chanceSlowProc)
+ //           {
+ //                cible.Slow(slowValue,slowDuration,slowFadeState);
+ //           }          
+ //       }
+ //   }
 
 
-    }
+ //   }
 //Génère un nombre random
-    protected int NbRand()
-    {
-        rand = Random.value*100;
-        return Mathf.FloorToInt(rand);
-    }
-}
+//    protected int NbRand()
+//    {
+//        rand = Random.value*100;
+//        return Mathf.FloorToInt(rand);
+//    }
+//}
 
-    public float attackSpeed; //  attackCD
-   
-
-//Attributs responsables des effets de Burn et de Slow ainsi que la rareté (propre à chaque arme)
-    public int chanceBurnProc;
-    public int chanceSlowProc;
-
-    public int burnDuration;
-    public int burnSuffered;
-
-    public int slowDuration;
-    public float slowValue;
-
-    public bool slowFadeState;
-
-    public bool isFire;
-    public bool isIce;
-    //rareté
-    public float randomR;
-    public float rarity;
-    public float common = 60;
-    public float rare = 25;
-    public float epic = 15;
-    public float legendary = 4.99f;
-    public float ultraLegendary = 0.01f;
- //Fin des attributs d'effets spéciaux d'armes  -Simon
-
+  //  public float attackSpeed; //  attackCD
+
+   
+
+
+
+//Attributs responsables des effets de Burn et de Slow ainsi que la rareté (propre à chaque arme)
+
+    //public int chanceBurnProc;
+    //public int chanceSlowProc;
+
+
+
+    //public int burnDuration;
+
+    //public int burnSuffered;
+
+
+
+    //public int slowDuration;
+
+    //public float slowValue;
+
+
+
+    //public bool slowFadeState;
+
+
+
+    //public bool isFire;
+
+    //public bool isIce;
+
+    //rareté
+
+    
+
+ //Fin des attributs d'effets spéciaux d'armes  -Simon
+
+

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114434318785287364}
   - component: {fileID: 114415609931410876}
   - component: {fileID: 50500600916201916}
+  - component: {fileID: 114093641662357804}
   m_Layer: 0
   m_Name: EnemyBlob 1
   m_TagString: EnemyManager
@@ -73,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327544550791342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 72, y: 72, z: 0}
+  m_LocalPosition: {x: 68, y: 68, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4742755626589672}
@@ -156,7 +157,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 1.2
 --- !u!58 &58646684823176858
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -171,7 +172,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 1.3
 --- !u!95 &95202726534527778
 Animator:
   serializedVersion: 3
@@ -189,6 +190,25 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114093641662357804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327544550791342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 20
+  immuneTime: 1
+  maxKnockBackAmount: 15
+  attackRange: 50
+  attackHitbox: []
+  prefab: {fileID: 0}
+  burnChance: 0
+  freezeChance: 0
 --- !u!114 &114415609931410876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,20 +239,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 10
-  attackSpeed: 1
-  attackRange: 0
   maxMoveSpeed: 10
-  idleTime: 0.5
   maxHp: 500
-  maxKnockBackAmount: 15
   gettingKnockedBackAmount: 1
-  immuneTime: 1
   chaseRange: 10
   chaseRangeBuffer: 5
-  size: 0
-  dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
   fireStack: 0
+  attackSpeed: 2
+  attacks:
+  - {fileID: 114093641662357804}
+  dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
+  CoroutineFire: 0
+  CoroutineIce: 0
+  currentStack: 0
+  currentBurnTime: 0
   hp: 0
   isRooted: 0
   currentSpeed: 0
@@ -243,18 +263,15 @@ MonoBehaviour:
   spriteR: {fileID: 0}
   targetCollider: []
   enemyCollider: {fileID: 0}
-  attackHitbox: []
-  isWalking: 0
-  isAttacking: 0
-  isDying: 0
   Angle: 0
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
   chaseTarget: {fileID: 0}
+  pathingUnit: {fileID: 0}
+  idleTime: 0.5
   wayPointList: []
   nextWayPoint: 0
-  pathingUnit: {fileID: 0}
   hpRatioLostOnAttack: 0.3
 --- !u!114 &114519354339216302
 MonoBehaviour:
@@ -270,7 +287,6 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 686c29cc04c5fa34d9af2305a526c5ad, type: 2}
   remainState: {fileID: 11400000, guid: 6ac035d69ace1684eaa557f6a34def6f, type: 2}
   enemyManager: {fileID: 114434318785287364}
-  bossManager: {fileID: 0}
   stateTimeElapsed: 0
   timeElapsed: 0
   aiActive: 0
