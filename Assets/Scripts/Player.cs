@@ -190,11 +190,14 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
-        if ((other.tag == "sylvain"))
+        if ((other.tag == "Coin"))
         {
-            
+            gainCoin();
+            Destroy(other.gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
+
         }
-        
+
 
     }
     
@@ -258,17 +261,14 @@ public class Player : MonoBehaviour {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
-        
-        //player.weapon = player.weaponObject.GetComponent<WeaponManager>();
-        // InstantiateWeapon(newWeapon.weaponPrefab);
+
         foreach (Transform child in weaponTransform)
         {
             GameObject.Destroy(child.gameObject);
         }
         newWeapon.transform.parent = weaponTransform;
-        newWeapon.transform.localScale = player.weapon.baseScale;
-        newWeapon.transform.localPosition = player.weapon.basePosition;
-        weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
+        newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
+        newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
     }
     void InstantiateWeapon(GameObject prefab)
     {

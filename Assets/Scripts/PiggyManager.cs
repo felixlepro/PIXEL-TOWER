@@ -33,7 +33,7 @@ public class PiggyManager : MonoBehaviour {
 	void Update () {
         getAnglePath();
         listCoinD = new List<Vector3 >();
-        if (!chasing) ChaseCoins(); 
+        ChaseCoins(); 
         SetSpeed();
         unity.targetPosition = target.position;
         UpdateAnim();
@@ -80,17 +80,19 @@ public class PiggyManager : MonoBehaviour {
         if (listCoinGO.Length != 0)
         {
             chasing = true;
-            dMin = 100;
+            dMin = 10;
+            iMin = -1;
             for (int i = 0; i < listCoinGO.Length; i++)
             {
-                listCoinD.Add(listCoinGO[i].transform.position - player.transform.position);
-                if (listCoinD[0].magnitude < dMin)
+                
+                if ((listCoinGO[i].transform.position - player.transform.position).magnitude  < dMin)
                 {
-                    dMin = listCoinD[i].magnitude;
+                    dMin = (listCoinGO[i].transform.position - player.transform.position).magnitude;
                     iMin = i;
                 }
             }
-            target = listCoinGO[iMin].transform;
+            if (iMin!=-1)target = listCoinGO[iMin].transform;
+            else target = player;
         }
         else target = player;
         
