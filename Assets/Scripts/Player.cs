@@ -261,17 +261,14 @@ public class Player : MonoBehaviour {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
-        player.weaponObject = newWeapon;
-        player.weapon = player.weaponObject.GetComponent<WeaponManager>();
-        // InstantiateWeapon(newWeapon.weaponPrefab);
+
         foreach (Transform child in weaponTransform)
         {
             GameObject.Destroy(child.gameObject);
         }
         newWeapon.transform.parent = weaponTransform;
-        newWeapon.transform.localScale = player.weapon.baseScale;
-        newWeapon.transform.localPosition = player.weapon.basePosition;
-        weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
+        newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
+        newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
     }
     void InstantiateWeapon(GameObject prefab)
     {

@@ -59,7 +59,7 @@ public class TimeRewinding : MonoBehaviour
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
         scriptPlayer = GameObject.Find("Pilot").GetComponent<Player>();
-        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, true));
+        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKey(KeyCode.Mouse0)));
     }
 
     public void StartRewind()

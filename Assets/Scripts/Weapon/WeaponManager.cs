@@ -36,6 +36,8 @@ public abstract class WeaponManager : MonoBehaviour {
     public string description;
     public Vector3 basePosition = new Vector3(0.35f, 0, 0);
     public Vector3 baseScale = new Vector3(1, 1, 1);
+    public int numAttack;
+    public bool isFantoming = false;
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
@@ -81,20 +83,32 @@ public abstract class WeaponManager : MonoBehaviour {
     void Update()
     {
         UpdateTimeUntilNextAttack();
+        if (!isFantoming) setNumAttack();
+        Attack(numAttack);
+    }
+    public void setNumAttack()
+    {
+        if (Input.GetKey(chargeAttackKey)) numAttack = 1;
+        else if (Input.GetKeyUp(chargeAttackKey)) numAttack = 2;
+        else numAttack = 0;
+        
+    }
+    public void Attack(int attack)
+    {
         if (timeUntilNextAttack <= 0)
         {
 
-            if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
+            if (numAttack == 1 && (currentChargeTime < chargeTime))
             {
-                
+
                 currentChargeTime += Time.deltaTime;
-                ChargeWeapon();               
+                ChargeWeapon();
             }
-            else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= chargeTime))
+            else if (numAttack == 1 && (currentChargeTime >= chargeTime))
             {
-                MaxChargeWeapon();      
+                MaxChargeWeapon();
             }
-            else if (Input.GetKeyUp(chargeAttackKey))
+            else if (numAttack == 2)
             {
                 ReleaseChargedWeapon();
                 currentChargeTime = 0;
@@ -107,7 +121,6 @@ public abstract class WeaponManager : MonoBehaviour {
             WeaponOnCD();
         }
     }
-
 
     public void EnvoyerDegat(EnemyManager cible)
     {
@@ -191,6 +204,7 @@ public abstract class WeaponManager : MonoBehaviour {
             isIce = true;
         }
     }
+
 }
 
     
