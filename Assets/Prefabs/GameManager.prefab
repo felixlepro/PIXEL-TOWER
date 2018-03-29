@@ -195,7 +195,6 @@ MonoBehaviour:
   - {fileID: 1050157812518948, guid: 2f186ffc7e5a0e841a467c247216522c, type: 2}
   nbrChestMax: 4
   nbrChest: 0
-  potentialChest: 
 --- !u!114 &114906157998995998
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
     {
         foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire
         {
-            em.GetComponent<EnemyManager>().SetupAI(true, wayPointList);
+            em.GetComponent<EnemyManager>().SetupAI(wayPointList);
         }
     }
     // Update is called once per frame

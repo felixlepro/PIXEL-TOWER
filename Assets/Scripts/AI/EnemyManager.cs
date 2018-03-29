@@ -41,7 +41,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
-    [HideInInspector] public StateController controller;
+     public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
    // [HideInInspector] public Collider2D enemyCollider;
@@ -126,11 +126,11 @@ abstract public class EnemyManager : MonoBehaviour {
         UpdatecurrentAttackCD();
     }
 
-    public void SetupAI(bool aiActivationFromGameManager, List<Vector3> wayPointsFromGameManager)
+    public void SetupAI( List<Vector3> wayPointsFromGameManager)
     {
 
         wayPointList = wayPointsFromGameManager;
-        controller.aiActive = aiActivationFromGameManager;
+        controller.aiActive = true;
         nextWayPoint = Random.Range(0, wayPointList.Count);
     }
     public void Attack(Attacks at)
@@ -200,6 +200,7 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         if (hp <= 0)
         {
+            controller.enabled = false;
             gonnaDie();
             currentSpeed = 0;
             setAnimState("Dying");
@@ -269,6 +270,7 @@ abstract public class EnemyManager : MonoBehaviour {
 
     private void Death()
     {
+
         Destroy(this.gameObject);
         //this.gameObject.SetActive(false);
     }

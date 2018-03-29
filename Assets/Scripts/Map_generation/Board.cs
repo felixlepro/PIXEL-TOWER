@@ -27,10 +27,12 @@ public class Board : MonoBehaviour {
 
     public GameObject[] enemyList;
     public int nbrEnemyBase;
+     List<int[]> potentialEn = new List<int[]>();
+
     public GameObject[] chestList;
     public int nbrChestMax;
     public int nbrChest;
-    public List<int> potentialChest;
+     List<int[]> potentialChest = new List<int[]>();
 
     int level;
     int nbrTileFloor = 0;
@@ -152,13 +154,19 @@ public class Board : MonoBehaviour {
                 {
                     int yCoord = currentRoom.posY + k;
 
+                    int[] pos = { xCoord, yCoord };
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    if(j == Mathf.FloorToInt(currentRoom.largRoom/2) && k == Mathf.FloorToInt(currentRoom.hautRoom/2))
+                    if (j == Mathf.FloorToInt(currentRoom.largRoom/2) && k == Mathf.FloorToInt(currentRoom.hautRoom/2))
                     {
-                        potentialChest.Add(xCoord);
-                        potentialChest.Add(yCoord);
+                        
+                        potentialChest.Add(pos);
                     }
-                    else tiles[xCoord][yCoord] = TileType.Floor;
+                    else
+                    {
+                        potentialEn.Add(pos);
+                    }
+                    tiles[xCoord][yCoord] = TileType.Floor;
+
                 }
             }
         }
@@ -286,29 +294,39 @@ public class Board : MonoBehaviour {
     {
         Vector3 player = GameObject.Find("Pilot").transform.position;
         int nbrEnemy = nbrEnemyBase + Mathf.RoundToInt(level * 1.5f);
-       // float enemyDensity = 1f + level * 0.1f;
 
-        int[,] grid = new int[t.Length, t[0].Length];
-        for (int x = 0; x < t.Length; x++)
+        for (int i = 0; i < nbrEnemy; i++)
         {
-            for (int y = 0; y < t[x].Length; y++)
-            {
-                if (t[x][y] == TileType.Floor)
-                {
-                    Vector3 pos = new Vector3(2 * x, 2 * y, 0);
-                   
-                    if (Vector3.Distance(pos, player) > 7 && Random.Range(1, nbrTileFloor) < nbrEnemy)
-                    {
-                        InstantiateAnEnemy(pos);
-                    }
-                    //if (Vector3.Distance(pos,player) > 7 && enemyDensity >= Random.Range(0, 100))
-                    //{
-
-                    //    InstantiateAnEnemy(pos);
-                    // }
-                }
-            }
+            int rng = Random.Range(0, potentialEn.Count);
+            int xCoord = potentialEn[rng][0];
+            int yCoord = potentialEn[rng][1];
+            potentialEn.RemoveAt(rng);
+            InstantiateAnEnemy(new Vector3(2 * xCoord, 2 * yCoord, 0));
+            
         }
+        // float enemyDensity = 1f + level * 0.1f;
+
+        //int[,] grid = new int[t.Length, t[0].Length];
+        //for (int x = 0; x < t.Length; x++)
+        //{
+        //    for (int y = 0; y < t[x].Length; y++)
+        //    {
+        //        if (t[x][y] == TileType.Floor)
+        //        {
+        //            Vector3 pos = new Vector3(2 * x, 2 * y, 0);
+
+        //            if (Vector3.Distance(pos, player) > 7 && Random.Range(1, nbrTileFloor) < nbrEnemy)
+        //            {
+        //                InstantiateAnEnemy(pos);
+        //            }
+        //            //if (Vector3.Distance(pos,player) > 7 && enemyDensity >= Random.Range(0, 100))
+        //            //{
+
+        //            //    InstantiateAnEnemy(pos);
+        //            // }
+        //        }
+        //    }
+        //}
         Debug.Log(test);
     }
     int test = 0;
@@ -346,16 +364,15 @@ public class Board : MonoBehaviour {
     void SetUpChest()
     {
         int nbrPot = potentialChest.Count / 2;
-        for(int i =0; i<nbrChest;i++)
+        for(int i =0; i<nbrChest; i++)
         {
             int rng = Random.Range(0, nbrPot);
-            int xCoord = potentialChest[rng*2];
-            int yCoord = potentialChest[rng*2 + 1];
-            if (tiles[xCoord][yCoord] != TileType.Chest)
-            {
-                AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
+            int xCoord = potentialChest[rng][0];
+            int yCoord = potentialChest[rng][1];
+            potentialChest.RemoveAt(rng);
+            AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
                 tiles[xCoord][yCoord] = TileType.Chest;
-            }
+            
         }
 
     }
