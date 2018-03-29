@@ -258,8 +258,8 @@ public class Player : MonoBehaviour {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
-        player.weaponObject = newWeapon;
-        player.weapon = player.weaponObject.GetComponent<WeaponManager>();
+        
+        //player.weapon = player.weaponObject.GetComponent<WeaponManager>();
         // InstantiateWeapon(newWeapon.weaponPrefab);
         foreach (Transform child in weaponTransform)
         {

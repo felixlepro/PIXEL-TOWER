@@ -105,4 +105,19 @@ public class SwordManager: WeaponManager
     {
         anima[1].SetTrigger("Swipe");
     }
+
+    public override void WeaponSetStats()
+    {
+        isIce = false;
+        isFire = false;
+        chanceBurnProc = 30;
+        chanceSlowProc = 40;
+        burnDuration = 4;
+        burnSuffered = 5;
+        slowDuration = 3;
+        slowValue = 0.3f;
+        slowFadeState = false;
+        SetRarity();
+    }
+
 }
