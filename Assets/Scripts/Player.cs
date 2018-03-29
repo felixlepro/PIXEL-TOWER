@@ -190,11 +190,14 @@ public class Player : MonoBehaviour {
             Invoke("Restart", restartDelay);
             enabled = false;
         }
-        if ((other.tag == "sylvain"))
+        if ((other.tag == "Coin"))
         {
-            
+            gainCoin();
+            Destroy(other.gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
+
         }
-        
+
 
     }
     

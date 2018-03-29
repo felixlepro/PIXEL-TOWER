@@ -33,7 +33,7 @@ public class PiggyManager : MonoBehaviour {
 	void Update () {
         getAnglePath();
         listCoinD = new List<Vector3 >();
-        if (!chasing) ChaseCoins(); 
+        ChaseCoins(); 
         SetSpeed();
         unity.targetPosition = target.position;
         UpdateAnim();
