@@ -158,7 +158,7 @@ public class Board : MonoBehaviour {
                         potentialChest.Add(xCoord);
                         potentialChest.Add(yCoord);
                     }
-                    else tiles[xCoord][yCoord] = TileType.Floor;
+                    tiles[xCoord][yCoord] = TileType.Floor;
                 }
             }
         }
@@ -356,6 +356,8 @@ public class Board : MonoBehaviour {
                 AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
                 tiles[xCoord][yCoord] = TileType.Chest;
             }
+            else tiles[xCoord][yCoord] = TileType.Floor;
+
         }
 
     }

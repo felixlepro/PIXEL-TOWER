@@ -41,8 +41,8 @@ public class PlayerCopie : MonoBehaviour
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
-
-
+        GetComponentInChildren<WeaponManager>().isFantoming = true;
+        ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(0).gameObject );
     }
 
 
@@ -76,6 +76,7 @@ public class PlayerCopie : MonoBehaviour
             float vertical = chemin[0].position.y;
             Move(horizontal, vertical);
             faceMouse(chemin[0].direction);
+            Attack(chemin[0].click);
             chemin.RemoveAt(0);
         }
         else
@@ -97,8 +98,30 @@ public class PlayerCopie : MonoBehaviour
         else anim.SetBool("IsMoving", true);
         transform.position = nouvPlace;
     }
+    public void Attack(bool click)
+    {
 
+        if (GetComponentInChildren<WeaponManager>().numAttack == 1)
+        {
+            if (!click) GetComponentInChildren<WeaponManager>().numAttack = 2;
+        }
+        else if (click)
+        {
+            GetComponentInChildren<WeaponManager>().numAttack = 1;
+        }
+        else GetComponentInChildren<WeaponManager>().numAttack = 0;
+    }
+    public void ChangeWeapon(GameObject newWeapon)
+    {
 
+        foreach (Transform child in weaponTransform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        newWeapon.transform.parent = weaponTransform;
+        newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
+        newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
+    }
     void faceMouse(Vector3 direction)
     {
         Vector3 faceRight = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
