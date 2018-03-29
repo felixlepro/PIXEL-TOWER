@@ -100,9 +100,12 @@ MonoBehaviour:
   immuneTime: 1
   maxKnockBackAmount: 20
   attackRange: 4
+  attackCD: 0
+  timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 1965252358492802}
-  prefab: {fileID: 1965252358492802}
+  burnChance: 0
+  freezeChance: 0
 --- !u!212 &212633853861069570
 SpriteRenderer:
   m_ObjectHideFlags: 1

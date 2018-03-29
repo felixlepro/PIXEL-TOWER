@@ -12,7 +12,6 @@ public class AttackDecisionBoss : Decision
 
     public override bool Decide(StateController controller)
     {
-        Debug.Log("ca");
         return controller.enemyManager.CheckAttack();
     }
 }

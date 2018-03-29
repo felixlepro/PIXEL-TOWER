@@ -7,27 +7,9 @@ public class BlobManager : EnemyManager
 
     public float hpRatioLostOnAttack;
 
-    void Start()
+    protected override void OnStart()
     {
-        anim = GetComponentInChildren<Animator>();
-        currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
-        pathingUnit = GetComponent<Unit>();
-        pathingUnit.speed = currentSpeed;
-
-        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
-        hp = maxHp;
-
-        enemyRigidbody = GetComponent<Rigidbody2D>();
-        controller = GetComponent<StateController>();
-
-        anim = GetComponentInChildren<Animator>();
-        // anim.runtimeAnimatorController = animator;
-
-        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteR.color = wColor;
-
-        enemyCollider = GetComponentInChildren<Collider2D>();
-        targetCollider = chaseTarget.GetComponents<Collider2D>();
+        currentSpeed = maxMoveSpeed / patrolSpeedChaseSpeedRatio;
         attacks[0].attackHitbox = transform.Find("AttackHitbox").gameObject.GetComponents<Collider2D>();
         setAnimState("Moving");
     }

@@ -44,7 +44,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
-    [HideInInspector] public Collider2D enemyCollider;
+   // [HideInInspector] public Collider2D enemyCollider;
 
     //[HideInInspector] public bool isWalking;
     //[HideInInspector] public bool isAttacking;
@@ -56,6 +56,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
     const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
+    bool onlyOneAttack = false;
 
     public Transform chaseTarget;
 
@@ -77,6 +78,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector]   public List<Vector3> wayPointList;
     [HideInInspector] public int nextWayPoint = 0;
 
+    abstract protected void OnStart();
     abstract public bool CheckAttack();
     abstract public void setAnimState(string newState);
     abstract public string getAnimState();
@@ -94,6 +96,10 @@ abstract public class EnemyManager : MonoBehaviour {
     void Start()
     {
         attacks = GetComponents<Attacks>();
+        if (attacks.Length == 1)
+        {
+            onlyOneAttack = true;
+        }
         anim = GetComponentInChildren<Animator>();
         currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
@@ -103,25 +109,20 @@ abstract public class EnemyManager : MonoBehaviour {
         hp = maxHp;
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
-       
-
-        anim = GetComponentInChildren<Animator>();
-       // anim.runtimeAnimatorController = animator;
 
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteR.GetComponent<Collider2D>().isTrigger = false;
         spriteR.color = wColor;
 
        // enemyCollider = GetComponentInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
+        OnStart();
     }
     private void Update()
     {
         if (isRooted)     pathingUnit.speed = 0;    
         else               pathingUnit.speed = currentSpeed;
-        anim.speed = currentSpeed / maxMoveSpeed;
+       // anim.speed  = currentSpeed / maxMoveSpeed;                    //IMPORTANT A SOLVE
         UpdateAnim();
-        spriteOrderInLayer();
         UpdatecurrentAttackCD();
     }
 
@@ -179,14 +180,6 @@ abstract public class EnemyManager : MonoBehaviour {
 
     //}
 
-    public void spriteOrderInLayer()
-    {
-        //if (chaseTarget.transform.position.y <= transform.position.y)
-        //{
-        //    spriteR.sortingOrder = -2;
-        //}
-        //else spriteR.sortingOrder = 2;
-    }
     public void recevoirDegats(int damage, Vector3 kbDirection, float kbAmmount)
     {
         hp -= damage;
@@ -211,7 +204,7 @@ abstract public class EnemyManager : MonoBehaviour {
             currentSpeed = 0;
             setAnimState("Dying");
             UpdateAnim();
-            Invoke("Death", anim.GetCurrentAnimatorClipInfo(0).Length);
+            Invoke("Death", 1);
         }
      
     }
@@ -286,6 +279,13 @@ abstract public class EnemyManager : MonoBehaviour {
         {
             timeUntilNextAttack -= Time.deltaTime;
         }
+        if(!onlyOneAttack)
+        {
+            foreach (Attacks at in attacks)
+            {
+                at.UpdatecurrentAttackCD();
+            }
+        }          
     }
     public bool checkIfAttackIsReady()
     {

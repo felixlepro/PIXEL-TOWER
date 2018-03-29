@@ -40,11 +40,11 @@ public class MagicBall : Projectile {
     //    knockBack *= kbMult;
     //    speed *= speedMult;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float it, float sped, float burn, float freeze)
+    public void Setup(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, float freeze)
     {
         attackDamage = dam;
         maxKnockBackAmount = kb;
-        //attackRange = range;
+        attackRange = range;
         immuneTime = it;
         direction = dir;
         speed = sped;
@@ -58,7 +58,7 @@ public class MagicBall : Projectile {
         {
             attackHitbox[0].enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
-            player.RecevoirDegats(attackDamage, direction, knockBack, immuneTime);
+            player.RecevoirDegats(attackDamage, player.transform.position - transform.position, knockBack, immuneTime);
             speed = 0;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
@@ -68,7 +68,7 @@ public class MagicBall : Projectile {
             {
                 attackHitbox[0].enabled = false;
                 EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
-                em.recevoirDegats(attackDamage, direction, knockBack);
+                em.recevoirDegats(attackDamage, em.transform.position - transform.position, knockBack);
             speed = 0;
             Animator anim = GetComponent<Animator>();
                 anim.SetTrigger("Hit");

@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Projectile : Attacks {
 
-    public override float speed
+    public float projectileSpeed;
+    public override float speed    
     {
-        get { return speed; }
-        set { }
+        get
+        {
+            return projectileSpeed;
+        }
+        set
+        {
+            projectileSpeed = value;
+        }
     }
+
 }

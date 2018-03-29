@@ -202,9 +202,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 20
-  immuneTime: 1
+  immuneTime: 2
   maxKnockBackAmount: 15
   attackRange: 50
+  attackCD: 0
+  timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 0}
   burnChance: 0
@@ -263,7 +265,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spriteR: {fileID: 0}
   targetCollider: []
-  enemyCollider: {fileID: 0}
   Angle: 0
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}

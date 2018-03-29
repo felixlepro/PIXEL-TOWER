@@ -284,7 +284,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spriteR: {fileID: 0}
   targetCollider: []
-  enemyCollider: {fileID: 0}
   Angle: 0
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
@@ -308,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  repathRate: 0.2
+  repathRate: 0.1
   requestPath: 1
   requestProcessing: 0
   direction: {x: 0, y: 0, z: 0}
@@ -340,6 +339,8 @@ MonoBehaviour:
   immuneTime: 1
   maxKnockBackAmount: 20
   attackRange: 3
+  attackCD: 0
+  timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 0}
   burnChance: 0

@@ -51,7 +51,7 @@ public class Player : MonoBehaviour {
         // weaponObject.name = "Weapon";
         //ChangeWeapon(player.weaponObject);
 
-        graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
+        graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
         coinText.text = "Coins: " + coins;       
     }
@@ -91,11 +91,29 @@ public class Player : MonoBehaviour {
                 knockBackAmountOverTime = 0;
                 StartCoroutine("KnockBack");
             }
+            else StartCoroutine("RedOnly");
             immune = true;
             StartCoroutine("ImmuneAnim");
             Invoke("StopImmunity", immuneTime);
         }
         
+    }
+    public IEnumerator RedOnly()
+    {
+        float kbAmountOverTime = 0;
+        graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
+        while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
+        {
+            // if (!hitAWall)
+            {
+                float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
+                graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
+
+                kbAmountOverTime += Time.deltaTime * 1.75f;
+            }
+            yield return null;
+        }
+        graphicsSpriteR.color = new Color(1f, 1, 1, graphicsSpriteR.color[3]);
     }
     IEnumerator KnockBack()
     {
@@ -138,7 +156,7 @@ public class Player : MonoBehaviour {
                 weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
             } 
             graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
-            weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], alpha);
+            weaponSprite.color = new Color(weaponSprite.color[0], weaponSprite.color[1], weaponSprite.color[2], alpha);
             yield return new WaitForSeconds(0.075f);
         }
     }
@@ -147,7 +165,7 @@ public class Player : MonoBehaviour {
     {
         immune = false;
         graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], 1f);
-        weaponSprite.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], 1f);
+        weaponSprite.color = new Color(weaponSprite.color[0], weaponSprite.color[1], weaponSprite.color[2], 1f);
     }
   
     private void Restart()

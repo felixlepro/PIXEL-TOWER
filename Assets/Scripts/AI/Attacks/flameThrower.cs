@@ -37,6 +37,7 @@ public class flameThrower : Attacks {
     //}
     public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, float freeze)
     {
+        direction = dir;
         attackDamage = dam;
         maxKnockBackAmount = kb;
         attackRange = range;
@@ -51,7 +52,6 @@ public class flameThrower : Attacks {
         {
             attackHitbox2.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
-            Debug.Log(maxKnockBackAmount);
             player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
 
         }

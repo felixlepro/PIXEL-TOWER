@@ -5,30 +5,10 @@ using UnityEngine;
 public class Wizard : EnemyManager {
 
      State state;
+    public int nbrBoule;
 
-    void Start()
+    protected override void OnStart()
     {
-        anim = GetComponentInChildren<Animator>();
-        currentSpeed = maxMoveSpeed;
-        pathingUnit = GetComponent<Unit>();
-        pathingUnit.speed = currentSpeed;
-
-        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
-        hp = maxHp;
-
-        enemyRigidbody = GetComponent<Rigidbody2D>();
-        controller = GetComponent<StateController>();
-
-        anim = GetComponentInChildren<Animator>();
-        // anim.runtimeAnimatorController = animator;
-
-        spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteR.color = wColor;
-
-        enemyCollider = GetComponentInChildren<Collider2D>();
-        targetCollider = chaseTarget.GetComponents<Collider2D>();
-
-        pathingUnit.targetPosition = chaseTarget.position;
     }
     private void Update()
     {
@@ -37,7 +17,6 @@ public class Wizard : EnemyManager {
         else pathingUnit.speed = currentSpeed;
         //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;;
         UpdateAnim();
-        spriteOrderInLayer();
         UpdatecurrentAttackCD();
     }
     public override bool CheckAttack()
@@ -45,24 +24,43 @@ public class Wizard : EnemyManager {
         if (checkIfAttackIsReady())
         {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
-            if (distance < attacks[0].attackRange)
+            if (attacks[0].checkIfAttackIsReady() && distance < attacks[0].attackRange)
             {
-                GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
-               fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position, attacks[0].attackDamage, attacks[0].maxKnockBackAmount,attacks[0].immuneTime , attacks[0].speed, attacks[0].burnChance,attacks[0].freezeChance);
+                state = State.AttackNormal;
+                UpdateAnim();
                 resetAttackCD();
-                state = State.GrosCoup;
+                attacks[0].resetAttackCD();
+                Root(1);
+                Invoke("doAttackFlameThrower", 1);
+                Debug.Log("true");
                 return true;
             }
-            else if (distance < attacks[1].attackRange)
+            else if (attacks[1].checkIfAttackIsReady() && distance < attacks[1].attackRange)
             {
-                GameObject fB = Instantiate(attacks[1].prefab, transform.position, Quaternion.identity);
-               fB.GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position, attacks[1].attackDamage, attacks[1].maxKnockBackAmount,attacks[1].immuneTime , attacks[1].speed, attacks[1].burnChance,attacks[1].freezeChance);
+                state = State.AttackSwing;
+                UpdateAnim();
                 resetAttackCD();
-                state = State.AttackNormal;
+                attacks[1].resetAttackCD();
+                Root(1);
+                for (float i = 0; i < nbrBoule; i++)
+                {
+                    float delay = i/4f;
+                    Invoke("doAttackFireBall", 0.5f + delay);
+                }
                 return true;
             }
         }
         return false;
+    }
+    void doAttackFlameThrower()
+    {
+        GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
+        fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up/2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed, attacks[0].burnChance, attacks[0].freezeChance);
+    }
+    void doAttackFireBall()
+    {
+        GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up/2, Quaternion.identity);
+        fT.GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed, attacks[1].burnChance, attacks[1].freezeChance);
     }
     public override void setAnimState(string newState)
     {
