@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114977944435057902}
   - component: {fileID: 114138632656762068}
   - component: {fileID: 210743529585343276}
+  - component: {fileID: 114012373234533588}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: EnemyManager
@@ -203,6 +204,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114012373234533588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549573954070942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 30
+  immuneTime: 1
+  maxKnockBackAmount: 0
+  attackRange: 10
+  attackCD: 4
+  timeUntilNextAttack: 0
+  attackHitbox: []
+  prefab: {fileID: 1739142269822794, guid: a389908b4a0f871469fe9efae9677f15, type: 2}
+  burnChance: 0
+  freezeChance: 0
 --- !u!114 &114055100238023092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,7 +311,7 @@ MonoBehaviour:
   timeUntilNextAttack: 0
   enemyRigidbody: {fileID: 0}
   anim: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 114579189075010984}
   spriteR: {fileID: 0}
   targetCollider: []
   Angle: 0

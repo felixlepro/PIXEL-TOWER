@@ -41,7 +41,7 @@ abstract public class EnemyManager : MonoBehaviour {
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
-    [HideInInspector] public StateController controller;
+    public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
    // [HideInInspector] public Collider2D enemyCollider;

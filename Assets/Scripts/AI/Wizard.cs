@@ -35,6 +35,18 @@ public class Wizard : EnemyManager {
                 Debug.Log("true");
                 return true;
             }
+            else if (attacks[2].checkIfAttackIsReady() && distance > attacks[2].attackRange)
+            {
+                state = State.Summoning;
+                UpdateAnim();
+                resetAttackCD();
+                attacks[2].resetAttackCD();
+                Root(1);
+                GameObject fT = Instantiate(attacks[2].prefab, chaseTarget.transform.position, Quaternion.identity);
+                fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, attacks[2].burnChance, attacks[2].freezeChance);
+
+                return true;
+            }
             else if (attacks[1].checkIfAttackIsReady() && distance < attacks[1].attackRange)
             {
                 state = State.AttackSwing;
