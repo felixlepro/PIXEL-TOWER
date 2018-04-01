@@ -296,7 +296,7 @@ MonoBehaviour:
   chaseRange: 10
   chaseRangeBuffer: 5
   fireStack: 0
-  attackSpeed: 1
+  attackSpeed: 1.5
   attacks:
   - {fileID: 0}
   - {fileID: 0}

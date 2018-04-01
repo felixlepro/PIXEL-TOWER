@@ -509,10 +509,12 @@ MonoBehaviour:
   isFire: 0
   isIce: 0
   chanceBurnProc: 0
+  chanceSlowProc: 40
   burnDuration: 0
   burnSuffered: 0
   slowDuration: 0
   slowValue: 0
+  slowFadeState: 0
   chargeTime: 1.5
   attackDamageChargedBonus: 10
   knockBackAmount: 15
@@ -521,6 +523,8 @@ MonoBehaviour:
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
+  numAttack: 0
+  isFantoming: 0
 --- !u!114 &114596416209805874
 MonoBehaviour:
   m_ObjectHideFlags: 1

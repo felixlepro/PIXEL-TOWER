@@ -67,7 +67,6 @@ public class Player : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        Debug.Log(playerRigidbody.velocity);
         if (knockBackAmountOverTime >= knockBackAmountOverTimeMinimum)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
