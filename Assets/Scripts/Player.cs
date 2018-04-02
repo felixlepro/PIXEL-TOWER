@@ -266,6 +266,7 @@ public class Player : MonoBehaviour {
         {
             GameObject.Destroy(child.gameObject);
         }
+        //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;

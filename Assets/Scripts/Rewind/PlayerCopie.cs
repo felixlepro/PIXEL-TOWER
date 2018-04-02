@@ -41,7 +41,6 @@ public class PlayerCopie : MonoBehaviour
         weaponTransform = transform.Find("WeaponRotation");
         weaponChild = GameObject.Find("Weapon");
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
-        GetComponentInChildren<WeaponManager>().isFantoming = true;
         ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(0).gameObject );
     }
 
@@ -70,6 +69,8 @@ public class PlayerCopie : MonoBehaviour
 
     void FixedUpdate()
     {
+        weaponTransform.GetChild(0).GetComponent<WeaponManager>().isFantoming = true;
+       // JE sait que c du caca mais ca marche pas sinon
         if (chemin.Count > 0)
         {
             float horizontal = chemin[0].position.x;
@@ -100,16 +101,16 @@ public class PlayerCopie : MonoBehaviour
     }
     public void Attack(bool click)
     {
-
-        if (GetComponentInChildren<WeaponManager>().numAttack == 1)
+        if (weaponTransform.GetChild(0).GetComponent<WeaponManager>().numAttack == 1)
         {
-            if (!click) GetComponentInChildren<WeaponManager>().numAttack = 2;
+            if (!click) weaponTransform.GetChild(0).GetComponent<WeaponManager>().numAttack = 2;
+            
         }
         else if (click)
         {
-            GetComponentInChildren<WeaponManager>().numAttack = 1;
+            weaponTransform.GetChild(0).GetComponent<WeaponManager>().numAttack = 1;
         }
-        else GetComponentInChildren<WeaponManager>().numAttack = 0;
+        else weaponTransform.GetChild(0).GetComponent<WeaponManager>().numAttack = 0;
     }
     public void ChangeWeapon(GameObject newWeapon)
     {
@@ -118,7 +119,8 @@ public class PlayerCopie : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        newWeapon.transform.parent = weaponTransform;
+        Instantiate(newWeapon, weaponTransform);
+        //newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
     }

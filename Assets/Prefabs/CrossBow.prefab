@@ -79,10 +79,12 @@ MonoBehaviour:
   isFire: 0
   isIce: 0
   chanceBurnProc: 30
+  chanceSlowProc: 40
   burnDuration: 4
   burnSuffered: 5
   slowDuration: 3
   slowValue: 0.3
+  slowFadeState: 0
   chargeTime: 0
   attackDamageChargedBonus: 0
   knockBackAmount: 4
@@ -90,7 +92,9 @@ MonoBehaviour:
   sprite: {fileID: 0}
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
-  baseScale: {x: 1, y: 1, z: 1}
+  baseScale: {x: 10, y: 10, z: 10}
+  numAttack: 0
+  isFantoming: 0
   boltSpeed: 20
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
 --- !u!212 &212378961993274990

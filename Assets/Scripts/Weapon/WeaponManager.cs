@@ -81,7 +81,7 @@ public abstract class WeaponManager : MonoBehaviour {
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         UpdateTimeUntilNextAttack();
         if (!isFantoming) setNumAttack();
