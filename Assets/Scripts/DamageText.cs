@@ -32,6 +32,6 @@ public class DamageText : MonoBehaviour {
     {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(new Vector2(location.x , location.y));
         rt.position = screenPosition;
-        rt.localScale -= rt.localScale*0.6f * Time.deltaTime;
+        //rt.localScale -= rt.localScale*0.6f * Time.deltaTime;
     }
 }

@@ -42,7 +42,7 @@ public class Wizard : EnemyManager {
                 resetAttackCD();
                 attacks[2].resetAttackCD();
                 Root(1);
-                GameObject fT = Instantiate(attacks[2].prefab, playerMovementPrediction(0.5f,3), Quaternion.identity);
+                GameObject fT = Instantiate(attacks[2].prefab, playerMovementPrediction(0.5f,1.25f), Quaternion.identity);
                 fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, attacks[2].burnChance, attacks[2].freezeChance);
 
                 return true;
@@ -72,7 +72,7 @@ public class Wizard : EnemyManager {
     void doAttackFireBall()
     {
         GameObject fT = Instantiate(attacks[1].prefab, transform.position, Quaternion.identity);
-        Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up;
+        Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up/2;
         fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed, attacks[1].burnChance, attacks[1].freezeChance);
     }
     public override void setAnimState(string newState)
