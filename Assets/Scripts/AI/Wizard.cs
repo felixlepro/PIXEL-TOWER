@@ -42,7 +42,7 @@ public class Wizard : EnemyManager {
                 resetAttackCD();
                 attacks[2].resetAttackCD();
                 Root(1);
-                GameObject fT = Instantiate(attacks[2].prefab, chaseTarget.transform.position, Quaternion.identity);
+                GameObject fT = Instantiate(attacks[2].prefab, playerMovementPrediction(0.5f,3), Quaternion.identity);
                 fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, attacks[2].burnChance, attacks[2].freezeChance);
 
                 return true;
@@ -66,13 +66,14 @@ public class Wizard : EnemyManager {
     }
     void doAttackFlameThrower()
     {
-        GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
-        fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up/2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed, attacks[0].burnChance, attacks[0].freezeChance);
+        GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);     
+        fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed, attacks[0].burnChance, attacks[0].freezeChance);
     }
     void doAttackFireBall()
     {
-        GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up/2, Quaternion.identity);
-        fT.GetComponent<MagicBall>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed, attacks[1].burnChance, attacks[1].freezeChance);
+        GameObject fT = Instantiate(attacks[1].prefab, transform.position, Quaternion.identity);
+        Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up;
+        fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed, attacks[1].burnChance, attacks[1].freezeChance);
     }
     public override void setAnimState(string newState)
     {

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
 
-abstract public class EnemyManager : MonoBehaviour {
-    public string EnemyName;
-    public Color wColor = Color.white;
-    public float maxMoveSpeed;
+abstract public class EnemyManager : Character {
+    
     public float patrolSpeedChaseSpeedRatio;
-    public int maxHp;
     public float gettingKnockedBackAmount;
     //public float attackRange;
     public float chaseRange;
@@ -29,26 +26,14 @@ abstract public class EnemyManager : MonoBehaviour {
     
     public AudioClip dun;
 
-    [HideInInspector] public bool CoroutineFire = false;
-    [HideInInspector] public bool CoroutineIce;
-    [HideInInspector] public const int maxStack = 5;
-    [HideInInspector] public int currentStack;
-    [HideInInspector] public float currentBurnTime;
-
-    public int hp;
     [HideInInspector] public bool isRooted = false;
-    [HideInInspector] public float currentSpeed;
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
     public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
-   // [HideInInspector] public Collider2D enemyCollider;
 
-    //[HideInInspector] public bool isWalking;
-    //[HideInInspector] public bool isAttacking;
-    //[HideInInspector] public bool isDying = false;
     [HideInInspector] public float Angle;
 
     [HideInInspector] public float knockBackAmount = 0;
@@ -69,10 +54,6 @@ abstract public class EnemyManager : MonoBehaviour {
     //public float immuneTime;
 
     public float idleTime;
-
-    //[HideInInspector] public bool isWalking;
-    //[HideInInspector] public bool isAttacking;
-    //[HideInInspector] public bool isDying = false;
 
 
     [HideInInspector]   public List<Vector3> wayPointList;
@@ -180,9 +161,10 @@ abstract public class EnemyManager : MonoBehaviour {
 
     //}
 
-    public void recevoirDegats(int damage, Vector3 kbDirection, float kbAmmount)
+    public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float im)
     {
         hp -= damage;
+        DamageTextManager.CreateFloatingText(damage, transform.position);
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
         knockBackAmount = kbAmmount * gettingKnockedBackAmount;
         Damaged();  
@@ -364,39 +346,12 @@ abstract public class EnemyManager : MonoBehaviour {
     {
         isRooted = false;
     }
+ 
 
-   
-    public void Burn(float burnTimer, int burnDamage)
+    protected Vector3 playerMovementPrediction(float castTime, float predictionAmount)
     {
-        currentBurnTime = 0;
-        VerifStack();
-        if (CoroutineFire == false)
-        {
-            StartCoroutine(IsBurning(burnTimer,burnDamage)); 
-        }
-       
-    }
+        return chaseTarget.position + chaseTarget.GetComponent<Player>().movement.normalized * chaseTarget.GetComponent<Player>().currentSpeed * castTime/predictionAmount;
 
-    public void VerifStack()
-    {
-        if(currentStack < maxStack)
-        {
-            currentStack += 1;
-        }
-    }
-
-    IEnumerator IsBurning(float burnTime,int burnAmount)
-    {
-        
-        CoroutineFire = true;
-        while (currentBurnTime < burnTime)
-        {
-            currentBurnTime += Time.deltaTime;
-            VerifStack();        
-            recevoirDegats(burnAmount + currentStack, Vector3.zero , 0);
-            yield return new WaitForSeconds(1f);
-        }
-        CoroutineFire = false;
-    }
+}
 
 }

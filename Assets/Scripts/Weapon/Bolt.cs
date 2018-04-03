@@ -63,7 +63,7 @@ public class Bolt : MonoBehaviour {
             transform.right = -direction;
             EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
             damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
-            em.recevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt);
+            em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt,0);
             //Destroy(this.gameObject);
             UpdateSpeed = false;
             transform.parent = em.gameObject.transform;

@@ -152,10 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1549573954070942, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
   m_IsPrefabParent: 0
@@ -1141,15 +1137,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523076eab3952ff4caa8b6539859302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
+  maxHp: 100
+  hp: 0
+  wColor: {r: 1, g: 1, b: 1, a: 1}
+  maxMoveSpeed: 10
+  immune: 0
+  currentSpeed: 0
+  CoroutineFire: 0
+  CoroutineIce: 0
+  currentStack: 0
+  currentBurnTime: 0
+  weaponObject: {fileID: 0}
   rotationBuffer: 15
   restartDelay: 1
   valuePerCoin: 1
   coinText: {fileID: 1578679367}
   coins: 0
-  player: {fileID: 11400000, guid: db782df26369bb6478edacc6ddee327f, type: 2}
-  immune: 0
-  currentSpeed: 0
   direction: {x: 0, y: 0}
+  movement: {x: 0, y: 0, z: 0}
   timeUntilNextAttack: 0
   knockBackAmount: 0
   knockBackAmountOverTime: 1

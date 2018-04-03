@@ -5,25 +5,24 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using EZCameraShake;
 
-public class Player : MonoBehaviour {
-    
+public class Player : Character {
+
+    public GameObject weaponObject;
     public float rotationBuffer;
     public float restartDelay = 1f;
     public int valuePerCoin = 1;
     public Text coinText;
     public int coins;
-    public PlayerObject player;
-    public bool immune = false;
-    [HideInInspector ] public float currentSpeed;
+
+
 
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
-    private int hp;
-    private Vector3 movement;
+    public Vector3 movement;
     private bool FacingMouse = true;
-
+    const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
     Transform weaponTransform;
     SpriteRenderer graphicsSpriteR;
     SpriteRenderer weaponSprite;
@@ -32,17 +31,17 @@ public class Player : MonoBehaviour {
 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] public float knockBackAmountOverTime = 1;
-    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.85f;
+    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.775f;
     [HideInInspector] public float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
     void Start()
     {
-        currentSpeed=player.maxSpeed;
+        hp = maxHp;
+        currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        anim.runtimeAnimatorController = player.animator;
         //player.hp = GameManager.instance.playerHp;
 
         weaponTransform = transform.Find("WeaponRotation");
@@ -67,7 +66,7 @@ public class Player : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        if (knockBackAmountOverTime >= knockBackAmountOverTimeMinimum)
+        if (!stunned)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -78,10 +77,11 @@ public class Player : MonoBehaviour {
 
     
 
-    public void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime)
+    public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime)
     {
         if (!immune)
         {
+            DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
             hp -= damage;
             if (kbAmmount != 0)
@@ -119,6 +119,10 @@ public class Player : MonoBehaviour {
     {
         yield return new WaitForFixedUpdate();
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
+        stunned = true;
+
+        //float knockBackTime = timePerKnockBackAmount / ((knockBackAmount - timePerKnockBackAmount) / 2 + timePerKnockBackAmount);
+        float knockBackTime = 2 * timePerKnockBackAmount / (knockBackAmount + timePerKnockBackAmount);
         while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
@@ -132,7 +136,7 @@ public class Player : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
         graphicsSpriteR.color = new Color(1f, 1, 1, graphicsSpriteR.color[3]);
-
+        stunned = false;
     }
 
     IEnumerator ImmuneAnim()
@@ -285,43 +289,5 @@ public class Player : MonoBehaviour {
         weaponInstance.transform.localPosition = prefab.transform.position;
 
     }
-    public void Slow(float slowAmount, float duration, bool fade)
-    {
-        if (fade)
-        {
-            StartCoroutine(SlowFade(slowAmount, duration));
-        }
-        else
-        {
-            StartCoroutine(SlowNonFade(slowAmount, duration));
-        }
-
-    }
-    IEnumerator SlowNonFade(float slowAmount, float duration)
-    {
-        float time = 0;
-
-        currentSpeed *= (1 - slowAmount);
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        currentSpeed /= (1 - slowAmount);
-    }
-    IEnumerator SlowFade(float slowAmount, float duration)
-    {
-        float speed = 1f;
-        float time = 0;
-        while (time < duration)
-        {
-            currentSpeed /= speed;
-            speed = (time / duration) * slowAmount + 1 - slowAmount;
-            currentSpeed *= speed;
-
-            time += Time.deltaTime;
-            yield return null;
-        }
-        currentSpeed /= speed;
-    }
+    
 }

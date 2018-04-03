@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 20
-  immuneTime: 1
+  immuneTime: 0
   maxKnockBackAmount: 5
   attackRange: 100
   attackCD: 3.5
@@ -287,11 +287,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2649dff2e7d4614ab9e5b2242af7aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyName: 
+  name: 
+  maxHp: 500
+  hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 5
+  immune: 0
+  currentSpeed: 0
+  CoroutineFire: 0
+  CoroutineIce: 0
+  currentStack: 0
+  currentBurnTime: 0
   patrolSpeedChaseSpeedRatio: 1
-  maxHp: 500
   gettingKnockedBackAmount: 1
   chaseRange: 10
   chaseRangeBuffer: 5
@@ -301,13 +308,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dun: {fileID: 0}
-  CoroutineFire: 0
-  CoroutineIce: 0
-  currentStack: 0
-  currentBurnTime: 0
-  hp: 0
   isRooted: 0
-  currentSpeed: 0
   timeUntilNextAttack: 0
   enemyRigidbody: {fileID: 0}
   anim: {fileID: 0}
