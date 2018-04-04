@@ -8,9 +8,14 @@ public abstract class WeaponManager : MonoBehaviour {
     public string weaponName;
     public Color wColor;
     public int attackDamage;
-    public int cost;
-   // public float range;
     public float attackSpeed; //  attackCD
+    public float chargeTime;
+    public float attackDamageChargedBonus;
+    public float knockBackAmount;
+    public int cost;
+  
+    // public float range;
+  
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     public bool isFire = false;
     public bool isIce = false;
@@ -21,28 +26,27 @@ public abstract class WeaponManager : MonoBehaviour {
     [HideInInspector] public float burnDuration = 4;
     [HideInInspector] public int burnSuffered = 5;
 
-    [HideInInspector] public int slowDuration = 3;
+    [HideInInspector] public float slowDuration = 3;
     [HideInInspector] public float slowValue = 0.3f;
 
    [HideInInspector]public bool slowFadeState = false;     
     //Fin des attributs d'effets spéciaux d'armes  -Simon
 
 
-    public float chargeTime;
-    public int attackDamageChargedBonus;
-    public float knockBackAmount;
+   
     [HideInInspector] public RuntimeAnimatorController animator;
     public Sprite sprite;
     public string description;
     public Vector3 basePosition = new Vector3(0.35f, 0, 0);
     public Vector3 baseScale = new Vector3(1, 1, 1);
-    public int numAttack;
-    public bool isFantoming = false;
+
+    [HideInInspector] public int numAttack;
+    [HideInInspector] public bool isFantoming = false;
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
 
-    protected float rand;
+    //protected float rand;
     protected Player player;
     protected float chargeDoneRatio;
     protected  float timeUntilNextAttack;
@@ -50,19 +54,29 @@ public abstract class WeaponManager : MonoBehaviour {
     protected float currentChargeTime;
      KeyCode chargeAttackKey = KeyCode.Mouse0;
 
-    float randomR;
+    public IntRange attackDamageRange = new IntRange(15, 20);
+    public FloatRange attackSpeedRange = new FloatRange(0.1f, 0.7f);
+    public FloatRange attackDamageChargedBonusRange = new FloatRange(0.25f, 0.75f);
+    public FloatRange knockBackAmountRange = new FloatRange(5f, 12f);
 
-    float rarity;
+    public IntRange chanceBurnProcRange = new IntRange(25, 75);
+    public IntRange chanceSlowProcRange = new IntRange(25, 75);
+    public FloatRange slowDurationRange = new FloatRange(1, 3);
+    public FloatRange slowValueRanges = new FloatRange(0.1f, 0.4f);
 
-    const float common = 60;
+    protected float rarity;
+    float[,] rarities = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
+    //const float commonChance = 100;
+    //const float rareChance = 50;
+    //const float epicChance = 20;
+    //const float legendaryChance = 5f;
+    //const float ultraLegendaryChance = 0.01f;
 
-    const float rare = 25;
-
-    const float epic = 15;
-
-    const float legendary = 4.99f;
-
-    const float ultraLegendary = 0.01f;
+    //const float commonMult = 1;
+    //const float rareMult = 1.2f;
+    //const float epicMult = 1.4f;
+    //const float legendaryMult = 1.6f;
+    //const float ultraLegendaryMult = 2f;
 
     protected abstract void ChargeWeapon();
     protected abstract void MaxChargeWeapon();
@@ -86,6 +100,17 @@ public abstract class WeaponManager : MonoBehaviour {
         UpdateTimeUntilNextAttack();
         if (!isFantoming) setNumAttack();
         Attack(numAttack);
+    }
+    public void SetRarity()
+    {
+        float randomR = NbRand(0, 100);
+        for(int i = 0; i < rarities.GetLength(0); i++)
+        {
+            if(randomR <= rarities[i,0])
+            {
+                rarity = rarities[i, 1];
+            }
+        }
     }
     public void setNumAttack()
     {
@@ -127,11 +152,11 @@ public abstract class WeaponManager : MonoBehaviour {
     {
         if (currentChargeTime < chargeTime)
         {
-            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage + attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
+            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage * (attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio)), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
         }
         else
         {
-            cible.RecevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount,0);
+            cible.RecevoirDegats(attackDamage + Mathf.RoundToInt(attackDamageChargedBonus * attackDamage), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
         }
 
         if (isFire)
@@ -171,15 +196,10 @@ public abstract class WeaponManager : MonoBehaviour {
 
     protected int NbRand(int min, int max)
     {
-        rand = Random.Range(min,max);
-        return Mathf.FloorToInt(rand);
+        return Mathf.FloorToInt(Random.Range(min, max));
     }
     
-    public void SetRarity()
-    {
-        randomR = NbRand(0,100);
-       
-    }
+    
     public void WeaponSetEffect(bool Fire,bool frozen)
     {
         if(Fire)

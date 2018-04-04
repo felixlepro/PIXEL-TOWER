@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordManager: WeaponManager 
+public class SwordManager : WeaponManager
 {
     private BoxCollider2D coll;
     Animator[] anima;
+
+
+
 
     void Start()
     {
@@ -18,7 +21,33 @@ public class SwordManager: WeaponManager
         anima = GetComponentsInChildren<Animator>();
         //anima[].runtimeAnimatorController = animator;     
     }
+    public override void WeaponSetStats()
+    {
+        SetRarity();
 
+        float AdAsRation = Random.value;
+
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
+        attackSpeed = attackSpeedRange.Set(1-AdAsRation) * rarity;
+        attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
+        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;
+
+        cost = 10;
+
+        float slowDurationValueRatio = Random.value;
+
+        chanceBurnProc = chanceBurnProcRange.Random;
+        chanceSlowProc = chanceSlowProcRange.Random;
+        slowDuration = slowDurationRange.Set(slowDurationValueRatio);
+        slowValue = slowValueRanges.Set(1 - slowDurationValueRatio);
+
+        isIce = false;
+        isFire = false;
+        burnDuration = 4;
+        burnSuffered = 5;
+        slowFadeState = false;
+        
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Colision");
@@ -104,20 +133,6 @@ public class SwordManager: WeaponManager
     void triggerSwipe()
     {
         anima[1].SetTrigger("Swipe");
-    }
-
-    public override void WeaponSetStats()
-    {
-        isIce = false;
-        isFire = false;
-        chanceBurnProc = 30;
-        chanceSlowProc = 40;
-        burnDuration = 4;
-        burnSuffered = 5;
-        slowDuration = 3;
-        slowValue = 0.3f;
-        slowFadeState = false;
-        SetRarity();
     }
 
 }

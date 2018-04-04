@@ -16,10 +16,8 @@ public class LookDecision : Decision
         float distance = Vector3.Distance(controller.enemyManager.chaseTarget.transform.position, controller.transform.position);
         if (distance <= controller.enemyManager.chaseRange)
         {
-            //controller.enemyManager.enemyCollider.isTrigger = false;
             controller.enemyManager.currentSpeed *= controller.enemyManager.patrolSpeedChaseSpeedRatio;
-            controller.enemyManager.Root(0.75f);
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(controller.enemyManager.dun);
+            controller.enemyManager.playDun();
 
             return true;
         }

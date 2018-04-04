@@ -25,12 +25,14 @@ abstract public class EnemyManager : Character {
     //}
     
     public AudioClip dun;
+    public GameObject dunExlamation;
+    public float height;
 
     [HideInInspector] public bool isRooted = false;
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
-    public StateController controller;
+    [HideInInspector] public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
 
@@ -69,7 +71,7 @@ abstract public class EnemyManager : Character {
     abstract public void UpdateAnim();
     abstract public void gonnaDie();    
 
-    private void Awake()
+    private void OnEnable()
     {
         controller = GetComponent<StateController>();
     }
@@ -352,6 +354,15 @@ abstract public class EnemyManager : Character {
     {
         return chaseTarget.position + chaseTarget.GetComponent<Player>().movement.normalized * chaseTarget.GetComponent<Player>().currentSpeed * castTime/predictionAmount;
 
-}
+    }
+
+    public void playDun()
+    {
+        Root(0.75f);
+        GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(dun);
+        GameObject dungo = Instantiate(dunExlamation, transform.position + Vector3.up*height, Quaternion.identity);
+        dungo.GetComponentInChildren<DunManager>().Initialize(transform.position + Vector3.up * height);
+
+    }
 
 }

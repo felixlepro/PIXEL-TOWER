@@ -54,7 +54,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
@@ -190,7 +190,7 @@ MonoBehaviour:
   enemyList:
   - {fileID: 1931763787068262, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
   - {fileID: 1327544550791342, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
-  nbrEnemyBase: 0
+  nbrEnemyBase: 10
   chestList:
   - {fileID: 1050157812518948, guid: 2f186ffc7e5a0e841a467c247216522c, type: 2}
   nbrChestMax: 4

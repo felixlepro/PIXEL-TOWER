@@ -24,7 +24,7 @@ public abstract class Character : MonoBehaviour {
     public void Burn(float burnTimer, int burnDamage)
     {
         currentBurnTime = 0;
-        VerifStack();
+        addStack();
         if (CoroutineFire == false)
         {
             StartCoroutine(IsBurning(burnTimer, burnDamage));
@@ -32,7 +32,7 @@ public abstract class Character : MonoBehaviour {
 
     }
 
-    public void VerifStack()
+    public void addStack()
     {
         if (currentStack < maxStack)
         {
@@ -46,8 +46,8 @@ public abstract class Character : MonoBehaviour {
         while (currentBurnTime < burnTime)
         {
             currentBurnTime += Time.deltaTime;
-            VerifStack();
-            RecevoirDegats(burnAmount + currentStack, Vector3.zero, 0,0);
+            //VerifStack();
+            RecevoirDegats(burnAmount * currentStack, Vector3.zero, 0,0);
             yield return new WaitForSeconds(1f);
         }
         CoroutineFire = false;

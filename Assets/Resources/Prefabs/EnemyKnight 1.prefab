@@ -258,11 +258,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f70a5ca48dca4592127727762c80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyName: 
+  name: 
+  maxHp: 300
+  hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 8
+  immune: 0
+  currentSpeed: 0
+  CoroutineFire: 0
+  CoroutineIce: 0
+  currentStack: 0
+  currentBurnTime: 0
   patrolSpeedChaseSpeedRatio: 3
-  maxHp: 300
   gettingKnockedBackAmount: 0
   chaseRange: 10
   chaseRangeBuffer: 5
@@ -271,13 +278,10 @@ MonoBehaviour:
   attacks:
   - {fileID: 114632020951264710}
   dun: {fileID: 8300000, guid: d2d3e263b14c2304793c6253646519e7, type: 3}
-  CoroutineFire: 0
-  CoroutineIce: 0
-  currentStack: 0
-  currentBurnTime: 0
-  hp: 0
+  dunExlamation: {fileID: 1034376068111508, guid: 57bedcc6b62cfb54c930d86a3e780bd6,
+    type: 2}
+  height: 2
   isRooted: 0
-  currentSpeed: 0
   timeUntilNextAttack: 0
   enemyRigidbody: {fileID: 0}
   anim: {fileID: 0}
