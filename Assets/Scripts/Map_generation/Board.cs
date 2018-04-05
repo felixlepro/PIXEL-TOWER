@@ -19,11 +19,12 @@ public class Board : MonoBehaviour {
     public GameObject mur_Est;
     public GameObject mur_Ouest;
     public GameObject voidTile;
+    public GameObject exit;
 
     private TileType[][] tiles;
     private Room[] rooms;
     private Corridor[] corridors;
-    public GameObject boardHolder;
+    GameObject boardHolder;
 
     public GameObject[] enemyList;
     public int nbrEnemyBase;
@@ -32,7 +33,8 @@ public class Board : MonoBehaviour {
     public GameObject[] chestList;
     public int nbrChestMax;
     public int nbrChest;
-     List<int[]> potentialChest = new List<int[]>();
+    List<int[]> potentialChest = new List<int[]>();
+    List<int[]> potentialExit = new List<int[]>();
     GameObject chestHolder;
 
     int level;
@@ -40,8 +42,8 @@ public class Board : MonoBehaviour {
 
     public  void SetupBoard(int lvl)
     {
-        boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-        //boardHolder = new GameObject("Board Holder");
+        //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
+        boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
         if (lvl !=1)
         {
@@ -233,6 +235,12 @@ public class Board : MonoBehaviour {
                     if (tiles[i][j-1]==TileType.Floor )
                     {
                         InstantiateObject(mur_Nord, i, j);
+                        if (tiles[i+1][j] == TileType.Wall && tiles[i-1][j] == TileType.Wall )
+                        {
+                            int[] position = { i, j };
+                            potentialExit.Add(position);
+                        }
+                        
                     }
                     
 
@@ -266,6 +274,12 @@ public class Board : MonoBehaviour {
                 }
             }
         }
+        // Instantie lexit
+        int rndIndex = Random.Range(0, potentialExit.Count);
+        
+        InstantiateObject(exit, potentialExit[rndIndex][0], potentialExit[rndIndex][1]);
+        
+        
     }
 
     //void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
@@ -370,8 +384,7 @@ public class Board : MonoBehaviour {
             potentialChest.RemoveAt(rng);
             AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
             tiles[xCoord][yCoord] = TileType.Chest;
-         //}
-           // else tiles[xCoord][yCoord] = TileType.Floor;
+            
 
         }
 
