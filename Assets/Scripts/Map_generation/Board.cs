@@ -374,8 +374,6 @@ public class Board : MonoBehaviour {
             potentialChest.RemoveAt(rng);
             AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
                 tiles[xCoord][yCoord] = TileType.Chest;
-            }
-            else tiles[xCoord][yCoord] = TileType.Floor;
 
         }
 

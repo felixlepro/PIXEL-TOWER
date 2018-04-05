@@ -13,7 +13,8 @@ public class Player : Character {
     public int valuePerCoin = 1;
     public Text coinText;
     public int coins;
-
+    public Image hpBar;
+    public GameObject gameOverMenu;
 
 
     [HideInInspector] public Vector2 direction;
@@ -39,6 +40,7 @@ public class Player : Character {
     void Start()
     {
         hp = maxHp;
+        hpBar.fillAmount = (float)hp / (float)maxHp;
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -66,6 +68,7 @@ public class Player : Character {
     }
     void FixedUpdate()
     {
+        
         if (!stunned)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
@@ -84,6 +87,12 @@ public class Player : Character {
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
             hp -= damage;
+            hpBar.fillAmount = (float)hp / (float)maxHp;
+            if(hp <= 0)
+            {
+                Time.timeScale = 0;
+                gameOverMenu.SetActive(true);
+            }
             if (kbAmmount != 0)
             {
                 knockBackDirection = kbDirection;
@@ -95,8 +104,7 @@ public class Player : Character {
             immune = true;
             StartCoroutine("ImmuneAnim");
             Invoke("StopImmunity", immuneTime);
-        }
-        
+        }  
     }
     public IEnumerator RedOnly()
     {
