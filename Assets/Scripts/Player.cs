@@ -187,12 +187,17 @@ public class Player : Character {
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Exit")
         {
-            Invoke("Restart", restartDelay);
-            enabled = false;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                other.GetComponent<Animator>().SetTrigger("Open");
+                Invoke("Restart", restartDelay);
+                enabled = false;
+            }
+            
         }
         if ((other.tag == "Coin"))
         {
@@ -201,7 +206,7 @@ public class Player : Character {
             GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
 
         }
-
+        
 
     }
     
