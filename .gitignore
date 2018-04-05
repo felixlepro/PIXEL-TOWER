@@ -32,3 +32,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets/Scripts/AI/StateStuff/Blob\.meta
+
+Assets/Scripts/Objects\.meta
