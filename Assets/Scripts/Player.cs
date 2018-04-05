@@ -7,7 +7,7 @@ using EZCameraShake;
 
 public class Player : Character {
 
-    public GameObject weaponObject;
+    public GameObject[] weaponObject;
     public float rotationBuffer;
     public float restartDelay = 1f;
     public int valuePerCoin = 1;
@@ -20,7 +20,7 @@ public class Player : Character {
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
     private Animator anim;
-    public Vector3 movement;
+    [HideInInspector] public Vector3 movement;
     private bool FacingMouse = true;
     const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
     Transform weaponTransform;
@@ -70,12 +70,25 @@ public class Player : Character {
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
+
             Move(horizontal, vertical);
             FaceMouse();
         }
     }
 
-    
+    private void Move(float h, float v)
+    {
+     
+        movement.Set(h, v, 0f);
+        movement = movement.normalized * currentSpeed * Time.deltaTime;
+        playerRigidbody.MovePosition(transform.position + movement);
+        if (h == 0 && v == 0)
+        {
+            anim.SetBool("IsMoving", false);
+        }
+        else anim.SetBool("IsMoving", true);
+    }
+
 
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime)
     {
@@ -208,19 +221,7 @@ public class Player : Character {
 
 
     
-    private void Move(float h, float v)
-    {
-
-        movement.Set(h, v, 0f);
-        movement = movement.normalized * currentSpeed * Time.deltaTime;
-        playerRigidbody.MovePosition(transform.position + movement);
-        if (h == 0 && v == 0)
-        {
-            anim.SetBool("IsMoving", false);
-        }
-        else anim.SetBool("IsMoving", true);
-    }
-
+   
 
     void FaceMouse()
     {

@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) / nodeRadius);
         gridWorldSize = new Vector2(gridSizeX * nodeRadius * 2, gridSizeY * nodeRadius * 2);
         grid = new Node[gridSizeX, gridSizeY];
-        worldBotLeft = new Vector3(-1, 0, 0);
+        worldBotLeft = new Vector3(-1, -1, 0);
 
         for (int x = 0; x < gridSizeX; x++)
         {
@@ -34,7 +34,7 @@ public class GridManager : MonoBehaviour
                 int nx = Mathf.FloorToInt(x * nodeRadius);
                 int ny = Mathf.FloorToInt(y * nodeRadius);
                 bool walkable;
-                if (board[nx,ny] == 2 && Mathf.RoundToInt(y * nodeRadius) != ny) //fait en sorte que la partie du haut des tiles des chests soit walkable
+                if (board[nx,ny] == 2 && Mathf.RoundToInt(y * nodeRadius) == ny) //fait en sorte que la partie du bas des tiles des chests soit walkable
                 {
                     walkable = true;
                 }

@@ -347,21 +347,17 @@ public class Board : MonoBehaviour {
     }
     void SetNbrChest()
     {
-        int newNbrChest = 1;
         float rng = Random.value;
         rng = rng *rng*rng;
         for(int i = 1; i <= nbrChestMax; i++)
         {
-            float cossin = i;
-                float cossin2 = nbrChestMax;
 
-            if (rng < cossin/cossin2)
+            if (rng < (float)i/(float)nbrChestMax )
             {
-                newNbrChest = i;
+                nbrChest = i;
                 break;
             }
         }
-        nbrChest = newNbrChest;
     }
     void SetUpChest()
     {
@@ -373,9 +369,9 @@ public class Board : MonoBehaviour {
             int yCoord = potentialChest[rng][1];
             potentialChest.RemoveAt(rng);
             AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
-                tiles[xCoord][yCoord] = TileType.Chest;
-            }
-            else tiles[xCoord][yCoord] = TileType.Floor;
+            tiles[xCoord][yCoord] = TileType.Chest;
+         //}
+           // else tiles[xCoord][yCoord] = TileType.Floor;
 
         }
 

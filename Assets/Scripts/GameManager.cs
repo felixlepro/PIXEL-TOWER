@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour {
 
     private Text coinCounttext;
     private Board boardScript;
-    private int level = 1;
+    BoardBoss boardBoss;
+    private int level = 0;
     private List<EnemyManager> enemies;
     private bool doingSetup = true;
     private Text levelText;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
+        boardBoss = GetComponent<BoardBoss>();
         InitGame();
 
         audio = GetComponent<AudioSource>();
@@ -79,6 +81,17 @@ public class GameManager : MonoBehaviour {
         // levelImage.SetActive(true);
         // Invoke("HideLevelImage", levelStartDelay);
 
+    }
+    void loadNewLevel()
+    {
+        doingSetup = true;
+        enemies.Clear();
+
+        level += 1;
+        if (level % 3 == 0)   {
+            boardBoss.SetupBoard(level/3);
+        }
+        boardScript.SetupBoard(level);
     }
    
 

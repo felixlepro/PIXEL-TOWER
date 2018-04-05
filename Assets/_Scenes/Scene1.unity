@@ -270,7 +270,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1549573954070942, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114012373234533588, guid: 69919d60abbeaf24b8f3e6b3265db875,
         type: 2}
@@ -1298,16 +1298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13319ea4456116b4ca951d385687a917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  immuneTime: 0
-  maxKnockBackAmount: 0
-  attackRange: 0
-  attackCD: 0
-  timeUntilNextAttack: 0
-  attackHitbox: []
-  prefab: {fileID: 0}
-  burnChance: 0
-  freezeChance: 0
 --- !u!95 &187133482
 Animator:
   serializedVersion: 3
@@ -1915,6 +1905,11 @@ Prefab:
         type: 2}
       propertyPath: nbrEnemyBase
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114993608136937452, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
+      propertyPath: enableGizmos
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
@@ -2700,7 +2695,7 @@ CompositeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2800,7 +2795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
-  maxHp: 100
+  maxHp: 0
   hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 10
@@ -4586,7 +4581,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246905705
 GameObject:
@@ -6607,12 +6602,6 @@ Transform:
   m_Father: {fileID: 1332458540}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1857672081 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114579189075010984, guid: 69919d60abbeaf24b8f3e6b3265db875,
-    type: 2}
-  m_PrefabInternal: {fileID: 5304893}
-  m_Script: {fileID: 11500000, guid: 52ce213c8f4cd8e44a5b80b83307f181, type: 3}
 --- !u!4 &1862761045 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4710185510163748, guid: 69919d60abbeaf24b8f3e6b3265db875,
@@ -6728,6 +6717,7 @@ GameObject:
   - component: {fileID: 1896710130}
   - component: {fileID: 1896710129}
   - component: {fileID: 1896710128}
+  - component: {fileID: 1896710132}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -6864,6 +6854,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!70 &1896710132
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1896710126}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  m_Size: {x: 0.9, y: 0.4}
+  m_Direction: 1
 --- !u!1001 &1920915878
 Prefab:
   m_ObjectHideFlags: 0
@@ -7525,7 +7530,7 @@ RectTransform:
   - {fileID: 1005361822}
   - {fileID: 833494892}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

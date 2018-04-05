@@ -35,18 +35,27 @@ public class SwordManager : WeaponManager
         cost = 10;
 
         float slowDurationValueRatio = Random.value;
+        float burnDurationValueRatio = Random.value;
 
         chanceBurnProc = chanceBurnProcRange.Random;
+        burnDuration = burnDurationRange.Set(burnDurationValueRatio);
+        burnSuffered = burnSufferedRange.Set(1 - burnDurationValueRatio); 
+
         chanceSlowProc = chanceSlowProcRange.Random;
         slowDuration = slowDurationRange.Set(slowDurationValueRatio);
         slowValue = slowValueRanges.Set(1 - slowDurationValueRatio);
 
-        isIce = false;
-        isFire = false;
-        burnDuration = 4;
-        burnSuffered = 5;
-        slowFadeState = false;
-        
+        if (Random.value < IceFireChance)
+        {
+            isIce = true;
+        }
+        else isIce = false;
+
+        if (Random.value < IceFireChance)
+        {
+            isIce = isFire;
+        }
+        else isFire = false;       
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

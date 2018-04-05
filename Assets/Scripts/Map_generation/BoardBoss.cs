@@ -28,21 +28,19 @@ public class BoardBoss : MonoBehaviour
     private TileType[][] tiles;
     private Room[] rooms;
     private Corridor[] corridors;
-    public GameObject boardHolder;
 
     public GameObject[] enemyList;
     public int nbrEnemyBase;
 
-    public int nbrChest;
     GameObject chestHolder;
-
+    GameObject boardHolder;
     int level;
     int nbrTileFloor = 0;
 
     public void SetupBoard(int lvl)
     {
-        boardHolder = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-        //boardHolder = new GameObject("Board Holder");
+        //boardHolder = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
+        boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
         if (lvl != 1)
         {
@@ -55,7 +53,7 @@ public class BoardBoss : MonoBehaviour
         SetTilesValuesForCorridors();
         InstantiateTiles();
         GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
-        //  InstantiateEnemies(tiles);
+        InstantiateEnemies(tiles);
 
 
     }
@@ -276,44 +274,30 @@ public class BoardBoss : MonoBehaviour
         // Set the tile's parent to the board holder.
         tileInstance.transform.parent = boardHolder.transform;
     }
+
+void InstantiateEnemies(TileType[][] t)
+{
+    int nbrEnemy = Mathf.CeilToInt(level / 2);
+        // float enemyDensity = 1f + level * 0.1f;
+
+        float ecart = rooms[1].largRoom / (nbrEnemy+1);
+        for (int i = 1; i <= nbrEnemy; i++)
+        {
+            float xCoord = rooms[1].posX + i * ecart;
+            float yCoord = Mathf.RoundToInt(rooms[1].hautRoom/2) + rooms[1].posY;
+            InstantiateAnEnemy(new Vector3(2 * xCoord, 2 * yCoord, 0));
+
+        }
+        Debug.Log(test);
 }
-//    void InstantiateEnemies(TileType[][] t)
-//    {
-//        Vector3 player = GameObject.Find("Pilot").transform.position;
-//        int nbrEnemy = nbrEnemyBase + Mathf.RoundToInt(level * 1.5f);
-//        // float enemyDensity = 1f + level * 0.1f;
-
-//        int[,] grid = new int[t.Length, t[0].Length];
-//        for (int x = 0; x < t.Length; x++)
-//        {
-//            for (int y = 0; y < t[x].Length; y++)
-//            {
-//                if (t[x][y] == TileType.Floor)
-//                {
-//                    Vector3 pos = new Vector3(2 * x, 2 * y, 0);
-
-//                    if (Vector3.Distance(pos, player) > 7 && Random.Range(1, nbrTileFloor) < nbrEnemy)
-//                    {
-//                        InstantiateAnEnemy(pos);
-//                    }
-//                    //if (Vector3.Distance(pos,player) > 7 && enemyDensity >= Random.Range(0, 100))
-//                    //{
-
-//                    //    InstantiateAnEnemy(pos);
-//                    // }
-//                }
-//            }
-//        }
-//        Debug.Log(test);
-//    }
-//    int test = 0;
-//    void InstantiateAnEnemy(Vector3 position)
-//    {
-//        test += 1;
-//        int whatEn = Random.Range(0, enemyList.Length);
-//        GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
-//        enemy.transform.parent = GameObject.Find("Enemies").transform;
-//    }
+int test = 0;
+void InstantiateAnEnemy(Vector3 position)
+{
+    test += 1;
+    int whatEn = Random.Range(0, enemyList.Length);
+    GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
+    enemy.transform.parent = GameObject.Find("Enemies").transform;
+}
 //    void AddChest(Vector3 position)
 //    {
 //        int whatChest = 0;//Random.Range(0, enemyList.Length);
@@ -356,4 +340,4 @@ public class BoardBoss : MonoBehaviour
 //        }
 
 //    }
-//}
+}

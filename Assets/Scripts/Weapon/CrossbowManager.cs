@@ -10,9 +10,45 @@ public class CrossbowManager : WeaponManager
     public GameObject bolt;
     private List<Bolt> boltList = new List<Bolt>();
 
+    public FloatRange boltSpeedRange = new FloatRange(15, 20);
+
     public override void WeaponSetStats()
     {
-        throw new System.NotImplementedException();
+        SetRarity();
+
+        float AdAsRation = Random.value;
+
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
+        attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * rarity;
+        attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
+        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;
+
+        float boltSpeedSlowAmountRatio = Random.value;
+        boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * rarity;
+
+        cost = 10;
+
+        float slowDurationValueRatio = Random.value;
+        float burnDurationValueRatio = Random.value;
+        burnDuration = burnDurationRange.Set(burnDurationValueRatio);
+        burnSuffered = burnSufferedRange.Set(1 - burnDurationValueRatio);
+        chanceBurnProc = chanceBurnProcRange.Random;
+        chanceSlowProc = chanceSlowProcRange.Random;
+        slowDuration = slowDurationRange.Set(slowDurationValueRatio);
+        slowValue = slowValueRanges.Set(1 - slowDurationValueRatio);
+
+        if (Random.value < IceFireChance)
+        {
+            isIce = true;
+        }
+        else isIce = false;
+
+        if (Random.value < IceFireChance)
+        {
+            isIce = isFire;
+        }
+        else isFire = false;
+
     }
 
     protected override void ChargeWeapon()

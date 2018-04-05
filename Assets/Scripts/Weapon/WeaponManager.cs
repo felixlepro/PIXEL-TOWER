@@ -59,10 +59,14 @@ public abstract class WeaponManager : MonoBehaviour {
     public FloatRange attackDamageChargedBonusRange = new FloatRange(0.25f, 0.75f);
     public FloatRange knockBackAmountRange = new FloatRange(5f, 12f);
 
+    public float IceFireChance = 0.15f;
     public IntRange chanceBurnProcRange = new IntRange(25, 75);
+    public IntRange burnDurationRange = new IntRange(2, 5);
+    public IntRange burnSufferedRange = new IntRange(5, 10);
     public IntRange chanceSlowProcRange = new IntRange(25, 75);
     public FloatRange slowDurationRange = new FloatRange(1, 3);
     public FloatRange slowValueRanges = new FloatRange(0.1f, 0.4f);
+
 
     protected float rarity;
     float[,] rarities = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };

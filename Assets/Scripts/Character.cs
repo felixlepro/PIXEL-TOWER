@@ -13,44 +13,26 @@ public abstract class Character : MonoBehaviour {
     [HideInInspector] public bool immune = false;
     [HideInInspector] protected bool stunned = false;
     [HideInInspector] public float currentSpeed;
-    [HideInInspector] public bool CoroutineFire = false;
-    [HideInInspector] public bool CoroutineIce;
-    [HideInInspector] public const int maxStack = 5;
-    [HideInInspector] public int currentStack;
-    [HideInInspector] public float currentBurnTime;
+ //   [HideInInspector] public bool CoroutineFire = false;
+ //   [HideInInspector] public bool CoroutineIce;
 
     public abstract void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime);
 
     public void Burn(float burnTimer, int burnDamage)
     {
-        currentBurnTime = 0;
-        addStack();
-        if (CoroutineFire == false)
-        {
             StartCoroutine(IsBurning(burnTimer, burnDamage));
-        }
-
     }
 
-    public void addStack()
-    {
-        if (currentStack < maxStack)
-        {
-            currentStack += 1;
-        }
-    }
     IEnumerator IsBurning(float burnTime, int burnAmount)
     {
-
-        CoroutineFire = true;
+        float currentBurnTime = 0;
         while (currentBurnTime < burnTime)
         {
             currentBurnTime += Time.deltaTime;
             //VerifStack();
-            RecevoirDegats(burnAmount * currentStack, Vector3.zero, 0,0);
+            RecevoirDegats(burnAmount, Vector3.zero, 0,0);
             yield return new WaitForSeconds(1f);
         }
-        CoroutineFire = false;
     }
     public void Slow(float slowAmount, float duration, bool fade)
     {
