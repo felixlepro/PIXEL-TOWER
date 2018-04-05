@@ -10,6 +10,10 @@ public class CrossbowManager : WeaponManager
     public GameObject bolt;
     private List<Bolt> boltList = new List<Bolt>();
 
+    public override void WeaponSetStats()
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override void ChargeWeapon()
     {

@@ -8,41 +8,45 @@ public abstract class WeaponManager : MonoBehaviour {
     public string weaponName;
     public Color wColor;
     public int attackDamage;
-    public int cost;
-   // public float range;
     public float attackSpeed; //  attackCD
-
+    public float chargeTime;
+    public float attackDamageChargedBonus;
+    public float knockBackAmount;
+    public int cost;
+  
+    // public float range;
+  
+    //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     public bool isFire = false;
     public bool isIce = false;
 
     [HideInInspector]public int chanceBurnProc = 30;
-    [HideInInspector] int chanceSlowProc = 40;
+    [HideInInspector]public int chanceSlowProc = 40;
 
     [HideInInspector] public float burnDuration = 4;
     [HideInInspector] public int burnSuffered = 5;
 
-    [HideInInspector] public int slowDuration = 3;
+    [HideInInspector] public float slowDuration = 3;
     [HideInInspector] public float slowValue = 0.3f;
 
-   [HideInInspector] bool slowFadeState = false;
+   [HideInInspector]public bool slowFadeState = false;     
+    //Fin des attributs d'effets spéciaux d'armes  -Simon
 
- //Fin des attributs d'effets spéciaux d'armes  -Simon
 
-    public float chargeTime;
-    public int attackDamageChargedBonus;
-    public float knockBackAmount;
+   
     [HideInInspector] public RuntimeAnimatorController animator;
     public Sprite sprite;
     public string description;
     public Vector3 basePosition = new Vector3(0.35f, 0, 0);
     public Vector3 baseScale = new Vector3(1, 1, 1);
-    public int numAttack;
-    public bool isFantoming = false;
+
+    [HideInInspector] public int numAttack;
+    [HideInInspector] public bool isFantoming = false;
     protected  SpriteRenderer spriteR;
     protected Animator anim;
 
 
-    protected float rand;
+    //protected float rand;
     protected Player player;
     protected float chargeDoneRatio;
     protected  float timeUntilNextAttack;
@@ -50,24 +54,35 @@ public abstract class WeaponManager : MonoBehaviour {
     protected float currentChargeTime;
      KeyCode chargeAttackKey = KeyCode.Mouse0;
 
-    float randomR;
+    public IntRange attackDamageRange = new IntRange(15, 20);
+    public FloatRange attackSpeedRange = new FloatRange(0.1f, 0.7f);
+    public FloatRange attackDamageChargedBonusRange = new FloatRange(0.25f, 0.75f);
+    public FloatRange knockBackAmountRange = new FloatRange(5f, 12f);
 
-    float rarity;
+    public IntRange chanceBurnProcRange = new IntRange(25, 75);
+    public IntRange chanceSlowProcRange = new IntRange(25, 75);
+    public FloatRange slowDurationRange = new FloatRange(1, 3);
+    public FloatRange slowValueRanges = new FloatRange(0.1f, 0.4f);
 
-    const float common = 60;
+    protected float rarity;
+    float[,] rarities = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
+    //const float commonChance = 100;
+    //const float rareChance = 50;
+    //const float epicChance = 20;
+    //const float legendaryChance = 5f;
+    //const float ultraLegendaryChance = 0.01f;
 
-    const float rare = 25;
-
-    const float epic = 15;
-
-    const float legendary = 4.99f;
-
-    const float ultraLegendary = 0.01f;
+    //const float commonMult = 1;
+    //const float rareMult = 1.2f;
+    //const float epicMult = 1.4f;
+    //const float legendaryMult = 1.6f;
+    //const float ultraLegendaryMult = 2f;
 
     protected abstract void ChargeWeapon();
     protected abstract void MaxChargeWeapon();
     protected abstract void ReleaseChargedWeapon();
     protected abstract void WeaponOnCD();
+    public abstract void WeaponSetStats();
 
     void Start()
     {
@@ -80,11 +95,22 @@ public abstract class WeaponManager : MonoBehaviour {
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         UpdateTimeUntilNextAttack();
         if (!isFantoming) setNumAttack();
         Attack(numAttack);
+    }
+    public void SetRarity()
+    {
+        float randomR = NbRand(0, 100);
+        for(int i = 0; i < rarities.GetLength(0); i++)
+        {
+            if(randomR <= rarities[i,0])
+            {
+                rarity = rarities[i, 1];
+            }
+        }
     }
     public void setNumAttack()
     {
@@ -126,25 +152,25 @@ public abstract class WeaponManager : MonoBehaviour {
     {
         if (currentChargeTime < chargeTime)
         {
-            cible.recevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage + attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio), cible.gameObject.transform.position - transform.position, knockBackAmount);
+            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage * (attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio)), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
         }
         else
         {
-            cible.recevoirDegats(attackDamageChargedBonus + attackDamage, cible.gameObject.transform.position - transform.position, knockBackAmount);
+            cible.RecevoirDegats(attackDamage + Mathf.RoundToInt(attackDamageChargedBonus * attackDamage), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
         }
 
         if (isFire)
         {
-            if (NbRand() < chanceBurnProc)
+            if (NbRand(0,100) < chanceBurnProc)
             {
                 cible.Burn(burnDuration,burnSuffered);
             }
         }
         else if (isIce)
         {
-            if (NbRand() < chanceSlowProc)
+            if (NbRand(0,100) < chanceSlowProc)
             {
-                 //cible.Slow();
+                cible.Slow(slowValue, slowDuration, slowFadeState);
             }          
         }
     }
@@ -168,31 +194,12 @@ public abstract class WeaponManager : MonoBehaviour {
         timeUntilNextAttack = attackSpeed;
     }
 
-    protected int NbRand()
+    protected int NbRand(int min, int max)
     {
-        rand = Random.value*100;
-        return Mathf.FloorToInt(rand);
+        return Mathf.FloorToInt(Random.Range(min, max));
     }
-    //Mettre random avec float de legendary
-    public void WeaponSetStats()
-    {
-        isIce = false;
-        isFire = false;
-        chanceBurnProc = 30;
-        chanceSlowProc = 40;
-        burnDuration = 4;
-        burnSuffered = 5;
-        slowDuration = 3;
-        slowValue = 0.3f;
-        slowFadeState = false;
-        SetRarity();
-}
-    //a continuer
-    public void SetRarity()
-    {
-        randomR = NbRand();
-       
-    }
+    
+    
     public void WeaponSetEffect(bool Fire,bool frozen)
     {
         if(Fire)
@@ -209,100 +216,4 @@ public abstract class WeaponManager : MonoBehaviour {
 
     
    
-
-//Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-
-
-    //protected int NbRand()
-    //{
-    //    rand = Random.value*100;
-    //    return Mathf.FloorToInt(rand);
-    //}
-
-
-  //  public float attackSpeed; //  attackCD
-   
-
-//Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    //public int chanceBurnProc = 30;
-    //public int chanceSlowProc = 40;
-
-    //public int burnDuration = 4;
-    //public int burnSuffered = 5;
-
-    //public int slowDuration = 3;
-    //public float slowValue = 0.3f;
-
-    //public bool slowFadeState = false;
-
-    //public bool IsFire = false;
-    //public bool IsIce = false;
- //Fin des attributs d'effets spéciaux d'armes  -Simon
-
- //       }
- ////Vérification de la présence ou non d'un effet spéciale sur l'arme et appel de la fonction appropriée dans EnemyManager si le joueur à un nombre aléatoire qui respecte la condition d'activation.
- //       if (isFire)
- //       {
- //           if (NbRand() < chanceBurnProc)
- //           {
- //               cible.Burn(burnDuration,burnSuffered);
- //       }
- //       if (isIce)
- //       {
- //           if (NbRand() < chanceSlowProc)
- //           {
- //                cible.Slow(slowValue,slowDuration,slowFadeState);
- //           }          
- //       }
- //   }
-
-
- //   }
-//Génère un nombre random
-//    protected int NbRand()
-//    {
-//        rand = Random.value*100;
-//        return Mathf.FloorToInt(rand);
-//    }
-//}
-
-  //  public float attackSpeed; //  attackCD
-
-   
-
-
-
-//Attributs responsables des effets de Burn et de Slow ainsi que la rareté (propre à chaque arme)
-
-    //public int chanceBurnProc;
-    //public int chanceSlowProc;
-
-
-
-    //public int burnDuration;
-
-    //public int burnSuffered;
-
-
-
-    //public int slowDuration;
-
-    //public float slowValue;
-
-
-
-    //public bool slowFadeState;
-
-
-
-    //public bool isFire;
-
-    //public bool isIce;
-
-    //rareté
-
-    
-
- //Fin des attributs d'effets spéciaux d'armes  -Simon
-
 

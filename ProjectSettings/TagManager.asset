@@ -51,6 +51,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 3720422473
+    locked: 0
   - name: MurArriere
     uniqueID: 331026237
     locked: 0

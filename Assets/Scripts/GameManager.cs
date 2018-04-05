@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
         enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
         InitGame();
+
         audio = GetComponent<AudioSource>();
     }
     public void PlaySound(AudioClip clip)
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour {
     {
         doingSetup = true;
         enemies.Clear();
+        DamageTextManager.Initialize();
         levelImage = GameObject.Find("LevelImage");
         boardScript.SetupBoard(level);
         

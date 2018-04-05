@@ -13,4 +13,8 @@ public class IntRange {
     {
         get { return UnityEngine.Random.Range(min, max); }
     }
+    public int Set(float mult)
+    {
+        return min + UnityEngine.Mathf.RoundToInt((max - min) * mult);
+    }
 }

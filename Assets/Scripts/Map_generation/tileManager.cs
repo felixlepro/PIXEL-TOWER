@@ -6,7 +6,7 @@ public class tileManager : MonoBehaviour {
 
     SpriteRenderer[] spriteR;
     public Sprite[] spritee;
-
+    public bool rngRotation = true;
 
     void Start()
     {
@@ -16,8 +16,15 @@ public class tileManager : MonoBehaviour {
         {
             int rng = Random.Range(0, spritee.Length);
             caca.sprite = spritee[rng];
-            int rng2 = Random.Range(0, 3);
-            caca.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 90 * rng2);
+            if (!rngRotation)
+            {
+                caca.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                int rng2 = Random.Range(0, 3);
+                caca.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 90 * rng2);
+            }           
         } 
 	}
 }

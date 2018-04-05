@@ -33,6 +33,7 @@ public class Board : MonoBehaviour {
     public int nbrChestMax;
     public int nbrChest;
      List<int[]> potentialChest = new List<int[]>();
+    GameObject chestHolder;
 
     int level;
     int nbrTileFloor = 0;
@@ -41,6 +42,7 @@ public class Board : MonoBehaviour {
     {
         boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
         //boardHolder = new GameObject("Board Holder");
+        chestHolder = new GameObject("Chest Holder");
         if (lvl !=1)
         {
             Destroy(boardHolder);
@@ -341,7 +343,7 @@ public class Board : MonoBehaviour {
     {
         int whatChest = 0;//Random.Range(0, enemyList.Length);
         GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
-        enemy.transform.parent = GameObject.Find("Chests").transform;
+        enemy.transform.parent = GameObject.Find("Chest Holder").transform;
     }
     void SetNbrChest()
     {

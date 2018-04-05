@@ -68,7 +68,7 @@ public class MagicBall : Projectile {
             {
                 attackHitbox[0].enabled = false;
                 EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
-                em.recevoirDegats(attackDamage, em.transform.position - transform.position, knockBack);
+                em.RecevoirDegats(attackDamage, em.transform.position - transform.position, knockBack,0);
             speed = 0;
             Animator anim = GetComponent<Animator>();
                 anim.SetTrigger("Hit");

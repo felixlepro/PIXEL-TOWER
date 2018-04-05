@@ -16,6 +16,7 @@ public class Bolt : MonoBehaviour {
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
     Collider2D collider;
+    bool hasCollided = false;
 
     // Use this for initialization
     void Start () {
@@ -56,26 +57,35 @@ public class Bolt : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+      
         if (other.tag == "Enemy")
         {
-            collider.enabled = false;
-            GetComponent<Animator>().SetTrigger("Hit");
-            transform.right = -direction;
-            EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
-            damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
-            em.recevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt);
-            //Destroy(this.gameObject);
-            UpdateSpeed = false;
-            transform.parent = em.gameObject.transform;
+            if (!hasCollided)
+            {
+                hasCollided = true;
+                collider.enabled = false;
+                GetComponent<Animator>().SetTrigger("Hit");
+                transform.right = -direction;
+                EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
+                damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
+                em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt, 0);
+                //Destroy(this.gameObject);
+                UpdateSpeed = false;
+                transform.parent = em.gameObject.transform;
+            }
 
         }
         else if ((other.tag == "Obstacle" && !other.isTrigger) || other.tag == "Chest")
         {
-            collider.enabled = false;
+            if (!hasCollided)
+            {
+                hasCollided = true;
+                collider.enabled = false;
             GetComponent<Animator>().SetTrigger("Hit");
             transform.right = -direction;
             //Destroy(this.gameObject);
             UpdateSpeed = false;
+            }
         }
     }
 

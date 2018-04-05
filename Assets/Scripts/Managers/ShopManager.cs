@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    public List<GameObject> weaponList;
+
+    public GameObject[] weaponTypes;
     public GameObject canvas;
+
     public bool openIt = false;
     private bool canEnter = true;
     private string tagP;
+    private int currentWtype;
+    public int weaponMax = 6;
 
     private void Start()
     {
+        while(weaponList.Count < weaponMax)
+        {
+            CreateWeapon();
+        }
         canvas.SetActive(false);
+        
     }
 
 
@@ -57,6 +68,15 @@ public class ShopManager : MonoBehaviour
             tagP = "";
         }
     }
-
-
+    private int RandomTypeWeapon()
+    {
+        currentWtype = Random.Range(0,weaponTypes.Length);
+        return currentWtype;         
+    }
+    private void CreateWeapon()
+    {
+        RandomTypeWeapon();
+        weaponList.Add(Instantiate(weaponTypes[currentWtype],Vector3.zero, Quaternion.identity));
+        weaponList[weaponList.Count - 1].GetComponent<WeaponManager>().WeaponSetStats();
+    }
 }
