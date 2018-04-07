@@ -45,7 +45,7 @@ public class Board : MonoBehaviour {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
         boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
-        if (lvl !=1)
+        if (lvl !=0)
         {
             Destroy(boardHolder);
         }

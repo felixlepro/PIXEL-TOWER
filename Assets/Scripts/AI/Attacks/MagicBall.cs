@@ -40,7 +40,7 @@ public class MagicBall : Projectile {
     //    knockBack *= kbMult;
     //    speed *= speedMult;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, float freeze)
+    public void Setup(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu, float freeze, float freezeDu)
     {
         attackDamage = dam;
         maxKnockBackAmount = kb;
@@ -48,8 +48,16 @@ public class MagicBall : Projectile {
         immuneTime = it;
         direction = dir;
         speed = sped;
+
         burnChance = burn;
+        burnDamage = burnDa;
+        burnDuration = burnDu;
+        slowChance = slow;
+        slowAmount = slowAm;
+        slowDuration = slowDu;
+
         freezeChance = freeze;
+        freezeDuration = freezeDu;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

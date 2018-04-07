@@ -6,6 +6,7 @@ public class BlobManager : EnemyManager
 {
 
     public float hpRatioLostOnAttack;
+    public float slowAmountOnHit = 0.9f;
 
     protected override void OnStart()
     {
@@ -21,7 +22,7 @@ public class BlobManager : EnemyManager
 
     public override void AttackSuccessful()
     {
-        Slow(0.9f, attackSpeed, true);
+        Slow(100,slowAmountOnHit, attackSpeed, true);
         hp -= Mathf.FloorToInt(maxHp * hpRatioLostOnAttack);
         StartCoroutine("RedOnly");
         VerifyDeath();

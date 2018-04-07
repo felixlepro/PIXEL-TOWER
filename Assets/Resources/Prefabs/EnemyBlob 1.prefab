@@ -210,7 +210,13 @@ MonoBehaviour:
   attackHitbox: []
   prefab: {fileID: 0}
   burnChance: 0
+  slowChance: 0
   freezeChance: 0
+  freezeDuration: 0
+  burnDamage: 0
+  burnDuration: 0
+  slowAmount: 0
+  slowDuration: 0
 --- !u!114 &114415609931410876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,10 +252,6 @@ MonoBehaviour:
   maxMoveSpeed: 12
   immune: 0
   currentSpeed: 0
-  CoroutineFire: 0
-  CoroutineIce: 0
-  currentStack: 0
-  currentBurnTime: 0
   patrolSpeedChaseSpeedRatio: 3
   gettingKnockedBackAmount: 1
   chaseRange: 9
@@ -275,10 +277,11 @@ MonoBehaviour:
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
   chaseTarget: {fileID: 0}
   pathingUnit: {fileID: 0}
-  idleTime: 0.5
+  idleTime: 1
   wayPointList: []
   nextWayPoint: 0
   hpRatioLostOnAttack: 0.3
+  slowAmountOnHit: 0.9
 --- !u!114 &114519354339216302
 MonoBehaviour:
   m_ObjectHideFlags: 1

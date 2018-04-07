@@ -35,17 +35,27 @@ public class flameThrower : Attacks {
     //    maxKnockBackAmount *= kbMult;
     //    this.gameObject.transform.right = direction;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, float freeze)
+    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu, float freeze, float freezeDu)
     {
         direction = dir;
         attackDamage = dam;
         maxKnockBackAmount = kb;
         attackRange = range;
         immuneTime = it;
-        burnChance = burn;
+         burnChance = burn;
+         burnDamage = burnDa;
+        burnDuration = burnDu;
+        slowChance = slow;
+        slowAmount = slowAm;
+        slowDuration = slowDu;
+
         freezeChance = freeze;
-        this.gameObject.transform.right = direction;
+        freezeDuration = freezeDu;
+         this.gameObject.transform.right = direction;
+    
+       
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

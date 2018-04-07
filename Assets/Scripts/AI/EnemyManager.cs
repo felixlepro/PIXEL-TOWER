@@ -345,10 +345,12 @@ abstract public class EnemyManager : Character {
     {
         isRooted = true;
         Invoke("UnRoot", time);
-    }
+        setAnimState("Idling");
+}
     public void UnRoot()
     {
         isRooted = false;
+        setAnimState("Moving");
     }
  
 

@@ -165,17 +165,15 @@ public abstract class WeaponManager : MonoBehaviour {
 
         if (isFire)
         {
-            if (NbRand(0,100) < chanceBurnProc)
-            {
-                cible.Burn(burnDuration,burnSuffered);
-            }
+
+          cible.Burn(NbRand(0, 100),burnSuffered, burnDuration);
+            
         }
         else if (isIce)
         {
-            if (NbRand(0,100) < chanceSlowProc)
-            {
-                cible.Slow(slowValue, slowDuration, slowFadeState);
-            }          
+
+                cible.Slow(NbRand(0, 100),slowValue, slowDuration, slowFadeState);
+                   
         }
     }
 

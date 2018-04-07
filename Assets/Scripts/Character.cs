@@ -18,9 +18,16 @@ public abstract class Character : MonoBehaviour {
 
     public abstract void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime);
 
-    public void Burn(float burnTimer, int burnDamage)
+    public void Burn(float burnChance, int burnDamage,float burnTimer)
     {
+        if (burnChance >= 100)
+        {
             StartCoroutine(IsBurning(burnTimer, burnDamage));
+        }
+        else if (Random.value * 100 <= burnChance)
+        {
+            StartCoroutine(IsBurning(burnTimer, burnDamage));
+        }           
     }
 
     IEnumerator IsBurning(float burnTime, int burnAmount)
@@ -34,15 +41,22 @@ public abstract class Character : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
     }
-    public void Slow(float slowAmount, float duration, bool fade)
+    public void Slow(float slowChance,float slowAmount, float duration, bool fade)
     {
-        if (fade)
+        if (slowChance >= 100)
         {
             StartCoroutine(SlowFade(slowAmount, duration));
         }
-        else
+        else if (Random.value * 100 <= slowChance)
         {
-            StartCoroutine(SlowNonFade(slowAmount, duration));
+            if (fade)
+            {
+                StartCoroutine(SlowFade(slowAmount, duration));
+            }
+            else
+            {
+                StartCoroutine(SlowNonFade(slowAmount, duration));
+            }
         }
 
     }
@@ -72,6 +86,17 @@ public abstract class Character : MonoBehaviour {
             yield return null;
         }
         currentSpeed /= speed;
+    }
+    public void Freeze (float chance, float time)
+    {
+        if (chance >= 100)
+        {
+            Stun(time);
+        }
+       else if (Random.value * 100 <= chance)
+        {
+            Stun(time);
+        }
     }
     public void Stun(float time)
     {

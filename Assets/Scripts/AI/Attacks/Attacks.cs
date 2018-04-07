@@ -13,7 +13,13 @@ public class Attacks : MonoBehaviour {
     [HideInInspector] public Collider2D[] attackHitbox;
     public GameObject prefab;
     public float burnChance;
+    public float slowChance;
     public float freezeChance;
+    public float freezeDuration;
+    public int burnDamage;
+    public float burnDuration;
+    public float slowAmount;
+    public float slowDuration;
 
     public virtual float speed { get; set; }
 
