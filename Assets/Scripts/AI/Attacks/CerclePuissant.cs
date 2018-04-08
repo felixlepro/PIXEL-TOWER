@@ -57,9 +57,9 @@ public class CerclePuissant : Attacks {
     {
         yield return new WaitForSeconds(chargeTime);
         attackHitbox[0].enabled = true;
-        yield return null;
+        yield return new WaitForSeconds(0.1f); ;
         attackHitbox[0].enabled = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         Destroy(this.gameObject);
     }
 }

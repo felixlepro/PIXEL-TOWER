@@ -82,8 +82,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: PlayerAttack
+  - m_ConditionMode: 2
+    m_ConditionEvent: AttackCharge
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102825387541460068}
@@ -290,13 +290,13 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102825387541460068}
-    m_Position: {x: 480, y: 264, z: 0}
+    m_Position: {x: 552, y: 252, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102191105467836090}
     m_Position: {x: 600, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102326261130932966}
-    m_Position: {x: 180, y: 276, z: 0}
+    m_Position: {x: 240, y: 252, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

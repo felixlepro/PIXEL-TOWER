@@ -7,16 +7,18 @@ using EZCameraShake;
 
 public class Player : Character {
 
-    public GameObject[] weaponObject;
+    public GameObject[] startingWeapon;
+    const int weaponEquipedMax = 2;
+    public List<WeaponManager> weaponList = new List<WeaponManager>();
     public float rotationBuffer;
     public float restartDelay = 1f;
     public int valuePerCoin = 1;
     public Text coinText;
     public int coins;
     public Image hpBar;
-    public GameObject gameOverMenu;
+    public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
 
-
+    int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -54,21 +56,26 @@ public class Player : Character {
 
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
-        coinText.text = "Coins: " + coins;       
-    }
-    private void OnDisable()
-    {
-        GameManager.instance.playerHp = hp;
-        GameManager.instance.coinCount = coins;
-    }
-    public void gainCoin()
-    {
-        coins += valuePerCoin;
         coinText.text = "Coins: " + coins;
+
+        foreach (GameObject sw in startingWeapon)
+        {
+            GameObject newWeapon = Instantiate(sw, Vector3.zero, Quaternion.identity) as GameObject;
+            ChangeWeapon(newWeapon);
+        }
+    }
+    private void Update()
+    {
+        if (!stunned) {
+            if(Input.GetKeyDown("left shift"))
+            {
+                Debug.Log("switch");
+                SwitchWeapon();
+            }
+         }
     }
     void FixedUpdate()
-    {
-        
+    {     
         if (!stunned)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
@@ -99,14 +106,14 @@ public class Player : Character {
         {
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
-            hp -= damage;
-            hpBar.fillAmount = (float)hp / (float)maxHp;
+            hp -= damage;        
             if(hp <= 0)
             {
-                Time.timeScale = 0;
-                gameOverMenu.SetActive(true);
+                //Time.timeScale = 0;
+               // gameOverMenu.SetActive(true);                                      
             }
-            if (kbAmmount != 0)
+                hpBar.fillAmount = (float)hp / (float)maxHp;
+                if (kbAmmount != 0)
             {
                 knockBackDirection = kbDirection;
                 knockBackAmount = kbAmmount;
@@ -206,7 +213,16 @@ public class Player : Character {
             GameManager.instance.inLevel = true;
         }
     }
-
+    private void OnDisable()
+    {
+        GameManager.instance.playerHp = hp;
+        GameManager.instance.coinCount = coins;
+    }
+    public void gainCoin()
+    {
+        coins += valuePerCoin;
+        coinText.text = "Coins: " + coins;
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -231,11 +247,6 @@ public class Player : Character {
 
     }
     
-
-
-    
-   
-
     void FaceMouse()
     {
         if (FacingMouse)
@@ -279,15 +290,44 @@ public class Player : Character {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
+        //foreach (Transform child in weaponTransform)
+        //{
+        //    if (child.GetComponent<WeaponManager>().isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
+        //    {
+        //        GameObject.Destroy(child.gameObject);
+        //    }
+        //    child.gameObject.SetActive(false);
+        //}
+        bool foundAWeapon = false;
 
-        foreach (Transform child in weaponTransform)
+            Debug.Log(weaponList.Count);
+        
+        for (int i = 0; i < weaponList.Count; i++)
         {
-            GameObject.Destroy(child.gameObject);
+                weaponList[i].gameObject.SetActive(false);
+                if (weaponList[i].isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
+                {
+                    GameObject.Destroy(weaponList[i].gameObject);
+                    weaponList[i] = newWeapon.GetComponent<WeaponManager>();
+                    currentWeaponIndex = i;
+                    foundAWeapon = true;
+                }
+        }
+        if (!foundAWeapon)
+        {
+            weaponList.Add(newWeapon.GetComponent<WeaponManager>());
+            currentWeaponIndex = weaponList.Count-1;
         }
         //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
+    }
+    public void SwitchWeapon()
+    {
+        weaponList[currentWeaponIndex].gameObject.SetActive(false);
+        currentWeaponIndex = (currentWeaponIndex + 1) % weaponList.Count; //Fait que ca loop dans la liste au lieu de dépassé
+        weaponList[currentWeaponIndex].gameObject.SetActive(true);
     }
     void InstantiateWeapon(GameObject prefab)
     {

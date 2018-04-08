@@ -9,6 +9,7 @@ public class Wizard : EnemyManager {
 
     protected override void OnStart()
     {
+       setAnimState("Moving");
     }
     private void Update()
     {
@@ -26,22 +27,19 @@ public class Wizard : EnemyManager {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
             if (attacks[0].checkIfAttackIsReady() && distance < attacks[0].attackRange)
             {
-                state = State.AttackNormal;
-                UpdateAnim();
-                resetAttackCD();
-                attacks[0].resetAttackCD();
                 Root(1);
+                state = State.AttackNormal;
+                resetAttackCD();
+                attacks[0].resetAttackCD();               
                 Invoke("doAttackFlameThrower", 1);
-                Debug.Log("true");
                 return true;
             }
             else if (attacks[2].checkIfAttackIsReady() && distance > attacks[2].attackRange)
             {
-                state = State.Summoning;
-                UpdateAnim();
-                resetAttackCD();
-                attacks[2].resetAttackCD();
                 Root(1);
+                state = State.Summoning;
+                resetAttackCD();
+                attacks[2].resetAttackCD();              
                 GameObject fT = Instantiate(attacks[2].prefab, playerMovementPrediction(0.5f,1.25f), Quaternion.identity);
                 fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, 
                                                                       attacks[2].burnChance, attacks[2].burnDamage, attacks[2].burnDuration, 
@@ -51,11 +49,10 @@ public class Wizard : EnemyManager {
             }
             else if (attacks[1].checkIfAttackIsReady() && distance < attacks[1].attackRange)
             {
-                state = State.AttackSwing;
-                UpdateAnim();
-                resetAttackCD();
-                attacks[1].resetAttackCD();
                 Root(1);
+                state = State.AttackSwing;
+                resetAttackCD();
+                attacks[1].resetAttackCD();             
                 for (float i = 0; i < nbrBoule; i++)
                 {
                     float delay = i/4f;
@@ -76,7 +73,7 @@ public class Wizard : EnemyManager {
     }
     void doAttackFireBall()
     {
-        GameObject fT = Instantiate(attacks[1].prefab, transform.position, Quaternion.identity);
+        GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up/3, Quaternion.identity);
         Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up/2;
         fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
                                                                         attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
@@ -185,12 +182,6 @@ public class Wizard : EnemyManager {
     State stateAnim;
 
     public override void UpdateAnim()
-    {
-
-        UpdateAnimState();
-    }
-
-    void UpdateAnimState()
     {
         switch (state)
         {

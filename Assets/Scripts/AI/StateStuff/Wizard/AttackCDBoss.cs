@@ -14,6 +14,7 @@ public class AttackCDBoss : Decision
     {
         if (controller.enemyManager.checkIfAttackIsReady())//controller.CheckIfCountDownElapsed(controller.enemyManager.anim.GetCurrentAnimatorStateInfo(0).length))
         {
+            controller.enemyManager.setAnimState("Moving");
             return true;
         }
         return false;

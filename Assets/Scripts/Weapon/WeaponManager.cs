@@ -13,6 +13,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public float attackDamageChargedBonus;
     public float knockBackAmount;
     public int cost;
+    public bool isMelee;
   
     // public float range;
   
@@ -99,11 +100,15 @@ public abstract class WeaponManager : MonoBehaviour {
         
     }
 
-    void FixedUpdate()
+    void Update()
     {
         UpdateTimeUntilNextAttack();
-        if (!isFantoming) setNumAttack();
-        Attack(numAttack);
+        // if (!isFantoming) setNumAttack();
+        if (isFantoming)
+        {
+            AttackFantome(numAttack);
+        }
+        else Attack();
     }
     public void SetRarity()
     {
@@ -123,14 +128,44 @@ public abstract class WeaponManager : MonoBehaviour {
         else numAttack = 0;
         
     }
-    public void Attack(int attack)
+    public void Attack()//int attack)
+    {
+        numAttack = 0;
+        if (timeUntilNextAttack <= 0)
+        {
+
+            if (Input.GetKey(chargeAttackKey) && (currentChargeTime < chargeTime))
+            {
+                numAttack = 1;
+                currentChargeTime += Time.deltaTime;
+                ChargeWeapon();
+            }
+            else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= chargeTime))
+            {
+                numAttack = 1;
+                MaxChargeWeapon();
+            }
+            else if (Input.GetKeyUp(chargeAttackKey))
+            {
+                numAttack = 2;
+                ReleaseChargedWeapon();
+                currentChargeTime = 0;
+                chargeDoneRatio = 0;
+            }
+
+        }
+        else
+        {
+            WeaponOnCD();
+        }
+    }
+    public void AttackFantome(int attack)
     {
         if (timeUntilNextAttack <= 0)
         {
 
             if (numAttack == 1 && (currentChargeTime < chargeTime))
             {
-
                 currentChargeTime += Time.deltaTime;
                 ChargeWeapon();
             }
@@ -151,7 +186,6 @@ public abstract class WeaponManager : MonoBehaviour {
             WeaponOnCD();
         }
     }
-
     public void EnvoyerDegat(EnemyManager cible)
     {
         if (currentChargeTime < chargeTime)
@@ -212,6 +246,12 @@ public abstract class WeaponManager : MonoBehaviour {
         {
             isIce = true;
         }
+    }
+    public void OnDisable()
+    {
+       anim.Rebind();
+        currentChargeTime = 0;
+        chargeDoneRatio = 0;
     }
 
 }

@@ -67,23 +67,26 @@ public class MagicBall : Projectile {
             attackHitbox[0].enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
             player.RecevoirDegats(attackDamage, player.transform.position - transform.position, knockBack, immuneTime);
+            player.Burn(burnChance, burnDamage, burnDuration);
+            player.Slow(slowChance, slowAmount, slowDuration, false);
+            player.Freeze(freezeChance, freezeDuration);
             speed = 0;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
             Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
         }
-        else if (other.tag == "EnnemieManager")
-            {
-                attackHitbox[0].enabled = false;
-                EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
-                em.RecevoirDegats(attackDamage, em.transform.position - transform.position, knockBack,0);
-            speed = 0;
-            Animator anim = GetComponent<Animator>();
-                anim.SetTrigger("Hit");
-                Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
-            }
+        //else if (other.tag == "EnnemieManager")
+        //    {
+        //        attackHitbox[0].enabled = false;
+        //        EnemyManager em = other.gameObject.GetComponent<EnemyManager>();
+        //        em.RecevoirDegats(attackDamage, em.transform.position - transform.position, knockBack,0);
+        //    speed = 0;
+        //    Animator anim = GetComponent<Animator>();
+        //        anim.SetTrigger("Hit");
+        //        Invoke("destroyObject", anim.GetCurrentAnimatorClipInfo(0).Length);
+        //    }
 
-        else if ((other.tag == "Obstacle" && !other.isTrigger) || other.tag == "Chest")
+        else if ((other.tag == "Obstacle" && other.isTrigger) || other.tag == "Chest")
         {
             attackHitbox[0].enabled = false;
             Animator anim = GetComponent<Animator>();

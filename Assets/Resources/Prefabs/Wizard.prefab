@@ -215,16 +215,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 30
+  attackDamage: 5
   immuneTime: 1
   maxKnockBackAmount: 0
-  attackRange: 10
+  attackRange: 7.5
   attackCD: 4
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 1739142269822794, guid: a389908b4a0f871469fe9efae9677f15, type: 2}
-  burnChance: 0
+  burnChance: 75
+  slowChance: 0
   freezeChance: 0
+  freezeDuration: 0
+  burnDamage: 2
+  burnDuration: 5
+  slowAmount: 0
+  slowDuration: 0
 --- !u!114 &114055100238023092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cc5427786ef6f4382af94dd0f35e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 20
+  attackDamage: 5
   immuneTime: 0
   maxKnockBackAmount: 5
   attackRange: 100
@@ -256,8 +262,14 @@ MonoBehaviour:
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 1550821915172396, guid: 92448c1da306c4145857bce02d1d3837, type: 2}
-  burnChance: 0
+  burnChance: 25
+  slowChance: 0
   freezeChance: 0
+  freezeDuration: 0
+  burnDamage: 1
+  burnDuration: 3
+  slowAmount: 0.5
+  slowDuration: 0
   projectileSpeed: 20
 --- !u!114 &114579189075010984
 MonoBehaviour:
@@ -288,16 +300,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
-  maxHp: 500
+  maxHp: 200
   hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 5
   immune: 0
   currentSpeed: 0
-  CoroutineFire: 0
-  CoroutineIce: 0
-  currentStack: 0
-  currentBurnTime: 0
   patrolSpeedChaseSpeedRatio: 1
   gettingKnockedBackAmount: 1
   chaseRange: 10
@@ -308,6 +316,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dun: {fileID: 0}
+  dunExlamation: {fileID: 0}
+  height: 0
   isRooted: 0
   timeUntilNextAttack: 0
   enemyRigidbody: {fileID: 0}
@@ -353,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 15
+  attackDamage: 10
   immuneTime: 1
   maxKnockBackAmount: 20
   attackRange: 5
@@ -361,8 +371,14 @@ MonoBehaviour:
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 1965252358492802, guid: a32449f5bd65f2f4db1420153a6e474b, type: 2}
-  burnChance: 0
+  burnChance: 60
+  slowChance: 0
   freezeChance: 0
+  freezeDuration: 0
+  burnDamage: 2
+  burnDuration: 4
+  slowAmount: 0
+  slowDuration: 0
 --- !u!210 &210743529585343276
 SortingGroup:
   m_ObjectHideFlags: 1

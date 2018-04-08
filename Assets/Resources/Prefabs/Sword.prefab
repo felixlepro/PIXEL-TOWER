@@ -177,23 +177,59 @@ MonoBehaviour:
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 10
-  cost: 0
   attackSpeed: 0.4
+  chargeTime: 1.5
+  attackDamageChargedBonus: 10
+  knockBackAmount: 15
+  cost: 0
+  isMelee: 1
   isFire: 0
   isIce: 0
   chanceBurnProc: 0
+  chanceSlowProc: 40
   burnDuration: 0
   burnSuffered: 0
   slowDuration: 0
   slowValue: 0
-  chargeTime: 1.5
-  attackDamageChargedBonus: 10
-  knockBackAmount: 15
+  slowFadeState: 0
   animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
   sprite: {fileID: 0}
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
+  numAttack: 0
+  isFantoming: 0
+  attackDamageRange:
+    min: 15
+    max: 20
+  attackSpeedRange:
+    min: 0.1
+    max: 0.7
+  attackDamageChargedBonusRange:
+    min: 0.25
+    max: 0.75
+  knockBackAmountRange:
+    min: 5
+    max: 12
+  IceFireChance: 0.15
+  chanceBurnProcRange:
+    min: 25
+    max: 75
+  burnDurationRange:
+    min: 2
+    max: 5
+  burnSufferedRange:
+    min: 5
+    max: 10
+  chanceSlowProcRange:
+    min: 25
+    max: 75
+  slowDurationRange:
+    min: 1
+    max: 3
+  slowValueRanges:
+    min: 0.1
+    max: 0.4
 --- !u!212 &212568443491528716
 SpriteRenderer:
   m_ObjectHideFlags: 1

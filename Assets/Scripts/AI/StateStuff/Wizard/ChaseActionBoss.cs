@@ -14,7 +14,7 @@ public class ChaseActionBoss : Action {
     {
 
 
-        controller.enemyManager.setAnimState("Moving");
+        
         controller.enemyManager.getAngleTarget();
         controller.enemyManager.pathingUnit.targetPosition = controller.enemyManager.chaseTarget.position;
     }

@@ -9,6 +9,7 @@ public abstract class Character : MonoBehaviour {
     public int hp;
     public Color wColor = Color.white;
     public float maxMoveSpeed;
+    const float burnRepetitionTime = 1;
 
     [HideInInspector] public bool immune = false;
     [HideInInspector] protected bool stunned = false;
@@ -20,8 +21,13 @@ public abstract class Character : MonoBehaviour {
 
     public void Burn(float burnChance, int burnDamage,float burnTimer)
     {
+        if(burnChance == 0)
+        {
+            return;
+        }
         if (burnChance >= 100)
         {
+            Debug.Log("burn" + burnDamage + "  " + burnTimer);
             StartCoroutine(IsBurning(burnTimer, burnDamage));
         }
         else if (Random.value * 100 <= burnChance)
@@ -33,16 +39,20 @@ public abstract class Character : MonoBehaviour {
     IEnumerator IsBurning(float burnTime, int burnAmount)
     {
         float currentBurnTime = 0;
-        while (currentBurnTime < burnTime)
+        while (currentBurnTime <= burnTime)
         {
-            currentBurnTime += Time.deltaTime;
+            currentBurnTime += burnRepetitionTime;
             //VerifStack();
             RecevoirDegats(burnAmount, Vector3.zero, 0,0);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(burnRepetitionTime);
         }
     }
     public void Slow(float slowChance,float slowAmount, float duration, bool fade)
     {
+        if (slowChance == 0)
+        {
+            return;
+        }
         if (slowChance >= 100)
         {
             StartCoroutine(SlowFade(slowAmount, duration));
@@ -89,6 +99,10 @@ public abstract class Character : MonoBehaviour {
     }
     public void Freeze (float chance, float time)
     {
+        if (chance == 0)
+        {
+            return;
+        }
         if (chance >= 100)
         {
             Stun(time);

@@ -12,12 +12,16 @@ public class Attacks : MonoBehaviour {
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Collider2D[] attackHitbox;
     public GameObject prefab;
+    [Range(0, 100)]
     public float burnChance;
+    [Range(0, 100)]
     public float slowChance;
+    [Range(0, 100)]
     public float freezeChance;
     public float freezeDuration;
     public int burnDamage;
     public float burnDuration;
+    [Range(0, 1)]
     public float slowAmount;
     public float slowDuration;
 

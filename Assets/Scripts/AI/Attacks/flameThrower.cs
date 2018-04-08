@@ -43,7 +43,8 @@ public class flameThrower : Attacks {
         attackRange = range;
         immuneTime = it;
          burnChance = burn;
-         burnDamage = burnDa;
+        Debug.Log(burn);
+        burnDamage = burnDa;
         burnDuration = burnDu;
         slowChance = slow;
         slowAmount = slowAm;
@@ -63,7 +64,9 @@ public class flameThrower : Attacks {
             attackHitbox2.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
             player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
-
+            player.Burn(burnChance, burnDamage, burnDuration);
+            player.Slow(slowChance, slowAmount, slowDuration, false);
+            player.Freeze(freezeChance, freezeDuration);
         }
        
     }

@@ -131,8 +131,8 @@ public class SwordManager : WeaponManager
     {
        anima[0].speed = 1;
         anima[0].SetBool("AttackCharge", false);
-        anima[0].SetBool("AttackChargeMax", false);
-        anima[0].SetTrigger("PlayerAttack");
+        //anima[0].SetBool("AttackChargeMax", false);
+      //  anima[0].SetTrigger("PlayerAttack");
         Invoke("triggerSwipe", 0.1f);
         ResetAttackTimer();
         currentChargeTime = 0;
@@ -142,6 +142,15 @@ public class SwordManager : WeaponManager
     void triggerSwipe()
     {
         anima[1].SetTrigger("Swipe");
+    }
+    new private void OnDisable()
+    {
+        foreach (Animator a in anima)
+        {
+            a.Rebind();
+            currentChargeTime = 0;
+            chargeDoneRatio = 0;
+        }
     }
 
 }

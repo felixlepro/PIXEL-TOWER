@@ -75,7 +75,7 @@ public class Bolt : MonoBehaviour {
             }
 
         }
-        else if ((other.tag == "Obstacle" && !other.isTrigger) || other.tag == "Chest")
+        else if ((other.tag == "Obstacle" && other.isTrigger) || other.tag == "Chest")
         {
             if (!hasCollided)
             {
