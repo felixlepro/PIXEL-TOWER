@@ -21,12 +21,14 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        while(weaponList.Count < weaponMax)
+        
+        while (weaponList.Count < weaponMax)
         {
             CreateWeapon();
-        }  
+        }
+        canvas.SetActive(false);  
         SetInfo(weaponList[0]);
-        canvas.SetActive(false);
+      
     }
 
 
@@ -74,8 +76,8 @@ public class ShopManager : MonoBehaviour
     }
     private int RandomTypeWeapon()
     {
-        currentWtype = Random.Range(0,weaponTypes.Length);
-        return currentWtype;         
+        currentWtype = Random.Range(0,weaponTypes.Length-1);
+        return currentWtype;       
     }
     private void CreateWeapon()
     {     
