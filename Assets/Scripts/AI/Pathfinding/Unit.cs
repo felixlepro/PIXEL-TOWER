@@ -48,13 +48,16 @@ public class Unit : MonoBehaviour
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
-        requestProcessing = false;
-        if (pathSuccessful)
+        if (this != null)
         {
-            path = newPath;
-            targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            requestProcessing = false;
+            if (pathSuccessful)
+            {
+                path = newPath;
+                targetIndex = 0;
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
+            }
         }
     }
 

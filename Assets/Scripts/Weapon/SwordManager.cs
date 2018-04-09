@@ -6,7 +6,7 @@ public class SwordManager : WeaponManager
 {
     private BoxCollider2D coll;
     Animator[] anima;
-
+    float thisAttackCCT = 0;
 
 
 
@@ -62,9 +62,16 @@ public class SwordManager : WeaponManager
         //Debug.Log("Colision");
         if (other.tag == "Enemy")
         {
+            
             //Debug.Log("En");
             //EnemyManager enemyManager = other.gameObject.GetComponentInParent<EnemyManager>();
-            EnvoyerDegat(other.gameObject.GetComponentInParent<EnemyManager>());
+            chargeDoneRatio = thisAttackCCT;
+            if (coll.enabled)
+            {
+                EnvoyerDegat(other.gameObject.GetComponentInParent<EnemyManager>());
+            }
+            coll.enabled = false;
+            chargeDoneRatio = 0;
         }
         else if (other.tag== "Chest")
         {
@@ -86,11 +93,13 @@ public class SwordManager : WeaponManager
     }
     protected override  void ReleaseChargedWeapon()
     {
+        thisAttackCCT = chargeDoneRatio;
         coll.enabled = true;
         attack();
     }
     protected override void WeaponOnCD()
     {
+        currentChargeTime = 0;
         coll.enabled = false;
     }
     //void Update()
@@ -134,8 +143,7 @@ public class SwordManager : WeaponManager
         //anima[0].SetBool("AttackChargeMax", false);
       //  anima[0].SetTrigger("PlayerAttack");
         Invoke("triggerSwipe", 0.1f);
-        ResetAttackTimer();
-        currentChargeTime = 0;
+        ResetAttackTimer();  
         GetComponentInParent<Player>().doFaceMouse(false);
         Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed * 0.7f);
     }
@@ -143,14 +151,14 @@ public class SwordManager : WeaponManager
     {
         anima[1].SetTrigger("Swipe");
     }
-    new private void OnDisable()
-    {
-        foreach (Animator a in anima)
-        {
-            a.Rebind();
-            currentChargeTime = 0;
-            chargeDoneRatio = 0;
-        }
-    }
 
+      public override bool CanSwitch()
+    {
+        if (anima[0].GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            return true;
+        }
+        return false;
+
+    }
 }

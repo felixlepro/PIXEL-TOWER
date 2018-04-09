@@ -69,7 +69,6 @@ public class Player : Character {
         if (!stunned) {
             if(Input.GetKeyDown("left shift"))
             {
-                Debug.Log("switch");
                 SwitchWeapon();
             }
          }
@@ -325,9 +324,12 @@ public class Player : Character {
     }
     public void SwitchWeapon()
     {
-        weaponList[currentWeaponIndex].gameObject.SetActive(false);
-        currentWeaponIndex = (currentWeaponIndex + 1) % weaponList.Count; //Fait que ca loop dans la liste au lieu de dépassé
-        weaponList[currentWeaponIndex].gameObject.SetActive(true);
+        if (weaponList[currentWeaponIndex].CanSwitch())
+        {
+            weaponList[currentWeaponIndex].gameObject.SetActive(false);
+            currentWeaponIndex = (currentWeaponIndex + 1) % weaponList.Count; //Fait que ca loop dans la liste au lieu de dépassé
+            weaponList[currentWeaponIndex].gameObject.SetActive(true);
+        }
     }
     void InstantiateWeapon(GameObject prefab)
     {

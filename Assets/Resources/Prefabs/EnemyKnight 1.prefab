@@ -265,7 +265,7 @@ MonoBehaviour:
   maxMoveSpeed: 8
   immune: 0
   currentSpeed: 0
-  patrolSpeedChaseSpeedRatio: 3
+  patrolSpeedChaseSpeedRatio: 6
   gettingKnockedBackAmount: 0
   chaseRange: 10
   chaseRangeBuffer: 5

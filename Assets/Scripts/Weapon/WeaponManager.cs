@@ -188,9 +188,12 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     public void EnvoyerDegat(EnemyManager cible)
     {
+      //  Debug.Log(chargeDoneRatio);
+        //Debug.Log(attackDamage * attackDamageChargedBonus * chargeDoneRatio);
+       // Debug.Log(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)));
         if (currentChargeTime < chargeTime)
         {
-            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt(attackDamage * (attackDamageChargedBonus * chargeDoneRatio * chargeDoneRatio)), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
+            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
         }
         else
         {
@@ -247,11 +250,14 @@ public abstract class WeaponManager : MonoBehaviour {
             isIce = true;
         }
     }
-    public void OnDisable()
+    public virtual bool CanSwitch()
     {
-       anim.Rebind();
-        currentChargeTime = 0;
-        chargeDoneRatio = 0;
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            return true;
+        }
+        return false;
+
     }
 
 }
