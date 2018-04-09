@@ -74,8 +74,12 @@ MonoBehaviour:
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 30
-  cost: 5
   attackSpeed: 1
+  chargeTime: 0
+  attackDamageChargedBonus: 0
+  knockBackAmount: 4
+  cost: 5
+  isMelee: 0
   isFire: 0
   isIce: 0
   chanceBurnProc: 30
@@ -85,18 +89,49 @@ MonoBehaviour:
   slowDuration: 3
   slowValue: 0.3
   slowFadeState: 0
-  chargeTime: 0
-  attackDamageChargedBonus: 0
-  knockBackAmount: 4
   animator: {fileID: 9100000, guid: baa32e3196b24d64689e2eb78dcfcc9d, type: 2}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 0d0198e24c656514fa1d62830287f903, type: 3}
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
   baseScale: {x: 10, y: 10, z: 10}
   numAttack: 0
   isFantoming: 0
+  attackDamageRange:
+    min: 15
+    max: 20
+  attackSpeedRange:
+    min: 0.1
+    max: 0.7
+  attackDamageChargedBonusRange:
+    min: 0.25
+    max: 0.75
+  knockBackAmountRange:
+    min: 5
+    max: 12
+  IceFireChance: 0.15
+  chanceBurnProcRange:
+    min: 25
+    max: 75
+  burnDurationRange:
+    min: 2
+    max: 5
+  burnSufferedRange:
+    min: 5
+    max: 10
+  chanceSlowProcRange:
+    min: 25
+    max: 75
+  slowDurationRange:
+    min: 1
+    max: 3
+  slowValueRanges:
+    min: 0.1
+    max: 0.4
   boltSpeed: 20
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
+  boltSpeedRange:
+    min: 15
+    max: 20
 --- !u!212 &212378961993274990
 SpriteRenderer:
   m_ObjectHideFlags: 1

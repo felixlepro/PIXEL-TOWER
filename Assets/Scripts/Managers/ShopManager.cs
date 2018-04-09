@@ -10,7 +10,7 @@ public class ShopManager : MonoBehaviour
     public GameObject[] weaponTypes;
     private GameObject canvas;
     private GameObject panel;
-    private Image weaponIm;
+    public Image weaponIm;
     private GameObject buttonBuy;
 
     public bool openIt = false;
@@ -78,9 +78,8 @@ public class ShopManager : MonoBehaviour
         return currentWtype;         
     }
     private void CreateWeapon()
-    {
-        RandomTypeWeapon();
-        weaponList.Add(Instantiate(weaponTypes[currentWtype],Vector3.zero, Quaternion.identity));
+    {     
+        weaponList.Add(Instantiate(weaponTypes[RandomTypeWeapon()],Vector3.zero, Quaternion.identity));
         weaponList[weaponList.Count - 1].GetComponent<WeaponManager>().WeaponSetStats();
     }
 

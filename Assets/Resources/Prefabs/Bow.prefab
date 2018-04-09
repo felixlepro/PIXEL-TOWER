@@ -74,24 +74,68 @@ MonoBehaviour:
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 20
-  cost: 0
-  range: 50
   attackSpeed: 0.1
-  IsFire: 0
-  IsIce: 0
-  chanceBurnProc: 0
-  chanceSlowProc: 0
   chargeTime: 1
   attackDamageChargedBonus: 30
   knockBackAmount: 5
+  cost: 0
+  isMelee: 0
+  isFire: 0
+  isIce: 0
+  chanceBurnProc: 0
+  chanceSlowProc: 0
+  burnDuration: 4
+  burnSuffered: 5
+  slowDuration: 3
+  slowValue: 0.3
+  slowFadeState: 0
   animator: {fileID: 9100000, guid: 08c7696b68e6a2749bf75cf2b718578b, type: 2}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: eed3f649cca75dd4b816f1620dc69b4e, type: 3}
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
+  numAttack: 0
+  isFantoming: 0
+  attackDamageRange:
+    min: 15
+    max: 20
+  attackSpeedRange:
+    min: 0.1
+    max: 0.7
+  attackDamageChargedBonusRange:
+    min: 0.25
+    max: 0.75
+  knockBackAmountRange:
+    min: 5
+    max: 12
+  IceFireChance: 0.15
+  chanceBurnProcRange:
+    min: 25
+    max: 75
+  burnDurationRange:
+    min: 2
+    max: 5
+  burnSufferedRange:
+    min: 5
+    max: 10
+  chanceSlowProcRange:
+    min: 25
+    max: 75
+  slowDurationRange:
+    min: 1
+    max: 3
+  slowValueRanges:
+    min: 0.1
+    max: 0.4
   boltSpeed: 25
   slowAmount: 0.7
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
+  boltSpeedRange:
+    min: 20
+    max: 30
+  slowAmountRange:
+    min: 0.25
+    max: 0.75
 --- !u!212 &212623114865415482
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -101,6 +145,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -116,14 +161,22 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0

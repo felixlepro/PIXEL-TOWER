@@ -76,6 +76,6 @@ public class SpearManager : WeaponManager
 
     public override void WeaponSetStats()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
