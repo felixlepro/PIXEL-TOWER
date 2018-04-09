@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using UnityEngine.UI;
 
 abstract public class EnemyManager : Character {
     
@@ -12,6 +13,7 @@ abstract public class EnemyManager : Character {
     public float chaseRangeBuffer;
     public int fireStack = 0;
     public float attackSpeed;
+    public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
    // public GameObject[] attacksUPF; //attackUsingPrefabs
     //public struct Atta 
@@ -166,10 +168,13 @@ abstract public class EnemyManager : Character {
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float im)
     {
         hp -= damage;
+        Debug.Log(hp);
+        hpBar.fillAmount = (float)hp / (float)maxHp;
+        Debug.Log(hpBar.fillAmount);
         DamageTextManager.CreateFloatingText(damage, transform.position);
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
         knockBackAmount = kbAmmount * gettingKnockedBackAmount;
-        Damaged();  
+        Damaged();
         if (knockBackAmount != 0)
         {
             knockBackDirection = kbDirection;
