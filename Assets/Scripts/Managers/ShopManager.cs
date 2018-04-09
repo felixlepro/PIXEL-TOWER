@@ -1,13 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
     public List<GameObject> weaponList;
+    public List<GameObject> panelList;
 
     public GameObject[] weaponTypes;
-    public GameObject canvas;
+    private GameObject canvas;
+    private GameObject panel;
+    public Image weaponIm;
+    private GameObject buttonBuy;
 
     public bool openIt = false;
     private bool canEnter = true;
@@ -20,9 +24,9 @@ public class ShopManager : MonoBehaviour
         while(weaponList.Count < weaponMax)
         {
             CreateWeapon();
-        }
+        }  
+        SetInfo(weaponList[0]);
         canvas.SetActive(false);
-        
     }
 
 
@@ -74,9 +78,14 @@ public class ShopManager : MonoBehaviour
         return currentWtype;         
     }
     private void CreateWeapon()
-    {
-        RandomTypeWeapon();
-        weaponList.Add(Instantiate(weaponTypes[currentWtype],Vector3.zero, Quaternion.identity));
+    {     
+        weaponList.Add(Instantiate(weaponTypes[RandomTypeWeapon()],Vector3.zero, Quaternion.identity));
         weaponList[weaponList.Count - 1].GetComponent<WeaponManager>().WeaponSetStats();
+    }
+
+    private void SetInfo(GameObject weap)
+    {
+        weaponIm.sprite = weap.GetComponent<WeaponManager>().sprite;
+
     }
 }

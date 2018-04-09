@@ -108,8 +108,8 @@ public class Player : Character {
             hp -= damage;        
             if(hp <= 0)
             {
-                //Time.timeScale = 0;
-               // gameOverMenu.SetActive(true);                                      
+                Time.timeScale = 0;
+                gameOverMenu.SetActive(true);                                      
             }
                 hpBar.fillAmount = (float)hp / (float)maxHp;
                 if (kbAmmount != 0)

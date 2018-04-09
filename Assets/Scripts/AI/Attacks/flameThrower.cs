@@ -43,6 +43,7 @@ public class flameThrower : Attacks {
         attackRange = range;
         immuneTime = it;
          burnChance = burn;
+        //Debug.Log(burn);
         burnDamage = burnDa;
         burnDuration = burnDu;
         slowChance = slow;
