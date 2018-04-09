@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour {
 
     public void PlayGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 
@@ -17,11 +18,13 @@ public class MainMenu : MonoBehaviour {
 
     public void ReturnToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
     public void RestartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 }
