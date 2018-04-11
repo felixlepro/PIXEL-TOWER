@@ -18,19 +18,19 @@ public abstract class WeaponManager : MonoBehaviour {
     // public float range;
   
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    public bool isFire = false;
-    public bool isIce = false;
+    protected  bool isFire = true;
+    protected bool isIce = true;
 
-    [HideInInspector]public int chanceBurnProc = 30;
-    [HideInInspector]public int chanceSlowProc = 40;
+    [HideInInspector] protected int chanceBurnProc = 100;
+    [HideInInspector] protected int chanceSlowProc = 100;
 
-    [HideInInspector] public float burnDuration = 4;
-    [HideInInspector] public int burnSuffered = 5;
+    [HideInInspector] protected float burnDuration = 4;
+    [HideInInspector] protected int burnSuffered = 5;
 
-    [HideInInspector] public float slowDuration = 3;
-    [HideInInspector] public float slowValue = 0.3f;
+    [HideInInspector]   protected float slowDuration = 5;
+    [HideInInspector] protected float slowValue = 0.9f;
 
-   [HideInInspector]public bool slowFadeState = false;     
+   [HideInInspector] protected bool slowFadeState = false;     
     //Fin des attributs d'effets spéciaux d'armes  -Simon
 
 
@@ -193,23 +193,21 @@ public abstract class WeaponManager : MonoBehaviour {
        // Debug.Log(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)));
         if (currentChargeTime < chargeTime)
         {
-            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
+            cible.RecevoirDegats(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)), (cible.gameObject.transform.position - transform.position).normalized, knockBackAmount,0);
         }
         else
         {
-            cible.RecevoirDegats(attackDamage + Mathf.RoundToInt(attackDamageChargedBonus * attackDamage), cible.gameObject.transform.position - transform.position, knockBackAmount,0);
+            cible.RecevoirDegats(attackDamage + Mathf.RoundToInt(attackDamageChargedBonus * attackDamage), (cible.gameObject.transform.position - transform.position).normalized, knockBackAmount,0);
         }
 
         if (isFire)
         {
-
-          cible.Burn(NbRand(0, 100),burnSuffered, burnDuration);
+          cible.Burn(chanceBurnProc, burnSuffered, burnDuration);
             
         }
-        else if (isIce)
+        if (isIce)
         {
-
-                cible.Slow(NbRand(0, 100),slowValue, slowDuration, slowFadeState);
+                cible.Slow(chanceSlowProc,slowValue, slowDuration, slowFadeState);
                    
         }
     }

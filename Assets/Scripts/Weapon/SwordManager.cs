@@ -102,40 +102,7 @@ public class SwordManager : WeaponManager
         currentChargeTime = 0;
         coll.enabled = false;
     }
-    //void Update()
-    //{
-    //    UpdateTimeUntilNextAttack();
-
-    //    if (timeUntilNextAttack <= 0)
-    //    {
-
-    //        if (Input.GetKey(chargeAttackKey) && (currentChargeTime < weapon.chargeTime))
-    //        {
-    //            currentChargeTime += Time.deltaTime;
-    //            chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
-    //            anim.speed = 1+ (chargeDoneRatio * chargeDoneRatio * 1.5f);
-    //            anim.SetBool("AttackCharge", true);
-
-    //        }
-    //        else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
-    //        {
-               
-    //        }
-    //        else if (Input.GetKeyUp(chargeAttackKey))
-    //        {
-               
-    //        }
-           
-    //    }
-    //    else
-    //    {
-    //        coll.enabled = false;
-    //    }
-
-       
-
-    //}
-    
+  
     void attack()
     {
        anima[0].speed = 1;
@@ -162,3 +129,36 @@ public class SwordManager : WeaponManager
 
     }
 }
+//void Update()
+//{
+//    UpdateTimeUntilNextAttack();
+
+//    if (timeUntilNextAttack <= 0)
+//    {
+
+//        if (Input.GetKey(chargeAttackKey) && (currentChargeTime < weapon.chargeTime))
+//        {
+//            currentChargeTime += Time.deltaTime;
+//            chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
+//            anim.speed = 1+ (chargeDoneRatio * chargeDoneRatio * 1.5f);
+//            anim.SetBool("AttackCharge", true);
+
+//        }
+//        else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
+//        {
+
+//        }
+//        else if (Input.GetKeyUp(chargeAttackKey))
+//        {
+
+//        }
+
+//    }
+//    else
+//    {
+//        coll.enabled = false;
+//    }
+
+
+
+//}

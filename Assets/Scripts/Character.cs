@@ -21,13 +21,12 @@ public abstract class Character : MonoBehaviour {
 
     public void Burn(float burnChance, int burnDamage,float burnTimer)
     {
-        if(burnChance == 0)
+        if (burnChance == 0)
         {
             return;
         }
         if (burnChance >= 100)
         {
-            Debug.Log("burn" + burnDamage + "  " + burnTimer);
             StartCoroutine(IsBurning(burnTimer, burnDamage));
         }
         else if (Random.value * 100 <= burnChance)
@@ -49,13 +48,21 @@ public abstract class Character : MonoBehaviour {
     }
     public void Slow(float slowChance,float slowAmount, float duration, bool fade)
     {
-        if (slowChance == 0)
+        
+        if (slowChance <= 0)
         {
             return;
         }
         if (slowChance >= 100)
         {
-            StartCoroutine(SlowFade(slowAmount, duration));
+            if (fade)
+            {
+                StartCoroutine(SlowFade(slowAmount, duration));
+            }
+            else
+            {
+                StartCoroutine(SlowNonFade(slowAmount, duration));
+            }
         }
         else if (Random.value * 100 <= slowChance)
         {

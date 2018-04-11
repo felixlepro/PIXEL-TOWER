@@ -34,10 +34,11 @@ abstract public class EnemyManager : Character {
     [HideInInspector] public float timeUntilNextAttack;
     [HideInInspector] public Rigidbody2D enemyRigidbody;
     [HideInInspector] public Animator anim;
+    protected bool updateAnim = true;
      public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
     [HideInInspector] public Collider2D[] targetCollider;
-
+    Collider2D[]  enemyCollider;
     [HideInInspector] public float Angle;
 
     [HideInInspector] public float knockBackAmount = 0;
@@ -98,7 +99,7 @@ abstract public class EnemyManager : Character {
         spriteR = gameObject.transform.Find("EnemyGraphics").gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteR.color = wColor;
 
-       // enemyCollider = GetComponentInChildren<Collider2D>();
+        enemyCollider = GetComponentsInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
         OnStart();
     }
@@ -106,7 +107,6 @@ abstract public class EnemyManager : Character {
     {
         if (isRooted)     pathingUnit.speed = 0;    
         else               pathingUnit.speed = currentSpeed;
-       // anim.speed  = currentSpeed / maxMoveSpeed;                    //IMPORTANT A SOLVE
         UpdateAnim();
         UpdatecurrentAttackCD();
     }
@@ -168,9 +168,9 @@ abstract public class EnemyManager : Character {
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float im)
     {
         hp -= damage;
-        Debug.Log(hp);
+       // Debug.Log(hp);
         hpBar.fillAmount = (float)hp / (float)maxHp;
-        Debug.Log(hpBar.fillAmount);
+      //  Debug.Log(hpBar.fillAmount);
         DamageTextManager.CreateFloatingText(damage, transform.position);
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
         knockBackAmount = kbAmmount * gettingKnockedBackAmount;
@@ -189,12 +189,21 @@ abstract public class EnemyManager : Character {
     {
         if (hp <= 0)
         {
-            controller.enabled = false;
+            foreach(Collider2D cl in enemyCollider)
+            {
+                cl.enabled = false;
+            }
+            controller.aiActive = false;
             gonnaDie();
-            currentSpeed = 0;
+            spriteR.color = Color.white;
+            StopAllCoroutines();
+            isRooted = true;
+            currentSpeed = maxMoveSpeed;
             setAnimState("Dying");
             UpdateAnim();
-            Invoke("Death", 1);
+            updateAnim = false;
+            Destroy(this.gameObject , 2);
+            //   Invoke("Death", 2);
         }
      
     }
@@ -257,12 +266,12 @@ abstract public class EnemyManager : Character {
         pathingUnit.speed = currentSpeed;
     }
 
-    private void Death()
-    {
+    //private void Death()
+    //{
 
-        Destroy(this.gameObject);
-        //this.gameObject.SetActive(false);
-    }
+    //    Destroy(this.gameObject);
+    //    //this.gameObject.SetActive(false);
+    //}
 
     public void UpdatecurrentAttackCD()
     {
@@ -346,17 +355,25 @@ abstract public class EnemyManager : Character {
         }
         currentSpeed /= speed;
     }
-    public void Root(float time)
+    public IEnumerator Root(float time)
     {
         isRooted = true;
-        Invoke("UnRoot", time);
         setAnimState("Idling");
-}
-    public void UnRoot()
-    {
+       yield return new WaitForSeconds(time);
         isRooted = false;
         setAnimState("Moving");
     }
+//    public void Root(float time)
+//    {
+//        isRooted = true;
+//        Invoke("UnRoot", time);
+//        setAnimState("Idling");
+//}
+//    public void UnRoot()
+//    {
+//        isRooted = false;
+//        setAnimState("Moving");
+//    }
  
 
     protected Vector3 playerMovementPrediction(float castTime, float predictionAmount)

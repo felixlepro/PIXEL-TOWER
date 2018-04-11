@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpearManager : WeaponManager
 {
     private BoxCollider2D coll;
-    Animator anim;
+   // Animator anim;
 
     void Start()
     {

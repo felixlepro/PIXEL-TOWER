@@ -35,7 +35,6 @@ public class BoardBoss : MonoBehaviour
     GameObject chestHolder;
     GameObject boardHolder;
     int level;
-    int nbrTileFloor = 0;
 
     public void SetupBoard(int lvl)
     {
@@ -70,11 +69,10 @@ public class BoardBoss : MonoBehaviour
                 if (t[x][y] == TileType.Floor)
                 {
                     grid[x, y] = 1;
-                    nbrTileFloor += 1;
                 }
                 else if (t[x][y] == TileType.Chest)
                 {
-                    grid[x, y] = 2;
+                    grid[x, y] = 3;
                 }
                 else
                 {

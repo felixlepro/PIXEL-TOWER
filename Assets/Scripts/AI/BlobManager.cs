@@ -173,13 +173,16 @@ public class BlobManager : EnemyManager
 
     public override void setAnimState(string newState)
     {
-        switch (newState)
-        {
-            case "Moving": state = State.Moving; break;
-            case "Attacking": state = State.Moving; break;
-            case "Idling": state = State.Idling; break;
-            case "Dying": state = State.Dying; break;
-        }
+        //if (state != State.Dying)
+       // {
+            switch (newState)
+            {
+                case "Moving": state = State.Moving; break;
+                case "Attacking": state = State.Moving; break;
+                case "Idling": state = State.Idling; break;
+                case "Dying": state = State.Dying; break;
+            }
+        //}
     }
     public override string getAnimState()
     {

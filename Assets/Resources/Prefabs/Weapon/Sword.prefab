@@ -183,20 +183,11 @@ MonoBehaviour:
   knockBackAmount: 15
   cost: 0
   isMelee: 1
-  isFire: 0
-  isIce: 0
-  chanceBurnProc: 0
-  chanceSlowProc: 40
-  burnDuration: 0
-  burnSuffered: 0
-  slowDuration: 0
-  slowValue: 0
-  slowFadeState: 0
   animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
   sprite: {fileID: 21300000, guid: 418454ae7b81e1f4bab1701a33c9fbac, type: 3}
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
-  baseScale: {x: 1, y: 1, z: 1}
+  baseScale: {x: 1.05, y: 1.05, z: 1}
   numAttack: 0
   isFantoming: 0
   attackDamageRange:

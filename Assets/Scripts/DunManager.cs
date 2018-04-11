@@ -13,8 +13,8 @@ public class DunManager : MonoBehaviour {
     public void Initialize(Vector3 pos)
     {
         position = pos;
-        Animator anim = GetComponent<Animator>();
+        Animator anim = GetComponentInChildren<Animator>();
         AnimatorClipInfo[] info = anim.GetCurrentAnimatorClipInfo(0);
-        Destroy(gameObject, info[0].clip.length * 0.95f);
+        Destroy(this.gameObject, info[0].clip.length * 0.95f);
     }
 }

@@ -9,7 +9,7 @@ public class DamageTextManager : MonoBehaviour {
 
     public static void Initialize()
     {
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("CanvasPopUpText");
         if (!popupText)
             popupText = Resources.Load<DamageText>("Prefabs/PopUpTextParent");
     }

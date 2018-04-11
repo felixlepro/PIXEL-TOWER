@@ -36,9 +36,10 @@ public class Board : MonoBehaviour {
     List<int[]> potentialChest = new List<int[]>();
     List<int[]> potentialExit = new List<int[]>();
     GameObject chestHolder;
-
+    int[,] gridToInt;
     int level;
     int nbrTileFloor = 0;
+
 
     public  void SetupBoard(int lvl)
     {
@@ -50,43 +51,51 @@ public class Board : MonoBehaviour {
             Destroy(boardHolder);
         }
         SetUpTilesArray();
-
         CreateRoomsAndCorridors();
         SetTilesValuesForRooms();
         SetTilesValuesForCorridors();
+        gridToInt = new int[tiles.Length, tiles[0].Length];
         InstantiateTiles();
-        GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
+        //GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
+        GetComponent<GridManager>().CreateGrid(gridToInt);
         InstantiateEnemies(tiles);
 
 
     }
-    private int[,] TyleTypeToInt(TileType[][] t)
-    {
-        //int NodeContour = GetComponent<GridManager>().NodeContour;
+    //private int[,] TyleTypeToInt(TileType[][] t)
+    //{
+    //    //int NodeContour = GetComponent<GridManager>().NodeContour;
 
-        int[,] grid = new int[t.Length,t[0].Length];
-        for (int x = 0; x < t.Length; x++)
-        {
-            for (int y = 0; y < t[x].Length; y++)
-            {
-                //grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
-                if (t[x][y] == TileType.Floor)
-                {
-                    grid[x, y] = 1;
-                    nbrTileFloor += 1;
-                }
-                else if (t[x][y] == TileType.Chest)
-                {
-                    grid[x, y] = 2;
-                }
-                else
-                {
-                    grid[x, y] = 0;
-                }
-            }
-        }
-        return grid;
-    }
+    //    int[,] grid = new int[t.Length,t[0].Length];
+    //    for (int x = 0; x < t.Length; x++)
+    //    {
+    //        for (int y = 0; y < t[x].Length; y++)
+    //        {
+    //            //grid[x,y] = (t[x][y] == TileType.Floor)?1:0;
+    //            if (t[x][y] == TileType.Floor)
+    //            {
+    //                if (t[x][y - 1] != TileType.Floor)
+    //                {
+    //                    grid[x, y] = 3;
+    //                }
+    //                else
+    //                {
+    //                    grid[x, y] = 1;
+    //                    nbrTileFloor += 1;
+    //                }
+    //            }
+    //            else if (t[x][y] == TileType.Chest)
+    //            {
+    //                grid[x, y] = 2;
+    //            }
+    //            else
+    //            {
+    //                grid[x, y] = 0;
+    //            }
+    //        }
+    //    }
+    //    return grid;
+    //}
 
     private void SetUpTilesArray()
     {
@@ -223,14 +232,21 @@ public class Board : MonoBehaviour {
         {
             for (int j = 0; j < tiles[i].Length; j++)
             {
-                if (tiles[i][j] == TileType.Floor || tiles[i][j] == TileType.Chest)
+                if (tiles[i][j] == TileType.Floor) //|| tiles[i][j] == TileType.Chest)
                 {
                     InstantiateObject(floorTiles, i, j);
-
+                    if (gridToInt[i, j] != 3)  {
+                        gridToInt[i, j] = 1;
+                    }
+                  
                 }
-                
+                else if (tiles[i][j] == TileType.Chest)
+                {
+                    InstantiateObject(floorTiles, i, j);
+                    gridToInt[i, j] = 2;
+                }
 
-                if (tiles[i][j] == TileType.Wall && j > 0 )
+                else if (tiles[i][j] == TileType.Wall && j > 0 )
                 {
                     if (tiles[i][j-1]==TileType.Floor )
                     {
@@ -260,9 +276,9 @@ public class Board : MonoBehaviour {
                     {
                         InstantiateObject(mur_Sud, i, j+1.1f);
                         InstantiateObject(voidTile, i, j+.72f);
+                        gridToInt[i, j+1] = 3;
                     }
                     
-
                 }
                 if (tiles[i][j] == TileType.Wall &&  i > 0)
                 {
@@ -272,14 +288,13 @@ public class Board : MonoBehaviour {
                     }
 
                 }
+                
             }
         }
         // Instantie lexit
         int rndIndex = Random.Range(0, potentialExit.Count);
         
         InstantiateObject(exit, potentialExit[rndIndex][0], potentialExit[rndIndex][1]);
-        
-        
     }
 
     //void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
@@ -343,12 +358,9 @@ public class Board : MonoBehaviour {
         //        }
         //    }
         //}
-        Debug.Log(test);
     }
-    int test = 0;
     void InstantiateAnEnemy(Vector3 position)
     {
-        test += 1;
         int whatEn = Random.Range(0, enemyList.Length);
         GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Enemies").transform;                

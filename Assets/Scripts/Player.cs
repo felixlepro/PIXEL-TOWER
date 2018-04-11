@@ -25,16 +25,17 @@ public class Player : Character {
     private Animator anim;
     [HideInInspector] public Vector3 movement;
     private bool FacingMouse = true;
-    const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
+    bool rooted;
     Transform weaponTransform;
     SpriteRenderer graphicsSpriteR;
     SpriteRenderer weaponSprite;
 
     [HideInInspector] public float timeUntilNextAttack;
 
+    const float timePerKnockBackAmount = 20; //10 kba lasts 1 seconds
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] public float knockBackAmountOverTime = 1;
-    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.775f;
+    [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.7f;
     [HideInInspector] public float knockBackTime = 1;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
@@ -77,11 +78,15 @@ public class Player : Character {
     {     
         if (!stunned)
         {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-
-            Move(horizontal, vertical);
             FaceMouse();
+            if (!rooted)
+            {
+                float horizontal = Input.GetAxisRaw("Horizontal");
+                float vertical = Input.GetAxisRaw("Vertical");
+
+                Move(horizontal, vertical);
+            }
+            
         }
     }
 
@@ -146,7 +151,7 @@ public class Player : Character {
     {
         yield return new WaitForFixedUpdate();
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
-        stunned = true;
+         rooted = true;
 
         //float knockBackTime = timePerKnockBackAmount / ((knockBackAmount - timePerKnockBackAmount) / 2 + timePerKnockBackAmount);
         float knockBackTime = 2 * timePerKnockBackAmount / (knockBackAmount + timePerKnockBackAmount);
@@ -163,7 +168,7 @@ public class Player : Character {
             yield return new WaitForFixedUpdate();
         }
         graphicsSpriteR.color = new Color(1f, 1, 1, graphicsSpriteR.color[3]);
-        stunned = false;
+        rooted = false;
     }
 
     IEnumerator ImmuneAnim()
@@ -298,8 +303,6 @@ public class Player : Character {
         //    child.gameObject.SetActive(false);
         //}
         bool foundAWeapon = false;
-
-            Debug.Log(weaponList.Count);
         
         for (int i = 0; i < weaponList.Count; i++)
         {

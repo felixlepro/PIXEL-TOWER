@@ -7,6 +7,7 @@ public class Wizard : EnemyManager {
      State state;
     public int nbrBoule;
     Transform graphics;
+    bool dying = false;
 
     protected override void OnStart()
     {
@@ -29,7 +30,7 @@ public class Wizard : EnemyManager {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
             if (attacks[0].checkIfAttackIsReady() && distance < attacks[0].attackRange)
             {
-                Root(1);
+                StartCoroutine(Root(1));
                 state = State.AttackNormal;
                 resetAttackCD();
                 attacks[0].resetAttackCD();               
@@ -38,7 +39,7 @@ public class Wizard : EnemyManager {
             }
             else if (attacks[2].checkIfAttackIsReady() && distance > attacks[2].attackRange)
             {
-                Root(1);
+                StartCoroutine(Root(1));
                 state = State.Summoning;
                 resetAttackCD();
                 attacks[2].resetAttackCD();              
@@ -51,7 +52,7 @@ public class Wizard : EnemyManager {
             }
             else if (attacks[1].checkIfAttackIsReady() && distance < attacks[1].attackRange)
             {
-                Root(1);
+                StartCoroutine(Root(1));
                 state = State.AttackSwing;
                 resetAttackCD();
                 attacks[1].resetAttackCD();             
@@ -67,33 +68,42 @@ public class Wizard : EnemyManager {
     }
     void doAttackFlameThrower()
     {
-        GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);     
-        fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed, 
-                                                                      attacks[0].burnChance, attacks[0].burnDamage, attacks[0].burnDuration,
-                                                                      attacks[0].slowChance, attacks[0].slowAmount, attacks[0].slowDuration,
-                                                                      attacks[0].freezeChance, attacks[0].freezeDuration);
+        if (!dying)
+        {
+            GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
+            fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed,
+                                                                          attacks[0].burnChance, attacks[0].burnDamage, attacks[0].burnDuration,
+                                                                          attacks[0].slowChance, attacks[0].slowAmount, attacks[0].slowDuration,
+                                                                          attacks[0].freezeChance, attacks[0].freezeDuration);
+        }
     }
     void doAttackFireBall()
     {
-        GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up/3, Quaternion.identity);
-        Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up/2;
-        fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
-                                                                        attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
-                                                                      attacks[1].slowChance, attacks[1].slowAmount, attacks[1].slowDuration,
-                                                                      attacks[1].freezeChance, attacks[1].freezeDuration);
+        if (!dying)
+        {
+            GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up / 3, Quaternion.identity);
+            Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up / 2;
+            fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
+                                                                            attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
+                                                                          attacks[1].slowChance, attacks[1].slowAmount, attacks[1].slowDuration,
+                                                                          attacks[1].freezeChance, attacks[1].freezeDuration);
+        }
     }
     public override void setAnimState(string newState)
     {
-        switch (newState)
-        {
-            case "Moving": state = State.Moving; break;
-            case "Idling": state = State.Idling; break;
-            case "GrosCoup": state = State.GrosCoup; break;
-            case "AttackNormal": state = State.AttackNormal; break;
-            case "AttackSwing": state = State.AttackSwing; break;
-            case "Summoning": state = State.Summoning; break;
-            case "Dying": state = State.Dying; break;
-        }
+        //if (state != State.Dying)
+      //  {
+            switch (newState)
+            {
+                case "Moving": state = State.Moving; break;
+                case "Idling": state = State.Idling; break;
+                case "GrosCoup": state = State.GrosCoup; break;
+                case "AttackNormal": state = State.AttackNormal; break;
+                case "AttackSwing": state = State.AttackSwing; break;
+                case "Summoning": state = State.Summoning; break;
+                case "Dying": state = State.Dying; break;
+            }
+       // }
     }
     public override string getAnimState()
     {
@@ -111,6 +121,7 @@ public class Wizard : EnemyManager {
     }
     public override void gonnaDie()
     {
+        dying = true;
     }
 
     public override void Damaged()
@@ -185,6 +196,15 @@ public class Wizard : EnemyManager {
 
     public override void UpdateAnim()
     {
+        if (updateAnim)
+        {
+            UpdateAnimState();
+
+        }
+
+    }
+    public void UpdateAnimState()
+{
         switch (state)
         {
             case State.Idling:

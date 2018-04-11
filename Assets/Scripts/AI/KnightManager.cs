@@ -84,7 +84,7 @@ public class KnightManager : EnemyManager {
     {
         isRooted = false;
         pathingUnit.enablePathing();
-        anim.speed = currentSpeed / maxMoveSpeed;
+       // anim.speed = currentSpeed / maxMoveSpeed;
         //controller.enemyManager.isWalking = false; 
 
     }
@@ -167,8 +167,12 @@ public class KnightManager : EnemyManager {
 
     public override void UpdateAnim()
     {
+        if (updateAnim)
+        {
+            UpdateAnimState();
 
-        UpdateAnimState();
+        }
+       
     }
 
     void UpdateAnimState()
@@ -310,13 +314,16 @@ public class KnightManager : EnemyManager {
 
     public override void setAnimState(string newState)
     {
-        switch (newState)
-        {
-            case "Moving": state = State.Moving; break;
-            case "Idling": state = State.Idling; break;
-            case "Attacking": state = State.Attacking; break;
-            case "Dying": state = State.Dying; break;
-        }
+       // if (state != State.Dying)
+        //{
+            switch (newState)
+            {
+                case "Moving": state = State.Moving; break;
+                case "Idling": state = State.Idling; break;
+                case "Attacking": state = State.Attacking; break;
+                case "Dying": state = State.Dying; break;
+            }
+       // }
     }
     public override string getAnimState()
     {

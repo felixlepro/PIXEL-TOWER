@@ -80,15 +80,6 @@ MonoBehaviour:
   knockBackAmount: 5
   cost: 0
   isMelee: 0
-  isFire: 0
-  isIce: 0
-  chanceBurnProc: 0
-  chanceSlowProc: 0
-  burnDuration: 4
-  burnSuffered: 5
-  slowDuration: 3
-  slowValue: 0.3
-  slowFadeState: 0
   animator: {fileID: 9100000, guid: 08c7696b68e6a2749bf75cf2b718578b, type: 2}
   sprite: {fileID: 21300000, guid: eed3f649cca75dd4b816f1620dc69b4e, type: 3}
   description: 
