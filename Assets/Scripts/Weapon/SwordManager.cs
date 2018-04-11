@@ -6,9 +6,9 @@ public class SwordManager : WeaponManager
 {
     private BoxCollider2D coll;
     Animator[] anima;
+    List<GameObject> enemyAlreadyHit = new List<GameObject>();
     float thisAttackCCT = 0;
-
-
+    const float attackTime = 0.2f;
 
     void Start()
     {
@@ -21,6 +21,7 @@ public class SwordManager : WeaponManager
         anima = GetComponentsInChildren<Animator>();
         //anima[].runtimeAnimatorController = animator;     
     }
+
     public override void WeaponSetStats()
     {
         SetRarity();
@@ -28,7 +29,7 @@ public class SwordManager : WeaponManager
         float AdAsRation = Random.value;
 
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
-        attackSpeed = attackSpeedRange.Set(1-AdAsRation) * rarity;
+        attackSpeed = attackSpeedRange.Set(1-AdAsRation) * rarity + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;
 
@@ -55,23 +56,30 @@ public class SwordManager : WeaponManager
         {
             isIce = isFire;
         }
-        else isFire = false;       
+        else isFire = false;
+
+        Debug.Log(isFire + " " + isIce);
     }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Colision");
         if (other.tag == "Enemy")
         {
-            
-            //Debug.Log("En");
-            //EnemyManager enemyManager = other.gameObject.GetComponentInParent<EnemyManager>();
+            bool already = false;
             chargeDoneRatio = thisAttackCCT;
-            if (coll.enabled)
+            foreach (GameObject en in enemyAlreadyHit)
+            {
+                if (other.gameObject == en)
+                {
+                    already = true;
+                }
+            }  
+            if (!already)
             {
                 EnvoyerDegat(other.gameObject.GetComponentInParent<EnemyManager>());
+                enemyAlreadyHit.Add(other.gameObject);
             }
-            coll.enabled = false;
-            chargeDoneRatio = 0;
         }
         else if (other.tag== "Chest")
         {
@@ -99,8 +107,7 @@ public class SwordManager : WeaponManager
     }
     protected override void WeaponOnCD()
     {
-        currentChargeTime = 0;
-        coll.enabled = false;
+       
     }
   
     void attack()
@@ -110,7 +117,8 @@ public class SwordManager : WeaponManager
         //anima[0].SetBool("AttackChargeMax", false);
       //  anima[0].SetTrigger("PlayerAttack");
         Invoke("triggerSwipe", 0.1f);
-        ResetAttackTimer();  
+        ResetAttackTimer();
+        Invoke("EndAttack", attackTime);
         GetComponentInParent<Player>().doFaceMouse(false);
         Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed * 0.7f);
     }
@@ -126,7 +134,12 @@ public class SwordManager : WeaponManager
             return true;
         }
         return false;
-
+    }
+    void EndAttack()
+    {
+        currentChargeTime = 0;
+        coll.enabled = false;
+        enemyAlreadyHit.Clear();
     }
 }
 //void Update()

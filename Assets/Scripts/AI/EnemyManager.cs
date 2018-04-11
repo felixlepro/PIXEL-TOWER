@@ -384,7 +384,7 @@ abstract public class EnemyManager : Character {
 
     public void playDun()
     {
-        Root(0.75f);
+        StartCoroutine(Root(0.75f));
         GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(dun);
         GameObject dungo = Instantiate(dunExlamation, transform.position + Vector3.up*height, Quaternion.identity);
         dungo.GetComponentInChildren<DunManager>().Initialize(transform.position + Vector3.up * height);

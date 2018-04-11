@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 1931763787068262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 71, y: 67.89, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children:
   - {fileID: 4071827570834126}
   - {fileID: 4991255930640994}
@@ -342,7 +342,7 @@ MonoBehaviour:
   maxHp: 75
   hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  maxMoveSpeed: 8
+  maxMoveSpeed: 6
   immune: 0
   currentSpeed: 0
   patrolSpeedChaseSpeedRatio: 6

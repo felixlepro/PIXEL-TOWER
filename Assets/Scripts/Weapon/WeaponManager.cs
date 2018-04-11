@@ -19,16 +19,16 @@ public abstract class WeaponManager : MonoBehaviour {
   
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     protected  bool isFire = true;
-    protected bool isIce = true;
+    protected bool isIce = false;
 
-    [HideInInspector] protected int chanceBurnProc = 100;
+    [HideInInspector] protected int chanceBurnProc = 50;
     [HideInInspector] protected int chanceSlowProc = 100;
 
     [HideInInspector] protected float burnDuration = 4;
-    [HideInInspector] protected int burnSuffered = 5;
+    [HideInInspector] protected int burnSuffered = 1;
 
     [HideInInspector]   protected float slowDuration = 5;
-    [HideInInspector] protected float slowValue = 0.9f;
+    [HideInInspector] protected float slowValue = 0.5f;
 
    [HideInInspector] protected bool slowFadeState = false;     
     //Fin des attributs d'effets spéciaux d'armes  -Simon
@@ -55,14 +55,14 @@ public abstract class WeaponManager : MonoBehaviour {
     protected float currentChargeTime;
      KeyCode chargeAttackKey = KeyCode.Mouse0;
 
-    public IntRange attackDamageRange = new IntRange(15, 20);
-    public FloatRange attackSpeedRange = new FloatRange(0.1f, 0.7f);
+    public IntRange attackDamageRange = new IntRange(10, 20);
+    public FloatRange attackSpeedRange = new FloatRange(0.1f, 0.4f);
     public FloatRange attackDamageChargedBonusRange = new FloatRange(0.25f, 0.75f);
     public FloatRange knockBackAmountRange = new FloatRange(5f, 12f);
 
-    public float IceFireChance = 0.15f;
+    public float IceFireChance = 0.225f;
     public IntRange chanceBurnProcRange = new IntRange(25, 75);
-    public IntRange burnDurationRange = new IntRange(2, 5);
+    public IntRange burnDurationRange = new IntRange(1, 4);
     public IntRange burnSufferedRange = new IntRange(5, 10);
     public IntRange chanceSlowProcRange = new IntRange(25, 75);
     public FloatRange slowDurationRange = new FloatRange(1, 3);

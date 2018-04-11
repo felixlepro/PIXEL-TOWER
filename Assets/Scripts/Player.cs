@@ -11,8 +11,8 @@ public class Player : Character {
     const int weaponEquipedMax = 2;
     public List<WeaponManager> weaponList = new List<WeaponManager>();
     public float rotationBuffer;
-    public float restartDelay = 1f;
-    public int valuePerCoin = 1;
+    [HideInInspector] public float restartDelay = 1f;
+    [HideInInspector] public int valuePerCoin = 1;
     public Text coinText;
     public int coins;
     public Image hpBar;
@@ -228,28 +228,28 @@ public class Player : Character {
         coinText.text = "Coins: " + coins;
     }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "Exit")
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                other.GetComponent<Animator>().SetTrigger("Open");
-                Invoke("Restart", restartDelay);
-                enabled = false;
-            }
+    //private void OnTriggerStay2D(Collider2D other)            //VOIR LE SCRIPT PLAYERTRIGGERS
+    //{
+    //    if (other.tag == "Exit")
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.E))
+    //        {
+    //            other.GetComponent<Animator>().SetTrigger("Open");
+    //            Invoke("Restart", restartDelay);
+    //            enabled = false;
+    //        }
             
-        }
-        if ((other.tag == "Coin"))
-        {
-            gainCoin();
-            Destroy(other.gameObject);
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
+    //    }
+    //    if ((other.tag == "Coin"))
+    //    {
+    //        gainCoin();
+    //        Destroy(other.gameObject);
+    //        GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
 
-        }
+    //    }
         
 
-    }
+    //}
     
     void FaceMouse()
     {

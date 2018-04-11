@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114070967652995580}
   m_Layer: 8
   m_Name: CrossBow
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,11 +88,11 @@ MonoBehaviour:
   numAttack: 0
   isFantoming: 0
   attackDamageRange:
-    min: 15
-    max: 20
+    min: 7
+    max: 10
   attackSpeedRange:
     min: 0.1
-    max: 0.7
+    max: 0.3
   attackDamageChargedBonusRange:
     min: 0.25
     max: 0.75
@@ -107,8 +107,8 @@ MonoBehaviour:
     min: 2
     max: 5
   burnSufferedRange:
-    min: 5
-    max: 10
+    min: 1
+    max: 4
   chanceSlowProcRange:
     min: 25
     max: 75

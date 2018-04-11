@@ -79,9 +79,11 @@ public class BlobManager : EnemyManager
 
     public override void UpdateAnim()
     {
-        UpdateAnimState();
-
+        if (updateAnim)
+        {
+            UpdateAnimState();
     }
+}
 
     void UpdateAnimState()
     {
