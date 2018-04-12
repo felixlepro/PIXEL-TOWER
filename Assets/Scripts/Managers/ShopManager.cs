@@ -6,28 +6,27 @@ public class ShopManager : MonoBehaviour
 {
     public List<GameObject> weaponList;
     public List<GameObject> panelList;
+    public List<Image> imList;
 
     public GameObject[] weaponTypes;
     private GameObject canvas;
     private GameObject panel;
-    public Image weaponIm;
     private GameObject buttonBuy;
 
     public bool openIt = false;
     private bool canEnter = true;
     private string tagP;
     private int currentWtype;
-    public int weaponMax = 6;
+    public int iMax = 6;
 
     private void Start()
     {
         
-        while (weaponList.Count < weaponMax)
+        while (weaponList.Count < iMax)
         {
-            CreateWeapon();
+            CreateWeapon();       
         }
-        canvas.SetActive(false);  
-        SetInfo(weaponList[0]);
+        SetInfo();
       
     }
 
@@ -85,9 +84,15 @@ public class ShopManager : MonoBehaviour
         weaponList[weaponList.Count - 1].GetComponent<WeaponManager>().WeaponSetStats();
     }
 
-    private void SetInfo(GameObject weap)
+    private void SetInfo()
     {
-        weaponIm.sprite = weap.GetComponent<WeaponManager>().sprite;
+        for (int n = 0; n < iMax; n++)
+        {
+            imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
+        }
+    }
+    private void BuyWeapon()
+    {
 
     }
 }
