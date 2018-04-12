@@ -12,6 +12,14 @@ public class PlayerTriggers : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if (other.tag == "Weapon" )
+        {
+            if (Input.GetKeyDown(KeyCode.E) && player.weaponList[player.currentWeaponIndex].CanSwitch())
+            {
+                player.ChangeWeapon(other.gameObject);
+            }
+
+        }
         if (other.tag == "Exit")
         {
             if (Input.GetKeyDown(KeyCode.E))

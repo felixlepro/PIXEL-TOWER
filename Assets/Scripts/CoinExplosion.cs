@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CoinExplosion : MonoBehaviour {
 
-    public float  vitesse = 10000f;
-    public Vector3 direction;
+    public float  vitesseMin;
+    public float vitesseMax;
+    float vitesse;
+    Vector3 direction;
     int angle;
     AudioSource audio;
     
 	void Start () {
+        vitesse = Random.Range(vitesseMin, vitesseMax);
         angle = Random.Range(1, 360);
         direction =  new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized ;
         audio = GetComponent<AudioSource>();
@@ -19,7 +22,7 @@ public class CoinExplosion : MonoBehaviour {
         transform.position += direction * vitesse;
         if (vitesse > 0.0005)
         {
-            vitesse *= 0.995f;
+            vitesse -= vitesse*Time.deltaTime;
         }
         else vitesse = 0;
         

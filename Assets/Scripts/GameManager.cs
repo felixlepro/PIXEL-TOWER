@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public bool inLevel = true;
     public AudioSource audio;
     public AudioClip coinSound;
+    public GameObject[] weapons;
 
     private Text coinCounttext;
     private Board boardScript;

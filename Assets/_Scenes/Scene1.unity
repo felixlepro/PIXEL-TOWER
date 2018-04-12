@@ -806,22 +806,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 454302501}
---- !u!1 &478676799 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1152581165149338, guid: 55336882b5bf7f44bae2a9f18942a05b,
-    type: 2}
-  m_PrefabInternal: {fileID: 547340442}
---- !u!114 &478676806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 478676799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b330a5a1a415d0f498c70aa75be06679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &489261318
 Prefab:
   m_ObjectHideFlags: 0
@@ -871,11 +855,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: enemyList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4123507218699772, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -910,30 +889,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
         type: 2}
+      propertyPath: nbrChestMax
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
       propertyPath: nbrEnemyBase
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114993608136937452, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: enableGizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: hauteur
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: largeur
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: enemyList.Array.data[1]
-      value: 
-      objectReference: {fileID: 1327544550791342, guid: 9cc6aea96727aa849a5d54ce79fe43e4,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
   m_IsPrefabParent: 0
@@ -1025,6 +988,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
         type: 2}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 1306122474}
+    - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
+        type: 2}
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 160625691}
@@ -1035,9 +1003,10 @@ Prefab:
       objectReference: {fileID: 445310260}
     - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
         type: 2}
-      propertyPath: coinText
+      propertyPath: startingWeapon.Array.data[1]
       value: 
-      objectReference: {fileID: 1306122474}
+      objectReference: {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}
   m_IsPrefabParent: 0

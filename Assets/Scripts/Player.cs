@@ -18,7 +18,7 @@ public class Player : Character {
     public Image hpBar;
     public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
 
-    int currentWeaponIndex = 0;
+    [HideInInspector] public int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -303,13 +303,16 @@ public class Player : Character {
         //    child.gameObject.SetActive(false);
         //}
         bool foundAWeapon = false;
-        
+        newWeapon.GetComponent<WeaponManager>().enabled = true;
+        newWeapon.GetComponent<Collider2D>().enabled = false;
         for (int i = 0; i < weaponList.Count; i++)
         {
                 weaponList[i].gameObject.SetActive(false);
                 if (weaponList[i].isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
                 {
-                    GameObject.Destroy(weaponList[i].gameObject);
+                // GameObject.Destroy(weaponList[i].gameObject);
+                weaponList[i].gameObject.SetActive(true);
+                WeaponDrop.DropWeapon(weaponList[i].gameObject, transform.position - Vector3.right / 3);
                     weaponList[i] = newWeapon.GetComponent<WeaponManager>();
                     currentWeaponIndex = i;
                     foundAWeapon = true;
@@ -322,6 +325,7 @@ public class Player : Character {
         }
         //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
+        newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
     }

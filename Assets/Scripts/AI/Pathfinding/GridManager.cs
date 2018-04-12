@@ -40,7 +40,7 @@ public class GridManager : MonoBehaviour
                     //Debug.Log(Mathf.RoundToInt(y * nodeRadius * 2) + "      " + ny * 2);
                     walkable = true;
                 }
-                else    if (board[nx,ny] == 2 && Mathf.RoundToInt(y * nodeRadius  ) == ny) //fait en sorte que la partie du bas des tiles des chests soit walkable
+                else if (board[nx, ny] == 2 && Mathf.RoundToInt(y * nodeRadius * 2) == ny * 2) //fait en sorte que la partie du haut des tiles des chests soit walkable
                 {
                     walkable = true;
                 }

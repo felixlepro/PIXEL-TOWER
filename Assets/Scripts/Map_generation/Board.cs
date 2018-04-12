@@ -372,9 +372,9 @@ public class Board : MonoBehaviour {
         enemy.transform.parent = GameObject.Find("Chest Holder").transform;
     }
     void SetNbrChest()
-    {
+    {     
         float rng = Random.value;
-        rng = rng *rng*rng;
+        rng = rng *rng;
         for(int i = 1; i <= nbrChestMax; i++)
         {
 
@@ -388,7 +388,11 @@ public class Board : MonoBehaviour {
     void SetUpChest()
     {
         int nbrPot = potentialChest.Count / 2;
-        for(int i =0; i<nbrChest; i++)
+        if (nbrPot < nbrChest)
+        {
+            nbrChest = nbrPot;
+        }
+        for (int i =0; i<nbrChest; i++)
         {
             int rng = Random.Range(0, nbrPot);
             int xCoord = potentialChest[rng][0];
