@@ -353,12 +353,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 144230970}
---- !u!114 &160625691 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114600633141695014, guid: 69919d60abbeaf24b8f3e6b3265db875,
-    type: 2}
-  m_PrefabInternal: {fileID: 371588918}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!4 &178250493 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4161564469113750, guid: f3356c132d0008b478727a5f5ddc080c,
@@ -995,7 +989,7 @@ Prefab:
         type: 2}
       propertyPath: hpBar
       value: 
-      objectReference: {fileID: 160625691}
+      objectReference: {fileID: 758874377}
     - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
         type: 2}
       propertyPath: gameOverMenu
