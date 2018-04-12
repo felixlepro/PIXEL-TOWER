@@ -110,14 +110,14 @@ public class Player : Character {
         {
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
-            hp -= damage;        
-            if(hp <= 0)
+            hp -= damage;
+            hpBar.fillAmount = (float)hp / (float)maxHp;
+            if (hp <= 0)
             {
                 Time.timeScale = 0;
                 gameOverMenu.SetActive(true);                                      
             }
-                hpBar.fillAmount = (float)hp / (float)maxHp;
-                if (kbAmmount != 0)
+            if (kbAmmount != 0)
             {
                 knockBackDirection = kbDirection;
                 knockBackAmount = kbAmmount;
