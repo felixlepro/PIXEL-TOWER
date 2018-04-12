@@ -13,6 +13,9 @@ abstract public class EnemyManager : Character {
     public float chaseRangeBuffer;
     public int fireStack = 0;
     public float attackSpeed;
+    public int nbrCoins;
+    public GameObject coinPrefab;
+    public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
    // public GameObject[] attacksUPF; //attackUsingPrefabs
@@ -49,7 +52,7 @@ abstract public class EnemyManager : Character {
     bool onlyOneAttack = false;
 
     public Transform chaseTarget;
-
+    bool dead = false;
     [HideInInspector] public Unit pathingUnit;
 
    
@@ -187,8 +190,9 @@ abstract public class EnemyManager : Character {
     }
     public void VerifyDeath()
     {
-        if (hp <= 0)
+        if (hp <= 0 && !dead)
         {
+            dead = true;
             foreach(Collider2D cl in enemyCollider)
             {
                 cl.enabled = false;
@@ -202,6 +206,7 @@ abstract public class EnemyManager : Character {
             setAnimState("Dying");
             UpdateAnim();
             updateAnim = false;
+            DropItems();
             Destroy(this.gameObject , 2);
             //   Invoke("Death", 2);
         }
@@ -389,6 +394,19 @@ abstract public class EnemyManager : Character {
         GameObject dungo = Instantiate(dunExlamation, transform.position + Vector3.up*height, Quaternion.identity);
         dungo.GetComponentInChildren<DunManager>().Initialize(transform.position + Vector3.up * height);
 
+    }
+    void DropItems()
+    {
+        Debug.Log("caca");
+        nbrCoins = Random.Range(Mathf.RoundToInt(nbrCoins / 2), Mathf.RoundToInt(nbrCoins * 1.5f));
+        for (int coin = 0; coin < nbrCoins; coin++)
+        {
+           Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        }
+        if (Random.value *100 < weaponDropChance)
+        {
+            WeaponDrop.DropRandomWeapon(transform.position);
+        }
     }
 
 }

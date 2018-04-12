@@ -260,7 +260,7 @@ public class Player : Character {
 
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y - 0.5f);
             float angle = Vector2.Angle(direction, new Vector2(0, -1));
 
             if (direction.x < 0 && transform.localScale == faceRight && angle >= rotationBuffer & angle <= 180 - rotationBuffer)

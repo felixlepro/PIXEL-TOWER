@@ -412,6 +412,9 @@ MonoBehaviour:
   chaseRangeBuffer: 5
   fireStack: 0
   attackSpeed: 2
+  nbrCoins: 30
+  coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
+  weaponDropChance: 100
   hpBar: {fileID: 114313180205057798}
   attacks:
   - {fileID: 0}

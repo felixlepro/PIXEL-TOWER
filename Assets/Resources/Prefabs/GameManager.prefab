@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114376896094352634}
   - component: {fileID: 114906157998995998}
   - component: {fileID: 82646314027936982}
+  - component: {fileID: 114242319765115108}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -146,7 +147,44 @@ MonoBehaviour:
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  nbrFloorEntreBoss: 4
   wayPointList: []
+--- !u!114 &114242319765115108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361377974946490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804a6634e2796ea47872b5bf6fee9e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hauteur: 70
+  largeur: 70
+  hautRoomIni:
+    min: 5
+    max: 7
+  largRoomIni:
+    min: 5
+    max: 7
+  hautRoomBoss:
+    min: 12
+    max: 14
+  largRoomBoss:
+    min: 14
+    max: 16
+  longCorridor:
+    min: 8
+    max: 12
+  floorTiles: {fileID: 1906721978379716, guid: 7ebda04bcd4d2cd4eb4d25bfb66a53b2, type: 2}
+  mur_Nord: {fileID: 1294078729329326, guid: 39be942870f64c74195b1a9f76648dcb, type: 2}
+  mur_Sud: {fileID: 1221694232341328, guid: a695b0fc4ba65c0409d20032cbe27c32, type: 2}
+  mur_Est: {fileID: 1330389026989350, guid: 621005def8aae794baad7901b0463a70, type: 2}
+  mur_Ouest: {fileID: 1110770197726566, guid: 58bbdb613e0d5d848908cf063b836faa, type: 2}
+  voidTile: {fileID: 1276719814318878, guid: 8e7321b0d93b4b2499a70acfbd1b1de7, type: 2}
+  enemyList:
+  - {fileID: 1200067406220310, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
 --- !u!114 &114376896094352634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,7 +234,7 @@ MonoBehaviour:
   nbrEnemyBase: 5
   chestList:
   - {fileID: 1050157812518948, guid: 2f186ffc7e5a0e841a467c247216522c, type: 2}
-  nbrChestMax: 6
+  nbrChestMax: 3
   nbrChest: 0
 --- !u!114 &114906157998995998
 MonoBehaviour:

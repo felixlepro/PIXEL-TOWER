@@ -44,12 +44,13 @@ public class Board : MonoBehaviour {
     public  void SetupBoard(int lvl)
     {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
+
+        //Destroy(boardHolder);
+        Destroy(GameObject.Find("Board Holder"));
+        Destroy(GameObject.Find("Chest Holder"));
+
         boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
-        if (lvl !=0)
-        {
-            Destroy(boardHolder);
-        }
         SetUpTilesArray();
         CreateRoomsAndCorridors();
         SetTilesValuesForRooms();

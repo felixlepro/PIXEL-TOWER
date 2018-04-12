@@ -25,7 +25,7 @@ public class SwordManager : WeaponManager
     public override void WeaponSetStats()
     {
         SetRarity();
-
+        Random.seed = System.DateTime.Now.Millisecond;
         float AdAsRation = Random.value;
 
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);

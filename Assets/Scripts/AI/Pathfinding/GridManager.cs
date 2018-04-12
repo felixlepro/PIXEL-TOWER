@@ -20,7 +20,6 @@ public class GridManager : MonoBehaviour
 
     public void CreateGrid(int[,] board)
     {
-
         gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) / nodeRadius);
         gridWorldSize = new Vector2(gridSizeX * nodeRadius * 2, gridSizeY * nodeRadius * 2);

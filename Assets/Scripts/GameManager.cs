@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     private Board boardScript;
     BoardBoss boardBoss;
     private int level = 0;
+    public int nbrFloorEntreBoss = 4;
     private List<EnemyManager> enemies;
     private bool doingSetup = true;
     private Text levelText;
@@ -40,8 +41,9 @@ public class GameManager : MonoBehaviour {
         enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
         boardBoss = GetComponent<BoardBoss>();
-        InitGame();
-
+        loadNewLevel();
+        //InitGame();
+        DamageTextManager.Initialize();
         audio = GetComponent<AudioSource>();
     }
     public void PlaySound(AudioClip clip)
@@ -72,7 +74,6 @@ public class GameManager : MonoBehaviour {
     {
         doingSetup = true;
         enemies.Clear();
-        DamageTextManager.Initialize();
         levelImage = GameObject.Find("LevelImage");
         boardScript.SetupBoard(level);
         
@@ -87,12 +88,15 @@ public class GameManager : MonoBehaviour {
     {
         doingSetup = true;
         enemies.Clear();
-
+        levelImage = GameObject.Find("LevelImage");
         level += 1;
-        if (level % 3 == 0)   {
-            boardBoss.SetupBoard(level/3);
+        Debug.Log(level);
+        if ((level % 4) == 0)
+        {
+            boardBoss.SetupBoard(level);
         }
-        boardScript.SetupBoard(level);
+        else boardScript.SetupBoard(level);
+        SetupAI();
     }
    
 

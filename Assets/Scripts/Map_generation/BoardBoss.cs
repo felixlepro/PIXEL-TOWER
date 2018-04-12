@@ -30,7 +30,6 @@ public class BoardBoss : MonoBehaviour
     private Corridor[] corridors;
 
     public GameObject[] enemyList;
-    public int nbrEnemyBase;
 
     GameObject chestHolder;
     GameObject boardHolder;
@@ -41,12 +40,11 @@ public class BoardBoss : MonoBehaviour
     public void SetupBoard(int lvl)
     {
         //boardHolder = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
+        level = lvl / 4;
+        Destroy(GameObject.Find("Board Holder"));
+        Destroy(GameObject.Find("Chest Holder"));
         boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
-        if (lvl != 1)
-        {
-            Destroy(boardHolder);
-        }
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
@@ -283,7 +281,10 @@ public class BoardBoss : MonoBehaviour
 
 void InstantiateEnemies(TileType[][] t)
 {
-    int nbrEnemy = Mathf.CeilToInt(level / 2);
+        Debug.Log(level);
+        Debug.Log(level / 2);
+        int nbrEnemy = Mathf.CeilToInt((float)level / 2f);
+        Debug.Log(nbrEnemy);
         // float enemyDensity = 1f + level * 0.1f;
 
         float ecart = rooms[1].largRoom / (nbrEnemy+1);
