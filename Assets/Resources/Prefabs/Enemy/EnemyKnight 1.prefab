@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 212098840464227978}
   - component: {fileID: 95964868394623858}
   - component: {fileID: 58756809515585278}
-  - component: {fileID: 58434509418630290}
+  - component: {fileID: 70315317050156998}
   m_Layer: 0
   m_Name: EnemyGraphics
   m_TagString: Enemy
@@ -211,21 +211,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &58434509418630290
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1221752181028352}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.33}
-  serializedVersion: 2
-  m_Radius: 2.75
 --- !u!58 &58756809515585278
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -238,7 +223,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.5}
+  m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
   m_Radius: 0.1
 --- !u!61 &61025386417969170
@@ -266,6 +251,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 8}
   m_EdgeRadius: 0
+--- !u!70 &70315317050156998
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221752181028352}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.76}
+  m_Size: {x: 3.34, y: 5.43}
+  m_Direction: 0
 --- !u!95 &95964868394623858
 Animator:
   serializedVersion: 3
@@ -538,7 +538,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.625, y: 6.125}
+  m_Size: {x: 3.7333333, y: 5.866667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
