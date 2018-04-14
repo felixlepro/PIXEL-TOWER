@@ -14,13 +14,12 @@ public abstract class WeaponManager : MonoBehaviour {
     public float knockBackAmount;
     public int cost = 10; //pour l'instant les weapons coutent tous 10$ puisque ce n'est pas ma priorité
     public bool isMelee;
-  
-    // public float range;
-  
+
+    protected const float lvlScalability = 7.5f; //after how many floors will the damage double 
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     protected  bool isFire = true;
     protected bool isIce = false;
-
+    
     [HideInInspector] protected int chanceBurnProc = 50;
     [HideInInspector] protected int chanceSlowProc = 100;
 
@@ -87,7 +86,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected abstract void MaxChargeWeapon();
     protected abstract void ReleaseChargedWeapon();
     protected abstract void WeaponOnCD();
-    public abstract void WeaponSetStats();
+    public abstract void WeaponSetStats(int lvl);
 
     void Start()
     {
@@ -256,6 +255,17 @@ public abstract class WeaponManager : MonoBehaviour {
         }
         return false;
 
+    }
+    public IEnumerator DropWeaponAnim(float speed)
+    {
+        spriteR.sortingOrder = 1;
+        while (speed > 0.0005f)
+        {
+            transform.position += -Vector3.up * speed;
+            speed -= 0.4f * Time.deltaTime;
+            yield return null;
+        }
+        spriteR.sortingOrder = 0;
     }
 
 }

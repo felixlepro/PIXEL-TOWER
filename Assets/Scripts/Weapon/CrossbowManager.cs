@@ -12,13 +12,13 @@ public class CrossbowManager : WeaponManager
 
     public FloatRange boltSpeedRange = new FloatRange(15, 20);
 
-    public override void WeaponSetStats()
+    public override void WeaponSetStats(int lvl)
     {
         SetRarity();
 
         float AdAsRation = Random.value;
-
-        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
+        float lvlScale = 1 + (float)lvl / lvlScalability;
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity * lvlScale);
         attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * rarity;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;

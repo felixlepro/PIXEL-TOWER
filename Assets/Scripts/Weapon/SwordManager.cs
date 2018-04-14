@@ -22,13 +22,13 @@ public class SwordManager : WeaponManager
         //anima[].runtimeAnimatorController = animator;     
     }
 
-    public override void WeaponSetStats()
+    public override void WeaponSetStats(int lvl)
     {
         SetRarity();
         Random.seed = System.DateTime.Now.Millisecond;
         float AdAsRation = Random.value;
-
-        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
+        float lvlScale = 1 + (float)lvl / lvlScalability;
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity * lvlScale );
         attackSpeed = attackSpeedRange.Set(1-AdAsRation) * rarity + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;

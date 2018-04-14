@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour {
     {
         foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire
         {
+            em.GetComponent<EnemyManager>().SetStats(level);
             em.GetComponent<EnemyManager>().SetupAI(wayPointList);
         }
     }

@@ -18,6 +18,7 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
+    protected const float lvlScalability = 13f; //after how many floors will the stats double 
    // public GameObject[] attacksUPF; //attackUsingPrefabs
     //public struct Atta 
     //{
@@ -89,13 +90,14 @@ abstract public class EnemyManager : Character {
         {
             onlyOneAttack = true;
         }
+        hp = maxHp;
         anim = GetComponentInChildren<Animator>();
         currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
 
         chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
-        hp = maxHp;
+        
 
         enemyRigidbody = GetComponent<Rigidbody2D>();
 
@@ -105,6 +107,20 @@ abstract public class EnemyManager : Character {
         enemyCollider = GetComponentsInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
         OnStart();
+    }
+    public void SetStats(int lvl)
+    {
+        float lvlScale = 1 + (float)lvl / lvlScalability;
+        maxHp = Mathf.RoundToInt(maxHp * lvlScale);
+        hp = maxHp;
+        foreach(Attacks at in attacks)
+        {
+            at.attackDamage = Mathf.RoundToInt(at.attackDamage*lvlScale);
+            at.burnDamage = Mathf.RoundToInt(at.burnDamage * Mathf.Sqrt(lvlScale));
+            at.burnDuration *= Mathf.Sqrt(lvlScale);
+        }
+
+
     }
     private void Update()
     {
@@ -245,7 +261,6 @@ abstract public class EnemyManager : Character {
     }
     public IEnumerator KnockBack()
     {
-        yield return new WaitForFixedUpdate();
         pathingUnit.speed = 0;
         pathingUnit.disablePathing();
         float kbAmountOverTime = 0;
@@ -405,7 +420,7 @@ abstract public class EnemyManager : Character {
         }
         if (Random.value *100 < weaponDropChance)
         {
-            WeaponDrop.DropRandomWeapon(transform.position);
+            WeaponDrop.DropRandomWeapon(transform.position,true);
         }
     }
 

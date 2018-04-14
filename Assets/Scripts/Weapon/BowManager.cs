@@ -13,13 +13,13 @@ public class BowManager : WeaponManager {
     public FloatRange slowAmountRange = new FloatRange(0.25f, 0.75f);
 
 
-    public override void WeaponSetStats()
+    public override void WeaponSetStats(int lvl)
     {
         SetRarity();
 
         float AdAsRation = Random.value;
-
-        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity);
+        float lvlScale = 1 + (float)lvl / lvlScalability;
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity * lvlScale);
         attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * rarity;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;

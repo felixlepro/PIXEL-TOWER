@@ -25,7 +25,7 @@ public class Chest : MonoBehaviour {
             Instantiate(coinGO, transform.position, Quaternion.identity);
         }
         if (weaponDropChance > Random.value *100)  {
-            WeaponDrop.DropRandomWeapon(transform.position- Vector3.up / 3);
+           WeaponDrop.DropRandomWeapon(transform.position - Vector3.up / 3, true);
         }
         Destroy(col);
     }

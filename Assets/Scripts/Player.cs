@@ -312,7 +312,7 @@ public class Player : Character {
                 {
                 // GameObject.Destroy(weaponList[i].gameObject);
                 weaponList[i].gameObject.SetActive(true);
-                WeaponDrop.DropWeapon(weaponList[i].gameObject, transform.position - Vector3.right / 3);
+                WeaponDrop.DropWeapon(weaponList[i].gameObject, transform.position + Vector3.up/2 - Vector3.right/4,true);
                     weaponList[i] = newWeapon.GetComponent<WeaponManager>();
                     currentWeaponIndex = i;
                     foundAWeapon = true;

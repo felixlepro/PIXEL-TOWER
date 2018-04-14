@@ -74,7 +74,7 @@ public class SpearManager : WeaponManager
         //anima[1].SetTrigger("Swipe");
     }
 
-    public override void WeaponSetStats()
+    public override void WeaponSetStats(int lvl)
     {
         //throw new System.NotImplementedException();
     }
