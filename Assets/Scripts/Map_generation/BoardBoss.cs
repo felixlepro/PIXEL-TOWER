@@ -7,7 +7,7 @@ public class BoardBoss : MonoBehaviour
 
     public enum TileType
     {
-        Wall, Floor, Chest
+        Wall, Floor, Chest, Door
     }
     public int hauteur = 100;
     public int largeur = 100;
@@ -24,6 +24,7 @@ public class BoardBoss : MonoBehaviour
     public GameObject mur_Est;
     public GameObject mur_Ouest;
     public GameObject voidTile;
+    public GameObject Door;
 
     private TileType[][] tiles;
     private Room[] rooms;
@@ -110,7 +111,7 @@ public class BoardBoss : MonoBehaviour
         rooms[0].SetupRoom(largRoomIni, hautRoomIni, largeur, hauteur);
 
         // Setup the first corridor using the first room.
-        corridors[0].SetupCorridor(rooms[0], longCorridor, largRoomBoss, hautRoomBoss, largeur, hauteur, true);
+        corridors[0].SetupCorridor(rooms[0], longCorridor, largRoomBoss, hautRoomBoss, largeur, hauteur, true,0);
 
         rooms[1] = new Room();
         rooms[1].SetupRoom(largRoomBoss, hautRoomBoss, largeur, hauteur, corridors[0]);
@@ -190,7 +191,12 @@ public class BoardBoss : MonoBehaviour
                 }
 
                 // Set the tile at these coordinates to Floor.
-                tiles[xCoord][yCoord] = TileType.Floor;
+                if (j == currentCorridor.longCorridor-1)
+                {
+                    tiles[xCoord][yCoord] = TileType.Door;
+                }
+                else tiles[xCoord][yCoord] = TileType.Floor;
+                
             }
         }
     }
@@ -215,7 +221,7 @@ public class BoardBoss : MonoBehaviour
 
                 if (tiles[i][j] == TileType.Wall && j > 0)
                 {
-                    if (tiles[i][j - 1] == TileType.Floor)
+                    if (tiles[i][j - 1] == TileType.Floor || tiles[i][j-1] == TileType.Door)
                     {
                         InstantiateObject(mur_Nord, i, j);
                     }
@@ -225,7 +231,7 @@ public class BoardBoss : MonoBehaviour
                 if (tiles[i][j] == TileType.Wall && i < largeur - 1)
                 {
 
-                    if (tiles[i + 1][j] == TileType.Floor)
+                    if (tiles[i + 1][j] == TileType.Floor || tiles[i + 1][j] == TileType.Door)
                     {
                         InstantiateObject(mur_Ouest, i + .35f, j + .72f);
                     }
@@ -233,7 +239,7 @@ public class BoardBoss : MonoBehaviour
                 }
                 if (tiles[i][j] == TileType.Wall && j < hauteur - 1)
                 {
-                    if (tiles[i][j + 1] == TileType.Floor)
+                    if (tiles[i][j + 1] == TileType.Floor || tiles[i][j+1] == TileType.Door)
                     {
                         InstantiateObject(mur_Sud, i, j + 1.1f);
                         InstantiateObject(voidTile, i, j + .72f);
@@ -244,10 +250,19 @@ public class BoardBoss : MonoBehaviour
                 }
                 if (tiles[i][j] == TileType.Wall && i > 0)
                 {
-                    if (tiles[i - 1][j] == TileType.Floor)
+                    if (tiles[i - 1][j] == TileType.Floor || tiles[i - 1][j] == TileType.Door)
                     {
                         InstantiateObject(mur_Est, i - .35f, j + .72f);
                     }
+
+                }
+                if (tiles[i][j] == TileType.Door)
+                {
+
+                    InstantiateObject(floorTiles, i, j);
+                    InstantiateObject(Door, i, j - 0.5f);
+                    gridToInt[i, j] = 1;
+
 
                 }
             }

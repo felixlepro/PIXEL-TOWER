@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public GameObject player;
+    public GameObject piggy;
     public float levelStartDelay = 2f;
     public static GameManager instance = null;
     public int coinCount = 0;
@@ -15,12 +17,12 @@ public class GameManager : MonoBehaviour {
     public AudioClip coinSound;
     public GameObject coinPrefab;
     public GameObject[] weapons;
-    public GameObject Piggy;
+    
 
     private Text coinCounttext;
     private Board boardScript;
     BoardBoss boardBoss;
-    private int level = 0;
+    private int level = 3;
     public int nbrFloorEntreBoss = 4;
     private List<EnemyManager> enemies;
     private bool doingSetup = true;
@@ -45,9 +47,13 @@ public class GameManager : MonoBehaviour {
         boardBoss = GetComponent<BoardBoss>();
         loadNewLevel();
         //InitGame();
+
         DamageTextManager.Initialize();
         DropManager.Initialize();
         audio = GetComponent<AudioSource>();
+        // player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
+        player.transform.position = new Vector3(boardScript.hauteur, boardScript.largeur, 0);
+        piggy.transform.position = player.transform.position;
     }
     public void PlaySound(AudioClip clip)
     {
@@ -79,7 +85,7 @@ public class GameManager : MonoBehaviour {
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         boardScript.SetupBoard(level);
-        
+
         SetupAI();
         //levelText = GameObject.Find("LevelText").GetComponent<Text>();
         //levelText.text = "Level " + level;
@@ -111,18 +117,32 @@ public class GameManager : MonoBehaviour {
         if ((level % 4) == 0)
         {
             boardBoss.SetupBoard(level);
+            SetupAI();
         }
-        else boardScript.SetupBoard(level);
-        SetupAI();
+        else
+        {
+            boardScript.SetupBoard(level);
+            SetupAI();
+            ActivateAI(true);
+        }
+
     }
-   
+
 
     void SetupAI()
     {
-        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     
+        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))
         {
             em.GetComponent<EnemyManager>().SetStats(level);
             em.GetComponent<EnemyManager>().SetupAI(wayPointList);
+        }
+    }
+    public void ActivateAI(bool tf)
+    {
+        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))
+        {
+            em.GetComponent<EnemyManager>().ActivateAI(tf);
+
         }
     }
  
@@ -130,4 +150,5 @@ public class GameManager : MonoBehaviour {
     {
         return level;
     }
+
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: DoorRightBoss
+  m_Controller: {fileID: 9100000, guid: 4683481760d9ca94aa7ca3e199fcc1b5, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a8abe324e64dfbe47bd76273af1ddfd7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d324de95800d55a4192ac10ab6488708, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: db75ea335b03f7b4cbf831654edb25e4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a8e0ede32b54f1141bd8f088209a1b8e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 17fb6e2045e7e7044ae6725bb4a0e103, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5dc6b95394ced2c41878a606ada1f5e6, type: 2}

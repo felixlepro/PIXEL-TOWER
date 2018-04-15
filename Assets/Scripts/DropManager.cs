@@ -12,7 +12,8 @@ public class DropManager : MonoBehaviour {
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
         coinP = GameManager.instance.coinPrefab;
-        piggy = GameObject.Find("Piggy").GetComponent<PiggyManager>();
+        piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
+        //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
 
 	public static void DropWeapon(GameObject weapon,Vector3 pos, bool anim) //if the weapon is already generated

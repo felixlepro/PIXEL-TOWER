@@ -12,6 +12,7 @@ public class ChaseAction : Action
 
     private void Chase(StateController controller)
     {
+        controller.enemyManager.gotDamaged = false;
         controller.enemyManager.setAnimState("Moving");
         //if (controller.enemyManager.AIPathing.reachedEndOfPath)
         //{

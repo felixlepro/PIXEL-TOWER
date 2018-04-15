@@ -50,7 +50,8 @@ abstract public class EnemyManager : Character {
     [HideInInspector] public Color couleurKb = Color.white;
     const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
     bool onlyOneAttack = false;
-
+    [HideInInspector] public bool gotDamaged = false;
+   
     public Transform chaseTarget;
     bool dead = false;
     [HideInInspector] public Unit pathingUnit;
@@ -94,6 +95,7 @@ abstract public class EnemyManager : Character {
         currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
+        pathingUnit.enabled = false;
 
         chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
         
@@ -133,8 +135,12 @@ abstract public class EnemyManager : Character {
     {
 
         wayPointList = wayPointsFromGameManager;
-        controller.aiActive = true;
         nextWayPoint = Random.Range(0, wayPointList.Count);
+    }
+    public void ActivateAI(bool tf)
+    {
+        controller.aiActive = tf;
+        pathingUnit.enabled = true;
     }
     public void Attack(Attacks at)
     {
@@ -193,6 +199,7 @@ abstract public class EnemyManager : Character {
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
         knockBackAmount = kbAmmount * gettingKnockedBackAmount;
         Damaged();
+        gotDamaged = true;
         if (knockBackAmount != 0)
         {
             knockBackDirection = kbDirection;

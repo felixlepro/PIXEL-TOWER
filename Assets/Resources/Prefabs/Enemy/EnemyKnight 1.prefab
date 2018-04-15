@@ -348,11 +348,10 @@ MonoBehaviour:
   patrolSpeedChaseSpeedRatio: 6
   gettingKnockedBackAmount: 0
   chaseRange: 10
-  chaseRangeBuffer: 5
+  chaseRangeBuffer: 10
   fireStack: 0
   attackSpeed: 0.25
   nbrCoins: 5
-  coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
   weaponDropChance: 10
   hpBar: {fileID: 114602227574341786}
   attacks:
@@ -372,6 +371,7 @@ MonoBehaviour:
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
+  gotDamaged: 0
   chaseTarget: {fileID: 0}
   pathingUnit: {fileID: 0}
   idleTime: 1

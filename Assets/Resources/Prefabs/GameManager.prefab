@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f4aa8758661604f982030457944e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  piggy: {fileID: 0}
   levelStartDelay: 2
   coinCount: 0
   playerHp: 100
@@ -149,7 +151,6 @@ MonoBehaviour:
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
-  Piggy: {fileID: 0}
   nbrFloorEntreBoss: 4
   wayPointList: []
 --- !u!114 &114242319765115108
@@ -186,6 +187,7 @@ MonoBehaviour:
   mur_Est: {fileID: 1330389026989350, guid: 621005def8aae794baad7901b0463a70, type: 2}
   mur_Ouest: {fileID: 1110770197726566, guid: 58bbdb613e0d5d848908cf063b836faa, type: 2}
   voidTile: {fileID: 1276719814318878, guid: 8e7321b0d93b4b2499a70acfbd1b1de7, type: 2}
+  Door: {fileID: 1218560280872546, guid: 18a1e40bd4d0f8c4c9bd8bad1f8613da, type: 2}
   enemyList:
   - {fileID: 1200067406220310, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
 --- !u!114 &114376896094352634

@@ -329,7 +329,7 @@ MonoBehaviour:
   patrolSpeedChaseSpeedRatio: 6
   gettingKnockedBackAmount: 1
   chaseRange: 9
-  chaseRangeBuffer: 5
+  chaseRangeBuffer: 10
   fireStack: 0
   attackSpeed: 2
   nbrCoins: 5
@@ -352,6 +352,7 @@ MonoBehaviour:
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
+  gotDamaged: 0
   chaseTarget: {fileID: 0}
   pathingUnit: {fileID: 0}
   idleTime: 1
