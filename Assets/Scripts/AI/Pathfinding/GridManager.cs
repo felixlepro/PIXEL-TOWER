@@ -132,18 +132,19 @@ public class GridManager : MonoBehaviour
     void OnDrawGizmos()
     {
 
-        if (grid != null && enableGizmos)
-        {
-            {
-                foreach (Node n in grid)
-                {
-                    Gizmos.color = new Color(1, 0, 0, 0.25f);
-                    if (n.walkable)
-                        Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+        //if (grid != null && enableGizmos)
+        //{
+        //    {
+        //        foreach (Node n in grid)
+        //        {
+        //            Gizmos.color = new Color(1, 0, 0, 0.25f);
+        //            if (n.walkable)
+        //            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+                    
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
     }
     public int MaxSize

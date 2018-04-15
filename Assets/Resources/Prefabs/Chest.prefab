@@ -98,9 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animChest: {fileID: 9100000, guid: 10097f9fa65ed234f9b47843b4764b0c, type: 2}
   nbCoins: 20
-  weaponDropChance: 100
+  weaponDropChance: 25
   anim: {fileID: 0}
-  coinGO: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
 --- !u!212 &212598487089321842
 SpriteRenderer:
   m_ObjectHideFlags: 1

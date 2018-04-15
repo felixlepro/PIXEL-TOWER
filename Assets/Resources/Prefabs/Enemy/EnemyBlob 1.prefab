@@ -333,7 +333,6 @@ MonoBehaviour:
   fireStack: 0
   attackSpeed: 2
   nbrCoins: 5
-  coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
   weaponDropChance: 10
   hpBar: {fileID: 114884420105047334}
   attacks:

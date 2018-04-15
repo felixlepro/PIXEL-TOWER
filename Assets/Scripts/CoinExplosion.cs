@@ -42,6 +42,6 @@ public class CoinExplosion : MonoBehaviour {
     //private void OnDestroy()
     //{
     //    audio.Play();
-    //    //GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound();
+    //    //GameManager.instance..PlaySound();
     //}
 }

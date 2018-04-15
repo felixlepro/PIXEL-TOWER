@@ -13,20 +13,20 @@ public class BowManager : WeaponManager {
     public FloatRange slowAmountRange = new FloatRange(0.25f, 0.75f);
 
 
-    public override void WeaponSetStats(int lvl)
+    public override void WeaponSetStats()
     {
         SetRarity();
-
+        int lvl = GameManager.instance.GetCurrentLevel();
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
-        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * rarity * lvlScale);
-        attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * rarity;
-        attackDamageChargedBonus = attackDamageChargedBonusRange.Random * rarity;
-        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * rarity;
+        attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
+        attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * thisRarity.multiplier;
+        attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
+        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
         float boltSpeedSlowAmountRatio = Random.value;
-        boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * rarity;
-        slowAmount = slowAmountRange.Set(1 - boltSpeedSlowAmountRatio) / rarity;
+        boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
+        slowAmount = slowAmountRange.Set(1 - boltSpeedSlowAmountRatio) / thisRarity.multiplier;
 
         cost = 10;
 

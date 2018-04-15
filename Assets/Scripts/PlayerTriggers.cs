@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerTriggers : MonoBehaviour {
 
     Player player;
+    PiggyManager pm;
 
-	void Start () {
+    void Start () {
         player = GetComponentInParent<Player>();
-	}
-
+        pm = GameObject.Find("Piggy").GetComponent<PiggyManager>();
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Weapon" )
@@ -25,17 +26,19 @@ public class PlayerTriggers : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 other.GetComponent<Animator>().SetTrigger("Open");
-                player.Invoke("Restart", player.restartDelay);
+                GameManager.instance.Invoke("Restart", player.restartDelay);
                 enabled = false;
             }
 
         }
-        if ((other.tag == "Coin"))
-        {
+        if ((other.tag == "Coin")) { 
+
+            pm.coinList.Remove(other.gameObject);
+            pm.coinList.TrimExcess();
             player.gainCoin();
             Destroy(other.gameObject);
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
-
+            // GameManager.instance..PlaySound(GameManager.instance..coinSound);
+            GameManager.instance.PlaySound(GameManager.instance.coinSound);
         }
 
 

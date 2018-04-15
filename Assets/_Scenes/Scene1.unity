@@ -830,6 +830,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
+      propertyPath: nbrEnemyBase
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
+      propertyPath: nbrChestMax
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83,
+        type: 2}
+    - target: {fileID: 114993608136937452, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
+        type: 2}
+      propertyPath: nodeRadius
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
   m_IsPrefabParent: 0
@@ -842,7 +863,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4539897105685280, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 69.5
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4539897105685280, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
       propertyPath: m_LocalPosition.y
@@ -850,7 +871,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4539897105685280, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.115577154
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4539897105685280, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
       propertyPath: m_LocalRotation.x
@@ -877,6 +898,20 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1157135980}
+    - target: {fileID: 1259820859527176, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
+      propertyPath: m_Name
+      value: Piggy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114523878494450612, guid: 79c37d6e0671f2149948a3a132d78806,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 58278311648365312, guid: 79c37d6e0671f2149948a3a132d78806,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
   m_IsPrefabParent: 0

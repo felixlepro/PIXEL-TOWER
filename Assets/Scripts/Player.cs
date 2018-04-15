@@ -204,19 +204,7 @@ public class Player : Character {
         weaponSprite.color = new Color(weaponSprite.color[0], weaponSprite.color[1], weaponSprite.color[2], 1f);
     }
   
-    private void Restart()
-    {
-        if (GameManager.instance.inLevel)
-        {
-            SceneManager.LoadScene(2);
-            GameManager.instance.inLevel = false;
-        }
-        else
-        {
-            SceneManager.LoadScene(1);
-            GameManager.instance.inLevel = true;
-        }
-    }
+    
     private void OnDisable()
     {
         GameManager.instance.playerHp = hp;
@@ -244,7 +232,7 @@ public class Player : Character {
     //    {
     //        gainCoin();
     //        Destroy(other.gameObject);
-    //        GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound);
+    //        GameManager.instance..PlaySound(GameManager.instance..coinSound);
 
     //    }
         
@@ -312,7 +300,7 @@ public class Player : Character {
                 {
                 // GameObject.Destroy(weaponList[i].gameObject);
                 weaponList[i].gameObject.SetActive(true);
-                WeaponDrop.DropWeapon(weaponList[i].gameObject, transform.position + Vector3.up/2 - Vector3.right/4,true);
+                DropManager.DropWeapon(weaponList[i].gameObject, transform.position + Vector3.up/2 - Vector3.right/4,true);
                     weaponList[i] = newWeapon.GetComponent<WeaponManager>();
                     currentWeaponIndex = i;
                     foundAWeapon = true;

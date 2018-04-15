@@ -67,9 +67,20 @@ public abstract class WeaponManager : MonoBehaviour {
     public FloatRange slowDurationRange = new FloatRange(1, 3);
     public FloatRange slowValueRanges = new FloatRange(0.1f, 0.4f);
 
+    protected struct rarity
+    {
+        public float chance { get; set; }
+        public float multiplier { get; set; }
+        public string name { get; set; }
+    }
+    protected rarity thisRarity;
+    rarity[] possibleRarities = { new rarity() { chance = 100, multiplier = 1, name = "Commun" },
+                                  new rarity() { chance = 50, multiplier = 1.2f, name = "Rare" },
+                                  new rarity() { chance = 20, multiplier = 1.4f, name = "Épic" },
+                                  new rarity() { chance = 5, multiplier = 1.6f, name = "Mythique" },
+                                  new rarity() { chance = 0.01f, multiplier = 2f, name = "Légendaire" }};
+       // = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
 
-    protected float rarity;
-    float[,] rarities = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
     //const float commonChance = 100;
     //const float rareChance = 50;
     //const float epicChance = 20;
@@ -86,7 +97,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected abstract void MaxChargeWeapon();
     protected abstract void ReleaseChargedWeapon();
     protected abstract void WeaponOnCD();
-    public abstract void WeaponSetStats(int lvl);
+    public abstract void WeaponSetStats();
 
     void Start()
     {
@@ -112,13 +123,14 @@ public abstract class WeaponManager : MonoBehaviour {
     public void SetRarity()
     {
         float randomR = NbRand(0, 100);
-        for(int i = 0; i < rarities.GetLength(0); i++)
+        for(int i = 0; i < possibleRarities.Length; i++)
         {
-            if(randomR <= rarities[i,0])
+            if(randomR <= possibleRarities[i].chance)
             {
-                rarity = rarities[i, 1];
+                thisRarity = possibleRarities[i];
             }
         }
+        Debug.Log(thisRarity.name);
     }
     public void setNumAttack()
     {

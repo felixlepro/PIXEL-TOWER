@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour {
     public bool inLevel = true;
     public AudioSource audio;
     public AudioClip coinSound;
+    public GameObject coinPrefab;
     public GameObject[] weapons;
+    public GameObject Piggy;
 
     private Text coinCounttext;
     private Board boardScript;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour {
         loadNewLevel();
         //InitGame();
         DamageTextManager.Initialize();
+        DropManager.Initialize();
         audio = GetComponent<AudioSource>();
     }
     public void PlaySound(AudioClip clip)
@@ -84,6 +87,20 @@ public class GameManager : MonoBehaviour {
         // Invoke("HideLevelImage", levelStartDelay);
 
     }
+    public void Restart()
+    {
+        //if (GameManager.instance.inLevel)
+        //{
+        //    SceneManager.LoadScene(2);
+        //    inLevel = false;
+        //}
+        //else
+        {
+            SceneManager.LoadScene(1);
+            inLevel = true;
+            loadNewLevel();
+        }
+    }
     void loadNewLevel()
     {
         doingSetup = true;
@@ -102,16 +119,15 @@ public class GameManager : MonoBehaviour {
 
     void SetupAI()
     {
-        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     //temporaire
+        foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))                                     
         {
             em.GetComponent<EnemyManager>().SetStats(level);
             em.GetComponent<EnemyManager>().SetupAI(wayPointList);
         }
     }
-    // Update is called once per frame
-    void Update () {
-
-      //  coinCounttext.text = ("Coins: " + coinCount); 
-
+ 
+    public int GetCurrentLevel()
+    {
+        return level;
     }
 }

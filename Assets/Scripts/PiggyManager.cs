@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PiggyManager : MonoBehaviour {
-    public float Angle;
-    public bool isWalking;
-    public float speed;
+    float Angle;
+    bool isWalking;
+    float speed;
     public float maxSpeed;
     public Transform player;
     public bool chasing;
@@ -14,12 +14,15 @@ public class PiggyManager : MonoBehaviour {
     float dMin;
     int iMin;
     Vector2 distance;
-    GameObject[] listCoinGO;
-    List<Vector3 > listCoinD;
+    //GameObject[] listCoinGO;
+    [HideInInspector] public List<GameObject> coinList;
+
+   // List<Vector3 > listCoinD;
     Animator anim;
     SpriteRenderer spriteR;
     Player playerS;
     Unit unity;
+
 
 	void Start () {
         anim = GetComponent<Animator>();
@@ -32,17 +35,15 @@ public class PiggyManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         getAnglePath();
-        listCoinD = new List<Vector3 >();
+ //       listCoinD = new List<Vector3 >();
         ChaseCoins(); 
         SetSpeed();
         unity.targetPosition = target.position;
         UpdateAnim();
-        spriteOrderInLayer();
-        
 	}
     public void SetSpeed()
     {
-        if (chasing )
+        if (chasing)
         {
             speed = chaseSpeed ;
         }
@@ -67,45 +68,41 @@ public class PiggyManager : MonoBehaviour {
     {
         if (other.tag == "Coin")
         {
+            coinList.Remove(other.gameObject);
+            coinList.TrimExcess();
             playerS.gainCoin();
-            GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(GameObject.Find("GameManager").GetComponent<GameManager>().coinSound );
+            GameManager.instance.PlaySound(GameManager.instance.coinSound );
             chasing = false;
             Destroy(other.gameObject);
         }
     }
     public void ChaseCoins()
     {
-        
-        listCoinGO = GameObject.FindGameObjectsWithTag("Coin");
-        if (listCoinGO.Length != 0)
-        {
-            chasing = true;
-            dMin = 10;
-            iMin = -1;
-            for (int i = 0; i < listCoinGO.Length; i++)
+            //listCoinGO = GameObject.FindGameObjectsWithTag("Coin");
+            if (coinList.Count != 0)
             {
-                
-                if ((listCoinGO[i].transform.position - player.transform.position).magnitude  < dMin)
+                chasing = true;
+                dMin = 10;
+                iMin = -1;
+                for (int i = 0; i < coinList.Count; i++)
                 {
-                    dMin = (listCoinGO[i].transform.position - player.transform.position).magnitude;
-                    iMin = i;
-                }
-            }
-            if (iMin!=-1)target = listCoinGO[iMin].transform;
-            else target = player;
-        }
-        else target = player;
-        
 
+                    if ((coinList[i].transform.position - player.transform.position).magnitude < dMin)
+                    {
+                        dMin = (coinList[i].transform.position - player.transform.position).magnitude;
+                        iMin = i;
+                    }
+                }
+                if (iMin != -1)
+                {
+                    target = coinList[iMin].transform;
+//                    Debug.Log("ok");
+                }
+                else target = player;
+            }
+            else target = player;       
     }
-    public void spriteOrderInLayer()
-    {
-        if (player.position.y <= transform.position.y)
-        {
-            spriteR.sortingOrder = -2;
-        }
-        else spriteR.sortingOrder = 2;
-    }
+ 
     public void getAnglePath()
     {
         Vector2 direction = unity.direction;
@@ -116,6 +113,7 @@ public class PiggyManager : MonoBehaviour {
             Angle = angle;
         }
     }
+
     float stateStartTime;
     float timeInState
     {

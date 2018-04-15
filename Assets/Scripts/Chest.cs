@@ -9,7 +9,6 @@ public class Chest : MonoBehaviour {
     Collider2D col;
 
     [HideInInspector] public Animator anim;
-    public GameObject coinGO;
 
     private void Start()
     {
@@ -20,12 +19,9 @@ public class Chest : MonoBehaviour {
     public void OpenChest()
     {
         anim.SetTrigger("Open");
-        for (int coin =0; coin < nbCoins; coin ++)
-        {
-            Instantiate(coinGO, transform.position, Quaternion.identity);
-        }
+        DropManager.DropCoin(transform.position,nbCoins);
         if (weaponDropChance > Random.value *100)  {
-           WeaponDrop.DropRandomWeapon(transform.position - Vector3.up / 3, true);
+           DropManager.DropRandomWeapon(transform.position - Vector3.up / 3, true);
         }
         Destroy(col);
     }

@@ -53,6 +53,7 @@ public class Unit : MonoBehaviour
             requestProcessing = false;
             if (pathSuccessful)
             {
+                
                 path = newPath;
                 targetIndex = 0;
                 StopCoroutine("FollowPath");
@@ -63,29 +64,34 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        Debug.Log(path.Length);
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
             while (true)
             {
+               // Debug.Log(currentWaypoint + "   transform" + transform.position);
                 if (transform.position == currentWaypoint)
                 {
+                    
                     targetIndex++;
                     if (targetIndex >= path.Length)
                     {
+                       // Debug.Log("leave");
                         targetIndex = 0;
                         path = new Vector3[0];
                         yield break;
                     }
                     currentWaypoint = path[targetIndex];
                 }
-
+              //  Debug.Log("ok");
                 transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
                 direction = currentWaypoint - transform.position;
                 yield return null;
 
             }
         }
+       // Debug.Log("end");
     }
 
     public void enablePathing()
@@ -107,7 +113,7 @@ public class Unit : MonoBehaviour
             for (int i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.white;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                Gizmos.DrawCube(path[i], Vector3.one * (0.5f - .03f));
 
                 if (i == targetIndex)
                 {

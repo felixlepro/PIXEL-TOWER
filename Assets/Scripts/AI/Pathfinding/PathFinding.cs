@@ -30,8 +30,9 @@ public class PathFinding : MonoBehaviour
 
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
-       
-       // Debug.Log("Node     " + (startNode == targetNode));
+
+        // Debug.Log("Node     " + (startNode == targetNode));
+        Debug.Log(startNode == targetNode);
         if (startNode != targetNode && targetNode.walkable)
         {
            
@@ -41,9 +42,9 @@ public class PathFinding : MonoBehaviour
 
             while (openSet.Count > 0)
             {
+                //Debug.Log("genre");
                 Node currentNode = openSet.RemoveFirst();
                 closedSet.Add(currentNode);
-
                 if (currentNode == targetNode)
                 {
                     pathSuccess = true;
@@ -73,6 +74,7 @@ public class PathFinding : MonoBehaviour
             }
         }
         yield return null;
+        Debug.Log("Zucc" + pathSuccess);
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);

@@ -14,7 +14,6 @@ abstract public class EnemyManager : Character {
     public int fireStack = 0;
     public float attackSpeed;
     public int nbrCoins;
-    public GameObject coinPrefab;
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
@@ -113,12 +112,12 @@ abstract public class EnemyManager : Character {
         float lvlScale = 1 + (float)lvl / lvlScalability;
         maxHp = Mathf.RoundToInt(maxHp * lvlScale);
         hp = maxHp;
-        foreach(Attacks at in attacks)
-        {
-            at.attackDamage = Mathf.RoundToInt(at.attackDamage*lvlScale);
-            at.burnDamage = Mathf.RoundToInt(at.burnDamage * Mathf.Sqrt(lvlScale));
-            at.burnDuration *= Mathf.Sqrt(lvlScale);
-        }
+        //foreach(Attacks at in attacks)
+        //{
+        //    at.attackDamage = Mathf.RoundToInt(at.attackDamage*lvlScale);
+        //    at.burnDamage = Mathf.RoundToInt(at.burnDamage * Mathf.Sqrt(lvlScale));
+        //    at.burnDuration *= Mathf.Sqrt(lvlScale);
+        //}
 
 
     }
@@ -405,22 +404,18 @@ abstract public class EnemyManager : Character {
     public void playDun()
     {
         StartCoroutine(Root(0.75f));
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlaySound(dun);
+        GameManager.instance.PlaySound(dun);
         GameObject dungo = Instantiate(dunExlamation, transform.position + Vector3.up*height, Quaternion.identity);
         dungo.GetComponentInChildren<DunManager>().Initialize(transform.position + Vector3.up * height);
 
     }
     void DropItems()
     {
-        Debug.Log("caca");
         nbrCoins = Random.Range(Mathf.RoundToInt(nbrCoins / 2), Mathf.RoundToInt(nbrCoins * 1.5f));
-        for (int coin = 0; coin < nbrCoins; coin++)
-        {
-           Instantiate(coinPrefab, transform.position, Quaternion.identity);
-        }
+        DropManager.DropCoin(transform.position, nbrCoins);
         if (Random.value *100 < weaponDropChance)
         {
-            WeaponDrop.DropRandomWeapon(transform.position,true);
+            DropManager.DropRandomWeapon(transform.position,true);
         }
     }
 

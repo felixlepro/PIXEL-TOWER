@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponDrop : MonoBehaviour {
+public class DropManager : MonoBehaviour {
 
     const float speedDrop = 0.095f;
+    private static GameObject[] weaponList;
+    private static GameObject coinP;
+    private static PiggyManager piggy;
+
+    public static void Initialize()    {
+        weaponList = GameManager.instance.weapons;
+        coinP = GameManager.instance.coinPrefab;
+        piggy = GameObject.Find("Piggy").GetComponent<PiggyManager>();
+    }
 
 	public static void DropWeapon(GameObject weapon,Vector3 pos, bool anim) //if the weapon is already generated
     {
@@ -23,7 +32,7 @@ public class WeaponDrop : MonoBehaviour {
     }
     public static void DropRandomWeapon(Vector3 pos, bool anim) //if you want the weapon to be generated
     {
-        GameObject[] weaponList = GameObject.Find("GameManager").GetComponent<GameManager>().weapons;
+        
         GameObject weapon = Instantiate(weaponList[Random.Range(0, weaponList.Length)], pos, Quaternion.identity);
        WeaponManager wp = weapon.GetComponent<WeaponManager>();
         wp.WeaponSetStats();
@@ -32,6 +41,13 @@ public class WeaponDrop : MonoBehaviour {
         if (anim)
         {
             wp.StartCoroutine(wp.DropWeaponAnim(speedDrop));
+        }
+    }
+    public static void DropCoin(Vector3 pos,int nbrCoin)
+    {    
+        for (int i = 0; i < nbrCoin; i++)
+        {
+            piggy.coinList.Add(Instantiate(coinP, pos, Quaternion.identity));
         }
     }
 
