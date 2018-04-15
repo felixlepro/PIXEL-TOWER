@@ -830,27 +830,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: nbrEnemyBase
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694107868322254, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: nbrChestMax
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: coinPrefab
-      value: 
-      objectReference: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83,
-        type: 2}
-    - target: {fileID: 114993608136937452, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: nodeRadius
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
   m_IsPrefabParent: 0
@@ -901,16 +880,6 @@ Prefab:
     - target: {fileID: 1259820859527176, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
       propertyPath: m_Name
       value: Piggy
-      objectReference: {fileID: 0}
-    - target: {fileID: 114523878494450612, guid: 79c37d6e0671f2149948a3a132d78806,
-        type: 2}
-      propertyPath: maxSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 58278311648365312, guid: 79c37d6e0671f2149948a3a132d78806,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
@@ -971,9 +940,15 @@ Prefab:
       objectReference: {fileID: 445310260}
     - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
         type: 2}
+      propertyPath: startingWeapon.Array.data[0]
+      value: 
+      objectReference: {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507,
+        type: 2}
+    - target: {fileID: 114035642965733862, guid: 55336882b5bf7f44bae2a9f18942a05b,
+        type: 2}
       propertyPath: startingWeapon.Array.data[1]
       value: 
-      objectReference: {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902,
+      objectReference: {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}

@@ -295,7 +295,7 @@ public class Player : Character {
         newWeapon.GetComponent<Collider2D>().enabled = false;
         for (int i = 0; i < weaponList.Count; i++)
         {
-                weaponList[i].gameObject.SetActive(false);
+                
                 if (weaponList[i].isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
                 {
                 // GameObject.Destroy(weaponList[i].gameObject);
@@ -305,6 +305,8 @@ public class Player : Character {
                     currentWeaponIndex = i;
                     foundAWeapon = true;
                 }
+                else
+                weaponList[i].gameObject.SetActive(false);
         }
         if (!foundAWeapon)
         {

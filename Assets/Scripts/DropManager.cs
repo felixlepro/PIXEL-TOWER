@@ -23,7 +23,9 @@ public class DropManager : MonoBehaviour {
         weapon.GetComponent<Collider2D>().enabled = true;
         weapon.transform.parent = null;
         weapon.transform.localRotation = Quaternion.identity;
+        Debug.Log(weapon.transform.position);
         weapon.transform.position = pos;
+        Debug.Log(weapon.transform.position);
         weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, Mathf.Abs(weapon.transform.localScale.y), 1);
         if (anim)
         {

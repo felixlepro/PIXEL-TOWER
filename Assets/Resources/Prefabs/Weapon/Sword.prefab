@@ -173,13 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870ad1e2de377ec4eb3f32fd50998d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 1287666755509996}
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 15
   attackSpeed: 0.4
   chargeTime: 1.5
-  attackDamageChargedBonus: 0.8
+  attackDamageChargedBonus: 0.5
   knockBackAmount: 15
   cost: 0
   isMelee: 1

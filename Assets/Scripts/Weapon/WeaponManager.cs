@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class WeaponManager : MonoBehaviour {
 
-    public GameObject weaponPrefab;
+    //public GameObject weaponPrefab;
     public string weaponName;
     public Color wColor;
     public int attackDamage;
@@ -98,6 +98,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected abstract void ReleaseChargedWeapon();
     protected abstract void WeaponOnCD();
     public abstract void WeaponSetStats();
+    protected abstract SpriteRenderer GetSpriteRenderer();
 
     void Start()
     {
@@ -270,14 +271,14 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     public IEnumerator DropWeaponAnim(float speed)
     {
-        spriteR.sortingOrder = 1;
+       GetSpriteRenderer().sortingOrder = 1;
         while (speed > 0.0005f)
         {
             transform.position += -Vector3.up * speed;
             speed -= 0.4f * Time.deltaTime;
             yield return null;
         }
-        spriteR.sortingOrder = 0;
+        GetSpriteRenderer().sortingOrder = 0;
     }
 
 }

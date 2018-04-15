@@ -121,7 +121,7 @@ public class SwordManager : WeaponManager
         ResetAttackTimer();
         Invoke("EndAttack", attackTime);
         GetComponentInParent<Player>().doFaceMouse(false);
-        Invoke("facingMouse", anima[0].GetCurrentAnimatorStateInfo(0).length * anima[0].GetCurrentAnimatorStateInfo(0).speed * 0.7f);
+        Invoke("facingMouse", attackTime*1.3f);
     }
     void triggerSwipe()
     {
@@ -141,6 +141,10 @@ public class SwordManager : WeaponManager
         currentChargeTime = 0;
         coll.enabled = false;
         enemyAlreadyHit.Clear();
+    }
+    protected override SpriteRenderer GetSpriteRenderer()
+    {
+        return GetComponentInChildren<SpriteRenderer>();
     }
 }
 //void Update()

@@ -82,7 +82,10 @@ public class BowManager : WeaponManager {
         boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
         ResetAttackTimer();
     }
-
+    protected override SpriteRenderer GetSpriteRenderer()
+    {
+        return GetComponent<SpriteRenderer>();
+    }
     protected override void WeaponOnCD()
     {
     }

@@ -148,6 +148,7 @@ MonoBehaviour:
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
   Piggy: {fileID: 0}
   nbrFloorEntreBoss: 4
   wayPointList: []
@@ -233,10 +234,10 @@ MonoBehaviour:
   enemyList:
   - {fileID: 1931763787068262, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
   - {fileID: 1327544550791342, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
-  nbrEnemyBase: 0
+  nbrEnemyBase: 5
   chestList:
   - {fileID: 1050157812518948, guid: 2f186ffc7e5a0e841a467c247216522c, type: 2}
-  nbrChestMax: 50
+  nbrChestMax: 5
   nbrChest: 0
 --- !u!114 &114906157998995998
 MonoBehaviour:

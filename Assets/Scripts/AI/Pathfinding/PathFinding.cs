@@ -32,7 +32,7 @@ public class PathFinding : MonoBehaviour
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
         // Debug.Log("Node     " + (startNode == targetNode));
-        Debug.Log(startNode == targetNode);
+       // Debug.Log(startNode == targetNode);
         if (startNode != targetNode && targetNode.walkable)
         {
            
@@ -74,7 +74,7 @@ public class PathFinding : MonoBehaviour
             }
         }
         yield return null;
-        Debug.Log("Zucc" + pathSuccess);
+      //  Debug.Log("Zucc" + pathSuccess);
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);

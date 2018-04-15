@@ -73,7 +73,10 @@ public class CrossbowManager : WeaponManager
         boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed);
         ResetAttackTimer();
     }
-
+    protected override SpriteRenderer GetSpriteRenderer()
+    {
+        return GetComponent<SpriteRenderer>();
+    }
     protected override void WeaponOnCD()
     {
         
