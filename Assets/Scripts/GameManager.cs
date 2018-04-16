@@ -41,20 +41,28 @@ public class GameManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<EnemyManager>();
         boardScript = GetComponent<Board>();
         boardBoss = GetComponent<BoardBoss>();
-        loadNewLevel();
+        //loadNewLevel();
         //InitGame();
 
         DamageTextManager.Initialize();
         DropManager.Initialize();
         audio = GetComponent<AudioSource>();
-        // player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
+       // player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
         player.transform.position = new Vector3(boardScript.hauteur, boardScript.largeur, 0);
         piggy.transform.position = player.transform.position;
+        DontDestroyOnLoad(player);
+        DontDestroyOnLoad(piggy);
+
+    }
+    private void Start()
+    {
+        loadNewLevel();
     }
     public void PlaySound(AudioClip clip)
     {

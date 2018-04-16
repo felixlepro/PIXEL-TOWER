@@ -324,7 +324,7 @@ public class Board : MonoBehaviour {
     }
     void InstantiateEnemies(TileType[][] t)
     {
-        Vector3 player = GameObject.Find("Pilot").transform.position;
+        Vector3 player = GameManager.instance.player.transform.position;
         int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)level/15 + 1));
 
         for (int i = 0; i < nbrEnemy; i++)

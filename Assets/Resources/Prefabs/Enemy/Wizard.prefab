@@ -263,7 +263,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200067406220310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 498dde72b7fcfa542a647ca1d4057b81, type: 3}
   m_Name: 
@@ -413,7 +413,6 @@ MonoBehaviour:
   fireStack: 0
   attackSpeed: 2
   nbrCoins: 30
-  coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
   weaponDropChance: 100
   hpBar: {fileID: 114313180205057798}
   attacks:
@@ -434,6 +433,7 @@ MonoBehaviour:
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
   couleurKb: {r: 1, g: 1, b: 1, a: 1}
+  gotDamaged: 0
   chaseTarget: {fileID: 0}
   pathingUnit: {fileID: 0}
   idleTime: 0

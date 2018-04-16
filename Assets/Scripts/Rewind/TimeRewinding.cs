@@ -58,7 +58,7 @@ public class TimeRewinding : MonoBehaviour
         if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
-        scriptPlayer = GameObject.Find("Pilot").GetComponent<Player>();
+        scriptPlayer = GameManager.instance.player.GetComponent<Player>();
         positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKey(KeyCode.Mouse0)));
     }
 
