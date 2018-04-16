@@ -58,7 +58,7 @@ public class Player : Character {
 
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
         coins = GameManager.instance.coinCount;
-        coinText.text = "Coins: " + coins;
+        coinText.text = "C O I N S : " + coins;
 
         foreach (GameObject sw in startingWeapon)
         {
@@ -214,7 +214,7 @@ public class Player : Character {
     public void gainCoin()
     {
         coins += valuePerCoin;
-        coinText.text = "Coins: " + coins;
+        coinText.text = "C O I N S : " + coins;
     }
 
     //private void OnTriggerStay2D(Collider2D other)            //VOIR LE SCRIPT PLAYERTRIGGERS

@@ -8,7 +8,6 @@ public class Chest : MonoBehaviour {
     public int weaponDropChance;
     Collider2D col;
     [HideInInspector] public bool hasKey = false;
-
     [HideInInspector] public Animator anim;
 
     private void Start()
