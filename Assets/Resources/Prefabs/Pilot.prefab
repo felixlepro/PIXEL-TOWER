@@ -373,8 +373,8 @@ MonoBehaviour:
   immune: 0
   currentSpeed: 10
   startingWeapon:
-  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
+  - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
@@ -383,6 +383,7 @@ MonoBehaviour:
   coins: 0
   hpBar: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  hasKey: 0
   currentWeaponIndex: 0
   direction: {x: 13.555164, y: 1.2142601}
   movement: {x: 0, y: 0, z: 0}

@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour {
     public int nbCoins;
     public int weaponDropChance;
     Collider2D col;
+    [HideInInspector] public bool hasKey = false;
 
     [HideInInspector] public Animator anim;
 
@@ -22,6 +23,10 @@ public class Chest : MonoBehaviour {
         DropManager.DropCoin(transform.position,nbCoins);
         if (weaponDropChance > Random.value *100)  {
            DropManager.DropRandomWeapon(transform.position - Vector3.up / 3, true);
+        }
+        if (hasKey)
+        {
+            DropManager.DropKey(transform.position);
         }
         Destroy(col);
     }

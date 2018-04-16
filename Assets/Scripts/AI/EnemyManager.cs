@@ -95,7 +95,7 @@ abstract public class EnemyManager : Character {
         currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
-        pathingUnit.enabled = false;
+       // pathingUnit.enabled = false;
 
         chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
         
@@ -140,7 +140,7 @@ abstract public class EnemyManager : Character {
     public void ActivateAI(bool tf)
     {
         controller.aiActive = tf;
-        pathingUnit.enabled = true;
+        GetComponent<Unit>().enabled = true;
     }
     public void Attack(Attacks at)
     {

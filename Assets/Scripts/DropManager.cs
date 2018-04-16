@@ -7,12 +7,14 @@ public class DropManager : MonoBehaviour {
     const float speedDrop = 0.095f;
     private static GameObject[] weaponList;
     private static GameObject coinP;
+    private static GameObject key;
     private static PiggyManager piggy;
 
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
         coinP = GameManager.instance.coinPrefab;
         piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
+        key = GameManager.instance.key;
         //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
 
@@ -53,7 +55,8 @@ public class DropManager : MonoBehaviour {
             piggy.coinList.Add(Instantiate(coinP, pos, Quaternion.identity));
         }
     }
-
-    
-
+    public static void DropKey(Vector3 pos)
+    {
+        Instantiate(key, pos, Quaternion.identity);
+    }
 }

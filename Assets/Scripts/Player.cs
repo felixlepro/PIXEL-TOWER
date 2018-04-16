@@ -18,7 +18,8 @@ public class Player : Character {
     public Image hpBar;
     public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
 
-    [HideInInspector] public int currentWeaponIndex = 0;
+    [HideInInspector] public bool hasKey = false;
+ [HideInInspector] public int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -342,5 +343,9 @@ public class Player : Character {
         weaponInstance.transform.localPosition = prefab.transform.position;
 
     }
-    
+    public void gainKey()
+    {
+        hasKey = true;
+    }
+
 }

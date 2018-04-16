@@ -24,7 +24,7 @@ public class PlayerTriggers : MonoBehaviour {
         }
         if (other.tag == "Exit")
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (player.hasKey && Input.GetKeyDown(KeyCode.E))
             {
                 other.GetComponent<Animator>().SetTrigger("Open");
                 GameManager.instance.Invoke("Restart", player.restartDelay);
@@ -39,6 +39,12 @@ public class PlayerTriggers : MonoBehaviour {
             player.gainCoin();
             Destroy(other.gameObject);
             // GameManager.instance..PlaySound(GameManager.instance..coinSound);
+            GameManager.instance.PlaySound(GameManager.instance.coinSound);
+        }
+        if ((other.tag == "Key"))
+        {
+            player.gainKey();
+            Destroy(other.gameObject);
             GameManager.instance.PlaySound(GameManager.instance.coinSound);
         }
 

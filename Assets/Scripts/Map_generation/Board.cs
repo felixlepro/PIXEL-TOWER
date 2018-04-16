@@ -366,11 +366,12 @@ public class Board : MonoBehaviour {
         GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Enemies").transform;                
     }
-    void AddChest(Vector3 position)
+    void AddChest(Vector3 position, bool key)
     {
         int whatChest = 0;//Random.Range(0, enemyList.Length);
         GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Chest Holder").transform;
+        enemy.GetComponent<Chest>().hasKey = key;
     }
     void SetNbrChest()
     {     
@@ -384,7 +385,7 @@ public class Board : MonoBehaviour {
                 nbrChest = i;
                 break;
             }
-        }
+        }      
     }
     void SetUpChest()
     {
@@ -393,16 +394,15 @@ public class Board : MonoBehaviour {
         {
             nbrChest = nbrPot;
         }
+        int key = Random.Range(0, nbrChest - 1);
         for (int i =0; i<nbrChest; i++)
         {
             int rng = Random.Range(0, nbrPot);
             int xCoord = potentialChest[rng][0];
             int yCoord = potentialChest[rng][1];
             potentialChest.RemoveAt(rng);
-            AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0));
-            tiles[xCoord][yCoord] = TileType.Chest;
-            
-
+            AddChest(new Vector3(2 * xCoord, 2 * yCoord, 0), (key == i));
+            tiles[xCoord][yCoord] = TileType.Chest;          
         }
 
     }

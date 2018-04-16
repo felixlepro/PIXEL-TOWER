@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour {
     public AudioSource audio;
     public AudioClip coinSound;
     public GameObject coinPrefab;
+    public GameObject key;
     public GameObject[] weapons;
     
 
     private Text coinCounttext;
     private Board boardScript;
     BoardBoss boardBoss;
-    private int level = 3;
+    private int level = 0;
     public int nbrFloorEntreBoss = 4;
     private List<EnemyManager> enemies;
     private bool doingSetup = true;

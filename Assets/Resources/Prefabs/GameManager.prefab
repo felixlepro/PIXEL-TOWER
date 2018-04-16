@@ -146,6 +146,7 @@ MonoBehaviour:
   audio: {fileID: 0}
   coinSound: {fileID: 8300000, guid: b4c5353d9366f2b43804628128c53b65, type: 3}
   coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
+  key: {fileID: 1722516931651180, guid: 1b6b1a758a35d9340a434c775e5f9bb1, type: 2}
   weapons:
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
@@ -264,4 +265,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableGizmos: 1
-  nodeRadius: 0.25
+  nodeRadius: 0.1
