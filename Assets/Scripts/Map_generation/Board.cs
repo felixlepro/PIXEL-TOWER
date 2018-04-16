@@ -40,7 +40,7 @@ public class Board : MonoBehaviour {
     int level;
     int nbrTileFloor = 0;
 
-
+    int modulXn = 3;
     public  void SetupBoard(int lvl)
     {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
@@ -372,6 +372,8 @@ public class Board : MonoBehaviour {
         GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Chest Holder").transform;
         enemy.GetComponent<Chest>().hasKey = key;
+        modulXn = (23 * modulXn + 7) % 11;
+        enemy.GetComponent<Chest>().nbCoins = modulXn;
     }
     void SetNbrChest()
     {     
