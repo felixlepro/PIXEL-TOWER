@@ -31,6 +31,24 @@ public class GameManager : MonoBehaviour {
     private GameObject levelImage;
     [HideInInspector] public List<Vector3> wayPointList;
 
+    public struct PlayerStats
+    {
+       public int hp { get;set; }
+        public int coins { get; set; }
+        public int currentWeaponIndex { get; set; }
+        public GameObject[] weapons { get; set; }
+
+        public PlayerStats(int h, int c, int cw, GameObject[] wea)
+        {
+            hp = h;
+            coins = c;
+            currentWeaponIndex = cw;
+            weapons = wea;
+           
+        }
+    }
+    PlayerStats playerStat;
+
     //METTRE LA BOOL DE PROG COMME DANS COIN ET GAMEMANAGER AVEC BOOL ET SHOPMANAGER
 
 
@@ -41,7 +59,11 @@ public class GameManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        
+
+        player = GameObject.Find("Pilot");
+        piggy = GameObject.Find("Piggy");
+        Debug.Log(level);
+        player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<EnemyManager>();
@@ -52,17 +74,18 @@ public class GameManager : MonoBehaviour {
 
         DamageTextManager.Initialize();
         DropManager.Initialize();
+
         audio = GetComponent<AudioSource>();
-       // player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
+        // player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
         player.transform.position = new Vector3(boardScript.hauteur, boardScript.largeur, 0);
         piggy.transform.position = player.transform.position;
-        DontDestroyOnLoad(player);
-        DontDestroyOnLoad(piggy);
-
+        // DontDestroyOnLoad(player);
+        //DontDestroyOnLoad(piggy);
+        loadNewLevel();
     }
+
     private void Start()
     {
-        loadNewLevel();
     }
     public void PlaySound(AudioClip clip)
     {
@@ -104,6 +127,8 @@ public class GameManager : MonoBehaviour {
     }
     public void Restart()
     {
+        Player p = player.GetComponent<Player>();
+        playerStat = new PlayerStats(p.hp,p.coins,p.currentWeaponIndex,p.weaponObjects());
         //if (GameManager.instance.inLevel)
         //{
         //    SceneManager.LoadScene(2);
@@ -113,16 +138,17 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene(1);
             inLevel = true;
-            loadNewLevel();
+           // loadNewLevel();
         }
     }
     void loadNewLevel()
     {
+        
         doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         level += 1;
-        Debug.Log(level);
+        Debug.Log("tests");
         if ((level % 4) == 0)
         {
             boardBoss.SetupBoard(level);
