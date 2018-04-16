@@ -39,44 +39,23 @@ public class PlayerCopie : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
-        weaponChild = GameObject.Find("Weapon");
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
-        ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(0).gameObject );
+        ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(1).gameObject);
     }
 
-
-
-    private void OnDisable()
-    {
-        GameManager.instance.playerHp = hp;
-    }
-
-    private void Restart()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Exit")
-        {
-            Invoke("Restart", restartDelay);
-            enabled = false;
-        }
-
-    }
     
 
     void FixedUpdate()
     {
         weaponTransform.GetChild(0).GetComponent<WeaponManager>().isFantoming = true;
-       // JE sait que c du caca mais ca marche pas sinon
+       
         if (chemin.Count > 0)
         {
             float horizontal = chemin[0].position.x;
             float vertical = chemin[0].position.y;
             Move(horizontal, vertical);
             faceMouse(chemin[0].direction);
+            weaponChild.GetComponent<WeaponManager>().direction = chemin[0].direction;
             Attack(chemin[0].click);
             chemin.RemoveAt(0);
         }
@@ -120,6 +99,7 @@ public class PlayerCopie : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
         Instantiate(newWeapon, weaponTransform);
+        weaponChild = newWeapon;
         //newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;

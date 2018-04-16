@@ -39,6 +39,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public string description;
     public Vector3 basePosition = new Vector3(0.35f, 0, 0);
     public Vector3 baseScale = new Vector3(1, 1, 1);
+    public Vector3 direction;
 
     [HideInInspector] public int numAttack;
     [HideInInspector] public bool isFantoming = false;
@@ -117,6 +118,7 @@ public abstract class WeaponManager : MonoBehaviour {
         // if (!isFantoming) setNumAttack();
         if (isFantoming)
         {
+            Debug.Log("cacca");
             AttackFantome(numAttack);
         }
         else Attack();
