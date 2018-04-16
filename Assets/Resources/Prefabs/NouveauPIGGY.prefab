@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 20
-  player: {fileID: 0}
+  player: {fileID: 4915721523439122, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}
   chasing: 0
   chaseSpeed: 7.5
   coinList: []

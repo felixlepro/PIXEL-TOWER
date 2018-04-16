@@ -43,8 +43,6 @@ public class Player : Character {
 
     void Start()
     {
-        hp = maxHp;
-        hpBar.fillAmount = (float)hp / (float)maxHp;
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -71,6 +69,7 @@ public class Player : Character {
         if (!stunned) {
             if(Input.GetKeyDown("left shift"))
             {
+                GameManager.instance.Restart();
                 SwitchWeapon();
             }
          }
@@ -312,7 +311,7 @@ public class Player : Character {
         if (!foundAWeapon)
         {
             weaponList.Add(newWeapon.GetComponent<WeaponManager>());
-            currentWeaponIndex = weaponList.Count-1;
+            //currentWeaponIndex = weaponList.Count-1;
         }
         //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
@@ -347,5 +346,35 @@ public class Player : Character {
     {
         hasKey = true;
     }
+    public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
+    {
+        if (!lvl0)
+        {
+            Debug.Log(h);
+            hp = h;
+            coins = coin;
+            currentWeaponIndex = cwi;
+            startingWeapon = wp;
+        }
+        else
+        {
+            hp = maxHp;
+            coins = 0;
+            currentWeaponIndex = 0;
+        }
+        Debug.Log("ca");
+        hpBar.fillAmount = (float)hp / (float)maxHp;
+    }
+    public GameObject[] weaponObjects()
+    {
+        GameObject[] wo = new GameObject[weaponList.Count];
+        for (int i = 0; i< weaponList.Count; i++)
+        {
+            wo[i] = weaponList[i].gameObject;
+        }
+        return wo;
+        
+    }
+ 
 
 }

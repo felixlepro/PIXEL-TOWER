@@ -13,7 +13,7 @@ public class DropManager : MonoBehaviour {
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
         coinP = GameManager.instance.coinPrefab;
-        piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
+        piggy = GameObject.Find("Piggy").GetComponent<PiggyManager>(); //GameManager.instance.piggy.GetComponent<PiggyManager>();
         key = GameManager.instance.key;
         //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }

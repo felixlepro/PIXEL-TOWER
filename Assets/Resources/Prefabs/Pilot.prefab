@@ -374,7 +374,7 @@ MonoBehaviour:
   currentSpeed: 10
   startingWeapon:
   - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
-  - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
