@@ -37,7 +37,7 @@ public class PlayerCopie : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        hp = GameManager.instance.playerHp;
+       // hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
         ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(1).gameObject);

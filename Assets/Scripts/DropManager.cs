@@ -13,7 +13,8 @@ public class DropManager : MonoBehaviour {
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
         coinP = GameManager.instance.coinPrefab;
-        piggy = GameObject.Find("Piggy").GetComponent<PiggyManager>(); //GameManager.instance.piggy.GetComponent<PiggyManager>();
+        piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
+        //GameObject.Find("Piggy").GetComponent<PiggyManager>(); //
         key = GameManager.instance.key;
         //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
@@ -26,9 +27,7 @@ public class DropManager : MonoBehaviour {
         weapon.GetComponent<Collider2D>().enabled = true;
         weapon.transform.parent = null;
         weapon.transform.localRotation = Quaternion.identity;
-        Debug.Log(weapon.transform.position);
         weapon.transform.position = pos;
-        Debug.Log(weapon.transform.position);
         weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, Mathf.Abs(weapon.transform.localScale.y), 1);
         if (anim)
         {

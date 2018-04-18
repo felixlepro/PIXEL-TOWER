@@ -3,16 +3,27 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform target;
-    public float MouseFollowAmount;
+     Transform target;
+    public float mouseMaxFollowAmount;
+    public float distanceFollow;
+    float mouseFollowAmount;
     public float zoomMin;
     public float zoomMax;
     float zoom =8;
+    Camera miniCam;
+
+    private void Start()
+    {
+        target = GameManager.instance.player.transform;
+      //  miniCam = GameObject.Find("MiniCamera").GetComponent<Camera>();
+    }
 
     void LateUpdate()
     {
         Vector3 mousePosition = Input.mousePosition;
-        Vector3 smoothedPosition = Vector3.Lerp(target.position, Camera.main.ScreenToWorldPoint(mousePosition), MouseFollowAmount);
+        mouseFollowAmount = Vector3.Distance(Camera.main.ScreenToWorldPoint(mousePosition), target.position) / distanceFollow;          //met la distance dans une variable entre 0 et 1 qui va déterminer le follow amount
+        mouseFollowAmount = Mathf.Clamp01(mouseFollowAmount);
+        Vector3 smoothedPosition = Vector3.Lerp(target.position, Camera.main.ScreenToWorldPoint(mousePosition), (mouseFollowAmount * mouseFollowAmount * mouseMaxFollowAmount)/2 + 0.08f);
         transform.position = smoothedPosition + new Vector3(0, 0, -1);
 
         zoom += -2*Input.GetAxis("Mouse ScrollWheel");
@@ -24,7 +35,7 @@ public class CameraFollow : MonoBehaviour {
         {
             zoom = zoomMax;
         }
-        GameObject.Find("MiniCamera").GetComponent<Camera>().orthographicSize = 3 * zoom;
+       // miniCam.orthographicSize = 3 * zoom;
         GetComponentInChildren<Camera>().orthographicSize = zoom;
         //Vector3 smoothedPosition = (mousePosition - target.position) * MouseFollowAmount + transform.position;
     }

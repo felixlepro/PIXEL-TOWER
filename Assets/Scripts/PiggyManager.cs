@@ -28,7 +28,9 @@ public class PiggyManager : MonoBehaviour {
         anim = GetComponent<Animator>();
         unity = GetComponent<Unit>();
         spriteR = GetComponent<SpriteRenderer>();
-        playerS = GameObject.Find("Pilot").GetComponent<Player>();
+        player = GameManager.instance.player.transform;
+        playerS = GameManager.instance.player.GetComponent<Player>();
+        // GameObject.Find("Pilot Copie").GetComponent<Player>();
         target = player;
 	}
 	

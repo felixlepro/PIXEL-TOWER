@@ -14,6 +14,7 @@ public class PatrolAction : Action
 
     private void Patrol(StateController controller)
     {
+      // Debug.Log(controller.enemyManager.wayPointList.Count + "        " + controller.enemyManager.nextWayPoint);
         //controller.enemyManager.pathingUnit.RequestPath(controller.enemyManager.wayPointList[controller.enemyManager.nextWayPoint]);
         controller.enemyManager.pathingUnit.targetPosition  = controller.enemyManager.wayPointList[controller.enemyManager.nextWayPoint];
 

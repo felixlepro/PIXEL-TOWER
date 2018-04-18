@@ -20,11 +20,13 @@ public class GridManager : MonoBehaviour
 
     public void CreateGrid(int[,] board)
     {
-        Debug.Log("CreateGrid");
+        PrintId(board);
+
         gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) / nodeRadius);
         gridWorldSize = new Vector2(gridSizeX * nodeRadius * 2, gridSizeY * nodeRadius * 2);
         grid = new Node[gridSizeX, gridSizeY];
+       // Debug.Log(grid[70, 70].walkable);
         worldBotLeft = new Vector3(-1, -1, 0);
 
         for (int x = 0; x < gridSizeX; x++)
@@ -66,11 +68,30 @@ public class GridManager : MonoBehaviour
                 Vector3 worldPoint = worldBotLeft + Vector3.right * (nodeRadius * 2 * x + nodeRadius) + Vector3.up * (nodeRadius * 2 * y + nodeRadius);
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
-
         }
     }
 
+    public void PrintId(int[,] board)
+    {
+        int id = 0;
+        foreach (int nbr in board)
+        {
+            id += nbr;
+        }
+        Debug.Log("CreateGrid: Board Identity: " + id);
+    }
+    public void PrintIdGrid() {
 
+        int id = 0;
+        foreach (Node nbr in grid)
+        {
+            if (nbr.walkable)
+            {
+                id += 1;
+            }        
+        }
+        Debug.Log("Grid Identity: " + id);
+    }
 
 
     public List<Node> GetNeighbours(Node node)
@@ -132,7 +153,7 @@ public class GridManager : MonoBehaviour
 
     void OnDrawGizmos()
     {
-
+       // PrintIdGrid();
         if (grid != null && enableGizmos)
         {
             {

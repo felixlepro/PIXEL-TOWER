@@ -5,7 +5,7 @@ using EZCameraShake;
 using UnityEngine.UI;
 
 abstract public class EnemyManager : Character {
-    
+
     public float patrolSpeedChaseSpeedRatio;
     public float gettingKnockedBackAmount;
     //public float attackRange;
@@ -133,9 +133,12 @@ abstract public class EnemyManager : Character {
 
     public void SetupAI( List<Vector3> wayPointsFromGameManager)
     {
-
+       
+        wayPointList.Clear();
         wayPointList = wayPointsFromGameManager;
         nextWayPoint = Random.Range(0, wayPointList.Count);
+
+        Debug.Log("wpl  " + wayPointList.Count);
     }
     public void ActivateAI(bool tf)
     {

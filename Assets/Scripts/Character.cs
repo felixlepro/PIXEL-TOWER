@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
-
+    public int hp;
     public string name;
     public int maxHp;
-    public int hp;
+   
     public Color wColor = Color.white;
     public float maxMoveSpeed;
     const float burnRepetitionTime = 1;

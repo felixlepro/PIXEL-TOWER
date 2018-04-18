@@ -9,7 +9,7 @@ public class Player : Character {
 
     public GameObject[] startingWeapon;
     const int weaponEquipedMax = 2;
-    public List<WeaponManager> weaponList = new List<WeaponManager>();
+    public List<WeaponManager> weaponList;
     public float rotationBuffer;
     [HideInInspector] public float restartDelay = 1f;
     [HideInInspector] public int valuePerCoin = 1;
@@ -41,28 +41,14 @@ public class Player : Character {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
+    //private void Awake()
+    //{
+    //    setPlayerStats();
+    //}
     void Start()
     {
-        currentSpeed = maxMoveSpeed;
-        playerRigidbody = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
-        //player.hp = GameManager.instance.playerHp;
-
-        weaponTransform = transform.Find("WeaponRotation");
-        //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
-        // weaponObject.transform.parent = weaponTransform;
-        // weaponObject.name = "Weapon";
-        //ChangeWeapon(player.weaponObject);
-
-        graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
-        coins = GameManager.instance.coinCount;
-        coinText.text = "C O I N S : " + coins;
-
-        foreach (GameObject sw in startingWeapon)
-        {
-            GameObject newWeapon = Instantiate(sw, Vector3.zero, Quaternion.identity) as GameObject;
-            ChangeWeapon(newWeapon);
-        }
+            PlayerSetUp();
+        
     }
     private void Update()
     {
@@ -87,6 +73,39 @@ public class Player : Character {
                 Move(horizontal, vertical);
             }
             
+        }
+    }
+    void PlayerSetUp()
+    {
+   
+        currentSpeed = maxMoveSpeed;
+        playerRigidbody = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
+        //player.hp = GameManager.instance.playerHp;
+
+        weaponTransform = transform.Find("WeaponRotation");
+        //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
+        // weaponObject.transform.parent = weaponTransform;
+        // weaponObject.name = "Weapon";
+        //ChangeWeapon(player.weaponObject);
+
+        graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
+        //coins = GameManager.coinCount;
+       
+        hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
+        coinText = GameObject.Find("Canvas").transform.Find("CoinText").GetComponentInChildren<Text>();
+        coinText.text = "C O I N S : " + coins;
+
+        if (GameManager.instance.level == 1)
+        {
+            hp = maxHp;
+            weaponList = new List<WeaponManager>();
+            foreach (GameObject sw in startingWeapon)
+            {
+                GameObject newWeapon = Instantiate(sw, Vector3.zero, Quaternion.identity) as GameObject;
+                ChangeWeapon(newWeapon);
+            }
+            hpBar.fillAmount = (float)hp / (float)maxHp;
         }
     }
 
@@ -207,8 +226,8 @@ public class Player : Character {
     
     private void OnDisable()
     {
-        GameManager.instance.playerHp = hp;
-        GameManager.instance.coinCount = coins;
+     //   GameManager.instance.playerHp = hp;
+      //  GameManager.instance.coinCount = coins;
     }
     public void gainCoin()
     {
@@ -311,7 +330,7 @@ public class Player : Character {
         if (!foundAWeapon)
         {
             weaponList.Add(newWeapon.GetComponent<WeaponManager>());
-            //currentWeaponIndex = weaponList.Count-1;
+            currentWeaponIndex = weaponList.Count-1;
         }
         //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
@@ -346,6 +365,26 @@ public class Player : Character {
     {
         hasKey = true;
     }
+    //public void setPlayerStats()
+    //{
+    //    if (GameManager.instance.level != 0)
+    //    {
+           
+    //        hp = GameManager.playerStat.hp;
+    //        Debug.Log(hp);
+    //        coins = GameManager.playerStat.coins;
+    //        //currentWeaponIndex = GameManager.playerStat.;
+    //        startingWeapon = GameManager.playerStat.weapons;
+    //    }
+    //    else
+    //    {
+    //        hp = maxHp;
+    //        coins = 0;
+    //        currentWeaponIndex = 0;
+    //    }
+    //    //   Debug.Log("ca");
+    //   // hpBar.fillAmount = (float)hp / (float)maxHp;
+    //}
     public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
     {
         if (!lvl0)
@@ -362,7 +401,7 @@ public class Player : Character {
             coins = 0;
             currentWeaponIndex = 0;
         }
-        Debug.Log("ca");
+     //   Debug.Log("ca");
         hpBar.fillAmount = (float)hp / (float)maxHp;
     }
     public GameObject[] weaponObjects()

@@ -9,8 +9,9 @@ public class PlayerTriggers : MonoBehaviour {
 
     void Start () {
         player = GetComponentInParent<Player>();
-        pm = GameObject.Find("Piggy").GetComponent<PiggyManager>();
-        //GameObject.Find("Piggy").GetComponent<PiggyManager>();
+        pm = GameManager.instance.piggy.GetComponent<PiggyManager>();
+       // GameObject.Find("Piggy").GetComponent<PiggyManager>();
+        //
     }
     private void OnTriggerStay2D(Collider2D other)
     {

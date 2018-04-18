@@ -137,11 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f4aa8758661604f982030457944e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  piggy: {fileID: 0}
+  player: {fileID: 1903243394246204, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}
+  piggy: {fileID: 1259820859527176, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
   levelStartDelay: 2
-  coinCount: 0
-  playerHp: 100
   inLevel: 1
   audio: {fileID: 0}
   coinSound: {fileID: 8300000, guid: b4c5353d9366f2b43804628128c53b65, type: 3}
@@ -152,6 +150,7 @@ MonoBehaviour:
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
+  level: 0
   nbrFloorEntreBoss: 4
   wayPointList: []
 --- !u!114 &114242319765115108

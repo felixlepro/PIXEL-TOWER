@@ -10,16 +10,19 @@ public class CoinExplosion : MonoBehaviour {
     Vector3 direction;
     int angle;
     AudioSource audio;
+    Rigidbody2D rb;
     
 	void Start () {
         vitesse = Random.Range(vitesseMin, vitesseMax);
         angle = Random.Range(1, 360);
         direction =  new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized ;
         audio = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	void FixedUpdate () {
-        transform.position += direction * vitesse;
+        rb.MovePosition(transform.position + direction * vitesse);
+       // transform.position += direction * vitesse;
         if (vitesse > 0.0005)
         {
             vitesse -= vitesse*Time.deltaTime;

@@ -60,7 +60,7 @@ public class Board : MonoBehaviour {
         //GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
         GetComponent<GridManager>().CreateGrid(gridToInt);
         InstantiateEnemies(tiles);
-
+        GetComponent<GridManager>().PrintIdGrid();
 
     }
     //private int[,] TyleTypeToInt(TileType[][] t)
@@ -324,7 +324,8 @@ public class Board : MonoBehaviour {
     }
     void InstantiateEnemies(TileType[][] t)
     {
-        Vector3 player = GameObject.Find("Pilot").transform.position;
+        Vector3 player = GameManager.instance.player.transform.position;
+            //GameObject.Find("Pilot").transform.position;
         int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)level/15 + 1));
 
         for (int i = 0; i < nbrEnemy; i++)
