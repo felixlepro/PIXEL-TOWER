@@ -118,7 +118,6 @@ public abstract class WeaponManager : MonoBehaviour {
         // if (!isFantoming) setNumAttack();
         if (isFantoming)
         {
-            Debug.Log("cacca");
             AttackFantome(numAttack);
         }
         else Attack();

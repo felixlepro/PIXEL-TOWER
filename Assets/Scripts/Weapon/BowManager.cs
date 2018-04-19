@@ -57,9 +57,10 @@ public class BowManager : WeaponManager {
     {
        
         anim.SetBool("AttackCharge", true);
-        player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
+        
+        if(!isFantoming ) player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
         chargeDoneRatio = (currentChargeTime / chargeTime);
-        player.currentSpeed *= (1 - (slowAmount * (1-(1-chargeDoneRatio)*(1-chargeDoneRatio))));
+        if (!isFantoming) player.currentSpeed *= (1 - (slowAmount * (1-(1-chargeDoneRatio)*(1-chargeDoneRatio))));
 
     }
 
@@ -69,7 +70,7 @@ public class BowManager : WeaponManager {
 
     protected override void ReleaseChargedWeapon()
     {
-        player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
+        if (!isFantoming) player.currentSpeed /= (1 - (slowAmount * (1 - (1 - chargeDoneRatio) * (1 - chargeDoneRatio))));
 
         anim.SetBool("AttackCharge", false);
         anim.SetTrigger("PlayerAttack");

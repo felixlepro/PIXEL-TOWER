@@ -374,7 +374,7 @@ MonoBehaviour:
   currentSpeed: 10
   startingWeapon:
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
-  - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
+  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
@@ -407,6 +407,8 @@ MonoBehaviour:
   playerCopie: {fileID: 1332179274949130, guid: da74259292324fc4caa97762adf982e4,
     type: 2}
   scriptPlayer: {fileID: 114035642965733862}
+  ancienWeapon: {fileID: 0}
+  currentWeapon: {fileID: 0}
 --- !u!114 &114599861805657494
 MonoBehaviour:
   m_ObjectHideFlags: 1

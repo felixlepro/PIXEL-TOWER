@@ -40,7 +40,15 @@ public class PlayerCopie : MonoBehaviour
        // hp = GameManager.instance.playerHp;
         weaponTransform = transform.Find("WeaponRotation");
         graphicsSpriteR = GetComponentInChildren<SpriteRenderer>();
-        ChangeWeapon(GameObject.Find("Pilot").transform.Find("WeaponRotation").GetChild(1).gameObject);
+        foreach (PositionPlus  pos in chemin )
+        {
+            if (pos.ancienweapon != null)
+            {
+                weaponChild = pos.ancienweapon;
+                break;
+            }
+        }
+        ChangeWeapon(GameManager.instance.player.GetComponent<Player>().weaponList[GameManager.instance.player.GetComponent<Player>().currentWeaponIndex].gameObject );
     }
 
     
@@ -54,6 +62,8 @@ public class PlayerCopie : MonoBehaviour
             float horizontal = chemin[0].position.x;
             float vertical = chemin[0].position.y;
             Move(horizontal, vertical);
+            if (chemin[0].weapon != null)
+                ChangeWeapon(chemin[0].weapon);
             faceMouse(chemin[0].direction);
             weaponChild.GetComponent<WeaponManager>().direction = chemin[0].direction;
             Attack(chemin[0].click);
@@ -61,7 +71,8 @@ public class PlayerCopie : MonoBehaviour
         }
         else
         {
-            GameObject.Find("Pilot").GetComponent<TimeRewinding>().FantomeMort();
+            GameManager.instance.player.GetComponent<TimeRewinding>().FantomeMort();
+            //GameObject.Find("Pilot")
             Debug.Log("Mort");
             Destroy(this.gameObject);
         }

@@ -11,10 +11,14 @@ public class TimeRewinding : MonoBehaviour
     public List<PositionPlus> positionCopie;
     public GameObject playerCopie;
     public Player scriptPlayer;
+    public GameObject ancienWeapon;
+    public GameObject currentWeapon;
     void Start()
     {
         positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
+        scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
+        ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
     }
 
     void Update()
@@ -23,6 +27,7 @@ public class TimeRewinding : MonoBehaviour
             StartRewind();
         if (Input.GetKeyUp(KeyCode.R))
             StopRewind();
+        currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
     }
 
     private void FixedUpdate()
@@ -58,8 +63,16 @@ public class TimeRewinding : MonoBehaviour
         if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
-        scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
-        positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKey(KeyCode.Mouse0)));
+        if (currentWeapon == ancienWeapon )
+        {
+           
+            positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKey(KeyCode.Mouse0),null,null));
+        }
+        else
+        {
+            positionRewind.Insert(0, new PositionPlus(transform.position, scriptPlayer.direction, Input.GetKey(KeyCode.Mouse0),ancienWeapon, currentWeapon ));
+            ancienWeapon = currentWeapon;
+        }
     }
 
     public void StartRewind()
@@ -88,7 +101,7 @@ public class TimeRewinding : MonoBehaviour
     public void FantomeMort()
     {
         isFantoming = false;
-        GameObject.Find("Enemies").GetComponent<PlayerTarget>().changeTarget(GameObject.Find("Pilot").transform);
+        GameObject.Find("Enemies").GetComponent<PlayerTarget>().changeTarget(GameManager.instance.player.transform);
         
     }
 }
