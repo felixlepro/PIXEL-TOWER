@@ -137,6 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f4aa8758661604f982030457944e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  loadSlider: {fileID: 0}
+  loadText: {fileID: 0}
   player: {fileID: 1903243394246204, guid: 55336882b5bf7f44bae2a9f18942a05b, type: 2}
   piggy: {fileID: 1259820859527176, guid: 79c37d6e0671f2149948a3a132d78806, type: 2}
   levelStartDelay: 2

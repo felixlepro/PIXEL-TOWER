@@ -5,7 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-   // public  GameObject playerPrefab;
+
+    public GameObject loadingScreen;
+    public Slider loadSlider;
+    public Text loadText;
+
+    // public  GameObject playerPrefab;
     //public  GameObject piggyPrefab;
     public GameObject player;
     public GameObject piggy;
@@ -152,12 +157,12 @@ public class GameManager : MonoBehaviour {
     {
         if (GameManager.instance.inLevel)
         {
-            SceneManager.LoadScene(2);
+            StartCoroutine(LoadAsynchronously(2));
             inLevel = false;
         }
         else
         {
-            SceneManager.LoadScene(1);
+            StartCoroutine(LoadAsynchronously(1));
             inLevel = true;
         }
     }
@@ -204,5 +209,21 @@ public class GameManager : MonoBehaviour {
     public int GetCurrentLevel()
     {
         return level;
+    }
+
+    IEnumerator LoadAsynchronously(int index)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index);
+
+        loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loadSlider.value = progress;
+            loadText.text = Mathf.Floor(progress * 100) + "% ";
+            yield return null;
+        }
+
     }
 }
