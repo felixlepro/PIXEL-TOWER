@@ -18,9 +18,6 @@ public class Player : Character {
     public int coins;
      Image hpBar;
 
-
-    public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
-
     [HideInInspector] public bool hasKey = false;
  [HideInInspector] public int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
@@ -147,7 +144,7 @@ public class Player : Character {
             if (hp <= 0)
             {
                 Time.timeScale = 0;
-                gameOverMenu.SetActive(true);                                      
+                GameManager.instance.gameOverMenu.SetActive(true);                                   
             }
             if (kbAmmount != 0)
             {

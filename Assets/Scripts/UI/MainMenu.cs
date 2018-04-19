@@ -22,14 +22,18 @@ public class MainMenu : MonoBehaviour {
 
     public void ReturnToMenu()
     {
+        this.gameObject.SetActive(true);
         Time.timeScale = 1;
         StartCoroutine(LoadAsynchronously(0));
     }
 
     public void RestartGame()
     {
+        
+        this.gameObject.SetActive(true);
         Time.timeScale = 1;
-        StartCoroutine(LoadAsynchronously(1));
+        StartCoroutine(LoadAsynchronously(0));
+        ResetGame();
     }
 
     IEnumerator LoadAsynchronously (int index)
@@ -46,5 +50,13 @@ public class MainMenu : MonoBehaviour {
             yield return null;
         }
         
+    }
+
+    public void ResetGame()
+    {
+        //foreach (GameObject element in Object.FindObjectsOfType<GameObject>())
+        //{
+        //        Destroy(element);
+        //}   
     }
 }

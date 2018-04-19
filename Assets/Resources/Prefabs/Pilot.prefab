@@ -367,20 +367,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: -5
   nameC: 
-  maxHp: 200
+  maxHp: 100
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 10
   immune: 0
   currentSpeed: 10
   startingWeapon:
-  - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
+  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
   valuePerCoin: 1
   coins: 0
-  gameOverMenu: {fileID: 0}
   hasKey: 0
   currentWeaponIndex: 0
   direction: {x: 13.555164, y: 1.2142601}
