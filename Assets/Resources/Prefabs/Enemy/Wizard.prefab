@@ -400,8 +400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  name: 
-  maxHp: 200
+  nameC: 
+  maxHp: 250
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 5
   immune: 0

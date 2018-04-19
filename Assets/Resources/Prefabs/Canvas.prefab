@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222428907766872898}
   - component: {fileID: 114829110392621434}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Panel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.486}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.584}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0.965
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114161226833453998
@@ -289,7 +289,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'C O I N S :'
+  m_Text: 'C O I N S : 0'
 --- !u!114 &114315797453590804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -638,7 +638,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 187.09998, y: 30.700012}
+  m_SizeDelta: {x: 400, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224542463804599822
 RectTransform:

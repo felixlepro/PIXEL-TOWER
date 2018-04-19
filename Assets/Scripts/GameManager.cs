@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour {
     public GameObject coinPrefab;
     public GameObject key;
     public GameObject[] weapons;
-    public Text coinText;
-    public Image hpBar;
-    public GameObject canvas;
 
     private  Text coinCounttext;
     private Board boardScript;
@@ -88,10 +85,13 @@ public class GameManager : MonoBehaviour {
             instance.audio = GetComponent<AudioSource>();
             instance.boardScript = GetComponent<Board>();
             instance.boardBoss = GetComponent<BoardBoss>();
+
+            //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
             instance.player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
             instance.piggy = Instantiate(piggy, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
-            instance.player.GetComponent<Player>().SetUpCoin(coinText);
-            instance.player.GetComponent<Player>().SetUpHpBar(hpBar);
+            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
+            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
+
         }
         instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
         instance.piggy.transform.position = player.transform.position;
@@ -110,10 +110,11 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(piggy);
-        DontDestroyOnLoad(canvas);
-       // DontDestroyOnLoad(gameObject.GetComponent<GameManager>());
-       // Debug.Log(test);
-        
+       // DontDestroyOnLoad(canvas);
+       
+        // DontDestroyOnLoad(gameObject.GetComponent<GameManager>());
+        // Debug.Log(test);
+
     }
     public void PlaySound(AudioClip clip)
     {
@@ -155,12 +156,12 @@ public class GameManager : MonoBehaviour {
     }
     public void Restart()
     {
-        if (GameManager.instance.inLevel)
-        {
-            StartCoroutine(LoadAsynchronously(2));
-            inLevel = false;
-        }
-        else
+        //if (GameManager.instance.inLevel)
+        //{
+        //    StartCoroutine(LoadAsynchronously(2));
+        //    inLevel = false;
+        //}
+        //else
         {
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour {
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
 
-        loadingScreen.SetActive(true);
+        instance.loadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {

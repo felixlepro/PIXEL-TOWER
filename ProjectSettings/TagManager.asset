@@ -19,6 +19,7 @@ TagManager:
   - Boss
   - Key
   - CoinText
+  - HPBar
   layers:
   - Default
   - TransparentFX

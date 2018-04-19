@@ -19,7 +19,7 @@ public class Player : Character {
      Image hpBar;
 
 
-    public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
+    GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
 
     [HideInInspector] public bool hasKey = false;
  [HideInInspector] public int currentWeaponIndex = 0;
@@ -58,7 +58,7 @@ public class Player : Character {
         if (!stunned) {
             if(Input.GetKeyDown("left shift"))
             {
-                GameManager.instance.Restart();
+                //GameManager.instance.Restart();
                 SwitchWeapon();
             }
          }
@@ -80,7 +80,7 @@ public class Player : Character {
     }
     void PlayerSetUp()
     {
-   
+        gameOverMenu = GameObject.Find("GameOverMenu");
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -102,7 +102,9 @@ public class Player : Character {
 
         if (GameManager.instance.level == 1)
         {
-            hp = maxHp;
+            hp = maxHp;         
+            hpBar.fillAmount = (float)hp / (float)maxHp;
+            Debug.Log(hpBar.fillAmount);
             weaponList = new List<WeaponManager>();
             foreach (GameObject sw in startingWeapon)
             {
@@ -118,8 +120,9 @@ public class Player : Character {
     }
     public void SetUpHpBar(Image c)
     {
-        hpBar = c;
-       hpBar.fillAmount = (float)hp / (float)maxHp;
+        hpBar = c.GetComponentInChildren<Image>();
+        Debug.Log(hpBar.gameObject.name);
+      
     }
 
     private void Move(float h, float v)
@@ -144,6 +147,8 @@ public class Player : Character {
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
             hp -= damage;
             hpBar.fillAmount = (float)hp / (float)maxHp;
+            Debug.Log(hpBar.fillAmount);
+            Debug.Log(hpBar.sprite.name);
             if (hp <= 0)
             {
                 Time.timeScale = 0;
