@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public GameObject loadingScreen;
-    public Slider loadSlider;
-    public Text loadText;
+    public Canvas canvasMenu;
+    public GameObject gameOverMenu;
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
+    private GameObject loadingScreen;
+    private Slider loadSlider;
+    private Text loadText;
 
     // public  GameObject playerPrefab;
     //public  GameObject piggyPrefab;
@@ -76,12 +80,17 @@ public class GameManager : MonoBehaviour {
 
         // player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
 
-       
-      
 
         enemies = new List<EnemyManager>();
         if (instance.level == 0)
         {
+            instance.canvasMenu = Instantiate(canvasMenu, new Vector3(0, 0, 0), Quaternion.identity);
+            instance.loadingScreen = instance.canvasMenu.transform.Find("LoadingScreen").gameObject;
+            instance.gameOverMenu = instance.canvasMenu.transform.Find("GameOverMenu").gameObject;
+            instance.optionsMenu = instance.canvasMenu.transform.Find("OptionsMenu").gameObject;
+            instance.mainMenu = instance.canvasMenu.transform.Find("MainMenu").gameObject;
+            instance.loadSlider = instance.loadingScreen.GetComponentInChildren<Slider>();
+            instance.loadText = instance.loadSlider.GetComponentInChildren<Text>();
             instance.audio = GetComponent<AudioSource>();
             instance.boardScript = GetComponent<Board>();
             instance.boardBoss = GetComponent<BoardBoss>();
@@ -95,6 +104,11 @@ public class GameManager : MonoBehaviour {
         }
         instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
         instance.piggy.transform.position = player.transform.position;
+
+        instance.loadingScreen.SetActive(false);
+        instance.gameOverMenu.SetActive(false);
+        instance.optionsMenu.SetActive(false);
+        instance.mainMenu.SetActive(false);
 
         DamageTextManager.Initialize();
         DropManager.Initialize();
@@ -110,6 +124,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(piggy);
+        DontDestroyOnLoad(canvasMenu);
        // DontDestroyOnLoad(canvas);
        
         // DontDestroyOnLoad(gameObject.GetComponent<GameManager>());
@@ -221,8 +236,8 @@ public class GameManager : MonoBehaviour {
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
-            loadSlider.value = progress;
-            loadText.text = Mathf.Floor(progress * 100) + "% ";
+            instance.loadSlider.value = progress;
+            instance.loadText.text = Mathf.Floor(progress * 100) + "% ";
             yield return null;
         }
 
