@@ -82,6 +82,7 @@ public class ShopManager : MonoBehaviour
     {     
         weaponList.Add(Instantiate(weaponTypes[RandomTypeWeapon()],Vector3.zero, Quaternion.identity));
         weaponList[weaponList.Count - 1].GetComponent<WeaponManager>().WeaponSetStats();
+        weaponList[weaponList.Count - 1].SetActive(false);
     }
 
     private void SetInfo()
