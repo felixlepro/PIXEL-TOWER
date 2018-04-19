@@ -13,9 +13,12 @@ public class Player : Character {
     public float rotationBuffer;
     [HideInInspector] public float restartDelay = 1f;
     [HideInInspector] public int valuePerCoin = 1;
-    public Text coinText;
+
+    Text coinText;
     public int coins;
-    public Image hpBar;
+     Image hpBar;
+
+
     public GameObject gameOverMenu; //je pense pas que ca devrait etre dans player ca
 
     [HideInInspector] public bool hasKey = false;
@@ -92,9 +95,10 @@ public class Player : Character {
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
         //coins = GameManager.coinCount;
        
-        hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
-        coinText = GameObject.Find("Canvas").transform.Find("CoinText").GetComponentInChildren<Text>();
-        coinText.text = "C O I N S : " + coins;
+       // hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
+       // GameObject ca = GameObject.FindGameObjectWithTag("CoinText");//GameObject.Find("CoinText");//.transform.Find("Text").gameObject;
+        //coinText = ca.GetComponent<Text>();
+        
 
         if (GameManager.instance.level == 1)
         {
@@ -104,9 +108,18 @@ public class Player : Character {
             {
                 GameObject newWeapon = Instantiate(sw, Vector3.zero, Quaternion.identity) as GameObject;
                 ChangeWeapon(newWeapon);
-            }
-            hpBar.fillAmount = (float)hp / (float)maxHp;
+            }          
         }
+    }
+    public void SetUpCoin(Text c)
+    {
+        coinText = c;
+        coinText.text = "C O I N S : " + coins;
+    }
+    public void SetUpHpBar(Image c)
+    {
+        hpBar = c;
+       hpBar.fillAmount = (float)hp / (float)maxHp;
     }
 
     private void Move(float h, float v)

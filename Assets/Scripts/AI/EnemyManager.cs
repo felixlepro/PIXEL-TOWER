@@ -138,7 +138,7 @@ abstract public class EnemyManager : Character {
         wayPointList = wayPointsFromGameManager;
         nextWayPoint = Random.Range(0, wayPointList.Count);
 
-        Debug.Log("wpl  " + wayPointList.Count);
+     //   Debug.Log("wpl  " + wayPointList.Count);
     }
     public void ActivateAI(bool tf)
     {

@@ -7,7 +7,7 @@ public class BowManager : WeaponManager {
     public float slowAmount;
 
     public GameObject bolt;
-    private List<Bolt> boltList = new List<Bolt>();
+    //private List<Bolt> boltList = new List<Bolt>();
 
     public FloatRange boltSpeedRange = new FloatRange(20, 30);
     public FloatRange slowAmountRange = new FloatRange(0.25f, 0.75f);
@@ -73,14 +73,16 @@ public class BowManager : WeaponManager {
 
         anim.SetBool("AttackCharge", false);
         anim.SetTrigger("PlayerAttack");
-        boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());
+        // boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());
+       Bolt thisBolt = Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>();
         if (!isFantoming )
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            Vector3 direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
+            direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
         }
-        boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
+       // boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
+       thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
         ResetAttackTimer();
     }
     protected override SpriteRenderer GetSpriteRenderer()

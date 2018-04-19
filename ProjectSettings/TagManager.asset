@@ -18,6 +18,7 @@ TagManager:
   - OpenChest
   - Boss
   - Key
+  - CoinText
   layers:
   - Default
   - TransparentFX

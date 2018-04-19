@@ -375,7 +375,7 @@ MonoBehaviour:
   attackDamage: 10
   immuneTime: 1
   maxKnockBackAmount: 15
-  attackRange: 5
+  attackRange: 4
   attackCD: 4
   timeUntilNextAttack: 0
   attackHitbox: []
@@ -399,9 +399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2649dff2e7d4614ab9e5b2242af7aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
   name: 
   maxHp: 200
-  hp: 0
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 5
   immune: 0

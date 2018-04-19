@@ -8,10 +8,10 @@ public class Bolt : MonoBehaviour {
 
    public float lifeTime;
     float time = 0;
-    private bool UpdateSpeed = true;
+     bool UpdateSpeed = true;
     private int damage;
-    private float speedBolt;
-    float maxSpeedBolt;
+    public  float speedBolt;
+    public float maxSpeedBolt;
     private float knockBack;
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
@@ -32,7 +32,6 @@ public class Bolt : MonoBehaviour {
             StartCoroutine(fadeToDeath());
         }
 
-
         if (UpdateSpeed)
         {
             speedBolt -= slowDownAmount * Time.deltaTime;
@@ -52,7 +51,7 @@ public class Bolt : MonoBehaviour {
         knockBack = kb;
         speedBolt = speed;
         maxSpeedBolt = maxSpeed;
-        this.gameObject.transform.right = direction;
+        transform.right = direction;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

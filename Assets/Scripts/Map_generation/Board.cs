@@ -44,13 +44,18 @@ public class Board : MonoBehaviour {
     public  void SetupBoard(int lvl)
     {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-
+        Debug.Log("setup");
         //Destroy(boardHolder);
-        Destroy(GameObject.Find("Board Holder"));
-        Destroy(GameObject.Find("Chest Holder"));
+        //  Destroy(GameObject.Find("Board Holder"));
+        // Destroy(GameObject.Find("Chest Holder"));
+
+        potentialChest.Clear();
+        potentialEn.Clear();
+        potentialExit.Clear();
 
         boardHolder = new GameObject("Board Holder");
         chestHolder = new GameObject("Chest Holder");
+
         SetUpTilesArray();
         CreateRoomsAndCorridors();
         SetTilesValuesForRooms();
@@ -60,7 +65,6 @@ public class Board : MonoBehaviour {
         //GetComponent<GridManager>().CreateGrid(TyleTypeToInt(tiles));
         GetComponent<GridManager>().CreateGrid(gridToInt);
         InstantiateEnemies(tiles);
-        GetComponent<GridManager>().PrintIdGrid();
 
     }
     //private int[,] TyleTypeToInt(TileType[][] t)

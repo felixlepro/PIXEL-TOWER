@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour {
     public GameObject coinPrefab;
     public GameObject key;
     public GameObject[] weapons;
-    
+    public Text coinText;
+    public Image hpBar;
+    public GameObject canvas;
 
     private  Text coinCounttext;
     private Board boardScript;
@@ -73,15 +75,18 @@ public class GameManager : MonoBehaviour {
         // player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
 
        
-        audio = GetComponent<AudioSource>();
+      
 
         enemies = new List<EnemyManager>();
         if (instance.level == 0)
         {
+            instance.audio = GetComponent<AudioSource>();
             instance.boardScript = GetComponent<Board>();
             instance.boardBoss = GetComponent<BoardBoss>();
             instance.player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
             instance.piggy = Instantiate(piggy, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
+            instance.player.GetComponent<Player>().SetUpCoin(coinText);
+            instance.player.GetComponent<Player>().SetUpHpBar(hpBar);
         }
         instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
         instance.piggy.transform.position = player.transform.position;
@@ -100,6 +105,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(piggy);
+        DontDestroyOnLoad(canvas);
        // DontDestroyOnLoad(gameObject.GetComponent<GameManager>());
        // Debug.Log(test);
         

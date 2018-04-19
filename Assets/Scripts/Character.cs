@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
     public int hp;
-    public string name;
+    public string nameC;
     public int maxHp;
    
     public Color wColor = Color.white;

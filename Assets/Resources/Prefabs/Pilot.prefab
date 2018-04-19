@@ -365,23 +365,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523076eab3952ff4caa8b6539859302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  maxHp: 200
   hp: -5
+  nameC: 
+  maxHp: 200
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 10
   immune: 0
   currentSpeed: 10
   startingWeapon:
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
-  - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
+  - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
   valuePerCoin: 1
-  coinText: {fileID: 0}
   coins: 0
-  hpBar: {fileID: 0}
   gameOverMenu: {fileID: 0}
   hasKey: 0
   currentWeaponIndex: 0

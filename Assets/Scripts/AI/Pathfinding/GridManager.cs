@@ -20,7 +20,7 @@ public class GridManager : MonoBehaviour
 
     public void CreateGrid(int[,] board)
     {
-        PrintId(board);
+        
 
         gridSizeX = Mathf.RoundToInt((board.GetLength(0)) / nodeRadius);
         gridSizeY = Mathf.RoundToInt((board.GetLength(1)) / nodeRadius);
@@ -71,27 +71,27 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void PrintId(int[,] board)
-    {
-        int id = 0;
-        foreach (int nbr in board)
-        {
-            id += nbr;
-        }
-        Debug.Log("CreateGrid: Board Identity: " + id);
-    }
-    public void PrintIdGrid() {
+    //public void PrintId(int[,] board)
+    //{
+    //    int id = 0;
+    //    foreach (int nbr in board)
+    //    {
+    //        id += nbr;
+    //    }
+    //    Debug.Log("CreateGrid: Board Identity: " + id);
+    //}
+    //public void PrintIdGrid() {
 
-        int id = 0;
-        foreach (Node nbr in grid)
-        {
-            if (nbr.walkable)
-            {
-                id += 1;
-            }        
-        }
-        Debug.Log("Grid Identity: " + id);
-    }
+    //    int id = 0;
+    //    foreach (Node nbr in grid)
+    //    {
+    //        if (nbr.walkable)
+    //        {
+    //            id += 1;
+    //        }        
+    //    }
+    //    Debug.Log("Grid Identity: " + id);
+    //}
 
 
     public List<Node> GetNeighbours(Node node)
@@ -151,24 +151,24 @@ public class GridManager : MonoBehaviour
         return grid[x, y];
     }
 
-    void OnDrawGizmos()
-    {
-       // PrintIdGrid();
-        if (grid != null && enableGizmos)
-        {
-            {
-                foreach (Node n in grid)
-                {
-                    Gizmos.color = new Color(1, 0, 0, 0.25f);
-                    if (n.walkable)
-                        Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
+    //void OnDrawGizmos()
+    //{
+    //   // PrintIdGrid();
+    //    if (grid != null && enableGizmos)
+    //    {
+    //        {
+    //            foreach (Node n in grid)
+    //            {
+    //                Gizmos.color = new Color(1, 0, 0, 0.25f);
+    //                if (n.walkable)
+    //                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - .03f));
 
 
-                }
-            }
-        }
+    //            }
+    //        }
+    //    }
 
-    }
+    //}
     public int MaxSize
     {
         get
