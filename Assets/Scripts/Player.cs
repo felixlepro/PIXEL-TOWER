@@ -41,6 +41,7 @@ public class Player : Character {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
+    GameObject gameOverMenu;
     //private void Awake()
     //{
     //    setPlayerStats();
