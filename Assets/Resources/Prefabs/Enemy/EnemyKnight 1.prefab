@@ -338,9 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f70a5ca48dca4592127727762c80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  maxHp: 75
   hp: 0
+  nameC: 
+  maxHp: 125
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 6
   immune: 0

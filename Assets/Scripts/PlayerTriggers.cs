@@ -27,6 +27,7 @@ public class PlayerTriggers : MonoBehaviour {
         {
             if (player.hasKey && Input.GetKeyDown(KeyCode.E))
             {
+                player.hasKey = false;
                 other.GetComponent<Animator>().SetTrigger("Open");
                 GameManager.instance.Invoke("Restart", player.restartDelay);
                 enabled = false;

@@ -97,7 +97,7 @@ abstract public class EnemyManager : Character {
         pathingUnit.speed = currentSpeed;
        // pathingUnit.enabled = false;
 
-        chaseTarget = GetComponentInParent<PlayerTarget>().playerTarget;
+        chaseTarget = GameManager.instance.player.transform;
         
 
         enemyRigidbody = GetComponent<Rigidbody2D>();

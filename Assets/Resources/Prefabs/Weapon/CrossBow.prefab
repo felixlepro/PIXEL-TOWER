@@ -86,7 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fede1fc13df8f945b836fef8a294887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 1846054610834424}
   weaponName: 
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 30
@@ -101,20 +100,21 @@ MonoBehaviour:
   description: 
   basePosition: {x: 0.35, y: 0, z: 0}
   baseScale: {x: 10, y: 10, z: 10}
+  direction: {x: 0, y: 0, z: 0}
   numAttack: 0
   isFantoming: 0
   attackDamageRange:
     min: 8
     max: 13
   attackSpeedRange:
-    min: 0.4
+    min: 0.5
     max: 1
   attackDamageChargedBonusRange:
     min: 0.25
     max: 0.75
   knockBackAmountRange:
-    min: 5
-    max: 12
+    min: 2
+    max: 4
   IceFireChance: 0.15
   chanceBurnProcRange:
     min: 25
