@@ -150,14 +150,12 @@ public class GameManager : MonoBehaviour {
     }
     public void Restart()
     {
-        //Player p = player.GetComponent<Player>();
-       // playerStat = new PlayerStats(p.hp , p.coins , p.weaponObjects());
-        //if (GameManager.instance.inLevel)
-        //{
-        //    SceneManager.LoadScene(2);
-        //    inLevel = false;
-        //}
-        //else
+        if (GameManager.instance.inLevel)
+        {
+            SceneManager.LoadScene(2);
+            inLevel = false;
+        }
+        else
         {
             SceneManager.LoadScene(1);
             inLevel = true;

@@ -937,9 +937,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponList: []
-  panelList: []
-  imList: []
-  weaponTypes: []
+  panelList:
+  - {fileID: 1462689807}
+  - {fileID: 568504495}
+  - {fileID: 401656160}
+  - {fileID: 1335746130}
+  - {fileID: 399212443}
+  - {fileID: 633579196}
+  imList:
+  - {fileID: 1462689809}
+  - {fileID: 568504497}
+  - {fileID: 401656162}
+  - {fileID: 1335746132}
+  - {fileID: 399212445}
+  - {fileID: 633579198}
+  weaponTypes:
+  - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
+  - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
+  canvas: {fileID: 857591495}
   openIt: 0
   iMax: 6
 --- !u!1 &399212443
@@ -1904,6 +1920,7 @@ MonoBehaviour:
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  canvas: {fileID: 0}
   openIt: 0
   iMax: 6
 --- !u!1 &883159007

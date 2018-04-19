@@ -9,7 +9,7 @@ public class ShopManager : MonoBehaviour
     public List<Image> imList;
 
     public GameObject[] weaponTypes;
-    private GameObject canvas;
+    public GameObject canvas;
     private GameObject panel;
     private GameObject buttonBuy;
 
@@ -21,7 +21,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        
+        weaponList.Clear();
         while (weaponList.Count < iMax)
         {
             CreateWeapon();       
