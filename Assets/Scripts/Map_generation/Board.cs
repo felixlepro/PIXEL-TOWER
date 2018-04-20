@@ -383,7 +383,7 @@ public class Board : MonoBehaviour {
     void SetNbrChest()
     {     
         float rng = Random.value;
-        rng = rng *rng;
+        rng = rng * rng * rng;
         for(int i = 1; i <= nbrChestMax; i++)
         {
 

@@ -34,14 +34,15 @@ public class PlayerTriggers : MonoBehaviour {
             }
 
         }
-        if ((other.tag == "Coin")) { 
+        if ((other.tag == "Coin")) {
 
-            pm.coinList.Remove(other.gameObject);
-            pm.coinList.TrimExcess();
-            player.gainCoin();
-            Destroy(other.gameObject);
-            // GameManager.instance..PlaySound(GameManager.instance..coinSound);
-            GameManager.instance.PlaySound(GameManager.instance.coinSound);
+                pm.coinList.Remove(other.gameObject);
+                pm.coinList.TrimExcess();
+                player.gainCoin();
+                Destroy(other.gameObject);
+                // GameManager.instance..PlaySound(GameManager.instance..coinSound);
+                GameManager.instance.PlaySound(GameManager.instance.coinSound);
+            
         }
         if ((other.tag == "Key"))
         {

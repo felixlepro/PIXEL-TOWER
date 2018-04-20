@@ -103,7 +103,8 @@ public class GameManager : MonoBehaviour {
 
         }
         instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
-        instance.piggy.transform.position = player.transform.position;
+        instance.piggy.transform.position = instance.player.transform.position;
+
 
         instance.loadingScreen.SetActive(false);
         instance.gameOverMenu.SetActive(false);

@@ -108,8 +108,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   sprite: {fileID: 21300000, guid: 48a6e6b7124442440b9d7e41676f419f, type: 3}
   description: 
-  basePosition: {x: 0.35, y: 0, z: 0}
+  basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
+  direction: {x: 0, y: 0, z: 0}
   numAttack: 0
   isFantoming: 0
   attackDamageRange:

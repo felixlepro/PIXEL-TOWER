@@ -533,42 +533,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: loadingScreen
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: loadSlider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: loadText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: coinText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: hpBar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114178250861591362, guid: 317f7e32398cbea4796e16e2fdeaa1f5,
-        type: 2}
-      propertyPath: canvasMenu
-      value: 
-      objectReference: {fileID: 223028681014231626, guid: b95ebcbfeb1add34081cbb389f7c1086,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317f7e32398cbea4796e16e2fdeaa1f5, type: 2}
   m_IsPrefabParent: 0
@@ -818,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6826333d7daa34ab9a50ccf42dab62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseMaxFollowAmount: 0.9
+  mouseMaxFollowAmount: 0.95
   distanceFollow: 40
   zoomMin: 3
   zoomMax: 7

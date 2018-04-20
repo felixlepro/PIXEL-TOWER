@@ -11,7 +11,8 @@ public class CoinExplosion : MonoBehaviour {
     int angle;
     AudioSource audio;
     Rigidbody2D rb;
-    
+
+
 	void Start () {
         vitesse = Random.Range(vitesseMin, vitesseMax);
         angle = Random.Range(1, 360);
@@ -21,15 +22,18 @@ public class CoinExplosion : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        rb.MovePosition(transform.position + direction * vitesse);
+       
+
        // transform.position += direction * vitesse;
         if (vitesse > 0.0005)
         {
             vitesse -= vitesse*Time.deltaTime;
         }
         else vitesse = 0;
-        
-	}
+
+        rb.MovePosition(transform.position + direction.normalized * vitesse);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "MurPrototypeFond(Clone)" || other.name == "MurAvant(Clone)")
