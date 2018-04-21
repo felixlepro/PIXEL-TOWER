@@ -13,9 +13,11 @@ public class TimeRewinding : MonoBehaviour
     public Player scriptPlayer;
     public GameObject ancienWeapon;
     public GameObject currentWeapon;
+    PlayerTarget pT;
     void Start()
     {
-        positionRewind = new List<PositionPlus>();
+        pT = GameObject.Find("Enemies").GetComponent<PlayerTarget>();
+       positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
         scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
@@ -90,7 +92,7 @@ public class TimeRewinding : MonoBehaviour
             fantome.Initialize(positionCopie);
             
            
-            GameObject.Find("Enemies").GetComponent<PlayerTarget>().changeTarget(GameObject.Find("PilotCopie(Clone)").transform);
+            pT.changeTarget(GameObject.Find("PilotCopie(Clone)").transform);
             
         }
         
@@ -101,7 +103,7 @@ public class TimeRewinding : MonoBehaviour
     public void FantomeMort()
     {
         isFantoming = false;
-        GameObject.Find("Enemies").GetComponent<PlayerTarget>().changeTarget(GameManager.instance.player.transform);
+       pT.changeTarget(GameManager.instance.player.transform);
         
     }
 }

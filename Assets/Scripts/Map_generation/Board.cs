@@ -7,8 +7,8 @@ public class Board : MonoBehaviour {
     {
         Wall,Floor,Chest
     }
-    public int hauteur = 100;
-    public int largeur = 100;
+    public int hauteur = 69;
+    public int largeur = 69;
     public IntRange numRooms = new IntRange(15, 20);
     public IntRange hautRoom = new IntRange(3, 10);
     public IntRange largRoom = new IntRange(3, 10);
@@ -39,12 +39,12 @@ public class Board : MonoBehaviour {
     int[,] gridToInt;
     int level;
     int nbrTileFloor = 0;
-
+    public float distanceMinEnemJoueur = 10;
     int modulXn = 3;
     public  void SetupBoard(int lvl)
     {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-        Debug.Log("setup");
+       // Debug.Log("setup");
         //Destroy(boardHolder);
         //  Destroy(GameObject.Find("Board Holder"));
         // Destroy(GameObject.Find("Chest Holder"));
@@ -104,13 +104,12 @@ public class Board : MonoBehaviour {
 
     private void SetUpTilesArray()
     {
-        tiles = new TileType[largeur][];
+
+        tiles = new TileType[largeur+1][];
         for (int i = 0;i<tiles.Length;i++)
         {
-            tiles[i] = new TileType[hauteur];
+            tiles[i] = new TileType[hauteur+1];
         }
-        hauteur--;
-        largeur--;
     }
     void CreateRoomsAndCorridors()
     {
@@ -179,7 +178,7 @@ public class Board : MonoBehaviour {
                         
                         potentialChest.Add(pos);
                     }
-                    else
+                    else if (new Vector2(xCoord - largeur/2, yCoord - hauteur/2).magnitude > distanceMinEnemJoueur)
                     {
                         potentialEn.Add(pos);
                     }
@@ -330,7 +329,7 @@ public class Board : MonoBehaviour {
     {
         Vector3 player = GameManager.instance.player.transform.position;
             //GameObject.Find("Pilot").transform.position;
-        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)level/15 + 1));
+        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)level/10 + 1));
 
         for (int i = 0; i < nbrEnemy; i++)
         {

@@ -25,6 +25,8 @@ public class PiggyManager : MonoBehaviour {
 
 
 	void Start () {
+        Debug.Log("start");
+        coinList.Clear();
         anim = GetComponent<Animator>();
         unity = GetComponent<Unit>();
         spriteR = GetComponent<SpriteRenderer>();

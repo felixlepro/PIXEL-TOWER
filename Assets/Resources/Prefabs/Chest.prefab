@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animChest: {fileID: 9100000, guid: 10097f9fa65ed234f9b47843b4764b0c, type: 2}
   nbCoins: 20
-  weaponDropChance: 100
+  weaponDropChance: 30
   hasKey: 0
   anim: {fileID: 0}
 --- !u!212 &212598487089321842

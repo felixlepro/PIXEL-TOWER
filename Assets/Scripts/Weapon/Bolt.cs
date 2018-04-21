@@ -15,13 +15,13 @@ public class Bolt : MonoBehaviour {
     private float knockBack;
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
-    Collider2D collider;
+    Collider2D colliderD;
     bool hasCollided = false;
 
     // Use this for initialization
     void Start () {
         boltRigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        colliderD = GetComponent<Collider2D>();
     }
 
 	// Update is called once per frame
@@ -62,7 +62,7 @@ public class Bolt : MonoBehaviour {
             if (!hasCollided)
             {
                 hasCollided = true;
-                collider.enabled = false;
+                colliderD.enabled = false;
                 GetComponent<Animator>().SetTrigger("Hit");
                 transform.right = -direction;
                 EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
@@ -79,7 +79,7 @@ public class Bolt : MonoBehaviour {
             if (!hasCollided)
             {
                 hasCollided = true;
-                collider.enabled = false;
+                colliderD.enabled = false;
             GetComponent<Animator>().SetTrigger("Hit");
             transform.right = -direction;
             //Destroy(this.gameObject);

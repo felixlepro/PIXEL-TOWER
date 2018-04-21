@@ -46,6 +46,13 @@ public class CoinExplosion : MonoBehaviour {
         }
         audio.Play();
     }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.tag == "Obstacle")
+    //    {
+    //        Debug.Log("wtf");
+    //    }
+    //}
     //private void OnDestroy()
     //{
     //    audio.Play();

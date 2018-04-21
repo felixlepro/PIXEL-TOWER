@@ -15,7 +15,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost = 10; //pour l'instant les weapons coutent tous 10$ puisque ce n'est pas ma priorité
     public bool isMelee;
 
-    protected const float lvlScalability = 7.5f; //after how many floors will the damage double 
+    protected const float lvlScalability = 6; //apres combien de floor les stats des armes vont doubler
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     protected  bool isFire = true;
     protected bool isIce = false;

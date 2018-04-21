@@ -119,8 +119,9 @@ public class Player : Character {
     public void SetUpHpBar(Image c)
     {
         hpBar = c.GetComponentInChildren<Image>();
-        Debug.Log(hpBar.gameObject.name);
-      
+        hpBar.fillAmount = (float)hp / (float)maxHp;
+        //Debug.Log(hpBar.gameObject.name);
+
     }
 
     private void Move(float h, float v)
@@ -145,8 +146,7 @@ public class Player : Character {
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
             hp -= damage;
             hpBar.fillAmount = (float)hp / (float)maxHp;
-            Debug.Log(hpBar.fillAmount);
-            Debug.Log(hpBar.sprite.name);
+            //Debug.Log(hpBar.fillAmount);
             if (hp <= 0)
             {
                 Time.timeScale = 0;
@@ -401,35 +401,35 @@ public class Player : Character {
     //    //   Debug.Log("ca");
     //   // hpBar.fillAmount = (float)hp / (float)maxHp;
     //}
-    public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
-    {
-        if (!lvl0)
-        {
-            Debug.Log(h);
-            hp = h;
-            coins = coin;
-            currentWeaponIndex = cwi;
-            startingWeapon = wp;
-        }
-        else
-        {
-            hp = maxHp;
-            coins = 0;
-            currentWeaponIndex = 0;
-        }
-     //   Debug.Log("ca");
-        hpBar.fillAmount = (float)hp / (float)maxHp;
-    }
-    public GameObject[] weaponObjects()
-    {
-        GameObject[] wo = new GameObject[weaponList.Count];
-        for (int i = 0; i< weaponList.Count; i++)
-        {
-            wo[i] = weaponList[i].gameObject;
-        }
-        return wo;
+    //public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
+    //{
+    //    if (!lvl0)
+    //    {
+    //        Debug.Log(h);
+    //        hp = h;
+    //        coins = coin;
+    //        currentWeaponIndex = cwi;
+    //        startingWeapon = wp;
+    //    }
+    //    else
+    //    {
+    //        hp = maxHp;
+    //        coins = 0;
+    //        currentWeaponIndex = 0;
+    //    }
+    // //   Debug.Log("ca");
+    //    hpBar.fillAmount = (float)hp / (float)maxHp;
+    //}
+    //public GameObject[] weaponObjects()
+    //{
+    //    GameObject[] wo = new GameObject[weaponList.Count];
+    //    for (int i = 0; i< weaponList.Count; i++)
+    //    {
+    //        wo[i] = weaponList[i].gameObject;
+    //    }
+    //    return wo;
         
-    }
+    //}
  
 
 }

@@ -288,7 +288,7 @@ MonoBehaviour:
   attackDamage: 5
   immuneTime: 1
   maxKnockBackAmount: 0
-  attackRange: 10
+  attackRange: 7
   attackCD: 4
   timeUntilNextAttack: 0
   attackHitbox: []

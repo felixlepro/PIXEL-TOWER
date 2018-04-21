@@ -298,17 +298,40 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1189997097214954, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
-      propertyPath: m_TagString
-      value: HPBar
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.74264705
       objectReference: {fileID: 0}
-    - target: {fileID: 1875194504157652, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.74264705
       objectReference: {fileID: 0}
-    - target: {fileID: 1070643316885644, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
-      propertyPath: m_TagString
-      value: CoinText
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.74264705
+      objectReference: {fileID: 0}
+    - target: {fileID: 114829110392621434, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114012922527408920, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0.416
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
@@ -782,8 +805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6826333d7daa34ab9a50ccf42dab62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseMaxFollowAmount: 0.95
-  distanceFollow: 40
+  mouseMaxFollowAmount: 0.5
+  distanceFollow: 30
   zoomMin: 3
   zoomMax: 7
 --- !u!4 &1098035495
@@ -1329,6 +1352,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1778549800}
+  - component: {fileID: 1778549801}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Untagged
@@ -1349,6 +1373,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778549801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778549799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b398ccb7378fac34bb8d34443631d284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTarget: {fileID: 0}
 --- !u!1 &1853770912
 GameObject:
   m_ObjectHideFlags: 0

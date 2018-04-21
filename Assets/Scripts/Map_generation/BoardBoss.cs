@@ -7,10 +7,10 @@ public class BoardBoss : MonoBehaviour
 
     public enum TileType
     {
-        Wall, Floor, Chest, Door
+        Wall, Floor, Chest, Door, Exit
     }
-    public int hauteur = 100;
-    public int largeur = 100;
+    public int hauteur = 69;
+    public int largeur = 69;
 
     public IntRange hautRoomIni = new IntRange(3, 10);
     public IntRange largRoomIni = new IntRange(3, 10);
@@ -26,10 +26,12 @@ public class BoardBoss : MonoBehaviour
     public GameObject voidTile;
     public GameObject Door;
 
+    public GameObject exit;
     private TileType[][] tiles;
     private Room[] rooms;
     private Corridor[] corridors;
-
+    
+    
     public GameObject[] enemyList;
 
     GameObject chestHolder;
@@ -41,7 +43,7 @@ public class BoardBoss : MonoBehaviour
     public void SetupBoard(int lvl)
     {
         //boardHolder = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-        level = lvl / 4;
+        level = lvl / GameManager.instance.nbrFloorEntreBoss;
         Destroy(GameObject.Find("Board Holder"));
         Destroy(GameObject.Find("Chest Holder"));
         boardHolder = new GameObject("Board Holder");
@@ -87,13 +89,11 @@ public class BoardBoss : MonoBehaviour
 
     private void SetUpTilesArray()
     {
-        tiles = new TileType[largeur][];
+        tiles = new TileType[largeur+1][];
         for (int i = 0; i < tiles.Length; i++)
         {
-            tiles[i] = new TileType[hauteur];
+            tiles[i] = new TileType[hauteur+1];
         }
-        hauteur--;
-        largeur--;
     }
     void CreateRoomsAndCorridors()
     {
@@ -148,9 +148,8 @@ public class BoardBoss : MonoBehaviour
                 for (int k = 0; k < currentRoom.hautRoom; k++)
                 {
                     int yCoord = currentRoom.posY + k;
-
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    tiles[xCoord][yCoord] = TileType.Floor;
+                     tiles[xCoord][yCoord] = TileType.Floor;
                 }
             }
         }
@@ -224,9 +223,11 @@ public class BoardBoss : MonoBehaviour
                     if (tiles[i][j - 1] == TileType.Floor || tiles[i][j-1] == TileType.Door)
                     {
                         InstantiateObject(mur_Nord, i, j);
+                        if (corridors[0].startX == i)
+                        {
+                            InstantiateObject(exit, i, j);
+                        }
                     }
-
-
                 }
                 if (tiles[i][j] == TileType.Wall && i < largeur - 1)
                 {
@@ -296,11 +297,8 @@ public class BoardBoss : MonoBehaviour
 
 void InstantiateEnemies(TileType[][] t)
 {
-        Debug.Log(level);
-        Debug.Log(level / 2);
-        int nbrEnemy = Mathf.CeilToInt((float)level / 2f);
-        Debug.Log(nbrEnemy);
-        // float enemyDensity = 1f + level * 0.1f;
+        int nbrEnemy = level;// Mathf.CeilToInt((float)level / 2f);
+        Debug.Log(nbrEnemy + " Wizard");
 
         float ecart = rooms[1].largRoom / (nbrEnemy+1);
         for (int i = 1; i <= nbrEnemy; i++)
@@ -310,12 +308,9 @@ void InstantiateEnemies(TileType[][] t)
             InstantiateAnEnemy(new Vector3(2 * xCoord, 2 * yCoord, 0));
 
         }
-        Debug.Log(test);
 }
-int test = 0;
 void InstantiateAnEnemy(Vector3 position)
 {
-    test += 1;
     int whatEn = Random.Range(0, enemyList.Length);
     GameObject enemy = Instantiate(enemyList[whatEn], position, Quaternion.identity);
     enemy.transform.parent = GameObject.Find("Enemies").transform;

@@ -122,8 +122,18 @@ public class Wizard : EnemyManager {
     public override void gonnaDie()
     {
         dying = true;
+  
     }
-
+    protected override void DropItems()
+    {
+        nbrCoins = Random.Range(Mathf.RoundToInt(nbrCoins / 2), Mathf.RoundToInt(nbrCoins * 1.5f));
+        DropManager.DropCoin(transform.position, nbrCoins);
+        DropManager.DropKey(transform.position);
+        if (Random.value * 100 < weaponDropChance)
+        {
+            DropManager.DropRandomWeapon(transform.position, true);
+        }
+    }
     public override void Damaged()
     {
     }

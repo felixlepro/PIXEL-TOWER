@@ -15,6 +15,7 @@ public class GridManager : MonoBehaviour
     Vector3 worldBotLeft;
     Vector2 gridWorldSize;
     public float nodeRadius;
+    public int nodeContour = 1;
     //public int NodeContour;
 
 
@@ -49,9 +50,9 @@ public class GridManager : MonoBehaviour
 
                 //if (walkable)
                 //{
-                //    for (int vx = -NodeContour; vx <= NodeContour; vx += NodeContour)
+                //    for (int vx = -nodeContour; vx <= nodeContour; vx += nodeContour)
                 //    {
-                //        for (int vy = -NodeContour; vy <= NodeContour; vy += NodeContour)
+                //        for (int vy = -nodeContour; vy <= nodeContour; vy += nodeContour)
                 //        {
                 //            int nvx = Mathf.FloorToInt((x + vx) * nodeRadius);
                 //            int nvy = Mathf.FloorToInt((y + vy) * nodeRadius);
@@ -153,7 +154,7 @@ public class GridManager : MonoBehaviour
 
     //void OnDrawGizmos()
     //{
-    //   // PrintIdGrid();
+    //    // PrintIdGrid();
     //    if (grid != null && enableGizmos)
     //    {
     //        {

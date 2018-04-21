@@ -113,27 +113,27 @@ MonoBehaviour:
     min: 0.25
     max: 0.75
   knockBackAmountRange:
-    min: 5
-    max: 12
-  IceFireChance: 0.15
+    min: 4
+    max: 6
+  IceFireChance: 0.25
   chanceBurnProcRange:
-    min: 25
+    min: 50
     max: 75
   burnDurationRange:
     min: 2
     max: 5
   burnSufferedRange:
-    min: 1
-    max: 4
+    min: 4
+    max: 8
   chanceSlowProcRange:
-    min: 25
-    max: 75
+    min: 50
+    max: 100
   slowDurationRange:
-    min: 1
-    max: 3
+    min: 2
+    max: 5
   slowValueRanges:
-    min: 0.1
-    max: 0.4
+    min: 0.3
+    max: 0.6
   boltSpeed: 25
   slowAmount: 0.7
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}

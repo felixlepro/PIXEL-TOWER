@@ -96,12 +96,13 @@ public class GameManager : MonoBehaviour {
             instance.boardBoss = GetComponent<BoardBoss>();
 
             //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
-            instance.player = Instantiate(player, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
-            instance.piggy = Instantiate(piggy, new Vector3(boardScript.hauteur, boardScript.largeur, 0), Quaternion.identity);
-            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
-            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
+            instance.player = Instantiate(player, new Vector3(boardScript.hauteur-2, boardScript.largeur, 0), Quaternion.identity);
+            instance.piggy = Instantiate(piggy, new Vector3(boardScript.hauteur-2, boardScript.largeur, 0), Quaternion.identity);
+          
 
         }
+        instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
+        instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
         instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
         instance.piggy.transform.position = instance.player.transform.position;
 
@@ -172,13 +173,20 @@ public class GameManager : MonoBehaviour {
     }
     public void Restart()
     {
+        foreach (GameObject wp in GameObject.FindGameObjectsWithTag("Weapon"))
+        {
+            if (wp.transform.parent == null)
+            {
+                Destroy(wp);
+            }
+        }
         //if (GameManager.instance.inLevel)
         //{
         //    StartCoroutine(LoadAsynchronously(2));
         //    inLevel = false;
         //}
         //else
-        {
+        {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;
         }
@@ -191,7 +199,7 @@ public class GameManager : MonoBehaviour {
         levelImage = GameObject.Find("LevelImage");
         instance.level += 1;
         Debug.Log("Floor: " + instance.level);
-        if ((instance.level % 4) == 0)
+        if ((instance.level % (nbrFloorEntreBoss+1)) == 0)
         {
             instance.boardBoss.SetupBoard(instance.level);
             SetupAI();
@@ -225,7 +233,7 @@ public class GameManager : MonoBehaviour {
  
     public int GetCurrentLevel()
     {
-        return level;
+        return instance.level;
     }
 
     IEnumerator LoadAsynchronously(int index)

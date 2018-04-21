@@ -200,12 +200,13 @@ abstract public class EnemyManager : Character {
       //  Debug.Log(hpBar.fillAmount);
         DamageTextManager.CreateFloatingText(damage, transform.position);
         CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
-        knockBackAmount = kbAmmount * gettingKnockedBackAmount;
+       float kbTemp = kbAmmount * gettingKnockedBackAmount;
         Damaged();
         gotDamaged = true;
-        if (knockBackAmount != 0)
+        if (kbTemp != 0)
         {
-            knockBackDirection = kbDirection;
+            knockBackAmount = kbTemp;
+            knockBackDirection = kbDirection.normalized;
             //knockBackAmountOverTime = 0;
             StartCoroutine("KnockBack");
         }
@@ -270,7 +271,7 @@ abstract public class EnemyManager : Character {
     }
     public IEnumerator KnockBack()
     {
-        pathingUnit.speed = 0;
+        isRooted = true;
         pathingUnit.disablePathing();
         float kbAmountOverTime = 0;
         spriteR.color = new Color(1f, 0, 0, 1f);
@@ -281,10 +282,10 @@ abstract public class EnemyManager : Character {
             float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
             spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
 
-          //  Debug.Log(knockBackDirection.normalized);
+           
 
-            Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
-
+            Vector3 kb = knockBackDirection * knockBackAmount * curve * Time.deltaTime;
+            //Debug.Log(kb + "    " + knockBackAmount + "    " + curve);
             enemyRigidbody.MovePosition(transform.position + kb);
             //transform.position = Vector3.MoveTowards(transform.position, transform.position+kb, Time.deltaTime);
             kbAmountOverTime += Time.deltaTime * knockBackTime;
@@ -292,7 +293,7 @@ abstract public class EnemyManager : Character {
         }
         spriteR.color = new Color(1f, 1, 1, 1f);
         pathingUnit.enablePathing();
-        pathingUnit.speed = currentSpeed;
+        isRooted = false;
     }
 
     //private void Death()
@@ -419,7 +420,7 @@ abstract public class EnemyManager : Character {
         dungo.GetComponentInChildren<DunManager>().Initialize(transform.position + Vector3.up * height);
 
     }
-    void DropItems()
+    protected virtual void DropItems()
     {
         nbrCoins = Random.Range(Mathf.RoundToInt(nbrCoins / 2), Mathf.RoundToInt(nbrCoins * 1.5f));
         DropManager.DropCoin(transform.position, nbrCoins);

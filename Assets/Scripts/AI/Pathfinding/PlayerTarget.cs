@@ -6,10 +6,6 @@ public class PlayerTarget : MonoBehaviour {
 
     [HideInInspector] public Transform playerTarget;
 
-    private void Awake()
-    {
-        playerTarget = GameManager.instance.player.transform;
-    }
     public void changeTarget(Transform newTarget)
     {
         playerTarget = newTarget;

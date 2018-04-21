@@ -223,7 +223,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
 --- !u!61 &61025386417969170
@@ -345,7 +345,7 @@ MonoBehaviour:
   maxMoveSpeed: 6
   immune: 0
   currentSpeed: 0
-  patrolSpeedChaseSpeedRatio: 6
+  patrolSpeedChaseSpeedRatio: 4
   gettingKnockedBackAmount: 0
   chaseRange: 10
   chaseRangeBuffer: 10
