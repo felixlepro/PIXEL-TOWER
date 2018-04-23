@@ -93,10 +93,6 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowNonFade(float slowAmount, float duration)
     {
-        iconList.Add(Instantiate(iconGlace));
-        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(duration);
-        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
-        iconList[iconList.Count - 1].transform.position = PositionIcone();
         float time = 0;
 
         currentSpeed *= (1 - slowAmount);
@@ -109,10 +105,6 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowFade(float slowAmount, float duration)
     {
-        iconList.Add(Instantiate(iconGlace));
-        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(duration);
-        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
-        iconList[iconList.Count - 1].transform.position = PositionIcone();
         float speed = 1f;
         float time = 0;
         while (time < duration)
