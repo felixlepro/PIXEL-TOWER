@@ -12,7 +12,6 @@ public class Chest : MonoBehaviour {
 
     private void Start()
     {
-        nbCoins = Random.Range(Mathf.RoundToInt(nbCoins / 2), Mathf.RoundToInt(nbCoins * 1.5f));
         anim = GetComponent<Animator>();
         anim.runtimeAnimatorController = animChest;
     }
