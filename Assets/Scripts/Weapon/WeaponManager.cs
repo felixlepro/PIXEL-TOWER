@@ -229,7 +229,7 @@ public abstract class WeaponManager : MonoBehaviour {
 
     protected void facingMouse()
     {
-        GetComponentInParent<Player>().doFaceMouse(true);
+        if(!isFantoming) GetComponentInParent<Player>().doFaceMouse(true);
     }
 
     protected void UpdateTimeUntilNextAttack()
