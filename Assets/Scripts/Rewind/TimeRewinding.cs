@@ -21,6 +21,7 @@ public class TimeRewinding : MonoBehaviour
         positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
         scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
+        Debug.Log(scriptPlayer.currentWeaponIndex);
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
         Debug.Log("cacacacacacaca");
     }

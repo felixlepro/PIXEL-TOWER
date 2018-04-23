@@ -120,7 +120,7 @@ public class SwordManager : WeaponManager
         Invoke("triggerSwipe", 0.1f);
         ResetAttackTimer();
         Invoke("EndAttack", attackTime);
-        GetComponentInParent<Player>().doFaceMouse(false);
+        if (!isFantoming) GetComponentInParent<Player>().doFaceMouse(false);
         Invoke("facingMouse", attackTime*1.3f);
     }
     void triggerSwipe()

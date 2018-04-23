@@ -118,7 +118,7 @@ public class SpearManager : WeaponManager
         //  anima[0].SetTrigger("PlayerAttack");
         ResetAttackTimer();
         Invoke("EndAttack", attackTime);
-        GetComponentInParent<Player>().doFaceMouse(false);
+        if(!isFantoming) GetComponentInParent<Player>().doFaceMouse(false);
         Invoke("facingMouse", attackTime);
     }
 
