@@ -26,7 +26,7 @@ public class CrossbowManager : WeaponManager
         float boltSpeedSlowAmountRatio = Random.value;
         boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
 
-        cost = 10;
+        cost = Mathf.RoundToInt(costRange.Random * lvlScalability * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;

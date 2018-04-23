@@ -28,7 +28,7 @@ public class BowManager : WeaponManager {
         boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
         slowAmount = slowAmountRange.Set(1 - boltSpeedSlowAmountRatio) / thisRarity.multiplier;
 
-        cost = 10;
+        cost = Mathf.RoundToInt(costRange.Random * lvlScalability * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;

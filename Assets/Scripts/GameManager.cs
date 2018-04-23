@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        
 
+        Debug.Log("awake");
        
         if (instance == null)
         {
@@ -74,51 +74,60 @@ public class GameManager : MonoBehaviour {
         }
         else if (instance != this)
             Destroy(gameObject);
-       
+
         //player = GameObject.Find("Pilot");
         //piggy = GameObject.Find("Piggy");
 
         // player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
 
-
-        enemies = new List<EnemyManager>();
-        if (instance.level == 0)
+        if (!!!!!!!!!!!(SceneManager.GetActiveScene().buildIndex != 1))
         {
-            instance.canvasMenu = Instantiate(canvasMenu, new Vector3(0, 0, 0), Quaternion.identity);
-            instance.loadingScreen = instance.canvasMenu.transform.Find("LoadingScreen").gameObject;
-            instance.gameOverMenu = instance.canvasMenu.transform.Find("GameOverMenu").gameObject;
-            instance.optionsMenu = instance.canvasMenu.transform.Find("OptionsMenu").gameObject;
-            instance.mainMenu = instance.canvasMenu.transform.Find("MainMenu").gameObject;
-            instance.loadSlider = instance.loadingScreen.GetComponentInChildren<Slider>();
-            instance.loadText = instance.loadSlider.GetComponentInChildren<Text>();
-            instance.audio = GetComponent<AudioSource>();
-            instance.boardScript = GetComponent<Board>();
-            instance.boardBoss = GetComponent<BoardBoss>();
+            enemies = new List<EnemyManager>();
+            if (instance.level == 0)
+            {
+                instance.canvasMenu = Instantiate(canvasMenu, new Vector3(0, 0, 0), Quaternion.identity);
+                instance.loadingScreen = instance.canvasMenu.transform.Find("LoadingScreen").gameObject;
+                instance.gameOverMenu = instance.canvasMenu.transform.Find("GameOverMenu").gameObject;
+                instance.optionsMenu = instance.canvasMenu.transform.Find("OptionsMenu").gameObject;
+                instance.mainMenu = instance.canvasMenu.transform.Find("MainMenu").gameObject;
+                instance.loadSlider = instance.loadingScreen.GetComponentInChildren<Slider>();
+                instance.loadText = instance.loadSlider.GetComponentInChildren<Text>();
+                instance.audio = GetComponent<AudioSource>();
+                instance.boardScript = GetComponent<Board>();
+                instance.boardBoss = GetComponent<BoardBoss>();
 
-            //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
-            instance.player = Instantiate(player, new Vector3(boardScript.hauteur-2, boardScript.largeur, 0), Quaternion.identity);
-            instance.piggy = Instantiate(piggy, new Vector3(boardScript.hauteur-2, boardScript.largeur, 0), Quaternion.identity);
-          
+                //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
+ 
+            }
+            instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
+            instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
+            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
+            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
+            instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
+            instance.piggy.transform.position = instance.player.transform.position;
+
+
+            DamageTextManager.Initialize();
+            
+            // DontDestroyOnLoad(player);
+            //DontDestroyOnLoad(piggy);
+            instance.wayPointList.Clear();
+            loadNewLevel();
+        }
+        else
+        {
+            instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
+            instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
+            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
+            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
+     
 
         }
-        instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
-        instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
-        instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
-        instance.piggy.transform.position = instance.player.transform.position;
-
-
+        DropManager.Initialize();
         instance.loadingScreen.SetActive(false);
         instance.gameOverMenu.SetActive(false);
         instance.optionsMenu.SetActive(false);
         instance.mainMenu.SetActive(false);
-
-        DamageTextManager.Initialize();
-        DropManager.Initialize();
-        // DontDestroyOnLoad(player);
-        //DontDestroyOnLoad(piggy);
-        instance.wayPointList.Clear();
-        loadNewLevel();
-
     }
 
     private void Start()
@@ -173,6 +182,7 @@ public class GameManager : MonoBehaviour {
     }
     public void Restart()
     {
+        piggy.GetComponent<PiggyManager>().coinList.Clear();
         foreach (GameObject wp in GameObject.FindGameObjectsWithTag("Weapon"))
         {
             if (wp.transform.parent == null)
@@ -180,12 +190,12 @@ public class GameManager : MonoBehaviour {
                 Destroy(wp);
             }
         }
-        //if (GameManager.instance.inLevel)
-        //{
-        //    StartCoroutine(LoadAsynchronously(2));
-        //    inLevel = false;
-        //}
-        //else
+        if (GameManager.instance.inLevel)
+        {
+            StartCoroutine(LoadAsynchronously(2));
+            inLevel = false;
+        }
+        else
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;

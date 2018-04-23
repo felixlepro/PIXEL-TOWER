@@ -55,6 +55,7 @@ public abstract class WeaponManager : MonoBehaviour {
     protected float currentChargeTime;
      KeyCode chargeAttackKey = KeyCode.Mouse0;
 
+    public IntRange costRange = new IntRange(25, 35);
     public IntRange attackDamageRange = new IntRange(10, 20);
     public FloatRange attackSpeedRange = new FloatRange(0.1f, 0.4f);
     public FloatRange attackDamageChargedBonusRange = new FloatRange(0.25f, 0.75f);

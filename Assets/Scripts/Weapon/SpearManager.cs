@@ -33,7 +33,7 @@ public class SpearManager : WeaponManager
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
-        cost = 10;
+        cost = Mathf.RoundToInt(costRange.Random * lvlScalability * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;

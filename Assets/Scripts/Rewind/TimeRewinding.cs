@@ -14,13 +14,15 @@ public class TimeRewinding : MonoBehaviour
     public GameObject ancienWeapon;
     public GameObject currentWeapon;
     PlayerTarget pT;
+
     void Start()
     {
         pT = GameObject.Find("Enemies").GetComponent<PlayerTarget>();
-       positionRewind = new List<PositionPlus>();
+        positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
         scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
+        Debug.Log("cacacacacacaca");
     }
 
     void Update()
@@ -62,6 +64,7 @@ public class TimeRewinding : MonoBehaviour
     }
     void Record()
     {
+        
         if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 
