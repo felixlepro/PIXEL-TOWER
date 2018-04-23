@@ -81,6 +81,7 @@ abstract public class EnemyManager : Character {
     private void OnEnable()
     {
         controller = GetComponent<StateController>();
+
     }
 
     void Start()
@@ -107,6 +108,7 @@ abstract public class EnemyManager : Character {
 
         enemyCollider = GetComponentsInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
+        canvas = GameObject.Find("Canvas");
         OnStart();
     }
     public void SetStats(int lvl)
@@ -430,4 +432,8 @@ abstract public class EnemyManager : Character {
         }
     }
 
+    public override Vector3 PositionIcone()
+    {
+        return transform.position;
+    }
 }

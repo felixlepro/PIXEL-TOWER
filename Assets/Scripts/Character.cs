@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour {
     public int hp;
@@ -10,6 +11,7 @@ public abstract class Character : MonoBehaviour {
     public Color wColor = Color.white;
     public float maxMoveSpeed;
     const float burnRepetitionTime = 1;
+    private List<GameObject> iconList = new List<GameObject>();
 
     [HideInInspector] public bool immune = false;
     [HideInInspector] protected bool stunned = false;
@@ -18,6 +20,13 @@ public abstract class Character : MonoBehaviour {
  //   [HideInInspector] public bool CoroutineIce;
 
     public abstract void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime);
+    public abstract Vector3 PositionIcone();
+
+    public GameObject iconFeu;
+    public GameObject iconGlace;
+    public GameObject canvas;
+
+
 
     public void Burn(float burnChance, int burnDamage,float burnTimer)
     {
@@ -37,6 +46,11 @@ public abstract class Character : MonoBehaviour {
 
     IEnumerator IsBurning(float burnTime, int burnAmount)
     {
+        iconList.Add(Instantiate(iconFeu));
+        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(burnTime);
+        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
+        iconList[iconList.Count - 1].transform.position = PositionIcone();
+
         float currentBurnTime = 0;
         while (currentBurnTime <= burnTime)
         {
@@ -79,6 +93,10 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowNonFade(float slowAmount, float duration)
     {
+        iconList.Add(Instantiate(iconGlace));
+        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(duration);
+        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
+        iconList[iconList.Count - 1].transform.position = PositionIcone();
         float time = 0;
 
         currentSpeed *= (1 - slowAmount);
@@ -91,6 +109,10 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowFade(float slowAmount, float duration)
     {
+        iconList.Add(Instantiate(iconGlace));
+        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(duration);
+        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
+        iconList[iconList.Count - 1].transform.position = PositionIcone();
         float speed = 1f;
         float time = 0;
         while (time < duration)
