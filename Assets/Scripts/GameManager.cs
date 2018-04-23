@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
 
         // player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
 
-        if (!!!!!!!!!!!(SceneManager.GetActiveScene().buildIndex != 1))
+        if ((SceneManager.GetActiveScene().buildIndex == 1))
         {
             enemies = new List<EnemyManager>();
             if (instance.level == 0)
@@ -95,15 +95,16 @@ public class GameManager : MonoBehaviour {
                 instance.audio = GetComponent<AudioSource>();
                 instance.boardScript = GetComponent<Board>();
                 instance.boardBoss = GetComponent<BoardBoss>();
-
+                instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
+                instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
                 //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
- 
+
             }
-            instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
-            instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
+            
             instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
             instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
-            instance.player.transform.position = new Vector3(instance.boardScript.hauteur, instance.boardScript.largeur, 0);
+            instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
+            instance.player.transform.position = new Vector3(instance.boardScript.largeur , instance.boardScript.hauteur-3, 0);
             instance.piggy.transform.position = instance.player.transform.position;
 
 
@@ -116,8 +117,6 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
-            instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
             instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
             instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
      
@@ -190,12 +189,12 @@ public class GameManager : MonoBehaviour {
                 Destroy(wp);
             }
         }
-        if (GameManager.instance.inLevel)
-        {
-            StartCoroutine(LoadAsynchronously(2));
-            inLevel = false;
-        }
-        else
+        //if (GameManager.instance.inLevel)
+        //{
+        //    StartCoroutine(LoadAsynchronously(2));
+        //    inLevel = false;
+        //}
+        //else
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;

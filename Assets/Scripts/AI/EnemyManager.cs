@@ -233,7 +233,7 @@ abstract public class EnemyManager : Character {
             UpdateAnim();
             updateAnim = false;
             DropItems();
-            Destroy(this.gameObject , 2);
+            Destroy(this.gameObject , 1);
             //   Invoke("Death", 2);
         }
      

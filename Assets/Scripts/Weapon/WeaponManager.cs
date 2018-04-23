@@ -17,8 +17,8 @@ public abstract class WeaponManager : MonoBehaviour {
 
     protected const float lvlScalability = 6; //apres combien de floor les stats des armes vont doubler
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    protected  bool isFire = true;
-    protected bool isIce = false;
+    public  bool isFire = true;
+    public bool isIce = false;
     
     [HideInInspector] protected int chanceBurnProc = 50;
     [HideInInspector] protected int chanceSlowProc = 100;
@@ -69,13 +69,13 @@ public abstract class WeaponManager : MonoBehaviour {
     public FloatRange slowDurationRange = new FloatRange(1, 3);
     public FloatRange slowValueRanges = new FloatRange(0.1f, 0.4f);
 
-    protected struct rarity
+    public struct rarity
     {
         public float chance { get; set; }
         public float multiplier { get; set; }
         public string name { get; set; }
     }
-    protected rarity thisRarity;
+    [HideInInspector] public rarity thisRarity;
     rarity[] possibleRarities = { new rarity() { chance = 100, multiplier = 1, name = "Commun" },
                                   new rarity() { chance = 50, multiplier = 1.2f, name = "Rare" },
                                   new rarity() { chance = 20, multiplier = 1.4f, name = "Épic" },
