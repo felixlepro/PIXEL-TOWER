@@ -326,6 +326,9 @@ MonoBehaviour:
   maxMoveSpeed: 9
   immune: 0
   currentSpeed: 0
+  iconFeu: {fileID: 1222544667402288, guid: 1f4699bc2ac7402488a098e5602c005e, type: 2}
+  iconGlace: {fileID: 1895710242576702, guid: 9b23ae9273fd8b24abe321288846e493, type: 2}
+  canvas: {fileID: 0}
   patrolSpeedChaseSpeedRatio: 4
   gettingKnockedBackAmount: 1
   chaseRange: 9

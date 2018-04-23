@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour {
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;
-        //}
+        }
     }
     void loadNewLevel()
     {
