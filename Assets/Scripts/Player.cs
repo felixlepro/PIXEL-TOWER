@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using EZCameraShake;
 
 public class Player : Character {
-
+    
     public GameObject[] startingWeapon;
     const int weaponEquipedMax = 2;
     public List<WeaponManager> weaponList;
@@ -50,8 +50,8 @@ public class Player : Character {
     //}
     void Start()
     {
-            PlayerSetUp();
-        
+        PlayerSetUp();
+        canvas = GameObject.Find("Canvas");
     }
     private void Update()
     {
@@ -389,7 +389,7 @@ public class Player : Character {
     //{
     //    if (GameManager.instance.level != 0)
     //    {
-           
+
     //        hp = GameManager.playerStat.hp;
     //        Debug.Log(hp);
     //        coins = GameManager.playerStat.coins;
@@ -432,8 +432,12 @@ public class Player : Character {
     //        wo[i] = weaponList[i].gameObject;
     //    }
     //    return wo;
-        
+
     //}
- 
+
+    public override Vector3 PositionIcone()
+    {
+        return transform.position;
+    }
 
 }
