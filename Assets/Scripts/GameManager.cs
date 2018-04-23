@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            
             instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
             instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
      
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour {
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;
-        }
+        //}
     }
     void loadNewLevel()
     {
