@@ -377,7 +377,7 @@ public class Board : MonoBehaviour {
         enemy.transform.parent = GameObject.Find("Chest Holder").transform;
         enemy.GetComponent<Chest>().hasKey = key;
         modulXn = (23 * modulXn + 7) % 11;
-        enemy.GetComponent<Chest>().nbCoins = modulXn;
+        enemy.GetComponent<Chest>().nbCoins = modulXn + 10;
     }
     void SetNbrChest()
     {     
