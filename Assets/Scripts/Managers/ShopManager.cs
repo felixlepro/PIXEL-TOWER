@@ -1,18 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ShopManager : MonoBehaviour
 {
     public List<GameObject> weaponList;
     public List<GameObject> panelList;
     public List<Image> imList;
+    public List<Button> BuList;
 
     public GameObject[] weaponTypes;
     public GameObject canvas;
     private GameObject panel;
-    private GameObject buttonBuy;
 
+    public Player p1;
+
+    private int armBpos;
     public bool openIt = false;
     private bool canEnter = true;
     private string tagP;
@@ -21,7 +25,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        weaponList.Clear();
+        //weaponList.Clear();
         while (weaponList.Count < iMax)
         {
             CreateWeapon();       
@@ -92,8 +96,28 @@ public class ShopManager : MonoBehaviour
             imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
         }
     }
-    private void BuyWeapon()
+    public void BuyWeapon()
     {
+        switch (EventSystem.current.currentSelectedGameObject.name)
+        {
+            case "BuyButton1": armBpos = 0;break;
+            case "BuyButton2": armBpos = 1; break;
+            case "BuyButton3": armBpos = 2; break;
+            case "BuyButton4": armBpos = 3; break;
+            case "BuyButton5": armBpos = 4; break;
+            case "BuyButton6": armBpos = 5; break;
 
+        }
+        
+        if (p1.GetComponent<Player>().coins >= weaponList[armBpos].GetComponent<WeaponManager>().cost)
+        {
+            p1.GetComponent<Player>().coins -= weaponList[armBpos].GetComponent<WeaponManager>().cost;
+            p1.ChangeWeapon(weaponList[armBpos]);
+
+        }
+        else
+        {
+            Debug.Log("gros pauvre");
+        }
     }
 }
