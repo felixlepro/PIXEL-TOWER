@@ -49,6 +49,18 @@ public class TimeRewinding : MonoBehaviour
     }
     void Rewind()
     {
+        if (!scriptPlayer.immune)
+        {
+            for (int i = 0; i < GameObject.Find("Enemies").transform.childCount; i++)
+            {
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().immune = true;
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().stunned  = true;
+            }
+            scriptPlayer.immune = true;
+            scriptPlayer.stunned = true;
+            scriptPlayer.StartCoroutine("ImmuneAnim");
+        }
+        
         if (positionRewind.Count > 2)
         {
             transform.position = positionRewind[0].position;
@@ -65,7 +77,20 @@ public class TimeRewinding : MonoBehaviour
     }
     void Record()
     {
+
+        if (scriptPlayer.immune)
+        {
+            for (int i = 0; i < GameObject.Find("Enemies").transform.childCount; i++)
+                {
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().immune = false;
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().stunned = false;
+            }
+            scriptPlayer.StopImmunity();
+            scriptPlayer.stunned = false;
+        }
         
+        scriptPlayer.immune = false;
+       
         if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
 

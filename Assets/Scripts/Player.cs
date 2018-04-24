@@ -232,7 +232,7 @@ public class Player : Character {
         }
     }
 
-    private void StopImmunity()
+    public void StopImmunity()
     {
         immune = false;
         graphicsSpriteR.color = new Color(graphicsSpriteR.color[0], graphicsSpriteR.color[1], graphicsSpriteR.color[2], 1f);

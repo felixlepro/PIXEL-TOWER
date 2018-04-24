@@ -12,7 +12,7 @@ public abstract class Character : MonoBehaviour {
     const float burnRepetitionTime = 1;
 
     [HideInInspector] public bool immune = false;
-    [HideInInspector] protected bool stunned = false;
+    [HideInInspector] public bool stunned = false;
     [HideInInspector] public float currentSpeed;
  //   [HideInInspector] public bool CoroutineFire = false;
  //   [HideInInspector] public bool CoroutineIce;

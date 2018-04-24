@@ -5,11 +5,13 @@ using UnityEngine;
 public class RewindEnemi : MonoBehaviour
 {
     bool isRewinding = false;
+    float tempsRewind;
     List<Vector2> positionRewind;
     public GameObject playerCopie;
     void Start()
     {
         positionRewind = new List<Vector2 >();
+        tempsRewind = GameManager.instance.player.GetComponent<TimeRewinding>().nbSec;
     }
 
     void Update()
@@ -49,7 +51,7 @@ public class RewindEnemi : MonoBehaviour
     }
     void Record()
     {
-        if (positionRewind.Count > Mathf.Round(2f / Time.fixedDeltaTime))
+        if (positionRewind.Count > Mathf.Round(tempsRewind  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);
         
         positionRewind.Insert(0,transform.position);

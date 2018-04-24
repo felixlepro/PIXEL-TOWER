@@ -22,11 +22,15 @@ public class BlobManager : EnemyManager
 
     public override void AttackSuccessful()
     {
-        Slow(100,slowAmountOnHit, attackSpeed, true);
-        hp -= Mathf.FloorToInt(maxHp * hpRatioLostOnAttack);
-        hpBar.fillAmount = (float)hp / (float)maxHp;
-        StartCoroutine("RedOnly");
-        VerifyDeath();
+        if(!immune )
+        {
+            Slow(100,slowAmountOnHit, attackSpeed, true);
+            hp -= Mathf.FloorToInt(maxHp * hpRatioLostOnAttack);
+            hpBar.fillAmount = (float)hp / (float)maxHp;
+            StartCoroutine("RedOnly");
+            VerifyDeath();
+        }
+        
     }
 
     public override void Damaged()

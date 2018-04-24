@@ -194,25 +194,29 @@ abstract public class EnemyManager : Character {
 
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float im)
     {
-        hp -= damage;
-       // Debug.Log(hp);
-        hpBar.fillAmount = (float)hp / (float)maxHp;
-      //  Debug.Log(hpBar.fillAmount);
-        DamageTextManager.CreateFloatingText(damage, transform.position);
-        CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
-       float kbTemp = kbAmmount * gettingKnockedBackAmount;
-        Damaged();
-        gotDamaged = true;
-        if (kbTemp != 0)
+        if (!immune)
         {
-            knockBackAmount = kbTemp;
-            knockBackDirection = kbDirection.normalized;
-            //knockBackAmountOverTime = 0;
-            StartCoroutine("KnockBack");
-        }
-        else StartCoroutine("RedOnly");
+            hp -= damage;
+            // Debug.Log(hp);
+            hpBar.fillAmount = (float)hp / (float)maxHp;
+            //  Debug.Log(hpBar.fillAmount);
+            DamageTextManager.CreateFloatingText(damage, transform.position);
+            CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
+            float kbTemp = kbAmmount * gettingKnockedBackAmount;
+            Damaged();
+            gotDamaged = true;
+            if (kbTemp != 0)
+            {
+                knockBackAmount = kbTemp;
+                knockBackDirection = kbDirection.normalized;
+                //knockBackAmountOverTime = 0;
+                StartCoroutine("KnockBack");
+            }
+            else StartCoroutine("RedOnly");
 
-        VerifyDeath();
+            VerifyDeath();
+        }
+        
     }
     public void VerifyDeath()
     {
