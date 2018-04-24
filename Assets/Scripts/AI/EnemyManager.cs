@@ -76,7 +76,7 @@ abstract public class EnemyManager : Character {
     abstract public void Damaged();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
-    abstract public void gonnaDie();    
+    abstract public void gonnaDie();
 
     private void OnEnable()
     {

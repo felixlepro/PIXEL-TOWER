@@ -5,19 +5,24 @@ using UnityEngine.UI;
 
 public class IconScript : MonoBehaviour {
     public Image iconImage;
-    float effectTime;
+    float effectTime = 0;
     float timeElapsed;
 
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update() {
         timeElapsed += Time.deltaTime;
         iconImage.fillAmount = 1 - (timeElapsed / effectTime);
-        if (timeElapsed >= effectTime) Destroy(this.gameObject);
+        if (timeElapsed >= effectTime)
+        {
+            timeElapsed = 0;
+            effectTime = 0;
+            this.gameObject.SetActive(false);
+        }
 	}
 
     public void IconSetup(float time)
     {
-        effectTime = time;
+        if(time > effectTime) effectTime = time;
     }
 }

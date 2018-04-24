@@ -19,7 +19,7 @@ public class Player : Character {
      Image hpBar;
 
     [HideInInspector] public bool hasKey = false;
- [HideInInspector] public int currentWeaponIndex = 0;
+    [HideInInspector] public int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -122,8 +122,6 @@ public class Player : Character {
     {
         hpBar = c.GetComponentInChildren<Image>();
         hpBar.fillAmount = (float)hp / (float)maxHp;
-        //Debug.Log(hpBar.gameObject.name);
-
     }
 
     private void Move(float h, float v)

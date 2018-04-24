@@ -21,12 +21,10 @@ public abstract class Character : MonoBehaviour {
 
     public abstract void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime);
     public abstract Vector3 PositionIcone();
+    public GameObject canvas;
 
     public GameObject iconFeu;
     public GameObject iconGlace;
-    public GameObject canvas;
-
-
 
     public void Burn(float burnChance, int burnDamage,float burnTimer)
     {
@@ -44,13 +42,24 @@ public abstract class Character : MonoBehaviour {
         }           
     }
 
+    public void SetUpIcon(int index, GameObject icon)
+    {
+        if(index == 1)
+        {
+            iconFeu = icon;
+            iconFeu.SetActive(false);
+        }
+        else
+        {
+            iconGlace = icon;
+            iconGlace.SetActive(false);
+        }
+    }
+
     IEnumerator IsBurning(float burnTime, int burnAmount)
     {
-        iconList.Add(Instantiate(iconFeu));
-        iconList[iconList.Count - 1].GetComponent<IconScript>().IconSetup(burnTime);
-        iconList[iconList.Count - 1].transform.SetParent(canvas.transform, false);
-        iconList[iconList.Count - 1].transform.position = PositionIcone();
-
+        iconFeu.SetActive(true);
+        iconFeu.GetComponent<IconScript>().IconSetup(burnTime);
         float currentBurnTime = 0;
         while (currentBurnTime <= burnTime)
         {
@@ -93,6 +102,8 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowNonFade(float slowAmount, float duration)
     {
+        iconGlace.SetActive(true);
+        iconGlace.GetComponent<IconScript>().IconSetup(duration);
         float time = 0;
 
         currentSpeed *= (1 - slowAmount);
@@ -105,6 +116,8 @@ public abstract class Character : MonoBehaviour {
     }
     IEnumerator SlowFade(float slowAmount, float duration)
     {
+        iconGlace.SetActive(true);
+        iconGlace.GetComponent<IconScript>().IconSetup(duration);
         float speed = 1f;
         float time = 0;
         while (time < duration)

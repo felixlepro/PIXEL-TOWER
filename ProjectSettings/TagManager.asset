@@ -22,6 +22,8 @@ TagManager:
   - HPBar
   - Panel
   - StatArme
+  - iconFeu
+  - iconGlace
   layers:
   - Default
   - TransparentFX
