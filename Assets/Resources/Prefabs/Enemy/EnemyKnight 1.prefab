@@ -354,7 +354,7 @@ MonoBehaviour:
   chaseRangeBuffer: 10
   fireStack: 0
   attackSpeed: 0.25
-  nbrCoins: 5
+  nbrCoins: 3
   weaponDropChance: 10
   hpBar: {fileID: 114602227574341786}
   attacks:
@@ -451,18 +451,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   immuneTime: 1
-  maxKnockBackAmount: 5
+  maxKnockBackAmount: 2
   attackRange: 3
   attackCD: 0
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 0}
-  burnChance: 0
+  burnChance: 50
   slowChance: 0
   freezeChance: 0
   freezeDuration: 0
-  burnDamage: 0
-  burnDuration: 0
+  burnDamage: 1
+  burnDuration: 4
   slowAmount: 0
   slowDuration: 0
 --- !u!114 &114704157243912500

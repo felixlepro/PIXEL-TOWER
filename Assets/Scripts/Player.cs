@@ -31,7 +31,7 @@ public class Player : Character {
     SpriteRenderer graphicsSpriteR;
     SpriteRenderer weaponSprite;
 
-    public weaponStatUI weaponStatUI;
+    [HideInInspector] public weaponStatUI weaponStatUI;
 
     [HideInInspector] public float timeUntilNextAttack;
 
@@ -355,7 +355,8 @@ public class Player : Character {
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
-        weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
+        Debug.Log("setw");
+        setUIWeaponpStat();
     }
     public void SwitchWeapon()
     {
@@ -364,7 +365,7 @@ public class Player : Character {
             weaponList[currentWeaponIndex].gameObject.SetActive(false);
             currentWeaponIndex = (currentWeaponIndex + 1) % weaponList.Count; //Fait que ca loop dans la liste au lieu de dépassé
             weaponList[currentWeaponIndex].gameObject.SetActive(true);
-            weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
+            setUIWeaponpStat();
         }
     }
     void InstantiateWeapon(GameObject prefab)
@@ -384,6 +385,10 @@ public class Player : Character {
     public void gainKey()
     {
         hasKey = true;
+    }
+    public void setUIWeaponpStat()
+    {
+        weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
     }
     //public void setPlayerStats()
     //{
