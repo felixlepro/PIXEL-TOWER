@@ -9,6 +9,8 @@ public class ShopManager : MonoBehaviour
     public List<GameObject> panelList;
     public List<Image> imList;
     public List<Button> BuList;
+    public List<Text> pInfAttack;
+    public List<Text> pInfRar;
 
     public GameObject[] weaponTypes;
     public GameObject canvas;
@@ -30,6 +32,7 @@ public class ShopManager : MonoBehaviour
         {
             CreateWeapon();       
         }
+
         SetInfo();
       
     }
@@ -93,7 +96,9 @@ public class ShopManager : MonoBehaviour
     {
         for (int n = 0; n < iMax; n++)
         {
-            imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
+           imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
+           pInfRar[n].text = "Rareté: " + weaponList[n].GetComponent<WeaponManager>().thisRarity.name;
+           pInfAttack[n].text = "Dégâts: " + weaponList[n].GetComponent<WeaponManager>().attackDamage;
         }
     }
     public void BuyWeapon()
