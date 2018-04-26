@@ -24,6 +24,7 @@ TagManager:
   - StatArme
   - iconFeu
   - iconGlace
+  - iconKey
   layers:
   - Default
   - TransparentFX
