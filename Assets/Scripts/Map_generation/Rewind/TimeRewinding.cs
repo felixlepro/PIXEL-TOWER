@@ -21,14 +21,14 @@ public class TimeRewinding : MonoBehaviour
         positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
         scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
-        Debug.Log(scriptPlayer.currentWeaponIndex);
+       // Debug.Log(scriptPlayer.currentWeaponIndex);
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
      //   Debug.Log("cacacacacacaca");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R)&&scriptPlayer.timeCharge > 0)
             StartRewind();
         if (Input.GetKeyUp(KeyCode.R))
             StopRewind();
@@ -83,6 +83,7 @@ public class TimeRewinding : MonoBehaviour
 
     public void StartRewind()
     {
+        scriptPlayer.looseTimeCharge();
         isRewinding = true;
     }
 

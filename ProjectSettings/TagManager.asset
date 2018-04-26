@@ -25,6 +25,9 @@ TagManager:
   - iconFeu
   - iconGlace
   - iconKey
+  - FloorText
+  - TimeCharge
+  - TimeChargeUI
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class DropManager : MonoBehaviour {
     private static GameObject coinP;
     private static GameObject key;
     private static PiggyManager piggy;
+    private static GameObject time;
 
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
@@ -16,6 +17,7 @@ public class DropManager : MonoBehaviour {
         piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
         //GameObject.Find("Piggy").GetComponent<PiggyManager>(); //
         key = GameManager.instance.key;
+        time = GameManager.instance.timeObject;
         //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
 
@@ -57,5 +59,9 @@ public class DropManager : MonoBehaviour {
     public static void DropKey(Vector3 pos)
     {
         Instantiate(key, pos, Quaternion.identity);
+    }
+    public static void DropTime(Vector3 pos)
+    {
+        Instantiate(time, pos, Quaternion.identity);
     }
 }

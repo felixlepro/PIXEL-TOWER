@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903243394246204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70, y: 70, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4434119239704326}
@@ -334,7 +334,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.9, y: 0.4}
   m_Direction: 1
 --- !u!95 &95293706032850970
@@ -372,9 +372,9 @@ MonoBehaviour:
   maxMoveSpeed: 10
   immune: 0
   currentSpeed: 10
-  iconFeu: {fileID: 1222544667402288, guid: 1f4699bc2ac7402488a098e5602c005e, type: 2}
-  iconGlace: {fileID: 1895710242576702, guid: 9b23ae9273fd8b24abe321288846e493, type: 2}
   canvas: {fileID: 0}
+  iconFeu: {fileID: 0}
+  iconGlace: {fileID: 0}
   startingWeapon:
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   weaponList: []
@@ -382,10 +382,11 @@ MonoBehaviour:
   restartDelay: 1
   valuePerCoin: 1
   coins: 0
-  hasKey: 0
+  hasKey: 1
   currentWeaponIndex: 0
   direction: {x: 13.555164, y: 1.2142601}
   movement: {x: 0, y: 0, z: 0}
+  weaponStatUI: {fileID: 0}
   timeUntilNextAttack: 0
   knockBackAmount: 20
   knockBackAmountOverTime: 0.8533328

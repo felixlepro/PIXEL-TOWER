@@ -17,23 +17,23 @@ public abstract class WeaponManager : MonoBehaviour {
 
     protected const float lvlScalability = 6; //apres combien de floor les stats des armes vont doubler
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
-    public  bool isFire = true;
+    public bool isFire = true;
     public bool isIce = false;
-    
+
     [HideInInspector] protected int chanceBurnProc = 50;
     [HideInInspector] protected int chanceSlowProc = 100;
 
     [HideInInspector] protected float burnDuration = 4;
     [HideInInspector] protected int burnSuffered = 1;
 
-    [HideInInspector]   protected float slowDuration = 5;
+    [HideInInspector] protected float slowDuration = 5;
     [HideInInspector] protected float slowValue = 0.5f;
 
-   [HideInInspector] protected bool slowFadeState = false;     
+    [HideInInspector] protected bool slowFadeState = false;
     //Fin des attributs d'effets spéciaux d'armes  -Simon
 
 
-   
+
     [HideInInspector] public RuntimeAnimatorController animator;
     public Sprite sprite;
     public string description;
@@ -43,17 +43,17 @@ public abstract class WeaponManager : MonoBehaviour {
 
     [HideInInspector] public int numAttack;
     [HideInInspector] public bool isFantoming = false;
-    protected  SpriteRenderer spriteR;
+    protected SpriteRenderer spriteR;
     protected Animator anim;
 
 
     //protected float rand;
     protected Player player;
     protected float chargeDoneRatio;
-    protected  float timeUntilNextAttack;
+    protected float timeUntilNextAttack;
     protected float time;
     protected float currentChargeTime;
-     KeyCode chargeAttackKey = KeyCode.Mouse0;
+    KeyCode chargeAttackKey = KeyCode.Mouse0;
 
     public IntRange costRange = new IntRange(25, 35);
     public IntRange attackDamageRange = new IntRange(10, 20);
@@ -77,10 +77,17 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     [HideInInspector] public rarity thisRarity;
     rarity[] possibleRarities = { new rarity() { chance = 100, multiplier = 1, name = "Commun" },
-                                  new rarity() { chance = 50, multiplier = 1.2f, name = "Rare" },
-                                  new rarity() { chance = 20, multiplier = 1.4f, name = "Épic" },
-                                  new rarity() { chance = 5, multiplier = 1.6f, name = "Mythique" },
-                                  new rarity() { chance = 0.01f, multiplier = 2f, name = "Légendaire" }};
+                                  new rarity() { chance = 50, multiplier = 1.15f, name = "Rare" },
+                                  new rarity() { chance = 20, multiplier = 1.3f, name = "Épic" },
+                                  new rarity() { chance = 5, multiplier = 1.45f, name = "Légendaire" },
+                                  new rarity() { chance = 0.03f, multiplier = 1.6f, name = "Mythique" },
+                                  new rarity() { chance = 0.006f, multiplier = 1.75f, name = "Divin" },
+                                 new rarity()  { chance = 0.00001f, multiplier = 2.5f, name = "Paradoxal" }
+    };
+
+                                 
+
+
        // = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
 
     //const float commonChance = 100;
@@ -133,7 +140,6 @@ public abstract class WeaponManager : MonoBehaviour {
                 thisRarity = possibleRarities[i];
             }
         }
-        Debug.Log(thisRarity.name);
     }
     public void setNumAttack()
     {

@@ -116,8 +116,8 @@ MonoBehaviour:
   numAttack: 0
   isFantoming: 0
   costRange:
-    min: 25
-    max: 35
+    min: 45
+    max: 55
   attackDamageRange:
     min: 7
     max: 17
