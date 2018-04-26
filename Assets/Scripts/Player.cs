@@ -44,6 +44,7 @@ public class Player : Character {
     [HideInInspector] public Color couleurKb = Color.white;
 
     GameObject gameOverMenu;
+    public GameObject iconKey;
     //private void Awake()
     //{
     //    setPlayerStats();
@@ -383,7 +384,15 @@ public class Player : Character {
     public void gainKey()
     {
         hasKey = true;
+        iconKey.SetActive(true);
     }
+
+    public void SetupIconKey(GameObject icon)
+    {
+        iconKey = icon;
+        iconKey.SetActive(false);
+    }
+
     public void setUIWeaponpStat()
     {
         weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
