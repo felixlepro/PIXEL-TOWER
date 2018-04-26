@@ -158,6 +158,8 @@ abstract public class EnemyManager : Character {
                     if (ah.IsTouching(pc))
                     {
                         pc.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, pc.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
+                        pc.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
+                        pc.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
                         AttackSuccessful();
                         //resetAttackCD();
                         break;

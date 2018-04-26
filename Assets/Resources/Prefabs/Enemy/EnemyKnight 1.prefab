@@ -637,7 +637,7 @@ MonoBehaviour:
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 0}
-  burnChance: 50
+  burnChance: 100
   slowChance: 0
   freezeChance: 0
   freezeDuration: 0

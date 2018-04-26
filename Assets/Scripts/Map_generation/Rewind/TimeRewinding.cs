@@ -23,7 +23,7 @@ public class TimeRewinding : MonoBehaviour
         scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
         Debug.Log(scriptPlayer.currentWeaponIndex);
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
-        Debug.Log("cacacacacacaca");
+     //   Debug.Log("cacacacacacaca");
     }
 
     void Update()
