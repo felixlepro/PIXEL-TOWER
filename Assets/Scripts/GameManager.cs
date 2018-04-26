@@ -196,12 +196,12 @@ public class GameManager : MonoBehaviour {
                 Destroy(wp);
             }
         }
-        //if (GameManager.instance.inLevel)
-        //{
-        //    StartCoroutine(LoadAsynchronously(2));
-        //    inLevel = false;
-        //}
-        //else
+        if (GameManager.instance.inLevel)
+        {
+            StartCoroutine(LoadAsynchronously(2));
+            inLevel = false;
+        }
+        else
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;

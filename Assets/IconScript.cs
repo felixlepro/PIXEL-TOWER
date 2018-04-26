@@ -23,6 +23,10 @@ public class IconScript : MonoBehaviour {
 
     public void IconSetup(float time)
     {
-        if(time > effectTime) effectTime = time;
+        if (time > effectTime)
+        {
+            effectTime = time;
+            timeElapsed = 0;
+        }
     }
 }
