@@ -201,11 +201,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4831740217012566, guid: 58bbdb613e0d5d848908cf063b836faa,
     type: 2}
   m_PrefabInternal: {fileID: 1309202166}
---- !u!224 &231848526 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224351753406830644, guid: aaca6e7e0bc958d49ac0464b0571d463,
-    type: 2}
-  m_PrefabInternal: {fileID: 979123119}
 --- !u!1001 &358118774
 Prefab:
   m_ObjectHideFlags: 0
