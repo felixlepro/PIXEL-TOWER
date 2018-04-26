@@ -12,7 +12,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public float chargeTime;
     public float attackDamageChargedBonus;
     public float knockBackAmount;
-    public int cost = 10; //pour l'instant les weapons coutent tous 10$ puisque ce n'est pas ma priorité
+    public int cost; 
     public bool isMelee;
 
     protected const float lvlScalability = 6; //apres combien de floor les stats des armes vont doubler

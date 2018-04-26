@@ -6,11 +6,11 @@ using UnityEngine.EventSystems;
 public class ShopManager : MonoBehaviour
 {
     public List<GameObject> weaponList;
-    public List<GameObject> panelList;
     public List<Image> imList;
     public List<Button> BuList;
-    public List<Text> pInfAttack;
-    public List<Text> pInfRar;
+    public List<Text> pInf;
+   
+
 
     public GameObject[] weaponTypes;
     public GameObject canvas;
@@ -27,6 +27,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        
         p1.gainKey();
         //weaponList.Clear();
         while (weaponList.Count < iMax)
@@ -98,8 +99,28 @@ public class ShopManager : MonoBehaviour
         for (int n = 0; n < iMax; n++)
         {
            imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
-           pInfRar[n].text = "Rareté: " + weaponList[n].GetComponent<WeaponManager>().thisRarity.name;
-           pInfAttack[n].text = "Dégâts: " + weaponList[n].GetComponent<WeaponManager>().attackDamage;
+           string rar = "Basique";
+
+            if (weaponList[n].GetComponent<WeaponManager>().thisRarity.name != null)
+            {
+                rar = weaponList[n].GetComponent<WeaponManager>().thisRarity.name;
+            }
+            pInf[n].text = " Rareté: " + rar + "\n Dégât: " + weaponList[n].GetComponent<WeaponManager>().attackDamage + "\n Bonus de charge: ";
+            if (weaponList[n].GetComponent<WeaponManager>().attackDamageChargedBonus != 0)
+            {
+                pInf[n].text += (1 + weaponList[n].GetComponent<WeaponManager>().attackDamageChargedBonus).ToString("F1");
+            }
+            pInf[n].text += "\n Vitesse: " + (1 / weaponList[n].GetComponent<WeaponManager>().attackSpeed).ToString("F1") + "\n Recul: " + weaponList[n].GetComponent<WeaponManager>().knockBackAmount.ToString("F1");
+            if (weaponList[n].GetComponent<WeaponManager>().isFire)
+            {
+                pInf[n].text += "\n Feu";
+            }
+            if (weaponList[n].GetComponent<WeaponManager>().isIce)
+            {
+                pInf[n].text += "\n Glace";
+            }
+            pInf[n].text += "\n Coût: " + weaponList[n].GetComponent<WeaponManager>().cost;
+
         }
     }
     public void BuyWeapon()
