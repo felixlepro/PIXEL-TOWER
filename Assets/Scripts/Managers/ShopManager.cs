@@ -27,6 +27,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        p1.gainKey();
         //weaponList.Clear();
         while (weaponList.Count < iMax)
         {
