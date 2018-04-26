@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
     public AudioClip coinSound;
     public GameObject coinPrefab;
     public GameObject key;
+    public GameObject timeObject;
     public GameObject[] weapons;
 
     private  Text coinCounttext;
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
 
-        Debug.Log("awake");
+      //  Debug.Log("awake");
        
         if (instance == null)
         {
@@ -105,10 +106,12 @@ public class GameManager : MonoBehaviour {
             instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
             instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
             instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
+            instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectsWithTag("TimeChargeUI"));
             instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
-            instance.player.transform.position = new Vector3(instance.boardScript.largeur , instance.boardScript.hauteur-3, 0);
+            instance.player.transform.position = new Vector3(instance.boardScript.largeur , instance.boardScript.hauteur, 0);
             instance.piggy.transform.position = instance.player.transform.position;
-
+            instance.piggy.GetComponent<PiggyManager>().coinList.Clear();
+            instance.piggy.GetComponent<PiggyManager>().GetComponent<PiggyManager>().enabled = true;
             if (instance.level != 0)
             {
                 instance.player.GetComponent<Player>().setUIWeaponpStat();
@@ -126,9 +129,16 @@ public class GameManager : MonoBehaviour {
             
             instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
             instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
-     
-
+            instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
+            instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
+            instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
+            instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
+            instance.player.transform.position = new Vector3(0,-3, 0);
+            instance.piggy.transform.position = instance.player.transform.position;
+            instance.piggy.GetComponent<PiggyManager>().coinList.Clear();
+            instance.piggy.GetComponent<PiggyManager>().GetComponent<PiggyManager>().enabled = false;
         }
+        GameObject.FindGameObjectWithTag("FloorText").GetComponent<Text>().text = "É T A G E : " + instance.level.ToString();
         DropManager.Initialize();
         instance.loadingScreen.SetActive(false);
         instance.gameOverMenu.SetActive(false);
@@ -196,12 +206,12 @@ public class GameManager : MonoBehaviour {
                 Destroy(wp);
             }
         }
-        //if (GameManager.instance.inLevel)
-        //{
-        //    StartCoroutine(LoadAsynchronously(2));
-        //    inLevel = false;
-        //}
-        //else
+        if (GameManager.instance.inLevel)
+        {
+            StartCoroutine(LoadAsynchronously(2));
+            inLevel = false;
+        }
+        else
         {         
             StartCoroutine(LoadAsynchronously(1));
             inLevel = true;

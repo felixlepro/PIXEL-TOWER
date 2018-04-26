@@ -7,13 +7,9 @@ public class weaponStatUI : MonoBehaviour {
 
     Text statText;
 
-    private void Awake()
-    {
-        statText = GetComponent<Text>();
-    }
      public void SetStat(WeaponManager wm)
     {
-        Debug.Log("test");
+        statText = GetComponent<Text>();
         string rar = "Basique";
  
         if (wm.thisRarity.name != null)

@@ -58,7 +58,6 @@ public class SpearManager : WeaponManager
         }
         else isFire = false;
 
-        Debug.Log(isFire + " " + isIce);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -16,7 +16,7 @@ public class ShopManager : MonoBehaviour
     public GameObject canvas;
     private GameObject panel;
 
-    public Player p1;
+     Player p1;
 
     private int armBpos;
     public bool openIt = false;
@@ -27,6 +27,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        p1 = GameManager.instance.player.GetComponent<Player>();
         p1.gainKey();
         //weaponList.Clear();
         while (weaponList.Count < iMax)

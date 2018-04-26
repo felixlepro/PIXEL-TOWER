@@ -150,6 +150,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: b4c5353d9366f2b43804628128c53b65, type: 3}
   coinPrefab: {fileID: 1968824300967390, guid: c237725e37adbea41b4539a869b72e83, type: 2}
   key: {fileID: 1722516931651180, guid: 1b6b1a758a35d9340a434c775e5f9bb1, type: 2}
+  timeObject: {fileID: 1004945372107420, guid: 723dc4f6f63f4b049a27336d7607c1ad, type: 2}
   weapons:
   - {fileID: 1658826654599420, guid: 32fbc3041ae61cf459f7333069f1e507, type: 2}
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
@@ -221,8 +222,8 @@ MonoBehaviour:
   hauteur: 70
   largeur: 70
   numRooms:
-    min: 10
-    max: 15
+    min: 13
+    max: 18
   hautRoom:
     min: 3
     max: 7

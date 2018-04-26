@@ -44,7 +44,7 @@ public class CoinExplosion : MonoBehaviour {
         {
             direction.x = -direction.x;
         }
-        audio.Play();
+       // audio.Play();
     }
     //private void OnTriggerStay2D(Collider2D other)
     //{
