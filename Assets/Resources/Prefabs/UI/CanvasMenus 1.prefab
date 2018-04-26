@@ -4914,9 +4914,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Ouvrir le magasin (Z)\n\n\nInteragir avec les objets en jeux (E)\n\n\nChanger
-    d'arme (SHIFT)\n\n\nMenu de pause (ESCAPE)\n\n\nAttaquer (Clique gauche)\n\n\nRamassez
-    la cl\xE9 cach\xE9e dans les coffres pour passer au prochain \xE9tage et monter
-    la tour !"
+    d'arme (SHIFT)\n\n\nMenu de pause (ESCAPE)\n\n\nAttaquer (Clique gauche)\n\n\nRecul
+    dans le temps (R)\n\nRamassez la cl\xE9 cach\xE9e dans les coffres pour passer
+    au prochain \xE9tage et monter la tour !"
 --- !u!114 &114901604024835060
 MonoBehaviour:
   m_ObjectHideFlags: 1
