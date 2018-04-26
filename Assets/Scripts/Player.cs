@@ -13,8 +13,9 @@ public class Player : Character {
     public float rotationBuffer;
     [HideInInspector] public float restartDelay = 1f;
     [HideInInspector] public int valuePerCoin = 1;
-    [HideInInspector] public int timeCharge;
-    GameObject[] timeChargesUI;
+    [HideInInspector] public float rewindCharge;
+    public int maxRewindCharge;
+    Image rewindBar;
     Text coinText;
     public int coins;
      Image hpBar;
@@ -102,12 +103,13 @@ public class Player : Character {
         // GameObject ca = GameObject.FindGameObjectWithTag("CoinText");//GameObject.Find("CoinText");//.transform.Find("Text").gameObject;
         //coinText = ca.GetComponent<Text>();
 
-        timeCharge = 0;
         if (GameManager.instance.level == 1)
         {
             hp = maxHp;         
             hpBar.fillAmount = (float)hp / (float)maxHp;
-          //  Debug.Log(hpBar.fillAmount);
+            rewindCharge = maxRewindCharge;
+            rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
+            //  Debug.Log(hpBar.fillAmount);
             weaponList = new List<WeaponManager>();
             foreach (GameObject sw in startingWeapon)
             {
@@ -116,9 +118,9 @@ public class Player : Character {
             }          
         }
     }
-    public void SetUpTimeChargeUI(GameObject[] tCUI)
+    public void SetUpTimeChargeUI(Image rewindB)
     {
-        timeChargesUI = tCUI;
+        rewindBar = rewindB;
     }
     public void SetUpCoin(Text c)
     {
@@ -386,14 +388,31 @@ public class Player : Character {
         weaponInstance.transform.localPosition = prefab.transform.position;
 
     }
-    public void gainTimeCharge()  {
-        timeCharge += 1;
-        timeChargesUI[timeCharge].SetActive(true);
+    public bool GainTimeCharge(float timeC)  {
+        if (rewindCharge >= maxRewindCharge)
+        {
+            return false;
+        }
+
+        rewindCharge += timeC;
+        if (rewindCharge > maxRewindCharge)
+        {
+            rewindCharge = maxRewindCharge;
+        }
+        rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
+        return true;
     }
-    public void looseTimeCharge()
+    public bool LooseTimeCharge(float chargePerSeconds)
     {
-        timeCharge -= 1;
-        timeChargesUI[timeCharge].SetActive(false);
+        bool canRewind = true;      
+        if (rewindCharge < 0)
+        {
+            rewindCharge = 0;
+            canRewind = false;
+        }
+        rewindCharge -= chargePerSeconds * Time.deltaTime;
+        rewindBar.fillAmount = rewindCharge / (float)maxRewindCharge;
+        return canRewind;
     }
     public void gainKey()
     {
@@ -409,7 +428,6 @@ public class Player : Character {
 
     public void setUIWeaponpStat()
     {
-        Debug.Log(currentWeaponIndex);
         weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
         
     }

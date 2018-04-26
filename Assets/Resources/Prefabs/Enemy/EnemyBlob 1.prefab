@@ -421,13 +421,13 @@ MonoBehaviour:
   attackHitbox: []
   prefab: {fileID: 0}
   burnChance: 0
-  slowChance: 0
+  slowChance: 100
   freezeChance: 0
   freezeDuration: 0
   burnDamage: 0
   burnDuration: 0
-  slowAmount: 0
-  slowDuration: 0
+  slowAmount: 0.3
+  slowDuration: 1.5
 --- !u!114 &114105419773072300
 MonoBehaviour:
   m_ObjectHideFlags: 1

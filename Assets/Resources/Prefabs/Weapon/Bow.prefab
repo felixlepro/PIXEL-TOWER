@@ -120,7 +120,7 @@ MonoBehaviour:
   knockBackAmountRange:
     min: 4
     max: 6
-  IceFireChance: 0.25
+  IceFireChance: 0.3
   chanceBurnProcRange:
     min: 50
     max: 75

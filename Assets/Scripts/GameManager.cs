@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
             instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
             instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
             instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
-            instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectsWithTag("TimeChargeUI"));
+            instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectWithTag("RewindBar").GetComponent<Image>());
             instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
             instance.player.transform.position = new Vector3(instance.boardScript.largeur , instance.boardScript.hauteur, 0);
             instance.piggy.transform.position = instance.player.transform.position;

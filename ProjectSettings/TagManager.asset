@@ -27,7 +27,7 @@ TagManager:
   - iconKey
   - FloorText
   - TimeCharge
-  - TimeChargeUI
+  - RewindBar
   layers:
   - Default
   - TransparentFX

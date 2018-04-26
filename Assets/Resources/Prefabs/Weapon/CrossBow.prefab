@@ -113,14 +113,14 @@ MonoBehaviour:
     max: 12
   attackSpeedRange:
     min: 0.3
-    max: 6
+    max: 0.6
   attackDamageChargedBonusRange:
     min: 0
     max: 0
   knockBackAmountRange:
     min: 0
     max: 3
-  IceFireChance: 0.2
+  IceFireChance: 0.25
   chanceBurnProcRange:
     min: 50
     max: 75

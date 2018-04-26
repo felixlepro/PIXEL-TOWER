@@ -28,7 +28,7 @@ public class TimeRewinding : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)&&scriptPlayer.timeCharge > 0)
+        if (Input.GetKeyDown(KeyCode.R)&&scriptPlayer.rewindCharge > 0)
             StartRewind();
         if (Input.GetKeyUp(KeyCode.R))
             StopRewind();
@@ -39,12 +39,15 @@ public class TimeRewinding : MonoBehaviour
     {
         if (isRewinding && !isFantoming )
         {
-            Rewind();
+            if (scriptPlayer.LooseTimeCharge(20))
+            {
+                Rewind();
+            }
+            else StopRewind();        
         }
         else
         {
             Record();
-
         }
     }
     void Rewind()
@@ -83,8 +86,7 @@ public class TimeRewinding : MonoBehaviour
 
     public void StartRewind()
     {
-        scriptPlayer.looseTimeCharge();
-        isRewinding = true;
+            isRewinding = true;
     }
 
     public void StopRewind()
