@@ -788,6 +788,7 @@ MonoBehaviour:
   p1: {fileID: 507738870}
   openIt: 0
   iMax: 6
+  healCost: 15
 --- !u!1 &412314923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4469,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 979625622}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 375635673}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &979625622

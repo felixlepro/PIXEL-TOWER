@@ -24,6 +24,7 @@ public class ShopManager : MonoBehaviour
     private string tagP;
     private int currentWtype;
     public int iMax = 6;
+    public int healCost = 15;
 
     private void Start()
     {
@@ -141,6 +142,18 @@ public class ShopManager : MonoBehaviour
             p1.GetComponent<Player>().coins -= weaponList[armBpos].GetComponent<WeaponManager>().cost;
             p1.ChangeWeapon(weaponList[armBpos]);
 
+        }
+        else
+        {
+            Debug.Log("gros pauvre");
+        }
+    }
+    public void BuyHeal()
+    {
+        if (p1.GetComponent<Player>().coins >= healCost)
+        {
+            p1.GetComponent<Player>().coins -= healCost;
+            p1.GetComponent<Player>().hp += 25;  
         }
         else
         {
