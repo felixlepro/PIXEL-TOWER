@@ -105,6 +105,8 @@ MonoBehaviour:
   knockBackAmount: 10
   cost: 10
   isMelee: 1
+  isFire: 1
+  isIce: 0
   animator: {fileID: 0}
   sprite: {fileID: 21300000, guid: 48a6e6b7124442440b9d7e41676f419f, type: 3}
   description: 
@@ -113,6 +115,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   numAttack: 0
   isFantoming: 0
+  costRange:
+    min: 45
+    max: 55
   attackDamageRange:
     min: 7
     max: 17
@@ -120,8 +125,8 @@ MonoBehaviour:
     min: 0.3
     max: 0.6
   attackDamageChargedBonusRange:
-    min: 0.75
-    max: 1.25
+    min: 0.5
+    max: 1
   knockBackAmountRange:
     min: 8
     max: 15

@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
 
     public GameObject[] chestList;
     public int nbrChestMax;
-    public int nbrChest;
+   [HideInInspector] public int nbrChest;
     List<int[]> potentialChest = new List<int[]>();
     List<int[]> potentialExit = new List<int[]>();
     GameObject chestHolder;
@@ -376,8 +376,9 @@ public class Board : MonoBehaviour {
         GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Chest Holder").transform;
         enemy.GetComponent<Chest>().hasKey = key;
+
         modulXn = (23 * modulXn + 7) % 11;
-        enemy.GetComponent<Chest>().nbCoins = modulXn + 10;
+        enemy.GetComponent<Chest>().nbCoins = modulXn + 5;
     }
     void SetNbrChest()
     {     

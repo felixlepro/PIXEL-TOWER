@@ -20,6 +20,14 @@ TagManager:
   - Key
   - CoinText
   - HPBar
+  - Panel
+  - StatArme
+  - iconFeu
+  - iconGlace
+  - iconKey
+  - FloorText
+  - TimeCharge
+  - RewindBar
   layers:
   - Default
   - TransparentFX

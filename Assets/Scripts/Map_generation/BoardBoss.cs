@@ -43,7 +43,7 @@ public class BoardBoss : MonoBehaviour
     public void SetupBoard(int lvl)
     {
         //boardHolder = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
-        level = lvl / GameManager.instance.nbrFloorEntreBoss;
+        level = lvl / (GameManager.instance.nbrFloorEntreBoss+1);
         Destroy(GameObject.Find("Board Holder"));
         Destroy(GameObject.Find("Chest Holder"));
         boardHolder = new GameObject("Board Holder");

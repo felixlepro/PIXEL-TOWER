@@ -17,7 +17,7 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
-    protected const float lvlScalability = 13f; //after how many floors will the stats double 
+    protected const float lvlScalability = 6; //after how many floors will the stats double 
    // public GameObject[] attacksUPF; //attackUsingPrefabs
     //public struct Atta 
     //{
@@ -76,11 +76,12 @@ abstract public class EnemyManager : Character {
     abstract public void Damaged();
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
-    abstract public void gonnaDie();    
+    abstract public void gonnaDie();
 
     private void OnEnable()
     {
         controller = GetComponent<StateController>();
+
     }
 
     void Start()
@@ -107,6 +108,7 @@ abstract public class EnemyManager : Character {
 
         enemyCollider = GetComponentsInChildren<Collider2D>();
         targetCollider = chaseTarget.GetComponents<Collider2D>();
+        canvas = GameObject.Find("Canvas");
         OnStart();
     }
     public void SetStats(int lvl)
@@ -156,6 +158,8 @@ abstract public class EnemyManager : Character {
                     if (ah.IsTouching(pc))
                     {
                         pc.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, pc.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
+                        pc.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
+                        pc.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
                         AttackSuccessful();
                         //resetAttackCD();
                         break;
@@ -237,7 +241,7 @@ abstract public class EnemyManager : Character {
             UpdateAnim();
             updateAnim = false;
             DropItems();
-            Destroy(this.gameObject , 2);
+            Destroy(this.gameObject , 1);
             //   Invoke("Death", 2);
         }
      
@@ -434,4 +438,8 @@ abstract public class EnemyManager : Character {
         }
     }
 
+    public override Vector3 PositionIcone()
+    {
+        return transform.position;
+    }
 }

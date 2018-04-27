@@ -6,6 +6,7 @@ public class Chest : MonoBehaviour {
     public RuntimeAnimatorController animChest;
     public int nbCoins;
     public int weaponDropChance;
+    public int timeDropChange;
     Collider2D col;
     [HideInInspector] public bool hasKey = false;
     [HideInInspector] public Animator anim;
@@ -25,6 +26,10 @@ public class Chest : MonoBehaviour {
         if (hasKey)
         {
             DropManager.DropKey(transform.position);
+        }
+        if (timeDropChange > Random.value * 100)
+        {
+            DropManager.DropTime(transform.position);
         }
         Destroy(col);
     }

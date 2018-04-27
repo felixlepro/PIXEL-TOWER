@@ -6,20 +6,22 @@ using UnityEngine.SceneManagement;
 using EZCameraShake;
 
 public class Player : Character {
-
+    
     public GameObject[] startingWeapon;
     const int weaponEquipedMax = 2;
     public List<WeaponManager> weaponList;
     public float rotationBuffer;
     [HideInInspector] public float restartDelay = 1f;
     [HideInInspector] public int valuePerCoin = 1;
-
+    [HideInInspector] public float rewindCharge;
+    public int maxRewindCharge;
+    Image rewindBar;
     Text coinText;
     public int coins;
      Image hpBar;
 
-    [HideInInspector] public bool hasKey = false;
- [HideInInspector] public int currentWeaponIndex = 0;
+    [HideInInspector] public bool hasKey;
+    [HideInInspector] public int currentWeaponIndex = 0;
     [HideInInspector] public Vector2 direction;
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D boxCollider;
@@ -30,6 +32,8 @@ public class Player : Character {
     Transform weaponTransform;
     SpriteRenderer graphicsSpriteR;
     SpriteRenderer weaponSprite;
+
+    [HideInInspector] public weaponStatUI weaponStatUI;
 
     [HideInInspector] public float timeUntilNextAttack;
 
@@ -42,14 +46,16 @@ public class Player : Character {
     [HideInInspector] public Color couleurKb = Color.white;
 
     GameObject gameOverMenu;
+    GameObject iconKey;
     //private void Awake()
     //{
     //    setPlayerStats();
     //}
     void Start()
     {
-            PlayerSetUp();
-        
+        hasKey = false;
+        PlayerSetUp();
+        canvas = GameObject.Find("Canvas");
     }
     private void Update()
     {
@@ -92,17 +98,18 @@ public class Player : Character {
 
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
         //coins = GameManager.coinCount;
-       
-       // hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
-       // GameObject ca = GameObject.FindGameObjectWithTag("CoinText");//GameObject.Find("CoinText");//.transform.Find("Text").gameObject;
+
+        // hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
+        // GameObject ca = GameObject.FindGameObjectWithTag("CoinText");//GameObject.Find("CoinText");//.transform.Find("Text").gameObject;
         //coinText = ca.GetComponent<Text>();
-        
 
         if (GameManager.instance.level == 1)
         {
             hp = maxHp;         
             hpBar.fillAmount = (float)hp / (float)maxHp;
-            Debug.Log(hpBar.fillAmount);
+            rewindCharge = maxRewindCharge;
+            rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
+            //  Debug.Log(hpBar.fillAmount);
             weaponList = new List<WeaponManager>();
             foreach (GameObject sw in startingWeapon)
             {
@@ -111,17 +118,19 @@ public class Player : Character {
             }          
         }
     }
+    public void SetUpTimeChargeUI(Image rewindB)
+    {
+        rewindBar = rewindB;
+    }
     public void SetUpCoin(Text c)
     {
         coinText = c;
-        coinText.text = "C O I N S : " + coins;
+        coinText.text = "P I È C E S : " + coins;
     }
     public void SetUpHpBar(Image c)
     {
         hpBar = c.GetComponentInChildren<Image>();
         hpBar.fillAmount = (float)hp / (float)maxHp;
-        //Debug.Log(hpBar.gameObject.name);
-
     }
 
     private void Move(float h, float v)
@@ -353,6 +362,7 @@ public class Player : Character {
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
+        setUIWeaponpStat();
     }
     public void SwitchWeapon()
     {
@@ -361,6 +371,7 @@ public class Player : Character {
             weaponList[currentWeaponIndex].gameObject.SetActive(false);
             currentWeaponIndex = (currentWeaponIndex + 1) % weaponList.Count; //Fait que ca loop dans la liste au lieu de dépassé
             weaponList[currentWeaponIndex].gameObject.SetActive(true);
+            setUIWeaponpStat();
         }
     }
     void InstantiateWeapon(GameObject prefab)
@@ -377,15 +388,54 @@ public class Player : Character {
         weaponInstance.transform.localPosition = prefab.transform.position;
 
     }
+    public bool GainTimeCharge(float timeC)  {
+        if (rewindCharge >= maxRewindCharge)
+        {
+            return false;
+        }
+
+        rewindCharge += timeC;
+        if (rewindCharge > maxRewindCharge)
+        {
+            rewindCharge = maxRewindCharge;
+        }
+        rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
+        return true;
+    }
+    public bool LooseTimeCharge(float chargePerSeconds)
+    {
+        bool canRewind = true;      
+        if (rewindCharge < 0)
+        {
+            rewindCharge = 0;
+            canRewind = false;
+        }
+        rewindCharge -= chargePerSeconds * Time.deltaTime;
+        rewindBar.fillAmount = rewindCharge / (float)maxRewindCharge;
+        return canRewind;
+    }
     public void gainKey()
     {
         hasKey = true;
+        iconKey.SetActive(true);
+    }
+
+    public void SetupIconKey(GameObject icon)
+    {
+        iconKey = icon;
+        iconKey.SetActive(false);
+    }
+
+    public void setUIWeaponpStat()
+    {
+        weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
+        
     }
     //public void setPlayerStats()
     //{
     //    if (GameManager.instance.level != 0)
     //    {
-           
+
     //        hp = GameManager.playerStat.hp;
     //        Debug.Log(hp);
     //        coins = GameManager.playerStat.coins;
@@ -428,8 +478,12 @@ public class Player : Character {
     //        wo[i] = weaponList[i].gameObject;
     //    }
     //    return wo;
-        
+
     //}
- 
+
+    public override Vector3 PositionIcone()
+    {
+        return transform.position;
+    }
 
 }

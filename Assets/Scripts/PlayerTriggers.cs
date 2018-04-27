@@ -50,6 +50,13 @@ public class PlayerTriggers : MonoBehaviour {
             Destroy(other.gameObject);
             GameManager.instance.PlaySound(GameManager.instance.coinSound);
         }
+        if ((other.tag == "TimeCharge"))
+        {
+           if (player.GainTimeCharge(35)) { 
+            Destroy(other.gameObject);
+                //GameManager.instance.PlaySound(GameManager.instance.coinSound);
+            }
+        }
 
 
     }
