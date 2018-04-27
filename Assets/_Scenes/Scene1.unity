@@ -306,6 +306,21 @@ Prefab:
       propertyPath: m_TagString
       value: RewindBar
       objectReference: {fileID: 0}
+    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.36191678
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.8602941
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
   m_IsPrefabParent: 0

@@ -131,21 +131,21 @@ public abstract class Character : MonoBehaviour {
         }
         currentSpeed /= speed;
     }
-    public void Freeze (float chance, float time)
-    {
-        if (chance == 0)
-        {
-            return;
-        }
-        if (chance >= 100)
-        {
-            Stun(time);
-        }
-       else if (Random.value * 100 <= chance)
-        {
-            Stun(time);
-        }
-    }
+    //public void Freeze (float chance, float time)
+    //{
+    //    if (chance == 0)
+    //    {
+    //        return;
+    //    }
+    //    if (chance >= 100)
+    //    {
+    //        Stun(time);
+    //    }
+    //   else if (Random.value * 100 <= chance)
+    //    {
+    //        Stun(time);
+    //    }
+    //}
     public void Stun(float time)
     {
         stunned = true;

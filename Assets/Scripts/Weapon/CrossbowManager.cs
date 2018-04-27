@@ -19,14 +19,14 @@ public class CrossbowManager : WeaponManager
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
-        attackSpeed = attackSpeedRange.Set(1 - AdAsRation) * thisRarity.multiplier;
+        attackSpeed = attackSpeedRange.Set(1 - AdAsRation);
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
         float boltSpeedSlowAmountRatio = Random.value;
         boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
 
-        cost = Mathf.RoundToInt(costRange.Random * lvlScalability * thisRarity.multiplier);
+        cost = Mathf.RoundToInt(costRange.Random * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;
@@ -53,25 +53,30 @@ public class CrossbowManager : WeaponManager
 
     protected override void ChargeWeapon()
     {
-        
+        crossBowAttack();
     }
 
     protected override void MaxChargeWeapon()
     {
-        
+        crossBowAttack();
     }
     
     protected override void ReleaseChargedWeapon()
     {
+        crossBowAttack();
+    }
+
+    void crossBowAttack()
+    {
         anim.SetTrigger("isFireing");
         boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());
-        if (!isFantoming )
+        if (!isFantoming)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y, 0f);
         }
-        
+
         boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed);
         ResetAttackTimer();
     }

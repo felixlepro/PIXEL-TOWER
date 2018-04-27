@@ -23,7 +23,7 @@ public class CerclePuissant : Attacks {
     //    maxKnockBackAmount *= kbMult;
     //    this.gameObject.transform.right = direction;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa,float burnDu, float slow, float slowAm, float slowDu, float freeze, float freezeDu)
+    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa,float burnDu, float slow, float slowAm, float slowDu)
     {
         attackDamage = dam;
         maxKnockBackAmount = kb;
@@ -35,9 +35,6 @@ public class CerclePuissant : Attacks {
         slowChance = slow;
         slowAmount = slowAm;
         slowDuration = slowDu;
-
-        freezeChance = freeze;
-        freezeDuration = freezeDu;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -48,7 +45,6 @@ public class CerclePuissant : Attacks {
             player.RecevoirDegats(attackDamage, Vector3.zero, maxKnockBackAmount, immuneTime);
             player.Burn(burnChance,burnDamage, burnDuration);
             player.Slow(slowChance, slowAmount, slowDuration,false);
-            player.Freeze(freezeChance, freezeDuration);
         }
 
     }

@@ -30,7 +30,7 @@ public class SwordManager : WeaponManager
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale );
-        attackSpeed = attackSpeedRange.Set(1-AdAsRation) * thisRarity.multiplier + attackTime;
+        attackSpeed = attackSpeedRange.Set(1-AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
@@ -59,7 +59,6 @@ public class SwordManager : WeaponManager
         }
         else isFire = false;
 
-        Debug.Log(isFire + " " + isIce);
     }
     
     private void OnTriggerEnter2D(Collider2D other)

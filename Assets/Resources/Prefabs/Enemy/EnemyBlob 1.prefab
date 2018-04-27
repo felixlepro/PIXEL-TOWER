@@ -414,7 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 7
   immuneTime: 2
-  maxKnockBackAmount: 10
+  maxKnockBackAmount: 13
   attackRange: 50
   attackCD: 0
   timeUntilNextAttack: 0
@@ -422,12 +422,10 @@ MonoBehaviour:
   prefab: {fileID: 0}
   burnChance: 0
   slowChance: 100
-  freezeChance: 0
-  freezeDuration: 0
   burnDamage: 0
   burnDuration: 0
-  slowAmount: 0.3
-  slowDuration: 1.5
+  slowAmount: 0.2
+  slowDuration: 1
 --- !u!114 &114105419773072300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,10 +582,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   nameC: 
-  maxHp: 90
+  maxHp: 80
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 9
   immune: 0
+  stunned: 0
   currentSpeed: 0
   canvas: {fileID: 0}
   iconFeu: {fileID: 1089929739161472}

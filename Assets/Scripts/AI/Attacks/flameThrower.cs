@@ -35,7 +35,7 @@ public class flameThrower : Attacks {
     //    maxKnockBackAmount *= kbMult;
     //    this.gameObject.transform.right = direction;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu, float freeze, float freezeDu)
+    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
     {
         direction = dir;
         attackDamage = dam;
@@ -50,8 +50,6 @@ public class flameThrower : Attacks {
         slowAmount = slowAm;
         slowDuration = slowDu;
 
-        freezeChance = freeze;
-        freezeDuration = freezeDu;
          this.gameObject.transform.right = direction;
     
        
@@ -66,7 +64,6 @@ public class flameThrower : Attacks {
             player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
             player.Burn(burnChance, burnDamage, burnDuration);
             player.Slow(slowChance, slowAmount, slowDuration, false);
-            player.Freeze(freezeChance, freezeDuration);
         }
        
     }

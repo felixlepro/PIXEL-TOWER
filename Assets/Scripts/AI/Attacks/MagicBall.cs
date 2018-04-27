@@ -40,7 +40,7 @@ public class MagicBall : Projectile {
     //    knockBack *= kbMult;
     //    speed *= speedMult;
     //}
-    public void Setup(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu, float freeze, float freezeDu)
+    public void Setup(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
     {
         attackDamage = dam;
         maxKnockBackAmount = kb;
@@ -55,9 +55,6 @@ public class MagicBall : Projectile {
         slowChance = slow;
         slowAmount = slowAm;
         slowDuration = slowDu;
-
-        freezeChance = freeze;
-        freezeDuration = freezeDu;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -69,7 +66,6 @@ public class MagicBall : Projectile {
             player.RecevoirDegats(attackDamage, player.transform.position - transform.position, knockBack, immuneTime);
             player.Burn(burnChance, burnDamage, burnDuration);
             player.Slow(slowChance, slowAmount, slowDuration, false);
-            player.Freeze(freezeChance, freezeDuration);
             speed = 0;
             Animator anim = GetComponent<Animator>();
             anim.SetTrigger("Hit");
