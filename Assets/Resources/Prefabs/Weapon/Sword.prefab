@@ -196,8 +196,8 @@ MonoBehaviour:
     min: 45
     max: 55
   attackDamageRange:
-    min: 20
-    max: 25
+    min: 18
+    max: 22
   attackSpeedRange:
     min: 0.05
     max: 0.3

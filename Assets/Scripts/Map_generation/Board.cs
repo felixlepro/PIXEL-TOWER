@@ -173,7 +173,7 @@ public class Board : MonoBehaviour {
 
                     int[] pos = { xCoord, yCoord };
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    if (j == Mathf.FloorToInt(currentRoom.largRoom/2) && k == Mathf.FloorToInt(currentRoom.hautRoom/2))
+                    if (j == Mathf.FloorToInt(currentRoom.largRoom/2) && k == Mathf.FloorToInt(currentRoom.hautRoom/2) && currentRoom != rooms[0])
                     {
                         
                         potentialChest.Add(pos);

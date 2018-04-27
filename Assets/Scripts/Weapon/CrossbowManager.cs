@@ -19,7 +19,7 @@ public class CrossbowManager : WeaponManager
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
-        attackSpeed = attackSpeedRange.Set(1 - AdAsRation);
+        attackSpeed = attackSpeedRange.Set(AdAsRation);
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 

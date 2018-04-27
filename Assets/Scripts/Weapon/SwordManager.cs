@@ -30,7 +30,7 @@ public class SwordManager : WeaponManager
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale );
-        attackSpeed = attackSpeedRange.Set(1-AdAsRation) + attackTime;
+        attackSpeed = attackSpeedRange.Set(AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
@@ -64,7 +64,7 @@ public class SwordManager : WeaponManager
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Colision");
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && transform.parent != null)
         {
             bool already = false;
             chargeDoneRatio = thisAttackCCT;

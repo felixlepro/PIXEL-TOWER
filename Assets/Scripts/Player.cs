@@ -88,39 +88,34 @@ public class Player : Character {
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        //player.hp = GameManager.instance.playerHp;
 
         weaponTransform = transform.Find("WeaponRotation");
-        //weaponObject = Instantiate(weaponObject, Vector3.zero, Quaternion.identity) as GameObject;
-        // weaponObject.transform.parent = weaponTransform;
-        // weaponObject.name = "Weapon";
-        //ChangeWeapon(player.weaponObject);
 
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
-        //coins = GameManager.coinCount;
 
-        // hpBar = GameObject.Find("Canvas").transform.Find("HPBar").GetComponent<Image>();
-        // GameObject ca = GameObject.FindGameObjectWithTag("CoinText");//GameObject.Find("CoinText");//.transform.Find("Text").gameObject;
-        //coinText = ca.GetComponent<Text>();
-
-        if (GameManager.instance.level == 1)
-        {
+            Debug.Log("o");
             hp = maxHp;         
             hpBar.fillAmount = (float)hp / (float)maxHp;
             rewindCharge = maxRewindCharge;
             rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
-            //  Debug.Log(hpBar.fillAmount);
             weaponList = new List<WeaponManager>();
             foreach (GameObject sw in startingWeapon)
             {
                 GameObject newWeapon = Instantiate(sw, Vector3.zero, Quaternion.identity) as GameObject;
                 ChangeWeapon(newWeapon);
             }          
-        }
+        
     }
     public void SetUpTimeChargeUI(Image rewindB)
     {
         rewindBar = rewindB;
+        if (rewindCharge < 0)
+        {
+            rewindCharge = 0;
+        }
+        Debug.Log(rewindCharge);
+        Debug.Log((float)rewindCharge / (float)maxRewindCharge);
+        rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
     }
     public void SetUpCoin(Text c)
     {
@@ -430,6 +425,14 @@ public class Player : Character {
     {
         weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
         
+    }
+    public void SetUpWeaponStatUI(weaponStatUI wsUI)
+    {
+        weaponStatUI = wsUI;
+        if (GameManager.instance.level != 0)
+        {
+            setUIWeaponpStat();
+        }
     }
     //public void setPlayerStats()
     //{

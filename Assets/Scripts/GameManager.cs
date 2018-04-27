@@ -101,17 +101,9 @@ public class GameManager : MonoBehaviour {
                 //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
 
             }
-            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
-            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
-            instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
-            instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
-            instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
-            instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectWithTag("RewindBar").GetComponent<Image>());
-            instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
-            instance.player.transform.position = new Vector3(instance.boardScript.largeur , instance.boardScript.hauteur, 0);
-            instance.piggy.transform.position = instance.player.transform.position;
-            instance.piggy.GetComponent<PiggyManager>().coinList.Clear();
-            instance.piggy.GetComponent<PiggyManager>().GetComponent<PiggyManager>().enabled = true;
+            PlaceAndSetStuffOnStart(new Vector3(instance.boardScript.largeur, instance.boardScript.hauteur, 0));
+            instance.piggy.GetComponent<PiggyManager>().enabled = true;
+            instance.piggy.GetComponent<Unit>().enabled = true;
             if (instance.level != 0)
             {
                 instance.player.GetComponent<Player>().setUIWeaponpStat();
@@ -126,17 +118,9 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            
-            instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
-            instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
-            instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
-            instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
-            instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
-            instance.player.GetComponent<Player>().weaponStatUI = GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>();
-            instance.player.transform.position = new Vector3(0,-3, 0);
-            instance.piggy.transform.position = instance.player.transform.position;
-            instance.piggy.GetComponent<PiggyManager>().coinList.Clear();
-            instance.piggy.GetComponent<PiggyManager>().GetComponent<PiggyManager>().enabled = false;
+            PlaceAndSetStuffOnStart(new Vector3(0, -3, 0));
+            instance.piggy.GetComponent<PiggyManager>().enabled = false;
+            instance.piggy.GetComponent<Unit>().enabled = false;
         }
         GameObject.FindGameObjectWithTag("FloorText").GetComponent<Text>().text = "É T A G E : " + instance.level.ToString();
         DropManager.Initialize();
@@ -144,6 +128,19 @@ public class GameManager : MonoBehaviour {
         instance.gameOverMenu.SetActive(false);
         instance.optionsMenu.SetActive(false);
         instance.mainMenu.SetActive(false);
+    }
+    void PlaceAndSetStuffOnStart(Vector3 playerPos)
+    {
+        instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
+        instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
+        instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
+        instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
+        instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
+        instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectWithTag("RewindBar").GetComponent<Image>());
+        instance.player.GetComponent<Player>().SetUpWeaponStatUI(GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>());
+        instance.player.transform.position = playerPos;
+        instance.piggy.transform.position = instance.player.transform.position;
+        instance.piggy.GetComponent<PiggyManager>().coinList.Clear();
     }
 
     private void Start()

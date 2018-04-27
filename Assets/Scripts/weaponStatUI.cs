@@ -16,10 +16,10 @@ public class weaponStatUI : MonoBehaviour {
         {
             rar = wm.thisRarity.name;
         }
-        statText.text = " Rareté: " + rar + "\n Dégât: " + wm.attackDamage + "\n Bonus de charge: ";
+        statText.text = " Rareté: " + rar + "\n Dégât: " + wm.attackDamage;
         if (wm.attackDamageChargedBonus != 0)
         {
-            statText.text += (1+wm.attackDamageChargedBonus).ToString("F1");
+            statText.text +="\n Bonus de charge: " + (1+wm.attackDamageChargedBonus).ToString("F1");
         }
         statText.text += "\n Vitesse: " + (1 / wm.attackSpeed).ToString("F1") + "\n Recul: " + wm.knockBackAmount.ToString("F1");
         if (wm.isFire)

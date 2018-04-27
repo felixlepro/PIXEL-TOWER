@@ -483,7 +483,7 @@ MonoBehaviour:
   patrolSpeedChaseSpeedRatio: 4
   gettingKnockedBackAmount: 0
   chaseRange: 10
-  chaseRangeBuffer: 10
+  chaseRangeBuffer: 5
   fireStack: 0
   attackSpeed: 0.25
   nbrCoins: 5
