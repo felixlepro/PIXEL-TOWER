@@ -32,8 +32,9 @@ public class ShopManager : MonoBehaviour
         p1.gainKey();
         //weaponList.Clear();
         while (weaponList.Count < iMax)
-        {
-            CreateWeapon();       
+        { 
+            CreateWeapon();   
+     
         }
 
         SetInfo();

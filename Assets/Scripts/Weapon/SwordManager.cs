@@ -26,7 +26,7 @@ public class SwordManager : WeaponManager
     {
         SetRarity();
         int lvl = GameManager.instance.GetCurrentLevel();
-        Random.seed = System.DateTime.Now.Millisecond;
+        Random.InitState((int)System.DateTime.Now.Ticks);
         float AdAsRation = Random.value;
         float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale );
