@@ -109,7 +109,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public abstract void WeaponSetStats();
     protected abstract SpriteRenderer GetSpriteRenderer();
 
-    void Start()
+    private void Start()
     {
         player = GetComponentInParent<Player>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
@@ -122,13 +122,16 @@ public abstract class WeaponManager : MonoBehaviour {
 
     void Update()
     {
-        UpdateTimeUntilNextAttack();
-        // if (!isFantoming) setNumAttack();
-        if (isFantoming)
+        if (!GameManager.instance.player.GetComponent<Player>().stunned)
         {
-            AttackFantome(numAttack);
+            UpdateTimeUntilNextAttack();
+            // if (!isFantoming) setNumAttack();
+            if (isFantoming)
+            {
+                AttackFantome(numAttack);
+            }
+            else Attack();
         }
-        else Attack();
     }
     public void SetRarity()
     {

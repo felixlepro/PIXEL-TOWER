@@ -62,7 +62,6 @@ public class Player : Character {
         if (!stunned) {
             if(Input.GetKeyDown("left shift"))
             {
-                //GameManager.instance.Restart();
                 SwitchWeapon();
             }
          }
@@ -93,7 +92,6 @@ public class Player : Character {
 
         graphicsSpriteR = transform.Find("Graphics").GetComponent<SpriteRenderer>();
 
-            Debug.Log("o");
             hp = maxHp;         
             hpBar.fillAmount = (float)hp / (float)maxHp;
             rewindCharge = maxRewindCharge;
@@ -113,8 +111,6 @@ public class Player : Character {
         {
             rewindCharge = 0;
         }
-        Debug.Log(rewindCharge);
-        Debug.Log((float)rewindCharge / (float)maxRewindCharge);
         rewindBar.fillAmount = (float)rewindCharge / (float)maxRewindCharge;
     }
     public void SetUpCoin(Text c)
@@ -168,6 +164,15 @@ public class Player : Character {
             StartCoroutine("ImmuneAnim");
             Invoke("StopImmunity", immuneTime);
         }  
+    }
+    public void Heal(int ammount)
+    {
+        hp += ammount;
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        hpBar.fillAmount = (float)hp / (float)maxHp;
     }
     public IEnumerator RedOnly()
     {
@@ -253,6 +258,12 @@ public class Player : Character {
     {
         coins += valuePerCoin;
         coinText.text = "C O I N S : " + coins;
+    }
+    public void LooseCoin(int coinnbr)
+    {
+        coins -= coinnbr;
+        coinText.text = "C O I N S : " + coins;
+
     }
 
     //private void OnTriggerStay2D(Collider2D other)            //VOIR LE SCRIPT PLAYERTRIGGERS

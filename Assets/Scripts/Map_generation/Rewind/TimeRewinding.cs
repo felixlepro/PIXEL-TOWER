@@ -28,9 +28,9 @@ public class TimeRewinding : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)&&scriptPlayer.rewindCharge > 0)
+        if (Input.GetKeyDown(KeyCode.R)&&scriptPlayer.rewindCharge > 0 && GameManager.instance.inLevel)
             StartRewind();
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) && scriptPlayer.rewindCharge > 0 && GameManager.instance.inLevel)
             StopRewind();
         currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
     }

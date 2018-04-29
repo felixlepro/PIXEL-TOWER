@@ -373,12 +373,12 @@ public class Board : MonoBehaviour {
     void AddChest(Vector3 position, bool key)
     {
         int whatChest = 0;//Random.Range(0, enemyList.Length);
-        GameObject enemy = Instantiate(chestList[whatChest], position, Quaternion.identity);
-        enemy.transform.parent = GameObject.Find("Chest Holder").transform;
-        enemy.GetComponent<Chest>().hasKey = key;
+        GameObject ch = Instantiate(chestList[whatChest], position, Quaternion.identity);
+        ch.transform.parent = GameObject.Find("Chest Holder").transform;
+        ch.GetComponent<Chest>().hasKey = key;
 
         modulXn = (23 * modulXn + 7) % 11;
-        enemy.GetComponent<Chest>().nbCoins = modulXn + 5;
+        ch.GetComponent<Chest>().nbCoins = modulXn + 5;
     }
     void SetNbrChest()
     {     

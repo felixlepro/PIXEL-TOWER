@@ -298,29 +298,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1630062330286476, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1837797327224292, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
-      propertyPath: m_TagString
-      value: RewindBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.36191678
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990469389500686, guid: aaca6e7e0bc958d49ac0464b0571d463,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.8602941
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
   m_IsPrefabParent: 0
@@ -1185,35 +1162,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 20364681223352336, guid: f581f7402c03ea24e922722a503ae51a,
-        type: 2}
-      propertyPath: m_HDR
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20364681223352336, guid: f581f7402c03ea24e922722a503ae51a,
-        type: 2}
-      propertyPath: m_OcclusionCulling
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20364681223352336, guid: f581f7402c03ea24e922722a503ae51a,
-        type: 2}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114851616678365444, guid: f581f7402c03ea24e922722a503ae51a,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20364681223352336, guid: f581f7402c03ea24e922722a503ae51a,
-        type: 2}
-      propertyPath: m_AllowMSAA
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20364681223352336, guid: f581f7402c03ea24e922722a503ae51a,
-        type: 2}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f581f7402c03ea24e922722a503ae51a, type: 2}

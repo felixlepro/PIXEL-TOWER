@@ -21,7 +21,7 @@ public class ShopManager : MonoBehaviour
     private int armBpos;
     public bool openIt = false;
     private bool canEnter = true;
-    private string tagP;
+    private bool inRange = false;
     private int currentWtype;
     public int iMax = 6;
     public int healCost = 15;
@@ -33,7 +33,8 @@ public class ShopManager : MonoBehaviour
         //weaponList.Clear();
         while (weaponList.Count < iMax)
         { 
-            CreateWeapon();   
+            CreateWeapon();
+            Debug.Log(weaponList.Count);
      
         }
 
@@ -44,19 +45,22 @@ public class ShopManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (tagP =="Player")
+        if (inRange)
         {
             if (Input.GetKey(KeyCode.Z)&&(canEnter))
             {
+               
                 canEnter = false;
 
                 if(openIt)
                 {
+                    p1.stunned = false;
                     canvas.SetActive(false);
                     openIt = false;
                 }
                 else
                 {
+                    p1.stunned = true;
                     canvas.SetActive(true);
                     openIt = true;
                 }
@@ -73,7 +77,7 @@ public class ShopManager : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            tagP = "Player";
+            inRange = true;
         }
     }
 
@@ -81,7 +85,7 @@ public class ShopManager : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            tagP = "";
+            inRange = false;
         }
     }
     private int RandomTypeWeapon()
@@ -100,8 +104,8 @@ public class ShopManager : MonoBehaviour
     {
         for (int n = 0; n < iMax; n++)
         {
-            //pInf[n].text += "\n Coût: " + weaponList[n].GetComponent<WeaponManager>().cost;
-            imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;
+            Debug.Log(n);
+           imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;   //        Jlai enlever parce que je sais pas cest quoi pi ca fait bugger toute
            string rar = "Basique";
 
             if (weaponList[n].GetComponent<WeaponManager>().thisRarity.name != null)
@@ -133,10 +137,12 @@ public class ShopManager : MonoBehaviour
 
         }
         
-        if (p1.GetComponent<Player>().coins >= weaponList[armBpos].GetComponent<WeaponManager>().cost)
+        if (p1.coins >= weaponList[armBpos].GetComponent<WeaponManager>().cost)
         {
-            p1.GetComponent<Player>().coins -= weaponList[armBpos].GetComponent<WeaponManager>().cost;
+            p1.LooseCoin( weaponList[armBpos].GetComponent<WeaponManager>().cost);
+            weaponList[armBpos].SetActive(true);
             p1.ChangeWeapon(weaponList[armBpos]);
+
 
         }
         else
@@ -148,8 +154,8 @@ public class ShopManager : MonoBehaviour
     {
         if (p1.GetComponent<Player>().coins >= healCost)
         {
-            p1.GetComponent<Player>().coins -= healCost;
-            p1.GetComponent<Player>().hp += 25;  
+            p1.GetComponent<Player>().LooseCoin(healCost);
+            p1.GetComponent<Player>().Heal(25);  
         }
         else
         {
