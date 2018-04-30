@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4443697690647068}
   - component: {fileID: 61847907969429398}
   - component: {fileID: 61265969337756274}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MurAvant
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4767558477979768}
   - component: {fileID: 212166720030745670}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: castle_elevator_wall_top_prior_001_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

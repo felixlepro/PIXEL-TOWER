@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4023524170682422}
   - component: {fileID: 212157003719875306}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: castle_elevator_wall_top_prior_001_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4119698276272922}
   - component: {fileID: 61903621443978196}
   - component: {fileID: 61026400201118336}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MurDroit
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

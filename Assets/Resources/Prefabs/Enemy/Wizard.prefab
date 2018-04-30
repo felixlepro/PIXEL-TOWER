@@ -519,8 +519,6 @@ MonoBehaviour:
   prefab: {fileID: 1739142269822794, guid: a389908b4a0f871469fe9efae9677f15, type: 2}
   burnChance: 100
   slowChance: 0
-  freezeChance: 0
-  freezeDuration: 0
   burnDamage: 2
   burnDuration: 5
   slowAmount: 0
@@ -618,8 +616,6 @@ MonoBehaviour:
   prefab: {fileID: 1965252358492802, guid: a32449f5bd65f2f4db1420153a6e474b, type: 2}
   burnChance: 100
   slowChance: 0
-  freezeChance: 0
-  freezeDuration: 0
   burnDamage: 2
   burnDuration: 4
   slowAmount: 0
@@ -637,10 +633,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   nameC: 
-  maxHp: 250
+  maxHp: 270
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 5
   immune: 0
+  stunned: 0
   currentSpeed: 0
   canvas: {fileID: 1978883531250166}
   iconFeu: {fileID: 1299963209532472}
@@ -667,7 +664,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   controller: {fileID: 114598034221232740}
   spriteR: {fileID: 0}
-  targetCollider: []
+  targetCollider: {fileID: 0}
   Angle: 0
   knockBackAmount: 0
   knockBackDirection: {x: 0, y: 0}
@@ -814,8 +811,6 @@ MonoBehaviour:
   prefab: {fileID: 1550821915172396, guid: 92448c1da306c4145857bce02d1d3837, type: 2}
   burnChance: 25
   slowChance: 0
-  freezeChance: 0
-  freezeDuration: 0
   burnDamage: 1
   burnDuration: 3
   slowAmount: 0.5

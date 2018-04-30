@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61706945843972150}
   - component: {fileID: 68987299366569996}
   - component: {fileID: 61014159957508000}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MurPrototypeFond
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4047546219533038}
   - component: {fileID: 212293411278328822}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: castle_elevator_wall_prior_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4940316166049288}
   - component: {fileID: 212691560149886048}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: castle_elevator_wall_top_prior_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

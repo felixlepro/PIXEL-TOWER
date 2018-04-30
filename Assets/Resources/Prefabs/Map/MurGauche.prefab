@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4831740217012566}
   - component: {fileID: 61363551881627024}
   - component: {fileID: 61325413702075512}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MurGauche
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648544286422556}
   - component: {fileID: 212135774020482158}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: castle_elevator_wall_top_prior_001_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
