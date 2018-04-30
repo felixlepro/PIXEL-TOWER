@@ -103,9 +103,9 @@ public class GameManager : MonoBehaviour {
             }
             PlaceAndSetStuffOnStart(new Vector3(instance.boardScript.largeur, instance.boardScript.hauteur, 0));
             instance.piggy.GetComponent<Unit>().ResetPF();
-            //instance.piggy.GetComponent<Unit>().enabled = true;
-            //instance.piggy.SetActive(true);
-            //instance.piggy.GetComponent<PiggyManager>().enabled = true;
+            instance.piggy.GetComponent<Unit>().enabled = true;
+            instance.piggy.SetActive(true);
+            instance.piggy.GetComponent<PiggyManager>().enabled = true;
 
             if (instance.level != 0)
             {
@@ -123,10 +123,10 @@ public class GameManager : MonoBehaviour {
         {
             PlaceAndSetStuffOnStart(new Vector3(0, -3, 0));
             instance.piggy.GetComponent<Unit>().ResetPF();
-            //instance.piggy.GetComponent<Unit>().enabled = false;
-            //instance.piggy.SetActive(false);
-            //instance.piggy.GetComponent<PiggyManager>().enabled = false;
-            
+            instance.piggy.GetComponent<Unit>().enabled = false;
+            instance.piggy.SetActive(false);
+            instance.piggy.GetComponent<PiggyManager>().enabled = false;
+
         }
         GameObject.FindGameObjectWithTag("FloorText").GetComponent<Text>().text = "É T A G E : " + instance.level.ToString();
         DropManager.Initialize();

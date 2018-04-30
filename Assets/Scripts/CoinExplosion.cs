@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinExplosion : MonoBehaviour {
 
-    public float  vitesseMin;
-    public float vitesseMax;
+    //public float  vitesseMin;
+    //public float vitesseMax;
     float vitesse;
     Vector3 direction;
     int angle;
@@ -14,24 +14,26 @@ public class CoinExplosion : MonoBehaviour {
 
 
 	void Start () {
-        vitesse = Random.Range(vitesseMin, vitesseMax);
+        //vitesse = Random.Range(vitesseMin, vitesseMax);
         angle = Random.Range(1, 360);
         direction =  new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized ;
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-	}
+        rb.AddForce(direction.normalized * (Random.value*125 + 100));
+    }
 	
 	void FixedUpdate () {
-       
 
-       // transform.position += direction * vitesse;
-        if (vitesse > 0.0005)
-        {
-            vitesse -= vitesse*Time.deltaTime;
-        }
-        else vitesse = 0;
 
-        rb.MovePosition(transform.position + direction.normalized * vitesse);
+        //if (vitesse > 0.0005)
+        //{
+        //    vitesse -= vitesse * Time.deltaTime*50;
+        //}
+        //else vitesse = 0;
+
+        //rb.MovePosition(transform.position + direction.normalized * vitesse);
+
+         
     }
 
     private void OnTriggerEnter2D(Collider2D other)
