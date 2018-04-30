@@ -378,7 +378,6 @@ MonoBehaviour:
   iconGlace: {fileID: 0}
   startingWeapon:
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
-  - {fileID: 0}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1
@@ -415,6 +414,7 @@ MonoBehaviour:
   scriptPlayer: {fileID: 114035642965733862}
   ancienWeapon: {fileID: 0}
   currentWeapon: {fileID: 0}
+  pT: {fileID: 0}
 --- !u!114 &114599861805657494
 MonoBehaviour:
   m_ObjectHideFlags: 1

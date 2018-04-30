@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour {
     {
         foreach (GameObject em in GameObject.FindGameObjectsWithTag("EnemyManager"))
         {
-            em.GetComponent<EnemyManager>().SetStats(level);
+            em.GetComponent<EnemyManager>().SetStats(instance.level);
             em.GetComponent<EnemyManager>().SetupAI(instance.wayPointList);
         }
     }

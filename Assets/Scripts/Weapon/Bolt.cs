@@ -18,6 +18,13 @@ public class Bolt : MonoBehaviour {
     Collider2D colliderD;
     bool hasCollided = false;
 
+    int burnChance;
+    int burnDamage;
+    float burnDuration;
+    int slowChance;
+    float slowAmount;
+    float slowDuration;
+
     // Use this for initialization
     void Start () {
         boltRigidbody = GetComponent<Rigidbody2D>();
@@ -44,7 +51,7 @@ public class Bolt : MonoBehaviour {
         }
     }
 
-    public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed)
+    public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed, int burnC,  int burnD,     float    burnDur,      int  slowC,   float     slowA,     float    slowD)
     {
         damage = dam;
         direction = dir;
@@ -52,6 +59,13 @@ public class Bolt : MonoBehaviour {
         speedBolt = speed;
         maxSpeedBolt = maxSpeed;
         transform.right = direction;
+
+        burnChance = burnC;
+         burnDamage = burnD;
+         burnDuration = burnDur;
+        slowDuration = slowD;
+         slowAmount = slowA;
+         slowDuration = slowD;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -68,6 +82,8 @@ public class Bolt : MonoBehaviour {
                 EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
                 damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
                 em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt, 0);
+                em.Burn(burnChance, burnDamage, burnDuration);
+                em.Slow(slowChance, slowAmount, slowDuration, false);
                 //Destroy(this.gameObject);
                 UpdateSpeed = false;
                 transform.parent = em.gameObject.transform;

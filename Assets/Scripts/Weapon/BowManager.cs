@@ -83,7 +83,7 @@ public class BowManager : WeaponManager {
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
        // boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
-       thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
+       thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration);
         ResetAttackTimer();
     }
     protected override SpriteRenderer GetSpriteRenderer()
