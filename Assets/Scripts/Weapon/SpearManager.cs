@@ -27,7 +27,8 @@ public class SpearManager : WeaponManager
         int lvl = GameManager.instance.GetCurrentLevel();
        // Random.seed = System.DateTime.Now.Millisecond;
         float AdAsRation = Random.value;
-        float lvlScale = 1 + (float)lvl / lvlScalability;
+        float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
+        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;

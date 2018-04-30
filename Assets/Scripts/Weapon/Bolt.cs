@@ -38,7 +38,6 @@ public class Bolt : MonoBehaviour {
         {
             StartCoroutine(fadeToDeath());
         }
-
         if (UpdateSpeed)
         {
             speedBolt -= slowDownAmount * Time.deltaTime;
@@ -63,14 +62,13 @@ public class Bolt : MonoBehaviour {
         burnChance = burnC;
          burnDamage = burnD;
          burnDuration = burnDur;
-        slowDuration = slowD;
+        slowChance = slowC;
          slowAmount = slowA;
          slowDuration = slowD;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      
         if (other.tag == "Enemy")
         {
             if (!hasCollided)

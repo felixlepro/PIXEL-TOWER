@@ -18,10 +18,11 @@ public class BowManager : WeaponManager {
         SetRarity();
         int lvl = GameManager.instance.GetCurrentLevel();
         float AdAsRation = Random.value;
-        float lvlScale = 1 + (float)lvl / lvlScalability;
+        float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
+        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation);
-        attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
+        attackDamageChargedBonus = 0;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
         float boltSpeedSlowAmountRatio = Random.value;

@@ -8,7 +8,7 @@ public class CrossbowManager : WeaponManager
 
 
     public GameObject bolt;
-    private List<Bolt> boltList = new List<Bolt>();
+    //private List<Bolt> boltList = new List<Bolt>();
 
     public FloatRange boltSpeedRange = new FloatRange(15, 20);
 
@@ -17,7 +17,8 @@ public class CrossbowManager : WeaponManager
         SetRarity();
         int lvl = GameManager.instance.GetCurrentLevel();
         float AdAsRation = Random.value;
-        float lvlScale = 1 + (float)lvl / lvlScalability;
+        float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
+        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation);
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
@@ -69,15 +70,17 @@ public class CrossbowManager : WeaponManager
     void crossBowAttack()
     {
         anim.SetTrigger("isFireing");
-        boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());
+     
         if (!isFantoming)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
+        Instantiate(bolt, transform.position, Quaternion.identity)
+            .GetComponent<Bolt>().Setup(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration); ;
 
-        boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration);
+        // boltList[boltList.Count - 1]
         ResetAttackTimer();
     }
     protected override SpriteRenderer GetSpriteRenderer()

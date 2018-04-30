@@ -90,7 +90,7 @@ MonoBehaviour:
   wColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 20
   attackSpeed: 0.1
-  chargeTime: 1
+  chargeTime: 0.75
   attackDamageChargedBonus: 30
   knockBackAmount: 5
   cost: 0
@@ -109,21 +109,21 @@ MonoBehaviour:
     min: 45
     max: 55
   attackDamageRange:
-    min: 25
-    max: 30
+    min: 19
+    max: 24
   attackSpeedRange:
     min: 0.2
     max: 0.4
   attackDamageChargedBonusRange:
-    min: 0.25
-    max: 0.75
+    min: 0
+    max: 0
   knockBackAmountRange:
     min: 4
     max: 6
   IceFireChance: 0.3
   chanceBurnProcRange:
     min: 50
-    max: 75
+    max: 100
   burnDurationRange:
     min: 2
     max: 5

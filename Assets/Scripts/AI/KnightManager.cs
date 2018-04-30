@@ -157,14 +157,6 @@ public class KnightManager : EnemyManager {
 
     State state;
     State stateAnim;
-    Vector2 velocity;
-    float horzInput;
-    bool jumpJustPressed;
-    bool jumpHeld;
-    int airJumpsDone = 0;
-
-
-
     public override void UpdateAnim()
     {
         if (updateAnim)

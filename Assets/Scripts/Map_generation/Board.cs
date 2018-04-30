@@ -37,8 +37,7 @@ public class Board : MonoBehaviour {
     List<int[]> potentialExit = new List<int[]>();
     GameObject chestHolder;
     int[,] gridToInt;
-    int level;
-    int nbrTileFloor = 0;
+    //int level;
     public float distanceMinEnemJoueur = 10;
     int modulXn = 3;
     public  void SetupBoard(int lvl)
@@ -54,7 +53,7 @@ public class Board : MonoBehaviour {
         potentialExit.Clear();
 
         boardHolder = new GameObject("Board Holder");
-        chestHolder = new GameObject("Chest Holder");
+         chestHolder = new GameObject("Chest Holder");
 
         SetUpTilesArray();
         CreateRoomsAndCorridors();
@@ -330,7 +329,7 @@ public class Board : MonoBehaviour {
     {
         Vector3 player = GameManager.instance.player.transform.position;
             //GameObject.Find("Pilot").transform.position;
-        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)level/10 + 1));
+        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)GameManager.instance.level/10 + 1));
 
         for (int i = 0; i < nbrEnemy; i++)
         {
@@ -375,7 +374,7 @@ public class Board : MonoBehaviour {
     {
         int whatChest = 0;//Random.Range(0, enemyList.Length);
         GameObject ch = Instantiate(chestList[whatChest], position, Quaternion.identity);
-        ch.transform.parent = GameObject.Find("Chest Holder").transform;
+        ch.transform.parent = chestHolder.transform;
         ch.GetComponent<Chest>().hasKey = key;
 
         modulXn = (23 * modulXn + 7) % 11;

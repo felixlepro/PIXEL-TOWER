@@ -5,7 +5,6 @@ using UnityEngine;
 public class MagicBall : Projectile {
     public const float lifeTime = 30;
     float time = 0; 
-    private float knockBack;
     public Vector3 direction;
     public Vector3 direction2;
     private Rigidbody2D ballRigidbody;
@@ -63,7 +62,7 @@ public class MagicBall : Projectile {
         {
             attackHitbox[0].enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
-            player.RecevoirDegats(attackDamage, player.transform.position - transform.position, knockBack, immuneTime);
+            player.RecevoirDegats(attackDamage, player.transform.position - transform.position, maxKnockBackAmount, immuneTime);
             player.Burn(burnChance, burnDamage, burnDuration);
             player.Slow(slowChance, slowAmount, slowDuration, false);
             speed = 0;

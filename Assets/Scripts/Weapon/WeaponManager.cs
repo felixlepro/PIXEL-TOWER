@@ -15,7 +15,7 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost; 
     public bool isMelee;
 
-    protected const float lvlScalability = 6; //apres combien de floor les stats des armes vont doubler
+    protected const float lvlScalability = 9; //apres combien de floor les stats des armes vont doubler
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     public bool isFire = true;
     public bool isIce = false;

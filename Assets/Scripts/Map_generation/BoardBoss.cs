@@ -34,11 +34,11 @@ public class BoardBoss : MonoBehaviour
     
     public GameObject[] enemyList;
 
-    GameObject chestHolder;
     GameObject boardHolder;
     int level;
 
     int[,] gridToInt;
+   [HideInInspector] public int nbrEnemy;
 
     public void SetupBoard(int lvl)
     {
@@ -47,7 +47,7 @@ public class BoardBoss : MonoBehaviour
         Destroy(GameObject.Find("Board Holder"));
         Destroy(GameObject.Find("Chest Holder"));
         boardHolder = new GameObject("Board Holder");
-        chestHolder = new GameObject("Chest Holder");
+      //  chestHolder = new GameObject("Chest Holder");
         SetUpTilesArray();
 
         CreateRoomsAndCorridors();
@@ -297,7 +297,7 @@ public class BoardBoss : MonoBehaviour
 
 void InstantiateEnemies(TileType[][] t)
 {
-        int nbrEnemy = level;// Mathf.CeilToInt((float)level / 2f);
+        nbrEnemy = level;// Mathf.CeilToInt((float)level / 2f);
         Debug.Log(nbrEnemy + " Wizard");
 
         float ecart = rooms[1].largRoom / (nbrEnemy+1);

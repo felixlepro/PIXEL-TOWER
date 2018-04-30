@@ -32,11 +32,11 @@ public class GameManager : MonoBehaviour {
 
     private  Text coinCounttext;
     private Board boardScript;
-    BoardBoss boardBoss;
+  [HideInInspector] public BoardBoss boardBoss;
     public int level;
     public int nbrFloorEntreBoss = 4;
     private List<EnemyManager> enemies;
-    private bool doingSetup = true;
+   // private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
     [HideInInspector] public List<Vector3> wayPointList = new List<Vector3>();
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour {
     private void HideLevelImage()
     {
         levelImage.SetActive(false);
-        doingSetup = false;
+      //  doingSetup = false;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour {
 
     void InitGame()
     {
-        doingSetup = true;
+       // doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         boardScript.SetupBoard(level);
@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour {
     void loadNewLevel()
     {
         
-        doingSetup = true;
+       // doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         instance.level += 1;

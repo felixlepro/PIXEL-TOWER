@@ -45,7 +45,7 @@ public class Player : Character {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
-    GameObject gameOverMenu;
+    //GameObject gameOverMenu;
     GameObject iconKey;
     //private void Awake()
     //{
@@ -83,7 +83,7 @@ public class Player : Character {
     }
     void PlayerSetUp()
     {
-        gameOverMenu = GameObject.Find("GameOverMenu");
+       // gameOverMenu = GameObject.Find("GameOverMenu");
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();

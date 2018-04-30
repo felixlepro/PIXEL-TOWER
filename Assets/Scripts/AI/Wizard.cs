@@ -123,6 +123,7 @@ public class Wizard : EnemyManager {
     }
     protected override void DropItems()
     {
+        if (GameManager.instance.boardBoss.nbrEnemy-- == 1) { 
         nbrCoins = Random.Range(Mathf.RoundToInt(nbrCoins / 2), Mathf.RoundToInt(nbrCoins * 1.5f));
         DropManager.DropCoin(transform.position, nbrCoins);
         DropManager.DropKey(transform.position);
@@ -130,6 +131,7 @@ public class Wizard : EnemyManager {
         {
             DropManager.DropRandomWeapon(transform.position, true);
         }
+    }
     }
     public override void Damaged()
     {

@@ -11,7 +11,6 @@ public abstract class Character : MonoBehaviour {
     public Color wColor = Color.white;
     public float maxMoveSpeed;
     const float burnRepetitionTime = 1;
-    private List<GameObject> iconList = new List<GameObject>();
 
     [HideInInspector] public bool immune = false;
     [HideInInspector] public bool stunned = false;

@@ -57,7 +57,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.06299999, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.12
 --- !u!95 &95276872749150568
 Animator:
   serializedVersion: 3
@@ -123,7 +123,7 @@ MonoBehaviour:
   IceFireChance: 0.25
   chanceBurnProcRange:
     min: 50
-    max: 75
+    max: 100
   burnDurationRange:
     min: 2
     max: 5

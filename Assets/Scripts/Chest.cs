@@ -7,7 +7,7 @@ public class Chest : MonoBehaviour {
     public int nbCoins;
     public int weaponDropChance;
     public int timeDropChange;
-    Collider2D col;
+   // Collider2D col;
     [HideInInspector] public bool hasKey = false;
     [HideInInspector] public Animator anim;
 
@@ -31,6 +31,6 @@ public class Chest : MonoBehaviour {
         {
             DropManager.DropTime(transform.position);
         }
-        Destroy(col);
+      //  Destroy(col);
     }
 }

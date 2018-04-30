@@ -19,7 +19,7 @@ public class PiggyManager : MonoBehaviour {
 
    // List<Vector3 > listCoinD;
     Animator anim;
-    SpriteRenderer spriteR;
+  //  SpriteRenderer spriteR;
     Player playerS;
     Unit unity;
 
@@ -28,7 +28,7 @@ public class PiggyManager : MonoBehaviour {
         coinList.Clear();
         anim = GetComponent<Animator>();
         unity = GetComponent<Unit>();
-        spriteR = GetComponent<SpriteRenderer>();
+       // spriteR = GetComponent<SpriteRenderer>();
         player = GameManager.instance.player.transform;
         playerS = GameManager.instance.player.GetComponent<Player>();
         // GameObject.Find("Pilot Copie").GetComponent<Player>();

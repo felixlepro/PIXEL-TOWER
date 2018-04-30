@@ -5,11 +5,9 @@ using UnityEngine;
 public class CerclePuissant : Attacks {
 
     public const float chargeTime = 0.5f;
-    Animator anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         attackHitbox = GetComponents<Collider2D>();
         StartCoroutine(attack());
         

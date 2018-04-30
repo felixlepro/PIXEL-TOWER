@@ -17,7 +17,7 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
-    protected const float lvlScalability = 5; //after how many floors will the stats double 
+    protected const float lvlScalability = 8f; //after how many floors will the stats double 
    // public GameObject[] attacksUPF; //attackUsingPrefabs
     //public struct Atta 
     //{
@@ -113,8 +113,8 @@ abstract public class EnemyManager : Character {
     }
     public void SetStats(int lvl)
     {
-       
-        float lvlScale = 1 + (float)lvl / lvlScalability;
+        float lvlScale = Mathf.Pow(2, (float)(lvl-1) / lvlScalability);
+        //float lvlScale = 1 + (float)lvl / lvlScalability;
         maxHp = Mathf.RoundToInt(maxHp * lvlScale);
         hp = maxHp;
         Debug.Log(maxHp + "   " + lvlScale + "      " + lvl);
