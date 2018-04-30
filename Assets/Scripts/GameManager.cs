@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour {
             if (instance.level != 0)
             {
                 instance.player.GetComponent<Player>().setUIWeaponpStat();
+                instance.player.GetComponent<TimeRewinding>().positionRewind.Clear();
+                instance.player.GetComponent<TimeRewinding>().pT = GameObject.Find("Enemies").GetComponent<PlayerTarget>();
             }
                 DamageTextManager.Initialize();
             

@@ -257,12 +257,12 @@ public class Player : Character {
     public void gainCoin()
     {
         coins += valuePerCoin;
-        coinText.text = "C O I N S : " + coins;
+        coinText.text = "P I È C E S : " + coins;
     }
     public void LooseCoin(int coinnbr)
     {
         coins -= coinnbr;
-        coinText.text = "C O I N S : " + coins;
+        coinText.text = "P I È C E S : " + coins;
 
     }
 

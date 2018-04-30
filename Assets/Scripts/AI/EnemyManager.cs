@@ -113,6 +113,7 @@ abstract public class EnemyManager : Character {
     }
     public void SetStats(int lvl)
     {
+        Debug.Log("s");
         float lvlScale = 1 + (float)lvl / lvlScalability;
         maxHp = Mathf.RoundToInt(maxHp * lvlScale);
         hp = maxHp;
