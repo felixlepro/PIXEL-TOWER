@@ -10,7 +10,6 @@ public class DropManager : MonoBehaviour {
     private static GameObject key;
     private static PiggyManager piggy;
     private static GameObject time;
-    public static GameObject weaponHolder;
 
     public static void Initialize()    {
         weaponList = GameManager.instance.weapons;
@@ -19,7 +18,6 @@ public class DropManager : MonoBehaviour {
         //GameObject.Find("Piggy").GetComponent<PiggyManager>(); //
         key = GameManager.instance.key;
         time = GameManager.instance.timeObject;
-        weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
         //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
 
@@ -29,9 +27,9 @@ public class DropManager : MonoBehaviour {
         WeaponManager wp = weapon.GetComponent<WeaponManager>();
         wp.enabled = false;
         weapon.GetComponent<Collider2D>().enabled = true;
-       // GameManager.instance.player.GetComponent<CompositeCollider2D>().enabled = false;
-        weapon.transform.parent = weaponHolder.transform;// weaponHolder.transform;
-      //  GameManager.instance.player.GetComponent<CompositeCollider2D>().enabled = true;
+        weapon.SetActive(false);                    //Prévient une erreur étrange
+        weapon.transform.parent = null;
+        weapon.SetActive(true);
         weapon.transform.localRotation = Quaternion.identity;
         weapon.transform.position = pos;
         weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, Mathf.Abs(weapon.transform.localScale.y), 1);

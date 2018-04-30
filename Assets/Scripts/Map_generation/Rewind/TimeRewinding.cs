@@ -92,7 +92,7 @@ public class TimeRewinding : MonoBehaviour
             scriptPlayer.stunned = false;
         }
         
-        scriptPlayer.immune = false;
+        scriptPlayer.immune = false;     //YO CEST QUOI CA genre tu break le immune en faisant ca
        
         if (positionRewind.Count > Mathf.Round(nbSec  / Time.fixedDeltaTime))
             positionRewind.RemoveAt(positionRewind.Count - 1);

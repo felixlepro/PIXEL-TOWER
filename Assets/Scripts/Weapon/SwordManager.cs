@@ -64,7 +64,7 @@ public class SwordManager : WeaponManager
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Colision");
-        if (other.tag == "Enemy" && transform.parent != DropManager.weaponHolder)
+        if (other.tag == "Enemy" && transform.parent != null)
         {
             bool already = false;
             chargeDoneRatio = thisAttackCCT;

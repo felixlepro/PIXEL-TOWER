@@ -102,8 +102,11 @@ public class GameManager : MonoBehaviour {
 
             }
             PlaceAndSetStuffOnStart(new Vector3(instance.boardScript.largeur, instance.boardScript.hauteur, 0));
-            instance.piggy.GetComponent<PiggyManager>().enabled = true;
-            instance.piggy.GetComponent<Unit>().enabled = true;
+            instance.piggy.GetComponent<Unit>().ResetPF();
+            //instance.piggy.GetComponent<Unit>().enabled = true;
+            //instance.piggy.SetActive(true);
+            //instance.piggy.GetComponent<PiggyManager>().enabled = true;
+
             if (instance.level != 0)
             {
                 instance.player.GetComponent<Player>().setUIWeaponpStat();
@@ -119,8 +122,11 @@ public class GameManager : MonoBehaviour {
         else
         {
             PlaceAndSetStuffOnStart(new Vector3(0, -3, 0));
-            instance.piggy.GetComponent<PiggyManager>().enabled = false;
-            instance.piggy.GetComponent<Unit>().enabled = false;
+            instance.piggy.GetComponent<Unit>().ResetPF();
+            //instance.piggy.GetComponent<Unit>().enabled = false;
+            //instance.piggy.SetActive(false);
+            //instance.piggy.GetComponent<PiggyManager>().enabled = false;
+            
         }
         GameObject.FindGameObjectWithTag("FloorText").GetComponent<Text>().text = "É T A G E : " + instance.level.ToString();
         DropManager.Initialize();
@@ -221,7 +227,6 @@ public class GameManager : MonoBehaviour {
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         instance.level += 1;
-        Debug.Log("Floor: " + instance.level);
         if ((instance.level % (nbrFloorEntreBoss+1)) == 0)
         {
             instance.boardBoss.SetupBoard(instance.level);

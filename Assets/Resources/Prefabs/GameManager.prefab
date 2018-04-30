@@ -243,7 +243,7 @@ MonoBehaviour:
   enemyList:
   - {fileID: 1931763787068262, guid: 0e897ab750ab5e94a8236a74233fec13, type: 2}
   - {fileID: 1327544550791342, guid: 9cc6aea96727aa849a5d54ce79fe43e4, type: 2}
-  nbrEnemyBase: 4
+  nbrEnemyBase: 5
   chestList:
   - {fileID: 1050157812518948, guid: 2f186ffc7e5a0e841a467c247216522c, type: 2}
   nbrChestMax: 4

@@ -40,7 +40,7 @@ abstract public class EnemyManager : Character {
     protected bool updateAnim = true;
      public StateController controller;
     [HideInInspector] public SpriteRenderer spriteR;
-    [HideInInspector] public Collider2D[] targetCollider;
+    [HideInInspector] public Collider2D targetCollider;
     Collider2D[]  enemyCollider;
     [HideInInspector] public float Angle;
 
@@ -107,7 +107,7 @@ abstract public class EnemyManager : Character {
         spriteR.color = wColor;
 
         enemyCollider = GetComponentsInChildren<Collider2D>();
-        targetCollider = chaseTarget.GetComponents<Collider2D>();
+        targetCollider = chaseTarget.GetComponent<Collider2D>();
         canvas = GameObject.Find("Canvas");
         OnStart();
     }
@@ -149,17 +149,17 @@ abstract public class EnemyManager : Character {
     }
     public void Attack(Attacks at)
     {
-        if (!targetCollider[0].gameObject.GetComponent<Player>().immune)
+        if (!targetCollider.gameObject.GetComponent<Player>().immune)
         {
-            foreach (Collider2D pc in targetCollider)
+           // foreach (Collider2D pc in targetCollider)
             {
                 foreach (Collider2D ah in at.attackHitbox)
                 {
-                    if (ah.IsTouching(pc))
+                    if (ah.IsTouching(targetCollider))
                     {
-                        pc.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, pc.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
-                        pc.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
-                        pc.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
+                        targetCollider.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, targetCollider.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
+                        targetCollider.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
+                        targetCollider.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
                         AttackSuccessful();
                         //resetAttackCD();
                         break;

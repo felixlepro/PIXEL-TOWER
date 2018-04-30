@@ -34,8 +34,6 @@ public class ShopManager : MonoBehaviour
         while (weaponList.Count < iMax)
         { 
             CreateWeapon();
-            Debug.Log(weaponList.Count);
-     
         }
 
         SetInfo();

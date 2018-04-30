@@ -59,7 +59,11 @@ public class Unit : MonoBehaviour
             }
         }
     }
-
+    public void ResetPF()
+    {
+        StopCoroutine("FollowPath");
+        targetPosition = GameManager.instance.player.transform.position;
+    }
     IEnumerator FollowPath()
     {
        // Debug.Log(path.Length);

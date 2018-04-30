@@ -278,7 +278,7 @@ Animator:
   m_GameObject: {fileID: 1991854546803822}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: db42350e5f820ce40a6e56b474f9b637, type: 2}
+  m_Controller: {fileID: 22100000, guid: 33ae4e9c827631a44a0a22a8820b5ce0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -340,6 +340,8 @@ MonoBehaviour:
   knockBackAmount: 15
   cost: 0
   isMelee: 0
+  isFire: 1
+  isIce: 0
   animator: {fileID: 9100000, guid: dd5d3ca0ec4beaf409be2e3251b32516, type: 2}
   sprite: {fileID: 0}
   description: 
@@ -348,6 +350,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   numAttack: 0
   isFantoming: 0
+  costRange:
+    min: 25
+    max: 35
   attackDamageRange:
     min: 10
     max: 20
