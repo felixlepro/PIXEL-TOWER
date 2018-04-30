@@ -81,17 +81,7 @@ public class TimeRewinding : MonoBehaviour
     void Record()
     {
 
-        if (scriptPlayer.immune)
-        {
-            for (int i = 0; i < GameObject.Find("Enemies").transform.childCount; i++)
-                {
-                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().immune = false;
-                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().stunned = false;
-            }
-            scriptPlayer.StopImmunity();
-            scriptPlayer.stunned = false;
-            scriptPlayer.immune = false;
-        }
+        
         
       
        
@@ -128,10 +118,18 @@ public class TimeRewinding : MonoBehaviour
             pT.changeTarget(GameObject.Find("PilotCopie(Clone)").transform);
             
         }
+            for (int i = 0; i < GameObject.Find("Enemies").transform.childCount; i++)
+            {
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().immune = false;
+                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().stunned = false;
+            }
+            scriptPlayer.StopImmunity();
+            scriptPlayer.stunned = false;
+            scriptPlayer.immune = false;
         
-       
 
-        
+
+
     }
     public void FantomeMort()
     {
