@@ -63,7 +63,7 @@ public class SpearManager : WeaponManager
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Colision");
-        if (other.tag == "Enemy" && transform.parent != null)
+        if (other.tag == "Enemy" && transform.parent != DropManager.weaponHolder)
         {
             bool already = false;
             chargeDoneRatio = thisAttackCCT;

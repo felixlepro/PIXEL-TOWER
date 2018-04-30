@@ -28,6 +28,7 @@ TagManager:
   - FloorText
   - TimeCharge
   - RewindBar
+  - WeaponHolder
   layers:
   - Default
   - TransparentFX

@@ -155,6 +155,7 @@ public class Board : MonoBehaviour {
 
     void SetTilesValuesForRooms()
     {
+        int nbr = 0;
         SetNbrChest();
         // Go through all the rooms...
         for (int i = 0; i < rooms.Length; i++)
@@ -178,7 +179,7 @@ public class Board : MonoBehaviour {
                         
                         potentialChest.Add(pos);
                     }
-                    else if (new Vector2(xCoord - largeur/2, yCoord - hauteur/2).magnitude > distanceMinEnemJoueur)
+                    else if (new Vector2(xCoord - largeur/2, yCoord - hauteur/2).magnitude > distanceMinEnemJoueur && nbr++%20 == 0)
                     {
                         potentialEn.Add(pos);
                     }
