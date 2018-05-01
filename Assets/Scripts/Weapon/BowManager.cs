@@ -29,7 +29,7 @@ public class BowManager : WeaponManager {
         boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
         slowAmount = slowAmountRange.Set(1 - boltSpeedSlowAmountRatio) / thisRarity.multiplier;
 
-        cost = Mathf.RoundToInt(costRange.Random * thisRarity.multiplier);
+        cost = Mathf.RoundToInt((costRange.Random + (lvl - 1) * costScalability) * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;
@@ -83,8 +83,9 @@ public class BowManager : WeaponManager {
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
-       // boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
-       thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration);
+        // boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
+        //  thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration);
+        thisBolt.Setup(direction, boltSpeed * chargeDoneRatio, boltSpeed, GetComponent<WeaponManager>());
         ResetAttackTimer();
     }
     protected override SpriteRenderer GetSpriteRenderer()

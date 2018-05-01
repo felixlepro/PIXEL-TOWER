@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 81342250849720830}
   - component: {fileID: 114210670259462956}
   - component: {fileID: 114851616678365444}
+  - component: {fileID: 114658790678715282}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -98,8 +99,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultPosInfluence: {x: 0.17, y: 0.17, z: 0}
-  DefaultRotInfluence: {x: 0, y: 0, z: 0.7}
+  DefaultPosInfluence: {x: 0.14, y: 0.14, z: 0}
+  DefaultRotInfluence: {x: 0, y: 0, z: 0.75}
+--- !u!114 &114658790678715282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298376864071572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6d4281e5d7cd44d8c6e38bc2c1b8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  intensity: 0.17
+  chromaticAberration: 0
+  axialAberration: 0.5
+  blur: 0
+  blurSpread: 0.75
+  luminanceDependency: 0.25
+  blurDistance: 2.5
+  vignetteShader: {fileID: 4800000, guid: 627943dc7a9a74286b70a4f694a0acd5, type: 3}
+  separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
+  chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
+    type: 3}
 --- !u!114 &114851616678365444
 MonoBehaviour:
   m_ObjectHideFlags: 1

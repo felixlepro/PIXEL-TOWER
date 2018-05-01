@@ -106,8 +106,8 @@ MonoBehaviour:
   numAttack: 0
   isFantoming: 0
   costRange:
-    min: 45
-    max: 55
+    min: 40
+    max: 50
   attackDamageRange:
     min: 6
     max: 12
@@ -122,8 +122,8 @@ MonoBehaviour:
     max: 3
   IceFireChance: 0.25
   chanceBurnProcRange:
-    min: 50
-    max: 100
+    min: 25
+    max: 50
   burnDurationRange:
     min: 2
     max: 5
@@ -131,14 +131,14 @@ MonoBehaviour:
     min: 4
     max: 8
   chanceSlowProcRange:
-    min: 50
-    max: 100
+    min: 25
+    max: 50
   slowDurationRange:
     min: 2
     max: 5
   slowValueRanges:
-    min: 0.3
-    max: 0.6
+    min: 0.15
+    max: 0.3
   boltSpeed: 20
   bolt: {fileID: 1537247388328212, guid: a9f466cf61432c64ba6edc85b789bcc0, type: 2}
   boltSpeedRange:

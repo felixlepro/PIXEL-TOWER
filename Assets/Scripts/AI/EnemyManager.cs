@@ -17,18 +17,19 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
-    protected const float lvlScalability = 8f; //after how many floors will the stats double 
+    protected const float lvlScalability = 6f; //after how many floors will the stats double 
+    protected float lvlScaleEx;
    // public GameObject[] attacksUPF; //attackUsingPrefabs
-    //public struct Atta 
-    //{
-    //    public int attackDamage;
-    //    public float immuneTime;
-    //    public float maxKnockBackAmount;
-    //    public float attackRange;
-    //    public GameObject prefab;
-    //    [HideInInspector] public Collider2D[] attackHitbox;
-    //}
-    
+   //public struct Atta 
+   //{
+   //    public int attackDamage;
+   //    public float immuneTime;
+   //    public float maxKnockBackAmount;
+   //    public float attackRange;
+   //    public GameObject prefab;
+   //    [HideInInspector] public Collider2D[] attackHitbox;
+   //}
+
     public AudioClip dun;
     public GameObject dunExlamation;
     public float height;
@@ -77,6 +78,7 @@ abstract public class EnemyManager : Character {
     abstract public void AttackSuccessful();
     abstract public void UpdateAnim();
     abstract public void gonnaDie();
+    abstract public void SpecificStats(int lvl);
 
     private void OnEnable()
     {
@@ -111,21 +113,13 @@ abstract public class EnemyManager : Character {
         canvas = GameObject.Find("Canvas");
         OnStart();
     }
-    public void SetStats(int lvl)
+    virtual public void SetStats(int lvl)
     {
-        float lvlScale = Mathf.Pow(2, (float)(lvl-1) / lvlScalability);
+        lvlScaleEx = Mathf.Pow(2, (float)(lvl-1) / lvlScalability);
         //float lvlScale = 1 + (float)lvl / lvlScalability;
-        maxHp = Mathf.RoundToInt(maxHp * lvlScale);
+        maxHp = Mathf.RoundToInt(maxHp * lvlScaleEx);
         hp = maxHp;
-        Debug.Log(maxHp + "   " + lvlScale + "      " + lvl);
-        //foreach(Attacks at in attacks)
-        //{
-        //    at.attackDamage = Mathf.RoundToInt(at.attackDamage*lvlScale);
-        //    at.burnDamage = Mathf.RoundToInt(at.burnDamage * Mathf.Sqrt(lvlScale));
-        //    at.burnDuration *= Mathf.Sqrt(lvlScale);
-        //}
-
-
+        SpecificStats(lvl);
     }
     private void Update()
     {
@@ -184,7 +178,7 @@ abstract public class EnemyManager : Character {
         nextWayPoint = Random.Range(0, wayPointList.Count-1);
 
         pathingUnit.targetPosition = wayPointList[nextWayPoint];        
-        pathingUnit.enablePathing();
+        pathingUnit.enablePathing(true);
 
     }
 
@@ -207,7 +201,7 @@ abstract public class EnemyManager : Character {
             hpBar.fillAmount = (float)hp / (float)maxHp;
             //  Debug.Log(hpBar.fillAmount);
             DamageTextManager.CreateFloatingText(damage, transform.position);
-            CameraShaker.Instance.ShakeOnce(damage * 0.1f, 2.5f, 0.1f, 0.7f);
+            CameraShaker.Instance.ShakeOnce(damage/lvlScaleEx * 0.15f, 2.5f, 0.1f, 0.7f);
             float kbTemp = kbAmmount * gettingKnockedBackAmount;
             Damaged();
             gotDamaged = true;
@@ -302,7 +296,7 @@ abstract public class EnemyManager : Character {
             yield return new WaitForFixedUpdate();
         }
         spriteR.color = new Color(1f, 1, 1, 1f);
-        pathingUnit.enablePathing();
+        pathingUnit.enablePathing(true);
         isRooted = false;
     }
 

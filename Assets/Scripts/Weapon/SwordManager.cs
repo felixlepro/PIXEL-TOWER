@@ -35,7 +35,7 @@ public class SwordManager : WeaponManager
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
         knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
 
-        cost = Mathf.RoundToInt(costRange.Random*thisRarity.multiplier);
+        cost = Mathf.RoundToInt((costRange.Random + (lvl - 1) * costScalability) * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;

@@ -83,7 +83,7 @@ public class KnightManager : EnemyManager {
     public void endAttack()
     {
         isRooted = false;
-        pathingUnit.enablePathing();
+        pathingUnit.enablePathing(true);
        // anim.speed = currentSpeed / maxMoveSpeed;
         //controller.enemyManager.isWalking = false; 
 
@@ -157,6 +157,11 @@ public class KnightManager : EnemyManager {
 
     State state;
     State stateAnim;
+
+    protected KnightManager()
+    {
+    }
+
     public override void UpdateAnim()
     {
         if (updateAnim)
@@ -327,6 +332,14 @@ public class KnightManager : EnemyManager {
             case State.Dying: return "Dying";
         }
         return "Idling";
+    }
+
+    public override void SpecificStats(int lvl)
+    {
+        attacks[0].attackDamage = Mathf.RoundToInt(attacks[0].attackDamage * (1 + (float)(lvl - 1) / (lvlScalability * 2)));
+        attacks[0].burnDamage = Mathf.RoundToInt(attacks[0].burnDamage * (1 + (float)(lvl - 1) / (lvlScalability * 2)));
+        maxMoveSpeed *= (1 + (float)(lvl - 1) / (lvlScalability * 4));
+        currentSpeed = maxMoveSpeed;
     }
 }
 

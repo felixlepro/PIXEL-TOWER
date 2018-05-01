@@ -25,6 +25,8 @@ public class Bolt : MonoBehaviour {
     float slowAmount;
     float slowDuration;
 
+    WeaponManager weaponSource;
+
     // Use this for initialization
     void Start () {
         boltRigidbody = GetComponent<Rigidbody2D>();
@@ -50,27 +52,47 @@ public class Bolt : MonoBehaviour {
         }
     }
 
-    public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed, int burnC,  int burnD,     float    burnDur,      int  slowC,   float     slowA,     float    slowD)
+        public void Setup(Vector3 dir, float speed, float maxSpeed, WeaponManager wm)
     {
-        damage = dam;
+       // damage = dam;
         direction = dir;
-        knockBack = kb;
         speedBolt = speed;
         maxSpeedBolt = maxSpeed;
         transform.right = direction;
+        weaponSource = wm;
 
-        burnChance = burnC;
-         burnDamage = burnD;
-         burnDuration = burnDur;
-        slowChance = slowC;
-         slowAmount = slowA;
-         slowDuration = slowD;
+        //knockBack = kb;
+
+
+        //burnChance = burnC;
+        //burnDamage = burnD;
+        //burnDuration = burnDur;
+        //slowChance = slowC;
+        //slowAmount = slowA;
+        //slowDuration = slowD;
     }
+    //public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed, int burnC,  int burnD,     float    burnDur,      int  slowC,   float     slowA,     float    slowD)
+    //{
+    //    damage = dam;
+    //    direction = dir;
+    //    knockBack = kb;
+    //    speedBolt = speed;
+    //    maxSpeedBolt = maxSpeed;
+    //    transform.right = direction;
+
+    //    burnChance = burnC;
+    //     burnDamage = burnD;
+    //     burnDuration = burnDur;
+    //    slowChance = slowC;
+    //     slowAmount = slowA;
+    //     slowDuration = slowD;
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
         {
+            
             if (!hasCollided)
             {
                 hasCollided = true;
@@ -79,11 +101,11 @@ public class Bolt : MonoBehaviour {
                 transform.right = -direction;
                 EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
                 damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
-                em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt, 0);
-                em.Burn(burnChance, burnDamage, burnDuration);
-                em.Slow(slowChance, slowAmount, slowDuration, false);
-                //Destroy(this.gameObject);
-                UpdateSpeed = false;
+                weaponSource.EnvoyerDegat(other.GetComponentInParent<EnemyManager>());
+            // em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt, 0);
+            //em.Burn(burnChance, burnDamage, burnDuration);
+            //em.Slow(slowChance, slowAmount, slowDuration, false);
+            UpdateSpeed = false;
                 transform.parent = em.gameObject.transform;
             }
 
@@ -96,7 +118,6 @@ public class Bolt : MonoBehaviour {
                 colliderD.enabled = false;
             GetComponent<Animator>().SetTrigger("Hit");
             transform.right = -direction;
-            //Destroy(this.gameObject);
             UpdateSpeed = false;
             }
         }

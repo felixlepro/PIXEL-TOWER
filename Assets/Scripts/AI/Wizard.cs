@@ -9,6 +9,7 @@ public class Wizard : EnemyManager {
     Transform graphics;
     bool dying = false;
 
+
     protected override void OnStart()
     {
        setAnimState("Moving");
@@ -22,6 +23,14 @@ public class Wizard : EnemyManager {
         //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;;
         UpdateAnim();
         UpdatecurrentAttackCD();
+    }
+    public override void SetStats(int lvl)
+    {
+        lvlScaleEx = Mathf.Pow(2, (float)(lvl - 1) / (lvlScalability*1.7f));
+        //float lvlScale = 1 + (float)lvl / lvlScalability;
+        maxHp = Mathf.RoundToInt(maxHp * lvlScaleEx);
+        hp = maxHp;
+        SpecificStats(lvl);
     }
     public override bool CheckAttack()
     {
@@ -136,6 +145,10 @@ public class Wizard : EnemyManager {
     public override void Damaged()
     {
     }
+    public override void SpecificStats(int lvl)
+    {
+    }
+
 
     //Animations-----------------------------------------
 

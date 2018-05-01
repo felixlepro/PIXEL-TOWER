@@ -116,11 +116,11 @@ MonoBehaviour:
   numAttack: 0
   isFantoming: 0
   costRange:
-    min: 45
-    max: 55
+    min: 40
+    max: 50
   attackDamageRange:
-    min: 17
-    max: 22
+    min: 20
+    max: 25
   attackSpeedRange:
     min: 0.3
     max: 0.6
@@ -132,14 +132,14 @@ MonoBehaviour:
     max: 15
   IceFireChance: 0.4
   chanceBurnProcRange:
-    min: 60
+    min: 75
     max: 100
   burnDurationRange:
-    min: 1
-    max: 4
+    min: 2
+    max: 5
   burnSufferedRange:
-    min: 5
-    max: 10
+    min: 4
+    max: 8
   chanceSlowProcRange:
     min: 75
     max: 100

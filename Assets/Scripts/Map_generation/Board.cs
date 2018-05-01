@@ -329,7 +329,7 @@ public class Board : MonoBehaviour {
     {
         Vector3 player = GameManager.instance.player.transform.position;
             //GameObject.Find("Pilot").transform.position;
-        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((float)GameManager.instance.level/10 + 1));
+        int nbrEnemy = Mathf.RoundToInt(nbrEnemyBase * ((((float)GameManager.instance.level-1) / 8 + 1) ));
 
         for (int i = 0; i < nbrEnemy; i++)
         {

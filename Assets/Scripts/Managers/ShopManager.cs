@@ -24,7 +24,7 @@ public class ShopManager : MonoBehaviour
     private bool inRange = false;
     private int currentWtype;
     public int iMax = 6;
-    public int healCost = 15;
+    public int healCost = 20;
 
     private void Start()
     {

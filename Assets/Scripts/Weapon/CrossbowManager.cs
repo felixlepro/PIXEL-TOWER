@@ -27,7 +27,7 @@ public class CrossbowManager : WeaponManager
         float boltSpeedSlowAmountRatio = Random.value;
         boltSpeed = boltSpeedRange.Set(boltSpeedSlowAmountRatio) * thisRarity.multiplier;
 
-        cost = Mathf.RoundToInt(costRange.Random * thisRarity.multiplier);
+        cost = Mathf.RoundToInt((costRange.Random + (lvl - 1) * costScalability) * thisRarity.multiplier);
 
         float slowDurationValueRatio = Random.value;
         float burnDurationValueRatio = Random.value;
@@ -77,8 +77,7 @@ public class CrossbowManager : WeaponManager
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
-        Instantiate(bolt, transform.position, Quaternion.identity)
-            .GetComponent<Bolt>().Setup(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration); ;
+        Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>().Setup(direction, boltSpeed, boltSpeed, GetComponent<WeaponManager>());//(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration); ;
 
         // boltList[boltList.Count - 1]
         ResetAttackTimer();

@@ -15,21 +15,22 @@ public abstract class WeaponManager : MonoBehaviour {
     public int cost; 
     public bool isMelee;
 
-    protected const float lvlScalability = 9; //apres combien de floor les stats des armes vont doubler
+    protected const float lvlScalability = 6f; //apres combien de floor les stats des armes vont doubler
+    protected const float costScalability = 5f; 
     //Attributs responsables des effets de Burn et de Slow (propre à chaque arme)
     public bool isFire = true;
     public bool isIce = false;
 
-    [HideInInspector] protected int chanceBurnProc = 50;
-    [HideInInspector] protected int chanceSlowProc = 100;
+    [HideInInspector] protected int chanceBurnProc ;
+    [HideInInspector] protected int chanceSlowProc ;
 
-    [HideInInspector] protected float burnDuration = 4;
-    [HideInInspector] protected int burnSuffered = 1;
+    [HideInInspector] protected float burnDuration ;
+    [HideInInspector] protected int burnSuffered;
 
-    [HideInInspector] protected float slowDuration = 5;
-    [HideInInspector] protected float slowValue = 0.5f;
+    [HideInInspector] protected float slowDuration;
+    [HideInInspector] protected float slowValue;
 
-    [HideInInspector] protected bool slowFadeState = false;
+    [HideInInspector] protected bool slowFadeState = true;
     //Fin des attributs d'effets spéciaux d'armes  -Simon
 
 
@@ -77,12 +78,12 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     [HideInInspector] public rarity thisRarity;
     rarity[] possibleRarities = { new rarity() { chance = 100, multiplier = 1, name = "Commun" },
-                                  new rarity() { chance = 50, multiplier = 1.15f, name = "Rare" },
-                                  new rarity() { chance = 20, multiplier = 1.3f, name = "Épic" },
-                                  new rarity() { chance = 5, multiplier = 1.45f, name = "Légendaire" },
-                                  new rarity() { chance = 0.03f, multiplier = 1.6f, name = "Mythique" },
-                                  new rarity() { chance = 0.006f, multiplier = 1.75f, name = "Divin" },
-                                 new rarity()  { chance = 0.00001f, multiplier = 2.5f, name = "Paradoxal" }
+                                  new rarity() { chance = 55, multiplier = 1.15f, name = "Rare" },
+                                  new rarity() { chance = 22, multiplier = 1.3f, name = "Épic" },
+                                  new rarity() { chance = 6, multiplier = 1.45f, name = "Légendaire" },
+                                  new rarity() { chance = 1f, multiplier = 1.6f, name = "Mythique" },
+                                  new rarity() { chance = 0.2f, multiplier = 1.75f, name = "Divin" },
+                                 new rarity()  { chance = 0.00001f, multiplier = 3f, name = "Paradoxal" }
     };
 
                                  
@@ -136,6 +137,10 @@ public abstract class WeaponManager : MonoBehaviour {
     public void SetRarity()
     {
         float randomR = NbRand(0, 100);
+        if (!GameManager.instance.inLevel)
+        {
+            randomR = Mathf.RoundToInt(randomR / 1.35f);
+        }
         for(int i = 0; i < possibleRarities.Length; i++)
         {
             if(randomR <= possibleRarities[i].chance)

@@ -377,8 +377,7 @@ MonoBehaviour:
   iconFeu: {fileID: 0}
   iconGlace: {fileID: 0}
   startingWeapon:
-  - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
-  - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
+  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   weaponList: []
   rotationBuffer: 15
   restartDelay: 1

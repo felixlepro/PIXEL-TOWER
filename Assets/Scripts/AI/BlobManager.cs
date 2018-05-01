@@ -42,7 +42,12 @@ public class BlobManager : EnemyManager
     {
 
     }
-
+    public override void SpecificStats(int lvl)
+    {
+        attacks[0].attackDamage = Mathf.RoundToInt(attacks[0].attackDamage * (1 + (float)(lvl - 1) / (lvlScalability * 2)));
+        maxMoveSpeed *= (1 + (float)(lvl - 1) / (lvlScalability * 4));
+        currentSpeed = maxMoveSpeed;
+    }
     //Animations-----------------------------------------
 
     float stateStartTime;

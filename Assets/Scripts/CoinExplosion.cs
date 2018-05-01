@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinExplosion : MonoBehaviour {
 
-    //public float  vitesseMin;
-    //public float vitesseMax;
+    public float  forceMin = 125;
+    public float forceScale = 150;
     float vitesse;
     Vector3 direction;
     int angle;
@@ -19,7 +19,7 @@ public class CoinExplosion : MonoBehaviour {
         direction =  new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized ;
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(direction.normalized * (Random.value*125 + 100));
+        rb.AddForce(direction.normalized * (Random.value*forceScale + forceMin));
     }
 	
 	void FixedUpdate () {

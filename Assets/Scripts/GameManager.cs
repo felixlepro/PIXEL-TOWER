@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour {
 
             }
             PlaceAndSetStuffOnStart(new Vector3(instance.boardScript.largeur, instance.boardScript.hauteur, 0));
-            instance.piggy.GetComponent<Unit>().ResetPF();
+            instance.piggy.GetComponent<Unit>().enablePathing(false);
             instance.piggy.GetComponent<Unit>().enabled = true;
             instance.piggy.SetActive(true);
             instance.piggy.GetComponent<PiggyManager>().enabled = true;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour {
         else
         {
             PlaceAndSetStuffOnStart(new Vector3(0, -3, 0));
-            instance.piggy.GetComponent<Unit>().ResetPF();
+            instance.piggy.GetComponent<Unit>().disablePathing();
             instance.piggy.GetComponent<Unit>().enabled = false;
             instance.piggy.SetActive(false);
             instance.piggy.GetComponent<PiggyManager>().enabled = false;
