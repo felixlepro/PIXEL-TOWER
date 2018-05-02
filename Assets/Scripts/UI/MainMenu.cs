@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour {
         
         this.gameObject.SetActive(true);
         Time.timeScale = 1;
-        StartCoroutine(LoadAsynchronously(0));
+        StartCoroutine(LoadAsynchronously(1));
         ResetGame();
     }
 
@@ -54,9 +54,9 @@ public class MainMenu : MonoBehaviour {
 
     public void ResetGame()
     {
-        //foreach (GameObject element in Object.FindObjectsOfType<GameObject>())
-        //{
-        //        Destroy(element);
-        //}   
+        foreach (GameObject element in Object.FindObjectsOfType<GameObject>())
+        {
+                Destroy(element);
+        }   
     }
 }

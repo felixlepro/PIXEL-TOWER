@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 7
+  attackDamage: 6
   immuneTime: 2
   maxKnockBackAmount: 13
   attackRange: 50

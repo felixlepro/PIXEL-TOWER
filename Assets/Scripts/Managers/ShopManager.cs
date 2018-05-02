@@ -102,7 +102,6 @@ public class ShopManager : MonoBehaviour
     {
         for (int n = 0; n < iMax; n++)
         {
-            Debug.Log(n);
            imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;   //        Jlai enlever parce que je sais pas cest quoi pi ca fait bugger toute
            string rar = "Basique";
 
@@ -150,14 +149,10 @@ public class ShopManager : MonoBehaviour
     }
     public void BuyHeal()
     {
-        if (p1.GetComponent<Player>().coins >= healCost)
+        if (p1.coins >= healCost && p1.hp < p1.maxHp)
         {
-            p1.GetComponent<Player>().LooseCoin(healCost);
-            p1.GetComponent<Player>().Heal(25);  
-        }
-        else
-        {
-            Debug.Log("gros pauvre");
+            p1.LooseCoin(healCost);
+            p1.Heal(25);  
         }
     }
 }

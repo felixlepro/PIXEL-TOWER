@@ -520,7 +520,7 @@ MonoBehaviour:
   burnChance: 100
   slowChance: 0
   burnDamage: 2
-  burnDuration: 5
+  burnDuration: 4
   slowAmount: 0
   slowDuration: 0
 --- !u!114 &114361256670301692
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 5
+  attackDamage: 7
   immuneTime: 1.5
   maxKnockBackAmount: 15
   attackRange: 4
@@ -616,7 +616,7 @@ MonoBehaviour:
   prefab: {fileID: 1965252358492802, guid: a32449f5bd65f2f4db1420153a6e474b, type: 2}
   burnChance: 100
   slowChance: 0
-  burnDamage: 2
+  burnDamage: 1
   burnDuration: 4
   slowAmount: 0
   slowDuration: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cc5427786ef6f4382af94dd0f35e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 3
+  attackDamage: 2
   immuneTime: 0
   maxKnockBackAmount: 5
   attackRange: 100

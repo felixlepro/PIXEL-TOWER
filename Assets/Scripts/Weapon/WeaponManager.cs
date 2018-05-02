@@ -290,8 +290,8 @@ public abstract class WeaponManager : MonoBehaviour {
        GetSpriteRenderer().sortingOrder = 1;
         while (speed > 0.0005f)
         {
-            transform.position += -Vector3.up * speed;
-            speed -= 0.4f * Time.deltaTime;
+            transform.position += -Vector3.up * speed * Time.deltaTime;
+            speed -= 12 * Time.deltaTime;
             yield return null;
         }
         GetSpriteRenderer().sortingOrder = 0;

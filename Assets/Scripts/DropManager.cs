@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DropManager : MonoBehaviour {
 
-    const float speedDrop = 0.095f;
+    const float speedDrop = 4;
     private static GameObject[] weaponList;
     private static GameObject coinP;
     private static GameObject key;

@@ -367,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: -5
   nameC: 
-  maxHp: 150
+  maxHp: 100
   wColor: {r: 1, g: 1, b: 1, a: 1}
   maxMoveSpeed: 10
   immune: 0
@@ -377,6 +377,7 @@ MonoBehaviour:
   iconFeu: {fileID: 0}
   iconGlace: {fileID: 0}
   startingWeapon:
+  - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
   weaponList: []
   rotationBuffer: 15

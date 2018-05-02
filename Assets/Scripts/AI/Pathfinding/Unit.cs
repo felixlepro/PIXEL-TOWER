@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour
         if (this != null)
         {
             requestProcessing = false;
-            if (pathSuccessful)
+            if (pathSuccessful && enabled)
             {
                 
                 path = newPath;

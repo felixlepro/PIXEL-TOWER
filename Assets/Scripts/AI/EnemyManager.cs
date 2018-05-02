@@ -430,7 +430,7 @@ abstract public class EnemyManager : Character {
         DropManager.DropCoin(transform.position, nbrCoins);
         if (Random.value *100 < weaponDropChance)
         {
-            DropManager.DropRandomWeapon(transform.position,true);
+            DropManager.DropRandomWeapon(transform.position + Vector3.up/2,true);
         }
     }
 
