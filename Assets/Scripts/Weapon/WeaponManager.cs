@@ -81,8 +81,8 @@ public abstract class WeaponManager : MonoBehaviour {
                                   new rarity() { chance = 55, multiplier = 1.15f, name = "Rare" },
                                   new rarity() { chance = 22, multiplier = 1.3f, name = "Épic" },
                                   new rarity() { chance = 6, multiplier = 1.45f, name = "Légendaire" },
-                                  new rarity() { chance = 1f, multiplier = 1.6f, name = "Mythique" },
-                                  new rarity() { chance = 0.2f, multiplier = 1.75f, name = "Divin" },
+                                  new rarity() { chance = 1.5f, multiplier = 1.6f, name = "Mythique" },
+                                  new rarity() { chance = 0.4f, multiplier = 1.75f, name = "Divin" },
                                  new rarity()  { chance = 0.00001f, multiplier = 3f, name = "Paradoxal" }
     };
 
@@ -136,10 +136,10 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     public void SetRarity()
     {
-        float randomR = NbRand(0, 100);
+        float randomR = Random.value*100;
         if (!GameManager.instance.inLevel)
         {
-            randomR = Mathf.RoundToInt(randomR / 1.35f);
+            randomR = randomR / 1.35f;
         }
         for(int i = 0; i < possibleRarities.Length; i++)
         {

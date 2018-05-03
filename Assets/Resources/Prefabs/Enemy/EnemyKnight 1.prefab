@@ -486,7 +486,7 @@ MonoBehaviour:
   chaseRangeBuffer: 5
   fireStack: 0
   attackSpeed: 0.25
-  nbrCoins: 5
+  nbrCoins: 7
   weaponDropChance: 10
   hpBar: {fileID: 114999532112890474}
   attacks:

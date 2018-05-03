@@ -187,20 +187,20 @@ public class GameManager : MonoBehaviour {
         //instance.InitGame();
     }
 
-    void InitGame()
-    {
-       // doingSetup = true;
-        enemies.Clear();
-        levelImage = GameObject.Find("LevelImage");
-        boardScript.SetupBoard(level);
+    //void InitGame()
+    //{
+    //   // doingSetup = true;
+    //    enemies.Clear();
+    //    levelImage = GameObject.Find("LevelImage");
+    //    boardScript.SetupBoard(level);
 
-        SetupAI();
-        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        //levelText.text = "Level " + level;
-        // levelImage.SetActive(true);
-        // Invoke("HideLevelImage", levelStartDelay);
+    //    SetupAI();
+    //    //levelText = GameObject.Find("LevelText").GetComponent<Text>();
+    //    //levelText.text = "Level " + level;
+    //    // levelImage.SetActive(true);
+    //    // Invoke("HideLevelImage", levelStartDelay);
 
-    }
+    //}
     public void Restart()
     {
         piggy.GetComponent<PiggyManager>().coinList.Clear();
@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            instance.boardScript.SetupBoard(instance.level);
+            instance.boardScript.SetupBoard();
             SetupAI();
             ActivateAI(true);
         }

@@ -298,7 +298,6 @@ public class BoardBoss : MonoBehaviour
 void InstantiateEnemies(TileType[][] t)
 {
         nbrEnemy = level;// Mathf.CeilToInt((float)level / 2f);
-        Debug.Log(nbrEnemy + " Wizard");
 
         float ecart = rooms[1].largRoom / (nbrEnemy+1);
         for (int i = 1; i <= nbrEnemy; i++)

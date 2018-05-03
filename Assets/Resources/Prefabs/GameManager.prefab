@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 1781025517976478, guid: bc63f7a615fa9504c977774e978f1902, type: 2}
   - {fileID: 1846054610834424, guid: 53c476ac81fd5ac40a743b011a4dfa1b, type: 2}
   - {fileID: 1287666755509996, guid: ea9c13c76f03c2d489c0dcc5830aa794, type: 2}
+  boardBoss: {fileID: 0}
   level: 0
   nbrFloorEntreBoss: 2
   wayPointList: []
@@ -197,6 +198,7 @@ MonoBehaviour:
   exit: {fileID: 1477174839672588, guid: e14704bca72c541428fdab9ec78d454d, type: 2}
   enemyList:
   - {fileID: 1200067406220310, guid: 69919d60abbeaf24b8f3e6b3265db875, type: 2}
+  nbrEnemy: 0
 --- !u!114 &114376896094352634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,5 +274,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableGizmos: 1
-  nodeRadius: 0.1
+  nodeRadius: 0.2
   nodeContour: 1

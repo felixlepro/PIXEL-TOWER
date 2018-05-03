@@ -40,7 +40,7 @@ public class Board : MonoBehaviour {
     //int level;
     public float distanceMinEnemJoueur = 10;
     int modulXn = 3;
-    public  void SetupBoard(int lvl)
+    public  void SetupBoard()
     {
         //boardHolder  = Instantiate(boardHolder, Vector3.zero, Quaternion.identity);
        // Debug.Log("setup");
@@ -178,7 +178,7 @@ public class Board : MonoBehaviour {
                         
                         potentialChest.Add(pos);
                     }
-                    else if (new Vector2(xCoord - largeur/2, yCoord - hauteur/2).magnitude > distanceMinEnemJoueur && nbr++%20 == 0)
+                    else if (new Vector2(xCoord - largeur/2, yCoord - hauteur/2).magnitude > distanceMinEnemJoueur && nbr++%5 == 0)
                     {
                         potentialEn.Add(pos);
                     }
@@ -333,7 +333,8 @@ public class Board : MonoBehaviour {
 
         for (int i = 0; i < nbrEnemy; i++)
         {
-            int rng = Random.Range(0, potentialEn.Count);
+            int rng = Random.Range(0, potentialEn.Count-1);
+            Debug.Log(potentialEn.Count + "   " + rng);
             int xCoord = potentialEn[rng][0];
             int yCoord = potentialEn[rng][1];
             potentialEn.RemoveAt(rng);
