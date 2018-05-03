@@ -26,7 +26,9 @@ public class MagicBall : Projectile {
             Destroy(this.gameObject);
         }
         //Debug.Log(direction);
-        ballRigidbody.MovePosition(transform.position + direction.normalized * speed * Time.deltaTime);
+        direction = direction.normalized * speed * Time.deltaTime;
+       // boltRigidbody.MovePosition(transform.position + direction);
+        ballRigidbody.MovePosition(transform.position + direction);
 
     }
 

@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 2
-  immuneTime: 0
+  immuneTime: 0.3
   maxKnockBackAmount: 5
   attackRange: 100
   attackCD: 3.5

@@ -29,6 +29,7 @@ TagManager:
   - TimeCharge
   - RewindBar
   - WeaponHolder
+  - Colliders
   layers:
   - Default
   - TransparentFX

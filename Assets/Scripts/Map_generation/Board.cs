@@ -334,7 +334,6 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < nbrEnemy; i++)
         {
             int rng = Random.Range(0, potentialEn.Count-1);
-            Debug.Log(potentialEn.Count + "   " + rng);
             int xCoord = potentialEn[rng][0];
             int yCoord = potentialEn[rng][1];
             potentialEn.RemoveAt(rng);
