@@ -29,7 +29,11 @@ TagManager:
   - TimeCharge
   - RewindBar
   - WeaponHolder
+<<<<<<< Updated upstream
   - Colliders
+=======
+  - iconArmor
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
