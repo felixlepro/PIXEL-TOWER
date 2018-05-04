@@ -26,7 +26,7 @@ public class DropManager : MonoBehaviour {
         
         WeaponManager wp = weapon.GetComponent<WeaponManager>();
         wp.enabled = false;
-        weapon.GetComponent<Collider2D>().enabled = true;
+        //weapon.GetComponent<Collider2D>().enabled = true;
         weapon.SetActive(false);                    //Prévient une erreur étrange
         weapon.transform.parent = null;
         weapon.SetActive(true);

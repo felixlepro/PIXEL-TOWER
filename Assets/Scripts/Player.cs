@@ -19,6 +19,7 @@ public class Player : Character {
     Text coinText;
     public int coins;
      Image hpBar;
+    public int currentArmor;
 
     [HideInInspector] public bool hasKey;
     [HideInInspector] public int currentWeaponIndex = 0;
@@ -47,6 +48,7 @@ public class Player : Character {
 
     //GameObject gameOverMenu;
     GameObject iconKey;
+    GameObject iconArmor;
     //private void Awake()
     //{
     //    setPlayerStats();
@@ -145,7 +147,7 @@ public class Player : Character {
         {
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
-            hp -= damage;
+            hp -= (damage - (currentArmor));
             hpBar.fillAmount = (float)hp / (float)maxHp;
             //Debug.Log(hpBar.fillAmount);
             if (hp <= 0)
@@ -333,14 +335,6 @@ public class Player : Character {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
-        //foreach (Transform child in weaponTransform)
-        //{
-        //    if (child.GetComponent<WeaponManager>().isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
-        //    {
-        //        GameObject.Destroy(child.gameObject);
-        //    }
-        //    child.gameObject.SetActive(false);
-        //}
         bool foundAWeapon = false;
         newWeapon.GetComponent<WeaponManager>().enabled = true;
         newWeapon.GetComponent<Collider2D>().enabled = false;
@@ -364,7 +358,6 @@ public class Player : Character {
             weaponList.Add(newWeapon.GetComponent<WeaponManager>());
             currentWeaponIndex = weaponList.Count-1;
         }
-        //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
@@ -433,6 +426,12 @@ public class Player : Character {
         iconKey.SetActive(false);
     }
 
+    public void SetupIconArmor(GameObject icon)
+    {
+        iconArmor = icon;
+        iconArmor.SetActive(true);
+        iconArmor.GetComponentInChildren<Text>().text = currentArmor.ToString();
+    }
     public void setUIWeaponpStat()
     {
         weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
