@@ -6,6 +6,8 @@ public class PlayerTriggers : MonoBehaviour {
 
     Player player;
     PiggyManager pm;
+    bool onExit = false;
+    bool onWeapon = false;
 
     void Start () {
         player = GetComponentInParent<Player>();
@@ -13,11 +15,12 @@ public class PlayerTriggers : MonoBehaviour {
        // GameObject.Find("Piggy").GetComponent<PiggyManager>();
         //
     }
+
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Weapon" )
+        if (other.tag == "Weapon")
         {
-            if (Input.GetKeyDown(KeyCode.E) && player.weaponList[player.currentWeaponIndex].CanSwitch())
+            if (Input.GetKey(KeyCode.E) && player.weaponList[player.currentWeaponIndex].CanSwitch())
             {
                 player.ChangeWeapon(other.gameObject);
             }
@@ -25,7 +28,7 @@ public class PlayerTriggers : MonoBehaviour {
         }
         if (other.tag == "Exit")
         {
-            if (player.hasKey && Input.GetKeyDown(KeyCode.E))
+            if (player.hasKey && Input.GetKey(KeyCode.E))
             {
                 player.hasKey = false;
                 other.GetComponent<Animator>().SetTrigger("Open");
@@ -34,6 +37,7 @@ public class PlayerTriggers : MonoBehaviour {
             }
 
         }
+
         if ((other.tag == "Coin")) {
 
                 pm.coinList.Remove(other.gameObject);
