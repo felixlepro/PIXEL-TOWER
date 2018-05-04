@@ -295,6 +295,7 @@ public abstract class WeaponManager : MonoBehaviour {
             yield return null;
         }
         GetSpriteRenderer().sortingOrder = 0;
+        GetComponent<Collider2D>().enabled = true;
     }
 
 }
