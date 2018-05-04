@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b7712947f67b846a48f0a3c5e7d552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMin: 125
+  forceMin: 160
   forceScale: 75
 --- !u!212 &212254953157458242
 SpriteRenderer:
