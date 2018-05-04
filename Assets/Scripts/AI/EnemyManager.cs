@@ -412,7 +412,14 @@ abstract public class EnemyManager : Character {
 
     protected Vector3 playerMovementPrediction(float castTime, float predictionAmount)
     {
-        return chaseTarget.position + chaseTarget.GetComponent<Player>().movement.normalized * chaseTarget.GetComponent<Player>().currentSpeed * castTime/predictionAmount;
+        if (chaseTarget.gameObject == GameManager.instance.player)
+        {
+            return chaseTarget.position + chaseTarget.GetComponent<Player>().movement.normalized * chaseTarget.GetComponent<Player>().currentSpeed * castTime / predictionAmount;
+        }
+        else
+        {
+            return chaseTarget.position;
+        }
 
     }
 

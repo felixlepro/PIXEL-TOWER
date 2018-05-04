@@ -115,13 +115,14 @@ public class TimeRewinding : MonoBehaviour
             fantome.Initialize(positionCopie);
             
            
-            pT.changeTarget(GameObject.Find("PilotCopie(Clone)").transform);
+            pT.changeTarget(fantome.gameObject.transform);
             
         }
-            for (int i = 0; i < GameObject.Find("Enemies").transform.childCount; i++)
+        GameObject enemies = GameObject.Find("Enemies");
+            for (int i = 0; i < enemies.transform.childCount; i++)
             {
-                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().immune = false;
-                GameObject.Find("Enemies").transform.GetChild(i).GetComponent<EnemyManager>().stunned = false;
+            enemies.transform.GetChild(i).GetComponent<EnemyManager>().immune = false;
+            enemies.transform.GetChild(i).GetComponent<EnemyManager>().stunned = false;
             }
             scriptPlayer.StopImmunity();
             scriptPlayer.stunned = false;

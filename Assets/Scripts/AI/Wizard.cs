@@ -34,7 +34,7 @@ public class Wizard : EnemyManager {
     }
     public override bool CheckAttack()
     {
-        if (checkIfAttackIsReady())
+        if (checkIfAttackIsReady() && !stunned)
         {
             float distance = Vector3.Distance(chaseTarget.transform.position, transform.position);
             if (attacks[0].checkIfAttackIsReady() && distance < attacks[0].attackRange)
