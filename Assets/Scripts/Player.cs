@@ -332,14 +332,6 @@ public class Player : Character {
 
     public void ChangeWeapon(GameObject newWeapon)
     {
-        //foreach (Transform child in weaponTransform)
-        //{
-        //    if (child.GetComponent<WeaponManager>().isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
-        //    {
-        //        GameObject.Destroy(child.gameObject);
-        //    }
-        //    child.gameObject.SetActive(false);
-        //}
         bool foundAWeapon = false;
         newWeapon.GetComponent<WeaponManager>().enabled = true;
         newWeapon.GetComponent<Collider2D>().enabled = false;
@@ -363,7 +355,6 @@ public class Player : Character {
             weaponList.Add(newWeapon.GetComponent<WeaponManager>());
             currentWeaponIndex = weaponList.Count-1;
         }
-        //Instantiate(newWeapon);
         newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
