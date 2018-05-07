@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour {
         instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
         instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
         instance.player.GetComponent<Player>().SetupIconKey(GameObject.FindGameObjectWithTag("iconKey"));
+        instance.player.GetComponent<Player>().SetupIconArmor(GameObject.FindGameObjectWithTag("iconArmor"));
         instance.player.GetComponent<Player>().SetUpTimeChargeUI(GameObject.FindGameObjectWithTag("RewindBar").GetComponent<Image>());
         instance.player.GetComponent<Player>().SetUpWeaponStatUI(GameObject.FindGameObjectWithTag("StatArme").GetComponent<weaponStatUI>());
         instance.player.transform.position = playerPos;

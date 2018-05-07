@@ -4,32 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - waypoints
-  - Exit
-  - Exit2
-  - Sylvain
-  - Coin
-  - GameManager
-  - Obstacle
+  - EnemyManager
   - Enemy
   - Weapon
-  - EnemyManager
-  - Chest
-  - OpenChest
-  - Boss
+  - Coin
   - Key
-  - CoinText
-  - HPBar
-  - Panel
-  - StatArme
-  - iconFeu
-  - iconGlace
-  - iconKey
-  - FloorText
   - TimeCharge
-  - RewindBar
-  - WeaponHolder
-  - Colliders
+  - Obstacle
+  - Exit
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -39,9 +22,9 @@ TagManager:
   - UI
   - 
   - 
-  - Global
-  - Coins
-  - Chest
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -64,21 +47,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Floor
-    uniqueID: 3720422473
-    locked: 0
-  - name: MurArriere
-    uniqueID: 331026237
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Fade
-    uniqueID: 3139134345
-    locked: 0
-  - name: "MurCot\xE9"
-    uniqueID: 1906002893
-    locked: 0
-  - name: MurAvant
-    uniqueID: 3927338355
     locked: 0

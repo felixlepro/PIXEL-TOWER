@@ -298,6 +298,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584082848502514, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
+      propertyPath: m_TagString
+      value: iconArmor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaca6e7e0bc958d49ac0464b0571d463, type: 2}
   m_IsPrefabParent: 0

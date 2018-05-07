@@ -19,6 +19,7 @@ public class Player : Character {
     Text coinText;
     public int coins;
      Image hpBar;
+    public int currentArmor;
 
     [HideInInspector] public bool hasKey;
     [HideInInspector] public int currentWeaponIndex = 0;
@@ -47,6 +48,7 @@ public class Player : Character {
 
     //GameObject gameOverMenu;
     GameObject iconKey;
+    GameObject iconArmor;
     //private void Awake()
     //{
     //    setPlayerStats();
@@ -145,7 +147,7 @@ public class Player : Character {
         {
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
-            hp -= damage;
+            hp -= (damage - (currentArmor));
             hpBar.fillAmount = (float)hp / (float)maxHp;
             //Debug.Log(hpBar.fillAmount);
             if (hp <= 0)
@@ -433,6 +435,12 @@ public class Player : Character {
         iconKey.SetActive(false);
     }
 
+    public void SetupIconArmor(GameObject icon)
+    {
+        iconArmor = icon;
+        iconArmor.SetActive(true);
+        iconArmor.GetComponentInChildren<Text>().text = currentArmor.ToString();
+    }
     public void setUIWeaponpStat()
     {
         weaponStatUI.SetStat(weaponList[currentWeaponIndex]);
