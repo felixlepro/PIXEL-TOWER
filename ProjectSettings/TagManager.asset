@@ -6,13 +6,15 @@ TagManager:
   tags:
   - EnemyManager
   - Enemy
-  - Weapon
-  - Coin
-  - Key
-  - TimeCharge
-  - Obstacle
-  - Exit
-  - Chest
+  - iconGlace
+  - iconKey
+  - iconArmor
+  - iconFeu
+  - CoinText
+  - StatArme
+  - FloorText
+  - RewindBar
+  - HPBar
   layers:
   - Default
   - TransparentFX
