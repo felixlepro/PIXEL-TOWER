@@ -19,6 +19,7 @@ public class Player : Character {
     Text coinText;
     public int coins;
      Image hpBar;
+    public int currentArmor;
 
     [HideInInspector] public bool hasKey;
     [HideInInspector] public int currentWeaponIndex = 0;

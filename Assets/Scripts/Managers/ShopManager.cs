@@ -18,6 +18,9 @@ public class ShopManager : MonoBehaviour
 
      Player p1;
 
+    public Text armorText;
+    public Text armorIconText;
+    private int armorCost;
     private int armBpos;
     public bool openIt = false;
     private bool canEnter = true;
@@ -28,6 +31,16 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+
+        if (p1.currentArmor == 0)  
+        {
+            armorCost = 15;
+        }
+        else
+        {
+            armorCost = 15 * 2 ^ p1.currentArmor;
+        }
+
         p1 = GameManager.instance.player.GetComponent<Player>();
         p1.gainKey();
         //weaponList.Clear();
@@ -155,4 +168,22 @@ public class ShopManager : MonoBehaviour
             p1.Heal(25);  
         }
     }
+    public void BuyArmor()
+    {
+        if (p1.coins >= armorCost)
+        {
+            p1.LooseCoin(armorCost);
+            p1.currentArmor += 1;
+
+            armorCost *= 2;
+            armorText.text = "+1 armure \n(" + armorCost + " $)";
+
+            Debug.Log("nice");
+
+            armorIconText.text = p1.currentArmor.ToString();
+
+
+        }
+    }
+
 }
