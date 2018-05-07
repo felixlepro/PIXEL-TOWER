@@ -18,6 +18,7 @@ public class ShopManager : MonoBehaviour
 
      Player p1;
 
+    public int trancheVieBonus = 10;
     public Text armorText;
     public Text armorIconText;
     private int armorCost;
@@ -31,17 +32,15 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-
-        if (p1.currentArmor == 0)  
-        {
-            armorCost = 15;
-        }
-        else
-        {
-            armorCost = 15 * 2 ^ p1.currentArmor;
-        }
-
         p1 = GameManager.instance.player.GetComponent<Player>();
+
+        armorCost = 15 * Mathf.CeilToInt((Mathf.Pow(2, p1.currentArmor)));
+        
+
+        SetArmorCost();
+        
+        
+       
         p1.gainKey();
         //weaponList.Clear();
         while (weaponList.Count < iMax)
@@ -168,20 +167,29 @@ public class ShopManager : MonoBehaviour
             p1.Heal(25);  
         }
     }
+    public void SetArmorCost()
+    {  
+        armorText.text = "+1 armure \n(" + armorCost + " $)";
+    }
     public void BuyArmor()
     {
         if (p1.coins >= armorCost)
         {
             p1.LooseCoin(armorCost);
+
             p1.currentArmor += 1;
 
+            p1.maxHp += trancheVieBonus;
+
             armorCost *= 2;
-            armorText.text = "+1 armure \n(" + armorCost + " $)";
+
+            SetArmorCost();
 
             Debug.Log("nice");
 
             armorIconText.text = p1.currentArmor.ToString();
 
+            Debug.Log(p1.maxHp);
 
         }
     }

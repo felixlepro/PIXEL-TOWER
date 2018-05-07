@@ -19,7 +19,7 @@ public class Player : Character {
     Text coinText;
     public int coins;
      Image hpBar;
-    public int currentArmor;
+    public int currentArmor = 0;
 
     [HideInInspector] public bool hasKey;
     [HideInInspector] public int currentWeaponIndex = 0;
@@ -48,6 +48,7 @@ public class Player : Character {
 
     //GameObject gameOverMenu;
     GameObject iconKey;
+    GameObject iconArmor;
     //private void Awake()
     //{
     //    setPlayerStats();
@@ -58,16 +59,17 @@ public class Player : Character {
         PlayerSetUp();
         canvas = GameObject.Find("Canvas");
     }
-    //private void Update()
-    //{
-    //    if (!stunned) {
-    //        if(Input.GetKeyDown("left shift"))
-    //        {
-    //           GameManager.instance.Restart();
-    //            SwitchWeapon();
-    //        }
-    //     }
-    //}
+    private void Update()
+    {
+        if (!stunned)
+        {
+            if (Input.GetKeyDown("left shift"))
+            {
+                //GameManager.instance.Restart();
+                SwitchWeapon();
+            }
+        }
+    }
     void FixedUpdate()
     {     
         if (!stunned)
@@ -423,6 +425,12 @@ public class Player : Character {
     {
         iconKey = icon;
         iconKey.SetActive(false);
+    }
+    public void SetupIconArmor(GameObject icon)
+    {
+        iconArmor = icon;
+        iconArmor.SetActive(true);
+        iconArmor.GetComponentInChildren<Text>().text = currentArmor.ToString();
     }
 
     public void setUIWeaponpStat()
