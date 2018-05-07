@@ -58,16 +58,16 @@ public class Player : Character {
         PlayerSetUp();
         canvas = GameObject.Find("Canvas");
     }
-    private void Update()
-    {
-        if (!stunned) {
-            if(Input.GetKeyDown("left shift"))
-            {
-               GameManager.instance.Restart();
-                SwitchWeapon();
-            }
-         }
-    }
+    //private void Update()
+    //{
+    //    if (!stunned) {
+    //        if(Input.GetKeyDown("left shift"))
+    //        {
+    //           GameManager.instance.Restart();
+    //            SwitchWeapon();
+    //        }
+    //     }
+    //}
     void FixedUpdate()
     {     
         if (!stunned)
