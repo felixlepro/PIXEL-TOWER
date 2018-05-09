@@ -3890,7 +3890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28676468, g: 0.20874782, b: 0.20874782, a: 1}
+  m_Color: {r: 0.28676468, g: 0.20874782, b: 0.20874782, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4754,7 +4754,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -4914,9 +4914,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Ouvrir le magasin (Z)\n\n\nInteragir avec les objets en jeux (E)\n\n\nChanger
-    d'arme (SHIFT)\n\n\nMenu de pause (ESCAPE)\n\n\nAttaquer (Clique gauche)\n\n\nRecul
-    dans le temps (R)\n\nRamassez la cl\xE9 cach\xE9e dans les coffres pour passer
-    au prochain \xE9tage et monter la tour !"
+    d'arme (SHIFT)\n\n\nMenu de pause (ESCAPE)\n\n\nAttaquer (Click gauche)\n\nAttaque
+    charg\xE9e (Maintenir Click gauche enfonc\xE9)\n\n\nRecul dans le temps (R)\n\nRamassez
+    la cl\xE9 cach\xE9e dans les coffres pour passer au prochain \xE9tage et monter
+    la tour !"
 --- !u!114 &114901604024835060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6980,8 +6981,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.199997, y: -2.199997}
-  m_SizeDelta: {x: 750.7, y: 329.7}
+  m_AnchoredPosition: {x: 0.0005493164, y: 0.00071715936}
+  m_SizeDelta: {x: 800, y: 450.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224966872507313800
 RectTransform:

@@ -65,7 +65,7 @@ public class Player : Character {
         {
             if (Input.GetKeyDown("left shift"))
             {
-                GameManager.instance.Restart();
+                //GameManager.instance.Restart();
                 SwitchWeapon();
             }
         }
