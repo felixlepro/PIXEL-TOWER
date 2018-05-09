@@ -53,9 +53,8 @@ public class Wizard : EnemyManager {
                 resetAttackCD();
                 attacks[2].resetAttackCD();              
                 GameObject fT = Instantiate(attacks[2].prefab, playerMovementPrediction(0.5f,1.25f), Quaternion.identity);
-                fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, 
-                                                                      attacks[2].burnChance, attacks[2].burnDamage, attacks[2].burnDuration, 
-                                                                      attacks[2].slowChance, attacks[2].slowAmount, attacks[2].slowDuration);
+              
+                fT.GetComponent<CerclePuissant>().Setup(attacks[2]);
                 return true;
             }
             else if (attacks[1].checkIfAttackIsReady() && distance < attacks[1].attackRange)
@@ -79,9 +78,8 @@ public class Wizard : EnemyManager {
         if (!dying)
         {
             GameObject fT = Instantiate(attacks[0].prefab, transform.position, Quaternion.identity);
-            fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed,
-                                                                          attacks[0].burnChance, attacks[0].burnDamage, attacks[0].burnDuration,
-                                                                          attacks[0].slowChance, attacks[0].slowAmount, attacks[0].slowDuration);
+           
+            fT.GetComponent<flameThrower>().Setup(attacks[0], chaseTarget.transform.position - transform.position + Vector3.up / 2);
         }
     }
     void doAttackFireBall()
@@ -90,15 +88,13 @@ public class Wizard : EnemyManager {
         {
             GameObject fT = Instantiate(attacks[1].prefab, transform.position + Vector3.up / 3, Quaternion.identity);
             Vector3 dir = playerMovementPrediction((chaseTarget.position - transform.position).magnitude / attacks[1].speed, 1) - transform.position + Vector3.up / 2;
-            fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
-                                                                            attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
-                                                                          attacks[1].slowChance, attacks[1].slowAmount, attacks[1].slowDuration);
+            fT.GetComponent<MagicBall>().Setup(attacks[1], dir);
+           
         }
     }
     public override void setAnimState(string newState)
     {
-        //if (state != State.Dying)
-      //  {
+
             switch (newState)
             {
                 case "Moving": state = State.Moving; break;
@@ -109,7 +105,7 @@ public class Wizard : EnemyManager {
                 case "Summoning": state = State.Summoning; break;
                 case "Dying": state = State.Dying; break;
             }
-       // }
+
     }
     public override string getAnimState()
     {
@@ -399,13 +395,20 @@ public class Wizard : EnemyManager {
 
     public override void TryAttack()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void AttackSuccessful()
     {
-        throw new System.NotImplementedException();
     }
 }
 
 
+//fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, 
+//                                                     attacks[2].burnChance, attacks[2].burnDamage, attacks[2].burnDuration, 
+//                                                    attacks[2].slowChance, attacks[2].slowAmount, attacks[2].slowDuration);
+//fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed,
+//                                                              attacks[0].burnChance, attacks[0].burnDamage, attacks[0].burnDuration,
+//   
+//fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
+//                                                                attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
+//                                                              attacks[1].slowChance, attacks[1].slowAmount, attacks[1].slowDuration);attacks[0].slowChance, attacks[0].slowAmount, attacks[0].slowDuration);

@@ -65,7 +65,7 @@ public class Player : Character {
         {
             if (Input.GetKeyDown("left shift"))
             {
-                //GameManager.instance.Restart();
+                GameManager.instance.Restart();
                 SwitchWeapon();
             }
         }
@@ -140,7 +140,12 @@ public class Player : Character {
         }
         else anim.SetBool("IsMoving", true);
     }
-
+    public void SeFaitAttaquer(Attacks attack, Vector3 direction)
+    {
+        RecevoirDegats(attack.attackDamage, direction, attack.maxKnockBackAmount, attack.immuneTime);
+        Burn(attack.burnChance, attack.burnDamage, attack.burnDuration);
+        Slow(attack.slowChance, attack.slowAmount, attack.slowDuration, false);
+    }
 
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float immuneTime)
     {

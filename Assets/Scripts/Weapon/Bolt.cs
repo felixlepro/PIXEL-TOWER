@@ -9,21 +9,20 @@ public class Bolt : MonoBehaviour {
    public float lifeTime;
     float time = 0;
      bool UpdateSpeed = true;
-    private int damage;
     public  float speedBolt;
     public float maxSpeedBolt;
-    private float knockBack;
+   // private float knockBack;
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
     Collider2D colliderD;
     bool hasCollided = false;
 
-    int burnChance;
-    int burnDamage;
-    float burnDuration;
-    int slowChance;
-    float slowAmount;
-    float slowDuration;
+    //int burnChance;
+    //int burnDamage;
+    //float burnDuration;
+    //int slowChance;
+    //float slowAmount;
+    //float slowDuration;
 
     WeaponManager weaponSource;
 
@@ -54,39 +53,12 @@ public class Bolt : MonoBehaviour {
 
         public void Setup(Vector3 dir, float speed, float maxSpeed, WeaponManager wm)
     {
-       // damage = dam;
         direction = dir;
         speedBolt = speed;
         maxSpeedBolt = maxSpeed;
         transform.right = direction;
         weaponSource = wm;
-
-        //knockBack = kb;
-
-
-        //burnChance = burnC;
-        //burnDamage = burnD;
-        //burnDuration = burnDur;
-        //slowChance = slowC;
-        //slowAmount = slowA;
-        //slowDuration = slowD;
     }
-    //public void Setup(int dam, Vector3 dir, float kb, float speed, float maxSpeed, int burnC,  int burnD,     float    burnDur,      int  slowC,   float     slowA,     float    slowD)
-    //{
-    //    damage = dam;
-    //    direction = dir;
-    //    knockBack = kb;
-    //    speedBolt = speed;
-    //    maxSpeedBolt = maxSpeed;
-    //    transform.right = direction;
-
-    //    burnChance = burnC;
-    //     burnDamage = burnD;
-    //     burnDuration = burnDur;
-    //    slowChance = slowC;
-    //     slowAmount = slowA;
-    //     slowDuration = slowD;
-    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -100,11 +72,7 @@ public class Bolt : MonoBehaviour {
                 GetComponent<Animator>().SetTrigger("Hit");
                 transform.right = -direction;
                 EnemyManager em = other.gameObject.GetComponentInParent<EnemyManager>();
-                damage = Mathf.RoundToInt(damage * speedBolt / maxSpeedBolt);
                 weaponSource.EnvoyerDegat(other.GetComponentInParent<EnemyManager>());
-            // em.RecevoirDegats(damage, direction, knockBack * speedBolt / maxSpeedBolt, 0);
-            //em.Burn(burnChance, burnDamage, burnDuration);
-            //em.Slow(slowChance, slowAmount, slowDuration, false);
             UpdateSpeed = false;
                 transform.parent = em.gameObject.transform;
             }

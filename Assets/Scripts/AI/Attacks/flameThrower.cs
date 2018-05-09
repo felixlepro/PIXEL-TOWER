@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class flameThrower : Attacks {
+public class flameThrower : MonoBehaviour {
 
-    BoxCollider2D attackHitbox2;
+    BoxCollider2D attackHitbox;
     private Vector3 direction;
     Animator anim;
+    Attacks attackStats;
 
-     Vector2[] f1 = {
+    Vector2[] f1 = {
         new Vector2(1.5f, 0),
         new Vector2(3, 3.5f)
     };
@@ -20,67 +21,68 @@ public class flameThrower : Attacks {
         new Vector2(3.8f, 0),
         new Vector2(7.75f, 4)
     };
-    void Start()
+    public void Setup(Attacks at, Vector3 dir)
     {
-        attackHitbox2 = GetComponent<BoxCollider2D>();
-        anim = GetComponent<Animator>();
-        StartCoroutine(attack());
-    }
-
-    
-    //public void Setup(Vector3 dir, float damMult, float kbMult)
-    //{
-    //    attackDamage = Mathf.RoundToInt(attackDamage * damMult);
-    //    direction = dir;
-    //    maxKnockBackAmount *= kbMult;
-    //    this.gameObject.transform.right = direction;
-    //}
-    public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
-    {
+        attackStats = at;
         direction = dir;
-        attackDamage = dam;
-        maxKnockBackAmount = kb;
-        attackRange = range;
-        immuneTime = it;
-         burnChance = burn;
-        //Debug.Log(burn);
-        burnDamage = burnDa;
-        burnDuration = burnDu;
-        slowChance = slow;
-        slowAmount = slowAm;
-        slowDuration = slowDu;
 
-         this.gameObject.transform.right = direction;
-    
-       
+        attackHitbox = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
+        this.gameObject.transform.right = direction;
+        StartCoroutine(attack());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            attackHitbox2.enabled = false;
+            attackHitbox.enabled = false;
             Player player = other.gameObject.GetComponent<Player>();
-            player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
-            player.Burn(burnChance, burnDamage, burnDuration);
-            player.Slow(slowChance, slowAmount, slowDuration, false);
+            player.SeFaitAttaquer(attackStats, direction);
+           
         }
        
     }
 
     IEnumerator attack()
     {
-        attackHitbox2.offset = f1[0];
-        attackHitbox2.size = f1[1];
+        attackHitbox.offset = f1[0];
+        attackHitbox.size = f1[1];
         yield return new WaitForSeconds(0.05f / anim.speed);
-        attackHitbox2.offset = f2[0];
-        attackHitbox2.size = f2[1];
+        attackHitbox.offset = f2[0];
+        attackHitbox.size = f2[1];
         yield return new WaitForSeconds(0.05f / anim.speed);
-        attackHitbox2.offset = f3[0];
-        attackHitbox2.size = f3[1];
+        attackHitbox.offset = f3[0];
+        attackHitbox.size = f3[1];
         yield return new WaitForSeconds(0.1f / anim.speed);
-        attackHitbox2.enabled = false;
+        attackHitbox.enabled = false;
         yield return new WaitForSeconds(0.30f / anim.speed);
         Destroy(this.gameObject);
     }
 }
+
+
+
+
+//public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
+//{
+//    direction = dir;
+//    attackDamage = dam;
+//    maxKnockBackAmount = kb;
+//    attackRange = range;
+//    immuneTime = it;
+//    burnChance = burn;
+//    Debug.Log(burn);
+//    burnDamage = burnDa;
+//    burnDuration = burnDu;
+//    slowChance = slow;
+//    slowAmount = slowAm;
+//    slowDuration = slowDu;
+
+//    this.gameObject.transform.right = direction;
+
+
+//}
+//player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
+//player.Burn(burnChance, burnDamage, burnDuration);
+//player.Slow(slowChance, slowAmount, slowDuration, false);

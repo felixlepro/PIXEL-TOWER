@@ -647,7 +647,7 @@ MonoBehaviour:
   chaseRange: 10
   chaseRangeBuffer: 5
   fireStack: 0
-  attackSpeed: 2
+  attackSpeed: 2.5
   nbrCoins: 30
   weaponDropChance: 100
   hpBar: {fileID: 114257300282385286}
@@ -805,17 +805,17 @@ MonoBehaviour:
   immuneTime: 0.3
   maxKnockBackAmount: 5
   attackRange: 100
-  attackCD: 3.5
+  attackCD: 3.25
   timeUntilNextAttack: 0
   attackHitbox: []
   prefab: {fileID: 1550821915172396, guid: 92448c1da306c4145857bce02d1d3837, type: 2}
-  burnChance: 25
+  burnChance: 35
   slowChance: 0
   burnDamage: 1
   burnDuration: 3
   slowAmount: 0.5
   slowDuration: 0
-  projectileSpeed: 20
+  projectileSpeed: 16
 --- !u!210 &210478771200998480
 SortingGroup:
   m_ObjectHideFlags: 1

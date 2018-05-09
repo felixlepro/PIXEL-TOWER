@@ -235,7 +235,7 @@ public abstract class WeaponManager : MonoBehaviour {
         }
         if (isIce)
         {
-                cible.Slow(chanceSlowProc,slowValue, slowDuration, slowFadeState);
+         cible.Slow(chanceSlowProc,slowValue, slowDuration, slowFadeState);
                    
         }
     }

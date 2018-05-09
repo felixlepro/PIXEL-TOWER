@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4d5081c4b848488fec7c47de56210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 6
+  attackDamage: 7
   immuneTime: 2
   maxKnockBackAmount: 13
   attackRange: 50
@@ -584,7 +584,7 @@ MonoBehaviour:
   nameC: 
   maxHp: 80
   wColor: {r: 1, g: 1, b: 1, a: 1}
-  maxMoveSpeed: 9
+  maxMoveSpeed: 9.5
   immune: 0
   stunned: 0
   currentSpeed: 0

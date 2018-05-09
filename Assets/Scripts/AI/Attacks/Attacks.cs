@@ -16,7 +16,6 @@ public class Attacks : MonoBehaviour {
     public float burnChance;
     [Range(0, 100)]
     public float slowChance;
-    [Range(0, 100)]
     public int burnDamage;
     public float burnDuration;
     [Range(0, 1)]

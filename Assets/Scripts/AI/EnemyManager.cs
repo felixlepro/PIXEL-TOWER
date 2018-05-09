@@ -153,9 +153,10 @@ abstract public class EnemyManager : Character {
                 {
                     if (ah.IsTouching(targetCollider))
                     {
-                        targetCollider.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, targetCollider.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
-                        targetCollider.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
-                        targetCollider.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
+                        //targetCollider.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, targetCollider.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
+                        //targetCollider.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
+                        //targetCollider.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
+                        targetCollider.gameObject.GetComponent<Player>().SeFaitAttaquer(at, targetCollider.gameObject.transform.position - transform.position);
                         AttackSuccessful();
                         //resetAttackCD();
                         break;
