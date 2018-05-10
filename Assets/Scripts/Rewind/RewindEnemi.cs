@@ -16,7 +16,7 @@ public class RewindEnemi : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && GameManager.instance.player.GetComponent<Player>().rewindCharge > 0)
             StartRewind();
         if (Input.GetKeyUp(KeyCode.R))
             StopRewind();

@@ -26,7 +26,7 @@ public class Wizard : EnemyManager {
     }
     public override void SetStats(int lvl)
     {
-        lvlScaleEx = Mathf.Pow(2, (float)(lvl - 1) / (lvlScalability*1.7f));
+        lvlScaleEx = Mathf.Pow(2, (float)(lvl - 1) / (lvlScalability*1.3f));
         //float lvlScale = 1 + (float)lvl / lvlScalability;
         maxHp = Mathf.RoundToInt(maxHp * lvlScaleEx);
         hp = maxHp;
