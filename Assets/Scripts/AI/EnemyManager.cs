@@ -17,7 +17,7 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
-    protected const float lvlScalability = 6f; //after how many floors will the stats double 
+    protected const float lvlScalability = 5f; //after how many floors will the stats double 
     protected float lvlScaleEx;
    // public GameObject[] attacksUPF; //attackUsingPrefabs
    //public struct Atta 

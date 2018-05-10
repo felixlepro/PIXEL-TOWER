@@ -109,8 +109,8 @@ MonoBehaviour:
     min: 35
     max: 45
   attackDamageRange:
-    min: 21
-    max: 26
+    min: 26
+    max: 30
   attackSpeedRange:
     min: 0.2
     max: 0.4
@@ -118,8 +118,8 @@ MonoBehaviour:
     min: 0
     max: 0
   knockBackAmountRange:
-    min: 4
-    max: 6
+    min: 6
+    max: 10
   IceFireChance: 0.3
   chanceBurnProcRange:
     min: 50

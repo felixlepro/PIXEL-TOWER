@@ -128,8 +128,8 @@ MonoBehaviour:
     min: 0.5
     max: 1
   knockBackAmountRange:
-    min: 8
-    max: 15
+    min: 7
+    max: 12
   IceFireChance: 0.4
   chanceBurnProcRange:
     min: 75

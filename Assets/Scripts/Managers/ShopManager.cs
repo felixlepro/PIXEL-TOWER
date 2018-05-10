@@ -35,8 +35,8 @@ public class ShopManager : MonoBehaviour
         p1 = GameManager.instance.player.GetComponent<Player>();
 
         armorCost = 15 * Mathf.CeilToInt((Mathf.Pow(2, p1.currentArmor)));
-        
 
+        armorIconText = GameObject.FindGameObjectWithTag("iconArmor").GetComponentInChildren<Text>();
         SetArmorCost();
         
         
@@ -180,12 +180,11 @@ public class ShopManager : MonoBehaviour
             p1.currentArmor += 1;
 
             p1.maxHp += trancheVieBonus;
+            p1.Heal(trancheVieBonus);
 
             armorCost *= 2;
 
             SetArmorCost();
-
-            Debug.Log("nice");
 
             armorIconText.text = p1.currentArmor.ToString();
 

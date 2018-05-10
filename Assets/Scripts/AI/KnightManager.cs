@@ -338,7 +338,7 @@ public class KnightManager : EnemyManager {
     {
         attacks[0].attackDamage = Mathf.RoundToInt(attacks[0].attackDamage * (1 + (float)(lvl - 1) / (lvlScalability * 2)));
         attacks[0].burnDamage = Mathf.RoundToInt(attacks[0].burnDamage * (1 + (float)(lvl - 1) / (lvlScalability * 2)));
-        maxMoveSpeed *= (1 + (float)(lvl - 1) / (lvlScalability * 4));
+        maxMoveSpeed *= (1 + (float)(lvl - 1) / (lvlScalability * 12));
         currentSpeed = maxMoveSpeed;
     }
 }

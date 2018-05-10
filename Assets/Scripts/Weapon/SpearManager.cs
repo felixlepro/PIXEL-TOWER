@@ -32,7 +32,7 @@ public class SpearManager : WeaponManager
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
-        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * thisRarity.multiplier;
+        knockBackAmount = knockBackAmountRange.Set(1 - AdAsRation) * ((thisRarity.multiplier - 1) / 2 + 1);
 
         cost = Mathf.RoundToInt((costRange.Random + (lvl - 1) * costScalability) * thisRarity.multiplier);
 
