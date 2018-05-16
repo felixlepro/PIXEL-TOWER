@@ -11,28 +11,19 @@ public class Bolt : MonoBehaviour {
      bool UpdateSpeed = true;
     public  float speedBolt;
     public float maxSpeedBolt;
-   // private float knockBack;
     private Vector3 direction;
     private Rigidbody2D boltRigidbody;
     Collider2D colliderD;
     bool hasCollided = false;
 
-    //int burnChance;
-    //int burnDamage;
-    //float burnDuration;
-    //int slowChance;
-    //float slowAmount;
-    //float slowDuration;
 
     WeaponManager weaponSource;
 
-    // Use this for initialization
     void Start () {
         boltRigidbody = GetComponent<Rigidbody2D>();
         colliderD = GetComponent<Collider2D>();
     }
 
-	// Update is called once per frame
 	void FixedUpdate () {
         time += Time.deltaTime;
         if (time >= lifeTime)

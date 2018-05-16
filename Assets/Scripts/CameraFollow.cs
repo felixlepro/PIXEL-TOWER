@@ -37,6 +37,5 @@ public class CameraFollow : MonoBehaviour {
         }
        // miniCam.orthographicSize = 3 * zoom;
         GetComponentInChildren<Camera>().orthographicSize = zoom;
-        //Vector3 smoothedPosition = (mousePosition - target.position) * MouseFollowAmount + transform.position;
     }
 }

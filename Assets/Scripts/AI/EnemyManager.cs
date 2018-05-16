@@ -243,19 +243,6 @@ abstract public class EnemyManager : Character {
         }
      
     }
-    //private void OnTriggerStay2D(Collider2D other)
-    //{
-    //    Debug.Log("triggered");
-    //    if (other.tag == "Obstacle" && !other.isTrigger)
-    //    {
-    //        Debug.Log("triggered");
-    //        hitAWall = true;
-    //    }
-    //}
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    hitAWall = false;
-    //}
 
     public IEnumerator RedOnly()
     {
@@ -290,9 +277,7 @@ abstract public class EnemyManager : Character {
            
 
             Vector3 kb = knockBackDirection * knockBackAmount * curve * Time.deltaTime;
-            //Debug.Log(kb + "    " + knockBackAmount + "    " + curve);
             enemyRigidbody.MovePosition(transform.position + kb);
-            //transform.position = Vector3.MoveTowards(transform.position, transform.position+kb, Time.deltaTime);
             kbAmountOverTime += Time.deltaTime * knockBackTime;
             yield return new WaitForFixedUpdate();
         }
@@ -300,13 +285,6 @@ abstract public class EnemyManager : Character {
         pathingUnit.enablePathing(true);
         isRooted = false;
     }
-
-    //private void Death()
-    //{
-
-    //    Destroy(this.gameObject);
-    //    //this.gameObject.SetActive(false);
-    //}
 
     public void UpdatecurrentAttackCD()
     {
@@ -398,18 +376,6 @@ abstract public class EnemyManager : Character {
         isRooted = false;
         setAnimState("Moving");
     }
-//    public void Root(float time)
-//    {
-//        isRooted = true;
-//        Invoke("UnRoot", time);
-//        setAnimState("Idling");
-//}
-//    public void UnRoot()
-//    {
-//        isRooted = false;
-//        setAnimState("Moving");
-//    }
- 
 
     protected Vector3 playerMovementPrediction(float castTime, float predictionAmount)
     {

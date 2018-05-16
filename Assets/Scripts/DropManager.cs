@@ -15,18 +15,15 @@ public class DropManager : MonoBehaviour {
         weaponList = GameManager.instance.weapons;
         coinP = GameManager.instance.coinPrefab;
         piggy = GameManager.instance.piggy.GetComponent<PiggyManager>();
-        //GameObject.Find("Piggy").GetComponent<PiggyManager>(); //
         key = GameManager.instance.key;
         time = GameManager.instance.timeObject;
-        //GameObject.Find("Piggy").GetComponent<PiggyManager>();
     }
 
-	public static void DropWeapon(GameObject weapon,Vector3 pos, bool anim) //if the weapon is already generated
+	public static void DropWeapon(GameObject weapon,Vector3 pos, bool anim) //si l'arme est deja généré et on veut juste la drop
     {
         
         WeaponManager wp = weapon.GetComponent<WeaponManager>();
         wp.enabled = false;
-        //weapon.GetComponent<Collider2D>().enabled = true;
         weapon.SetActive(false);                    //Prévient une erreur étrange
         weapon.transform.parent = null;
         weapon.SetActive(true);
@@ -38,7 +35,7 @@ public class DropManager : MonoBehaviour {
             wp.StartCoroutine(wp.DropWeaponAnim(speedDrop));
         }
     }
-    public static void DropRandomWeapon(Vector3 pos, bool anim) //if you want the weapon to be generated
+    public static void DropRandomWeapon(Vector3 pos, bool anim) //si tu veux générer l'arme
     {
         
         GameObject weapon = Instantiate(weaponList[Random.Range(0, weaponList.Length)], pos, Quaternion.identity);

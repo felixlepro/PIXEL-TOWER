@@ -46,13 +46,10 @@ public class Player : Character {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
-    //GameObject gameOverMenu;
+
     GameObject iconKey;
     GameObject iconArmor;
-    //private void Awake()
-    //{
-    //    setPlayerStats();
-    //}
+
     void Start()
     {
         hasKey = false;
@@ -87,7 +84,6 @@ public class Player : Character {
     }
     void PlayerSetUp()
     {
-       // gameOverMenu = GameObject.Find("GameOverMenu");
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -206,14 +202,12 @@ public class Player : Character {
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
          rooted = true;
 
-        //float knockBackTime = timePerKnockBackAmount / ((knockBackAmount - timePerKnockBackAmount) / 2 + timePerKnockBackAmount);
         float knockBackTime = 2 * timePerKnockBackAmount / (knockBackAmount + timePerKnockBackAmount);
         while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
             graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
 
-         //   Debug.Log(knockBackDirection.normalized);
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             playerRigidbody.MovePosition(transform.position + kb);
@@ -237,8 +231,7 @@ public class Player : Character {
                 alpha = 0.2f;
             }
             else alpha = 1;
-            //curve = Mathf.Cos(time*2000*Mathf.PI)/3 + 0.75f;
-            //Debug.Log(curve);
+
 
             if(weaponSprite == null)
             {
@@ -257,12 +250,6 @@ public class Player : Character {
         weaponSprite.color = new Color(weaponSprite.color[0], weaponSprite.color[1], weaponSprite.color[2], 1f);
     }
   
-    
-    private void OnDisable()
-    {
-     //   GameManager.instance.playerHp = hp;
-      //  GameManager.instance.coinCount = coins;
-    }
     public void gainCoin()
     {
         coins += valuePerCoin;
@@ -275,28 +262,6 @@ public class Player : Character {
 
     }
 
-    //private void OnTriggerStay2D(Collider2D other)            //VOIR LE SCRIPT PLAYERTRIGGERS
-    //{
-    //    if (other.tag == "Exit")
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.E))
-    //        {
-    //            other.GetComponent<Animator>().SetTrigger("Open");
-    //            Invoke("Restart", restartDelay);
-    //            enabled = false;
-    //        }
-            
-    //    }
-    //    if ((other.tag == "Coin"))
-    //    {
-    //        gainCoin();
-    //        Destroy(other.gameObject);
-    //        GameManager.instance..PlaySound(GameManager.instance..coinSound);
-
-    //    }
-        
-
-    //}
     
     void FaceMouse()
     {
@@ -314,17 +279,11 @@ public class Player : Character {
             {
                 transform.localScale = faceLeft;
                 weaponTransform.localScale = new Vector3(-1, -1, 0);
-
-                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
-
             }
             else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
             {
                 transform.localScale = faceRight;
                 weaponTransform.localScale = new Vector3(1, 1, 0);
-
-                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
-
             }
 
             if (angle > 115) graphicsSpriteR.sortingOrder = 1;
@@ -349,7 +308,6 @@ public class Player : Character {
                 
                 if (weaponList[i].isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
                 {
-                // GameObject.Destroy(weaponList[i].gameObject);
                 weaponList[i].gameObject.SetActive(true);
                 DropManager.DropWeapon(weaponList[i].gameObject, transform.position + Vector3.up/2 - Vector3.right/4,true);
                     weaponList[i] = newWeapon.GetComponent<WeaponManager>();
@@ -451,56 +409,6 @@ public class Player : Character {
             setUIWeaponpStat();
         }
     }
-    //public void setPlayerStats()
-    //{
-    //    if (GameManager.instance.level != 0)
-    //    {
-
-    //        hp = GameManager.playerStat.hp;
-    //        Debug.Log(hp);
-    //        coins = GameManager.playerStat.coins;
-    //        //currentWeaponIndex = GameManager.playerStat.;
-    //        startingWeapon = GameManager.playerStat.weapons;
-    //    }
-    //    else
-    //    {
-    //        hp = maxHp;
-    //        coins = 0;
-    //        currentWeaponIndex = 0;
-    //    }
-    //    //   Debug.Log("ca");
-    //   // hpBar.fillAmount = (float)hp / (float)maxHp;
-    //}
-    //public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
-    //{
-    //    if (!lvl0)
-    //    {
-    //        Debug.Log(h);
-    //        hp = h;
-    //        coins = coin;
-    //        currentWeaponIndex = cwi;
-    //        startingWeapon = wp;
-    //    }
-    //    else
-    //    {
-    //        hp = maxHp;
-    //        coins = 0;
-    //        currentWeaponIndex = 0;
-    //    }
-    // //   Debug.Log("ca");
-    //    hpBar.fillAmount = (float)hp / (float)maxHp;
-    //}
-    //public GameObject[] weaponObjects()
-    //{
-    //    GameObject[] wo = new GameObject[weaponList.Count];
-    //    for (int i = 0; i< weaponList.Count; i++)
-    //    {
-    //        wo[i] = weaponList[i].gameObject;
-    //    }
-    //    return wo;
-
-    //}
-
     public override Vector3 PositionIcone()
     {
         return transform.position;

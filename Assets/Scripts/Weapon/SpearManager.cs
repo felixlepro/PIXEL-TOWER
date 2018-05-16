@@ -16,19 +16,15 @@ public class SpearManager : WeaponManager
 
         coll = gameObject.GetComponent<BoxCollider2D>();
         coll.enabled = false;
-
-      //  anim = GetComponent<Animator>();
-          
+       
     }
 
     public override void WeaponSetStats()
     {
         SetRarity();
         int lvl = GameManager.instance.GetCurrentLevel();
-       // Random.seed = System.DateTime.Now.Millisecond;
         float AdAsRation = Random.value;
         float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
-        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
@@ -63,7 +59,6 @@ public class SpearManager : WeaponManager
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Colision");
         if (other.tag == "Enemy" && transform.parent != null)
         {
             bool already = false;
@@ -91,13 +86,10 @@ public class SpearManager : WeaponManager
     protected override void ChargeWeapon()
     {
         chargeDoneRatio = (currentChargeTime / chargeTime);
-       // anim.speed = 1 + (chargeDoneRatio * chargeDoneRatio * 1.5f);
         anim.SetBool("AttackCharge", true);
     }
     protected override void MaxChargeWeapon()
     {
-        //anima[0].SetBool("AttackCharge", true);
-       // anim.speed = 2.5f;
     }
     protected override void ReleaseChargedWeapon()
     {
@@ -112,10 +104,7 @@ public class SpearManager : WeaponManager
 
     void attack()
     {
-        //anim.speed = 1;
         anim.SetBool("AttackCharge", false);
-        //anima[0].SetBool("AttackChargeMax", false);
-        //  anima[0].SetTrigger("PlayerAttack");
         ResetAttackTimer();
         Invoke("EndAttack", attackTime);
         if(!isFantoming) GetComponentInParent<Player>().doFaceMouse(false);

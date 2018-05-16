@@ -16,7 +16,6 @@ public class BlobManager : EnemyManager
     }
     public override void TryAttack()
     {
-       // Debug.Log("tryA");
         Attack(attacks[0]);
     }
 
@@ -186,8 +185,6 @@ public class BlobManager : EnemyManager
 
     public override void setAnimState(string newState)
     {
-        //if (state != State.Dying)
-       // {
             switch (newState)
             {
                 case "Moving": state = State.Moving; break;
@@ -195,7 +192,6 @@ public class BlobManager : EnemyManager
                 case "Idling": state = State.Idling; break;
                 case "Dying": state = State.Dying; break;
             }
-        //}
     }
     public override string getAnimState()
     {

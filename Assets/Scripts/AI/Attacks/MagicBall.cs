@@ -72,27 +72,3 @@ public class MagicBall : MonoBehaviour {
     }
 
 }
-
-//player.RecevoirDegats(attackDamage, player.transform.position - transform.position, maxKnockBackAmount, immuneTime);
-//player.Burn(burnChance, burnDamage, burnDuration);
-//player.Slow(slowChance, slowAmount, slowDuration, false);
-//public void Setup2(Vector3 dir, int dam, float kb, float range,float it, float sped, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
-//{
-//    attackDamage = dam;
-//    maxKnockBackAmount = kb;
-//    attackRange = range;
-//    immuneTime = it;
-//    direction = dir;
-//    speed = sped;
-
-//    burnChance = burn;
-//    burnDamage = burnDa;
-//    burnDuration = burnDu;
-//    slowChance = slow;
-//    slowAmount = slowAm;
-//    slowDuration = slowDu;
-
-//    ballRigidbody = GetComponent<Rigidbody2D>();
-//    attackHitbox = GetComponents<Collider2D>();
-//    ballRigidbody.velocity = direction.normalized * speed;
-//}

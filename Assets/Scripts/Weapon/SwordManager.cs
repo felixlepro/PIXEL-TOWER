@@ -19,7 +19,6 @@ public class SwordManager : WeaponManager
         coll.enabled = false;
 
         anima = GetComponentsInChildren<Animator>();
-        //anima[].runtimeAnimatorController = animator;     
     }
 
     public override void WeaponSetStats()
@@ -29,7 +28,6 @@ public class SwordManager : WeaponManager
         Random.InitState((int)System.DateTime.Now.Ticks);
         float AdAsRation = Random.value;
         float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
-        // float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale );
         attackSpeed = attackSpeedRange.Set(AdAsRation) + attackTime;
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
@@ -64,7 +62,6 @@ public class SwordManager : WeaponManager
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Colision");
         if (other.tag == "Enemy" && transform.parent != null)
         {
             bool already = false;
@@ -115,8 +112,6 @@ public class SwordManager : WeaponManager
     {
        anima[0].speed = 1;
         anima[0].SetBool("AttackCharge", false);
-        //anima[0].SetBool("AttackChargeMax", false);
-      //  anima[0].SetTrigger("PlayerAttack");
         Invoke("triggerSwipe", 0.1f);
         ResetAttackTimer();
         Invoke("EndAttack", attackTime);
@@ -147,36 +142,3 @@ public class SwordManager : WeaponManager
         return GetComponentInChildren<SpriteRenderer>();
     }
 }
-//void Update()
-//{
-//    UpdateTimeUntilNextAttack();
-
-//    if (timeUntilNextAttack <= 0)
-//    {
-
-//        if (Input.GetKey(chargeAttackKey) && (currentChargeTime < weapon.chargeTime))
-//        {
-//            currentChargeTime += Time.deltaTime;
-//            chargeDoneRatio = (currentChargeTime / weapon.chargeTime);
-//            anim.speed = 1+ (chargeDoneRatio * chargeDoneRatio * 1.5f);
-//            anim.SetBool("AttackCharge", true);
-
-//        }
-//        else if (Input.GetKey(chargeAttackKey) && (currentChargeTime >= weapon.chargeTime))
-//        {
-
-//        }
-//        else if (Input.GetKeyUp(chargeAttackKey))
-//        {
-
-//        }
-
-//    }
-//    else
-//    {
-//        coll.enabled = false;
-//    }
-
-
-
-//}

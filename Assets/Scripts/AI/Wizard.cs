@@ -20,14 +20,13 @@ public class Wizard : EnemyManager {
         pathingUnit.targetPosition = chaseTarget.position;
         if (isRooted) pathingUnit.speed = 0;
         else pathingUnit.speed = currentSpeed;
-        //if (!isAttacking) anim.speed = currentSpeed / maxMoveSpeed;;
         UpdateAnim();
         UpdatecurrentAttackCD();
     }
     public override void SetStats(int lvl)
     {
         lvlScaleEx = Mathf.Pow(2, (float)(lvl - 1) / (lvlScalability*1.3f));
-        //float lvlScale = 1 + (float)lvl / lvlScalability;
+
         maxHp = Mathf.RoundToInt(maxHp * lvlScaleEx);
         hp = maxHp;
         SpecificStats(lvl);
@@ -401,14 +400,3 @@ public class Wizard : EnemyManager {
     {
     }
 }
-
-
-//fT.GetComponent<CerclePuissant>().Setup(Vector3.zero, attacks[2].attackDamage, attacks[2].maxKnockBackAmount, attacks[2].immuneTime, attacks[2].speed, 
-//                                                     attacks[2].burnChance, attacks[2].burnDamage, attacks[2].burnDuration, 
-//                                                    attacks[2].slowChance, attacks[2].slowAmount, attacks[2].slowDuration);
-//fT.GetComponent<flameThrower>().Setup(chaseTarget.transform.position - transform.position + Vector3.up / 2, attacks[0].attackDamage, attacks[0].maxKnockBackAmount, attacks[0].immuneTime, attacks[0].speed,
-//                                                              attacks[0].burnChance, attacks[0].burnDamage, attacks[0].burnDuration,
-//   
-//fT.GetComponent<MagicBall>().Setup(dir, attacks[1].attackDamage, attacks[1].maxKnockBackAmount, attacks[1].attackRange, attacks[1].immuneTime, attacks[1].speed,
-//                                                                attacks[1].burnChance, attacks[1].burnDamage, attacks[1].burnDuration,
-//                                                              attacks[1].slowChance, attacks[1].slowAmount, attacks[1].slowDuration);attacks[0].slowChance, attacks[0].slowAmount, attacks[0].slowDuration);
