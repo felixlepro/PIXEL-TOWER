@@ -8,7 +8,6 @@ abstract public class EnemyManager : Character {
 
     public float patrolSpeedChaseSpeedRatio;
     public float gettingKnockedBackAmount;
-    //public float attackRange;
     public float chaseRange;
     public float chaseRangeBuffer;
     public int fireStack = 0;
@@ -17,18 +16,9 @@ abstract public class EnemyManager : Character {
     public int weaponDropChance;
     public Image hpBar;
     [HideInInspector]  public Attacks[] attacks;
-    protected const float lvlScalability = 5f; //after how many floors will the stats double 
+    protected const float lvlScalability = 5f; 
     protected float lvlScaleEx;
-   // public GameObject[] attacksUPF; //attackUsingPrefabs
-   //public struct Atta 
-   //{
-   //    public int attackDamage;
-   //    public float immuneTime;
-   //    public float maxKnockBackAmount;
-   //    public float attackRange;
-   //    public GameObject prefab;
-   //    [HideInInspector] public Collider2D[] attackHitbox;
-   //}
+   
 
     public AudioClip dun;
     public GameObject dunExlamation;
@@ -49,20 +39,14 @@ abstract public class EnemyManager : Character {
     [HideInInspector] const float knockBackAmountOverTimeMinimum = 0.85f;
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
-    const float timePerKnockBackAmount = 10; //10 kba lasts 1 seconds
+    const float timePerKnockBackAmount = 10; 
     bool onlyOneAttack = false;
     [HideInInspector] public bool gotDamaged = false;
    
     public Transform chaseTarget;
     bool dead = false;
     [HideInInspector] public Unit pathingUnit;
-
-   
-    //public int attackDamage;
-    //public float attackRange;
-    //public float maxKnockBackAmount;
-    //public float immuneTime;
-
+    
     public float idleTime;
 
 
@@ -98,7 +82,6 @@ abstract public class EnemyManager : Character {
         currentSpeed = maxMoveSpeed/patrolSpeedChaseSpeedRatio;
         pathingUnit = GetComponent<Unit>();
         pathingUnit.speed = currentSpeed;
-       // pathingUnit.enabled = false;
 
         chaseTarget = GameManager.instance.player.transform;
         
@@ -116,7 +99,6 @@ abstract public class EnemyManager : Character {
     virtual public void SetStats(int lvl)
     {
         lvlScaleEx = Mathf.Pow(2, (float)(lvl-1) / lvlScalability);
-        //float lvlScale = 1 + (float)lvl / lvlScalability;
         maxHp = Mathf.RoundToInt(maxHp * lvlScaleEx);
         hp = maxHp;
         SpecificStats(lvl);
@@ -135,8 +117,7 @@ abstract public class EnemyManager : Character {
         wayPointList.Clear();
         wayPointList = wayPointsFromGameManager;
         nextWayPoint = Random.Range(0, wayPointList.Count);
-
-     //   Debug.Log("wpl  " + wayPointList.Count);
+        
     }
     public void ActivateAI(bool tf)
     {
@@ -147,18 +128,13 @@ abstract public class EnemyManager : Character {
     {
         if (!targetCollider.gameObject.GetComponent<Player>().immune)
         {
-           // foreach (Collider2D pc in targetCollider)
             {
                 foreach (Collider2D ah in at.attackHitbox)
                 {
                     if (ah.IsTouching(targetCollider))
                     {
-                        //targetCollider.gameObject.GetComponent<Player>().RecevoirDegats(at.attackDamage, targetCollider.gameObject.transform.position - transform.position, at.maxKnockBackAmount, at.immuneTime);
-                        //targetCollider.gameObject.GetComponent<Player>().Burn(at.burnChance, at.burnDamage, at.burnDuration);
-                        //targetCollider.gameObject.GetComponent<Player>().Slow(at.slowChance , at.slowAmount, at.slowDuration,false);
-                        targetCollider.gameObject.GetComponent<Player>().SeFaitAttaquer(at, targetCollider.gameObject.transform.position - transform.position);
+                       targetCollider.gameObject.GetComponent<Player>().SeFaitAttaquer(at, targetCollider.gameObject.transform.position - transform.position);
                         AttackSuccessful();
-                        //resetAttackCD();
                         break;
                     }
                 }
@@ -170,7 +146,6 @@ abstract public class EnemyManager : Character {
         float time = Random.Range(1, 5) * idleTime;
         setAnimState("Idling");
         pathingUnit.disablePathing();
-        //newPath();
         Invoke("newPath", time);    
     }
     private void newPath()
@@ -184,23 +159,14 @@ abstract public class EnemyManager : Character {
     }
 
 
-    //public void checkDistanceToPlayer()
-    //{
-    //    if ((controller.chaseTarget.transform.position - transform.position).magnitude <= enemy.size)
-    //    {
-    //        //controller.AIPathing.reachedEndOfPath = true;
-    //    }
-
-    //}
+    
 
     public override void RecevoirDegats(int damage, Vector3 kbDirection, float kbAmmount, float im)
     {
         if (!immune)
         {
             hp -= damage;
-            // Debug.Log(hp);
             hpBar.fillAmount = (float)hp / (float)maxHp;
-            //  Debug.Log(hpBar.fillAmount);
             DamageTextManager.CreateFloatingText(damage, transform.position);
             CameraShaker.Instance.ShakeOnce(damage/lvlScaleEx * 0.15f, 2.5f, 0.1f, 0.7f);
             float kbTemp = kbAmmount * gettingKnockedBackAmount;
@@ -210,7 +176,6 @@ abstract public class EnemyManager : Character {
             {
                 knockBackAmount = kbTemp;
                 knockBackDirection = kbDirection.normalized;
-                //knockBackAmountOverTime = 0;
                 StartCoroutine("KnockBack");
             }
             else StartCoroutine("RedOnly");
@@ -239,23 +204,10 @@ abstract public class EnemyManager : Character {
             updateAnim = false;
             DropItems();
             Destroy(this.gameObject , 1);
-            //   Invoke("Death", 2);
         }
      
     }
-    //private void OnTriggerStay2D(Collider2D other)
-    //{
-    //    Debug.Log("triggered");
-    //    if (other.tag == "Obstacle" && !other.isTrigger)
-    //    {
-    //        Debug.Log("triggered");
-    //        hitAWall = true;
-    //    }
-    //}
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    hitAWall = false;
-    //}
+   
 
     public IEnumerator RedOnly()
     {
@@ -263,7 +215,6 @@ abstract public class EnemyManager : Character {
         spriteR.color = new Color(1f, 0, 0, 1f);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-           // if (!hitAWall)
             {
                 float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
                 spriteR.color = new Color(1f, 1 - curve, 1 - curve, 1f);
@@ -290,9 +241,7 @@ abstract public class EnemyManager : Character {
            
 
             Vector3 kb = knockBackDirection * knockBackAmount * curve * Time.deltaTime;
-            //Debug.Log(kb + "    " + knockBackAmount + "    " + curve);
             enemyRigidbody.MovePosition(transform.position + kb);
-            //transform.position = Vector3.MoveTowards(transform.position, transform.position+kb, Time.deltaTime);
             kbAmountOverTime += Time.deltaTime * knockBackTime;
             yield return new WaitForFixedUpdate();
         }
@@ -300,13 +249,7 @@ abstract public class EnemyManager : Character {
         pathingUnit.enablePathing(true);
         isRooted = false;
     }
-
-    //private void Death()
-    //{
-
-    //    Destroy(this.gameObject);
-    //    //this.gameObject.SetActive(false);
-    //}
+    
 
     public void UpdatecurrentAttackCD()
     {
@@ -398,18 +341,6 @@ abstract public class EnemyManager : Character {
         isRooted = false;
         setAnimState("Moving");
     }
-//    public void Root(float time)
-//    {
-//        isRooted = true;
-//        Invoke("UnRoot", time);
-//        setAnimState("Idling");
-//}
-//    public void UnRoot()
-//    {
-//        isRooted = false;
-//        setAnimState("Moving");
-//    }
- 
 
     protected Vector3 playerMovementPrediction(float castTime, float predictionAmount)
     {

@@ -13,15 +13,11 @@ public class GameManager : MonoBehaviour {
     private GameObject loadingScreen;
     private Slider loadSlider;
     private Text loadText;
-
-    // public  GameObject playerPrefab;
-    //public  GameObject piggyPrefab;
+    
     public GameObject player;
     public GameObject piggy;
     public float levelStartDelay = 2f;
     public static GameManager instance;
-   // public static int coinCount;
-    //public int playerHp = 100;
     public bool inLevel = true;
     public AudioSource audio;
     public AudioClip coinSound;
@@ -36,38 +32,13 @@ public class GameManager : MonoBehaviour {
     public int level;
     public int nbrFloorEntreBoss = 4;
     private List<EnemyManager> enemies;
-   // private bool doingSetup = true;
     private Text levelText;
     private GameObject levelImage;
     [HideInInspector] public List<Vector3> wayPointList = new List<Vector3>();
-
-    //public struct PlayerStats
-    //{
-    //   public int hp { get;set; }
-    //    public int coins { get; set; }
-    //    //public int currentWeaponIndex { get; set; }
-    //    public GameObject[] weapons { get; set; }
-
-    //    public PlayerStats(int h, int c, GameObject[] wea)
-    //    {
-    //        hp = h;
-    //        coins = c;
-    //       // currentWeaponIndex = cw;
-    //        weapons = wea;
-           
-    //    }
-    //}
-  //  [HideInInspector] public static PlayerStats playerStat;
-
-    //METTRE LA BOOL DE PROG COMME DANS COIN ET GAMEMANAGER AVEC BOOL ET SHOPMANAGER
-
-
-    // Use this for initialization
+    
     void Awake()
     {
-
-      //  Debug.Log("awake");
-       
+        
         if (instance == null)
         {
             instance = this;
@@ -75,12 +46,7 @@ public class GameManager : MonoBehaviour {
         }
         else if (instance != this)
             Destroy(gameObject);
-
-        //player = GameObject.Find("Pilot");
-        //piggy = GameObject.Find("Piggy");
-
-        // player.GetComponent<Player>().setPlayerStats(playerStat.hp, playerStat.coins, playerStat.currentWeaponIndex, playerStat.weapons, level == 0);
-
+        
         if ((SceneManager.GetActiveScene().buildIndex == 1))
         {
             enemies = new List<EnemyManager>();
@@ -98,7 +64,6 @@ public class GameManager : MonoBehaviour {
                 instance.boardBoss = GetComponent<BoardBoss>();
                 instance.player = Instantiate(player, Vector3.zero, Quaternion.identity);
                 instance.piggy = Instantiate(piggy, Vector3.zero, Quaternion.identity);
-                //instance.canvas = Instantiate(canvas, Vector3.zero, Quaternion.identity);
 
             }
             PlaceAndSetStuffOnStart(new Vector3(instance.boardScript.largeur, instance.boardScript.hauteur, 0));
@@ -115,8 +80,6 @@ public class GameManager : MonoBehaviour {
             }
                 DamageTextManager.Initialize();
             
-            // DontDestroyOnLoad(player);
-            //DontDestroyOnLoad(piggy);
             instance.wayPointList.Clear();
             loadNewLevel();
 
@@ -139,8 +102,8 @@ public class GameManager : MonoBehaviour {
     }
     void PlaceAndSetStuffOnStart(Vector3 playerPos)
     {
-        instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());//instance.coinText.GetComponentInChildren<Text>());
-        instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());//instance.hpBar.GetComponentsInChildren<Image>()[1]);
+        instance.player.GetComponent<Player>().SetUpCoin(GameObject.FindGameObjectWithTag("CoinText").GetComponent<Text>());
+        instance.player.GetComponent<Player>().SetUpHpBar(GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>());
         instance.player.GetComponent<Player>().SetUpIcon(1, GameObject.FindGameObjectWithTag("iconFeu"));
         instance.player.GetComponent<Player>().SetUpIcon(2, GameObject.FindGameObjectWithTag("iconGlace"));
         instance.player.GetComponent<Player>().SetupIconArmor(GameObject.FindGameObjectWithTag("iconArmor"));
@@ -158,10 +121,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(piggy);
         DontDestroyOnLoad(canvasMenu);
-       // DontDestroyOnLoad(canvas);
        
-        // DontDestroyOnLoad(gameObject.GetComponent<GameManager>());
-        // Debug.Log(test);
 
     }
     public void PlaySound(AudioClip clip)
@@ -172,7 +132,6 @@ public class GameManager : MonoBehaviour {
     private void HideLevelImage()
     {
         levelImage.SetActive(false);
-      //  doingSetup = false;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -187,21 +146,7 @@ public class GameManager : MonoBehaviour {
         //instance.level++;
         //instance.InitGame();
     }
-
-    //void InitGame()
-    //{
-    //   // doingSetup = true;
-    //    enemies.Clear();
-    //    levelImage = GameObject.Find("LevelImage");
-    //    boardScript.SetupBoard(level);
-
-    //    SetupAI();
-    //    //levelText = GameObject.Find("LevelText").GetComponent<Text>();
-    //    //levelText.text = "Level " + level;
-    //    // levelImage.SetActive(true);
-    //    // Invoke("HideLevelImage", levelStartDelay);
-
-    //}
+    
     public void Restart()
     {
         piggy.GetComponent<PiggyManager>().coinList.Clear();
@@ -225,8 +170,6 @@ public class GameManager : MonoBehaviour {
     }
     void loadNewLevel()
     {
-        
-       // doingSetup = true;
         enemies.Clear();
         levelImage = GameObject.Find("LevelImage");
         instance.level += 1;

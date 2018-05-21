@@ -72,8 +72,7 @@ public class PlayerCopie : MonoBehaviour
         else
         {
             GameManager.instance.player.GetComponent<TimeRewinding>().FantomeMort();
-            //GameObject.Find("Pilot")
-            Debug.Log("Mort");
+            
             Destroy(this.gameObject);
         }
         
@@ -111,7 +110,6 @@ public class PlayerCopie : MonoBehaviour
         }
         Instantiate(newWeapon, weaponTransform);
         weaponChild = newWeapon;
-        //newWeapon.transform.parent = weaponTransform;
         newWeapon.transform.localScale = newWeapon.GetComponent<WeaponManager>().baseScale;
         newWeapon.transform.localPosition = newWeapon.GetComponent<WeaponManager>().basePosition;
     }
@@ -127,7 +125,6 @@ public class PlayerCopie : MonoBehaviour
             transform.localScale = faceLeft;
             weaponTransform.localScale = new Vector3(-1, -1, 0);
 
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
         else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
@@ -135,7 +132,6 @@ public class PlayerCopie : MonoBehaviour
             transform.localScale = faceRight;
             weaponTransform.localScale = new Vector3(1, 1, 0);
 
-            //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
         }
 

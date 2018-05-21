@@ -20,10 +20,9 @@ public class TimeRewinding : MonoBehaviour
         pT = GameObject.Find("Enemies").GetComponent<PlayerTarget>();
         positionRewind = new List<PositionPlus>();
         positionCopie = new List<PositionPlus>();
-        scriptPlayer = GameManager.instance.player.GetComponent<Player>();// GameObject.Find("Pilot").GetComponent<Player>();
-       // Debug.Log(scriptPlayer.currentWeaponIndex);
+        scriptPlayer = GameManager.instance.player.GetComponent<Player>();
         ancienWeapon = currentWeapon = scriptPlayer.weaponList[scriptPlayer.currentWeaponIndex].gameObject;
-     //   Debug.Log("cacacacacacaca");
+
     }
 
     void Update()

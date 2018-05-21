@@ -38,7 +38,7 @@ public class Player : Character {
 
     [HideInInspector] public float timeUntilNextAttack;
 
-    const float timePerKnockBackAmount = 20; //10 kba lasts 1 seconds
+    const float timePerKnockBackAmount = 20; 
     [HideInInspector] public float knockBackAmount = 0;
     [HideInInspector] public float knockBackAmountOverTime = 1;
     [HideInInspector] public float knockBackAmountOverTimeMinimum = 0.7f;
@@ -46,13 +46,10 @@ public class Player : Character {
     [HideInInspector] public Vector2 knockBackDirection;
     [HideInInspector] public Color couleurKb = Color.white;
 
-    //GameObject gameOverMenu;
+    
     GameObject iconKey;
     GameObject iconArmor;
-    //private void Awake()
-    //{
-    //    setPlayerStats();
-    //}
+    
     void Start()
     {
         hasKey = false;
@@ -65,7 +62,6 @@ public class Player : Character {
         {
             if (Input.GetKeyDown("left shift"))
             {
-                //GameManager.instance.Restart();
                 SwitchWeapon();
             }
         }
@@ -87,7 +83,6 @@ public class Player : Character {
     }
     void PlayerSetUp()
     {
-       // gameOverMenu = GameObject.Find("GameOverMenu");
         currentSpeed = maxMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -155,7 +150,6 @@ public class Player : Character {
             CameraShaker.Instance.ShakeOnce(damage * 0.25f, 2.5f, 0.1f, 1f);
             hp -= damage;
             hpBar.fillAmount = (float)hp / (float)maxHp;
-            //Debug.Log(hpBar.fillAmount);
             if (hp <= 0)
             {
                 Time.timeScale = 0;
@@ -189,7 +183,6 @@ public class Player : Character {
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
         while (kbAmountOverTime < knockBackAmountOverTimeMinimum)
         {
-            // if (!hitAWall)
             {
                 float curve = (1 - kbAmountOverTime) * (1 - kbAmountOverTime);
                 graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
@@ -205,15 +198,13 @@ public class Player : Character {
         yield return new WaitForFixedUpdate();
         graphicsSpriteR.color = new Color(1f, 0, 0, graphicsSpriteR.color[3]);
          rooted = true;
-
-        //float knockBackTime = timePerKnockBackAmount / ((knockBackAmount - timePerKnockBackAmount) / 2 + timePerKnockBackAmount);
+        
         float knockBackTime = 2 * timePerKnockBackAmount / (knockBackAmount + timePerKnockBackAmount);
         while (knockBackAmountOverTime < knockBackAmountOverTimeMinimum)
         {
             float curve = (1 - knockBackAmountOverTime) * (1 - knockBackAmountOverTime);
             graphicsSpriteR.color = new Color(1f, 1 - curve, 1 - curve, graphicsSpriteR.color[3]);
-
-         //   Debug.Log(knockBackDirection.normalized);
+            
 
             Vector3 kb = knockBackDirection.normalized * knockBackAmount * curve * Time.deltaTime;
             playerRigidbody.MovePosition(transform.position + kb);
@@ -227,7 +218,6 @@ public class Player : Character {
     IEnumerator ImmuneAnim()
     {
         float alpha = 0.225f;
-       // float curve;
         float time = 0;
         while (immune)
         {
@@ -237,9 +227,6 @@ public class Player : Character {
                 alpha = 0.2f;
             }
             else alpha = 1;
-            //curve = Mathf.Cos(time*2000*Mathf.PI)/3 + 0.75f;
-            //Debug.Log(curve);
-
             if(weaponSprite == null)
             {
                 weaponSprite = weaponTransform.gameObject.GetComponentInChildren<SpriteRenderer>();
@@ -274,29 +261,7 @@ public class Player : Character {
         coinText.text = "P I È C E S : " + coins;
 
     }
-
-    //private void OnTriggerStay2D(Collider2D other)            //VOIR LE SCRIPT PLAYERTRIGGERS
-    //{
-    //    if (other.tag == "Exit")
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.E))
-    //        {
-    //            other.GetComponent<Animator>().SetTrigger("Open");
-    //            Invoke("Restart", restartDelay);
-    //            enabled = false;
-    //        }
-            
-    //    }
-    //    if ((other.tag == "Coin"))
-    //    {
-    //        gainCoin();
-    //        Destroy(other.gameObject);
-    //        GameManager.instance..PlaySound(GameManager.instance..coinSound);
-
-    //    }
-        
-
-    //}
+    
     
     void FaceMouse()
     {
@@ -315,7 +280,6 @@ public class Player : Character {
                 transform.localScale = faceLeft;
                 weaponTransform.localScale = new Vector3(-1, -1, 0);
 
-                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x - 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
             }
             else if (direction.x > 0 & transform.localScale == faceLeft & angle >= rotationBuffer & angle <= 180 - rotationBuffer)
@@ -323,7 +287,6 @@ public class Player : Character {
                 transform.localScale = faceRight;
                 weaponTransform.localScale = new Vector3(1, 1, 0);
 
-                //weaponTransform.position = new Vector3(weaponTransform.transform.position.x + 2, weaponTransform.transform.position.y, weaponTransform.transform.position.z);
 
             }
 
@@ -349,7 +312,6 @@ public class Player : Character {
                 
                 if (weaponList[i].isMelee == newWeapon.GetComponent<WeaponManager>().isMelee)
                 {
-                // GameObject.Destroy(weaponList[i].gameObject);
                 weaponList[i].gameObject.SetActive(true);
                 DropManager.DropWeapon(weaponList[i].gameObject, transform.position + Vector3.up/2 - Vector3.right/4,true);
                     weaponList[i] = newWeapon.GetComponent<WeaponManager>();
@@ -451,56 +413,6 @@ public class Player : Character {
             setUIWeaponpStat();
         }
     }
-    //public void setPlayerStats()
-    //{
-    //    if (GameManager.instance.level != 0)
-    //    {
-
-    //        hp = GameManager.playerStat.hp;
-    //        Debug.Log(hp);
-    //        coins = GameManager.playerStat.coins;
-    //        //currentWeaponIndex = GameManager.playerStat.;
-    //        startingWeapon = GameManager.playerStat.weapons;
-    //    }
-    //    else
-    //    {
-    //        hp = maxHp;
-    //        coins = 0;
-    //        currentWeaponIndex = 0;
-    //    }
-    //    //   Debug.Log("ca");
-    //   // hpBar.fillAmount = (float)hp / (float)maxHp;
-    //}
-    //public void setPlayerStats(int h, int coin, int cwi, GameObject[] wp, bool lvl0)
-    //{
-    //    if (!lvl0)
-    //    {
-    //        Debug.Log(h);
-    //        hp = h;
-    //        coins = coin;
-    //        currentWeaponIndex = cwi;
-    //        startingWeapon = wp;
-    //    }
-    //    else
-    //    {
-    //        hp = maxHp;
-    //        coins = 0;
-    //        currentWeaponIndex = 0;
-    //    }
-    // //   Debug.Log("ca");
-    //    hpBar.fillAmount = (float)hp / (float)maxHp;
-    //}
-    //public GameObject[] weaponObjects()
-    //{
-    //    GameObject[] wo = new GameObject[weaponList.Count];
-    //    for (int i = 0; i< weaponList.Count; i++)
-    //    {
-    //        wo[i] = weaponList[i].gameObject;
-    //    }
-    //    return wo;
-
-    //}
-
     public override Vector3 PositionIcone()
     {
         return transform.position;
