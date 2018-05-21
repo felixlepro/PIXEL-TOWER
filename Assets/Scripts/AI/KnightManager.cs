@@ -5,11 +5,8 @@ using UnityEngine;
 public class KnightManager : EnemyManager {
 
     public float attackChargeTime;
-
-   // GameObject attackColliderObject;
     float colorAlpha = 0;
     const float colorAlphaMax = 1f;
-    //bool attackDone = false;
 
     
     protected override void OnStart()
@@ -33,10 +30,6 @@ public class KnightManager : EnemyManager {
         getAngleTarget();
 
         anim.speed = 0.7f / attackChargeTime;
-        //Invoke("endAttack", attacks[0].GetComponent<KnightAttack>().attackChargeTime * 1.5f);
-        //Instantiate(attacks[0].GetComponent<Attacks>().prefab, transform.position, Quaternion.identity);
-        //attacks[0].GetComponent<KnightAttack>().Setup(chaseTarget.transform.position - transform.position, 1, 1);
-
         attacks[0].attackHitbox[0].gameObject.transform.localRotation = Quaternion.Euler(0, 0, Angle);
         StartCoroutine(AttackFade());
     }
@@ -84,9 +77,6 @@ public class KnightManager : EnemyManager {
     {
         isRooted = false;
         pathingUnit.enablePathing(true);
-       // anim.speed = currentSpeed / maxMoveSpeed;
-        //controller.enemyManager.isWalking = false; 
-
     }
     public override void AttackSuccessful()
     {

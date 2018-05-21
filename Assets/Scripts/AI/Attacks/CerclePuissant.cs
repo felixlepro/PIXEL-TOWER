@@ -42,18 +42,3 @@ public class CerclePuissant : MonoBehaviour {
         Destroy(this.gameObject);
     }
 }
-
-
-//public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa,float burnDu, float slow, float slowAm, float slowDu)
-//{
-//    attackDamage = dam;
-//    maxKnockBackAmount = kb;
-//    attackRange = range;
-//    immuneTime = it;
-//    burnChance = burn;
-//    burnDamage = burnDa;
-//    burnDuration = burnDu;
-//    slowChance = slow;
-//    slowAmount = slowAm;
-//    slowDuration = slowDu;
-//}

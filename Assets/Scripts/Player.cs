@@ -244,12 +244,6 @@ public class Player : Character {
         weaponSprite.color = new Color(weaponSprite.color[0], weaponSprite.color[1], weaponSprite.color[2], 1f);
     }
   
-    
-    private void OnDisable()
-    {
-     //   GameManager.instance.playerHp = hp;
-      //  GameManager.instance.coinCount = coins;
-    }
     public void gainCoin()
     {
         coins += valuePerCoin;

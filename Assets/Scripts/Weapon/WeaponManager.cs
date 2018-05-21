@@ -79,29 +79,13 @@ public abstract class WeaponManager : MonoBehaviour {
     [HideInInspector] public rarity thisRarity;
     rarity[] possibleRarities = { new rarity() { chance = 100, multiplier = 1, name = "Commun" },
                                   new rarity() { chance = 55, multiplier = 1.15f, name = "Rare" },
-                                  new rarity() { chance = 22, multiplier = 1.3f, name = "Épic" },
+                                  new rarity() { chance = 22, multiplier = 1.3f, name = "Épique" },
                                   new rarity() { chance = 6, multiplier = 1.45f, name = "Légendaire" },
                                   new rarity() { chance = 1.5f, multiplier = 1.6f, name = "Mythique" },
                                   new rarity() { chance = 0.4f, multiplier = 1.75f, name = "Divin" },
                                  new rarity()  { chance = 0.00001f, multiplier = 3f, name = "Paradoxal" }
     };
 
-                                 
-
-
-       // = { { 100, 1 }, { 50, 1.2f }, { 20, 1.4f }, { 5, 1.6f }, { 0.01f, 2f } };
-
-    //const float commonChance = 100;
-    //const float rareChance = 50;
-    //const float epicChance = 20;
-    //const float legendaryChance = 5f;
-    //const float ultraLegendaryChance = 0.01f;
-
-    //const float commonMult = 1;
-    //const float rareMult = 1.2f;
-    //const float epicMult = 1.4f;
-    //const float legendaryMult = 1.6f;
-    //const float ultraLegendaryMult = 2f;
 
     protected abstract void ChargeWeapon();
     protected abstract void MaxChargeWeapon();
@@ -126,7 +110,6 @@ public abstract class WeaponManager : MonoBehaviour {
         if (!GameManager.instance.player.GetComponent<Player>().stunned)
         {
             UpdateTimeUntilNextAttack();
-            // if (!isFantoming) setNumAttack();
             if (isFantoming)
             {
                 AttackFantome(numAttack);
@@ -216,9 +199,6 @@ public abstract class WeaponManager : MonoBehaviour {
     }
     public void EnvoyerDegat(EnemyManager cible)
     {
-      //  Debug.Log(chargeDoneRatio);
-        //Debug.Log(attackDamage * attackDamageChargedBonus * chargeDoneRatio);
-       // Debug.Log(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)));
         if (currentChargeTime < chargeTime)
         {
             cible.RecevoirDegats(attackDamage + Mathf.FloorToInt((attackDamage * attackDamageChargedBonus * chargeDoneRatio)), (cible.gameObject.transform.position - transform.position).normalized, knockBackAmount,0);

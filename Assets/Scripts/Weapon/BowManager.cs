@@ -7,7 +7,6 @@ public class BowManager : WeaponManager {
     public float slowAmount;
 
     public GameObject bolt;
-    //private List<Bolt> boltList = new List<Bolt>();
 
     public FloatRange boltSpeedRange = new FloatRange(20, 30);
     public FloatRange slowAmountRange = new FloatRange(0.25f, 0.75f);
@@ -19,7 +18,6 @@ public class BowManager : WeaponManager {
         int lvl = GameManager.instance.GetCurrentLevel();
         float AdAsRation = Random.value;
         float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
-        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation);
         attackDamageChargedBonus = 0;
@@ -75,7 +73,6 @@ public class BowManager : WeaponManager {
 
         anim.SetBool("AttackCharge", false);
         anim.SetTrigger("PlayerAttack");
-        // boltList.Add(Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>());
        Bolt thisBolt = Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>();
         if (!isFantoming )
         {
@@ -83,8 +80,6 @@ public class BowManager : WeaponManager {
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
-        // boltList[boltList.Count - 1].Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed);
-        //  thisBolt.Setup(attackDamage, direction, knockBackAmount, boltSpeed * chargeDoneRatio, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration);
         thisBolt.Setup(direction, boltSpeed * chargeDoneRatio, boltSpeed, GetComponent<WeaponManager>());
         ResetAttackTimer();
     }

@@ -8,7 +8,6 @@ public class CrossbowManager : WeaponManager
 
 
     public GameObject bolt;
-    //private List<Bolt> boltList = new List<Bolt>();
 
     public FloatRange boltSpeedRange = new FloatRange(15, 20);
 
@@ -18,7 +17,6 @@ public class CrossbowManager : WeaponManager
         int lvl = GameManager.instance.GetCurrentLevel();
         float AdAsRation = Random.value;
         float lvlScale = Mathf.Pow(2, (float)(lvl - 1) / lvlScalability);
-        //float lvlScale = 1 + (float)lvl / lvlScalability;
         attackDamage = Mathf.RoundToInt(attackDamageRange.Set(AdAsRation) * thisRarity.multiplier * lvlScale);
         attackSpeed = attackSpeedRange.Set(AdAsRation);
         attackDamageChargedBonus = attackDamageChargedBonusRange.Random * thisRarity.multiplier;
@@ -77,9 +75,8 @@ public class CrossbowManager : WeaponManager
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             direction = new Vector3(mousePosition.x - transform.parent.transform.parent.position.x, mousePosition.y - transform.parent.transform.parent.transform.position.y - 0.5f, 0f);
         }
-        Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>().Setup(direction, boltSpeed, boltSpeed, GetComponent<WeaponManager>());//(attackDamage, direction, knockBackAmount, boltSpeed, boltSpeed, chanceBurnProc, burnSuffered, burnDuration, chanceSlowProc, slowValue, slowDuration); ;
+        Instantiate(bolt, transform.position, Quaternion.identity).GetComponent<Bolt>().Setup(direction, boltSpeed, boltSpeed, GetComponent<WeaponManager>());
 
-        // boltList[boltList.Count - 1]
         ResetAttackTimer();
     }
     protected override SpriteRenderer GetSpriteRenderer()

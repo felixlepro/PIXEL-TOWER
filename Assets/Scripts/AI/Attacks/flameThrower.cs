@@ -60,29 +60,3 @@ public class flameThrower : MonoBehaviour {
         Destroy(this.gameObject);
     }
 }
-
-
-
-
-//public void Setup(Vector3 dir, int dam, float kb, float range, float it, float burn, int burnDa, float burnDu, float slow, float slowAm, float slowDu)
-//{
-//    direction = dir;
-//    attackDamage = dam;
-//    maxKnockBackAmount = kb;
-//    attackRange = range;
-//    immuneTime = it;
-//    burnChance = burn;
-//    Debug.Log(burn);
-//    burnDamage = burnDa;
-//    burnDuration = burnDu;
-//    slowChance = slow;
-//    slowAmount = slowAm;
-//    slowDuration = slowDu;
-
-//    this.gameObject.transform.right = direction;
-
-
-//}
-//player.RecevoirDegats(attackDamage, direction, maxKnockBackAmount, immuneTime);
-//player.Burn(burnChance, burnDamage, burnDuration);
-//player.Slow(slowChance, slowAmount, slowDuration, false);
