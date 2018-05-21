@@ -42,7 +42,7 @@ public class ShopManager : MonoBehaviour
         
        
         p1.gainKey();
-        //weaponList.Clear();
+        
         while (weaponList.Count < iMax)
         { 
             CreateWeapon();
@@ -114,7 +114,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int n = 0; n < iMax; n++)
         {
-           imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;   //        Jlai enlever parce que je sais pas cest quoi pi ca fait bugger toute
+           imList[n].sprite = weaponList[n].GetComponent<WeaponManager>().sprite;  
            string rar = "Basique";
 
             if (weaponList[n].GetComponent<WeaponManager>().thisRarity.name != null)
@@ -154,10 +154,7 @@ public class ShopManager : MonoBehaviour
 
 
         }
-        else
-        {
-            Debug.Log("gros pauvre");
-        }
+        
     }
     public void BuyHeal()
     {
